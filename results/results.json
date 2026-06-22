@@ -1,0 +1,72 @@
+[
+  {
+    "framework": "Next.js",
+    "build_kb": 5247.1,
+    "client_js_gz_kb": 144.79,
+    "js_reqs": 6,
+    "ssr_cards": 6,
+    "ttfb_ms": 21.12,
+    "cold_ms": 510,
+    "rps": 575,
+    "p99_ms": 141.15,
+    "success": 1.0,
+    "tti_ms": 53,
+    "ok": "CTS"
+  },
+  {
+    "framework": "Remix",
+    "build_kb": 334.6,
+    "client_js_gz_kb": 101.28,
+    "js_reqs": 5,
+    "ssr_cards": 6,
+    "ttfb_ms": 12.24,
+    "cold_ms": 362,
+    "rps": 1011,
+    "p99_ms": 75.09,
+    "success": 1.0,
+    "tti_ms": 55,
+    "ok": "CTS"
+  },
+  {
+    "framework": "Astro",
+    "build_kb": 432.3,
+    "client_js_gz_kb": 0.33,
+    "js_reqs": 0,
+    "ssr_cards": 24,
+    "ttfb_ms": 12.25,
+    "cold_ms": 155,
+    "rps": 3807,
+    "p99_ms": 20.45,
+    "success": 1.0,
+    "tti_ms": 51,
+    "ok": "CTS"
+  },
+  {
+    "framework": "Qwik",
+    "build_kb": 248.6,
+    "client_js_gz_kb": 34.91,
+    "js_reqs": 15,
+    "ssr_cards": 3,
+    "ttfb_ms": 42.62,
+    "cold_ms": 160,
+    "rps": 938,
+    "p99_ms": 72.99,
+    "success": 1.0,
+    "tti_ms": 50,
+    "ok": "CTS"
+  },
+  {
+    "framework": "bext (PRISM)",
+    "build_kb": 3.9,
+    "client_js_gz_kb": 5.59,
+    "js_reqs": 4,
+    "ssr_cards": 24,
+    "ttfb_ms": 6.03,
+    "cold_ms": 10,
+    "rps": 4742,
+    "p99_ms": 70.99,
+    "success": 1.0,
+    "tti_ms": 51,
+    "ok": "CTS"
+  }
+]

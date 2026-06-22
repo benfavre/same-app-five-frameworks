@@ -1,0 +1,7 @@
+{
+  "framework": "bext (PRISM)",
+  "port": 80,
+  "buildDir": ".bext (compiled bundle cache)",
+  "start": "masquerade (always-on)",
+  "buildBytes": 3960
+}

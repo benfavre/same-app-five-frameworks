@@ -1,0 +1,12 @@
+{
+  "name": "same-app-five-frameworks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "One identical app in Next.js, Remix, Astro, Qwik, and bext — an honest, uncached SSR benchmark.",
+  "scripts": {
+    "summarize": "python3 harness/summarize.py"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.0.0"
+  }
+}

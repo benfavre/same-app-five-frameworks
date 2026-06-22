@@ -1,0 +1,7 @@
+{
+  "framework": "Next.js",
+  "port": 8101,
+  "buildDir": ".next",
+  "start": "npx next start -p 8101",
+  "buildBytes": 5373055
+}

@@ -1,0 +1,175 @@
+---
+export const prerender = false;
+
+import products from '../data/products.json';
+
+const framework = 'Astro';
+const renderedAt = Date.now();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Widget Showcase — {framework}</title>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #16181d;
+        --muted: #5b6470;
+        --card: #f5f6f8;
+        --border: #e2e5ea;
+        --accent: #2563eb;
+      }
+      html.dark {
+        --bg: #0f1115;
+        --fg: #e8eaed;
+        --muted: #9aa3af;
+        --card: #1a1d23;
+        --border: #2a2f38;
+        --accent: #6ea8ff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+        line-height: 1.5;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      header .name { font-weight: 700; font-size: 1.1rem; }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--fg);
+        border-radius: 8px;
+        padding: 0.5rem 0.9rem;
+      }
+      main { max-width: 980px; margin: 0 auto; padding: 1.5rem; }
+      .hero h1 { font-size: 2rem; margin: 0 0 0.25rem; }
+      .hero p { color: var(--muted); margin: 0 0 1.5rem; }
+      .controls {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+      input[type='search'] {
+        font: inherit;
+        flex: 1;
+        min-width: 220px;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--card);
+        color: var(--fg);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.85rem;
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: 10px;
+        padding: 0.9rem 1rem;
+      }
+      .card .pname { font-weight: 600; }
+      .card .cat {
+        display: inline-block;
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin: 0.25rem 0 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .card .price { font-variant-numeric: tabular-nums; }
+      footer {
+        max-width: 980px;
+        margin: 2rem auto 0;
+        padding: 1.5rem;
+        border-top: 1px solid var(--border);
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="name">{framework}</span>
+      <button id="theme-toggle" type="button" aria-label="Toggle theme">Toggle theme</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h1>Widget Showcase</h1>
+        <p>A cross-framework benchmark page, rendered with {framework}.</p>
+      </section>
+
+      <section>
+        <button id="counter" type="button">Count: 0</button>
+      </section>
+
+      <section class="controls">
+        <input id="search" type="search" placeholder="Filter products…" autocomplete="off" />
+      </section>
+
+      <section class="grid" id="grid">
+        {products.map((p) => (
+          <article class="card" data-name={p.name.toLowerCase()}>
+            <div class="pname">{p.name}</div>
+            <span class="cat">{p.category}</span>
+            <div class="price">${p.price}</div>
+          </article>
+        ))}
+      </section>
+    </main>
+
+    <footer>
+      Built with {framework}
+      <span data-rendered-at={renderedAt} hidden>{renderedAt}</span>
+    </footer>
+
+    <script>
+      // Theme toggle: flips <html> class + persists to localStorage('theme')
+      const root = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored === 'dark') root.classList.add('dark');
+      const toggle = document.getElementById('theme-toggle');
+      toggle?.addEventListener('click', () => {
+        const dark = root.classList.toggle('dark');
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+      });
+
+      // Counter
+      const counter = document.getElementById('counter');
+      let n = 0;
+      counter?.addEventListener('click', () => {
+        n += 1;
+        counter.textContent = 'Count: ' + n;
+      });
+
+      // Client-side search filter over SSR'd cards
+      const search = document.getElementById('search') as HTMLInputElement | null;
+      const cards = Array.from(document.querySelectorAll<HTMLElement>('#grid .card'));
+      search?.addEventListener('input', () => {
+        const q = search.value.toLowerCase();
+        for (const card of cards) {
+          const name = card.dataset.name || '';
+          card.style.display = name.includes(q) ? '' : 'none';
+        }
+      });
+    </script>
+  </body>
+</html>

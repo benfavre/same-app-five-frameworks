@@ -1,0 +1,19 @@
+# h2h-bext.bext.dev — the bext (PRISM) entry in the cross-framework benchmark.
+# Minimal, chrome-free "Widget Showcase" (see ~/bench-h2h/SPEC.md).
+
+[server]
+app_dir = "."
+static_dir = "public"
+
+[framework]
+type = "prism"
+
+[rendering]
+mode = "isr"
+revalidate = 60
+swr_secs = 30
+
+[build]
+watch_dirs = ["src/app", "src/components", "src/lib"]
+debounce_ms = 100
+live_reload = true

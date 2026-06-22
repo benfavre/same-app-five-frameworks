@@ -1,0 +1,7 @@
+{
+  "framework": "Qwik",
+  "port": 8104,
+  "buildDir": "dist",
+  "start": "PORT=8104 node server/entry.express.js",
+  "buildBytes": 254616
+}
