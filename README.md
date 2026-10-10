@@ -20,7 +20,7 @@ Updated 2026-10-10. Every framework rendering per request, each as its own proce
 
 | Framework | Client JS (gz) | TTFB | RPS (uncached) | p99 | Cold start | Build | Interactions |
 |---|--:|--:|--:|--:|--:|--:|:-:|
-| **bext (PRISM)** | 5.6 KB | **2.9 ms** | **16,958** | **4.1 ms** | **78 ms** | ~4 KB\* | ✅ |
+| **bext (PRISM)** | 5.6 KB | **2.9 ms** | **16,958** | **4.1 ms** | **54 ms** | ~4 KB\* | ✅ |
 | Astro | **0.33 KB** | 11.3 ms | 4,142 | 19.5 ms | 150 ms | 432 KB | ✅ |
 | Remix | 101 KB | 11.1 ms | 1,119 | 68 ms | 384 ms | 335 KB | ✅ |
 | Qwik | 35 KB | 43.7 ms | 906 | 70 ms | 157 ms | 249 KB | ✅ |
@@ -47,14 +47,15 @@ framework's best run: the box is shared, so the best run is the least disturbed 
 - **Client JS is unchanged.** bext ships 5.6 KB (a real signals/resume runtime) vs
   Qwik 35, Remix 101, Next 145. Astro's 0.33 KB is hand-written vanilla `<script>`:
   great for this app, different math once you need real reactive components.
-- **Cold start: bext is now the fastest to boot, 78 ms** to the first 200 (Astro 150,
+- **Cold start: bext is now the fastest to boot, 54 ms** to the first 200 (Astro 150,
   Qwik 157, Remix 384, Next 537), every framework measured as a process start. The first
   run of this re-measure found bext at 3.3 s; profiling the boot fixed it in bext: the
   continuous profiler no longer initializes on the boot path, route regexes compile once
   per process instead of once per HTTP thread, compile-cache housekeeping left the first
   request, the allocator stopped requesting transparent huge pages (each first touch
-  stalled for memory compaction on this host), HTTP workers build concurrently, and
-  V8 workers warm their isolate at boot. June's "10 ms" was the first request on
+  stalled for memory compaction on this host), HTTP workers build concurrently, V8
+  workers warm their isolate at boot, the binary packs its relocations, and libphp is
+  only loaded by processes that run PHP. June's "10 ms" was the first request on
   an always-on server, not a process start.
 - **bext's cached mode** (built-in ISR, one config line) serves the same page at
   about **44,000 RPS / 0.95 ms TTFB** on this loaded box. The 16,958 above is its
@@ -67,7 +68,7 @@ framework's best run: the box is shared, so the best run is the least disturbed 
 - **Shared, busy machine.** The runs happened on a 24-core server that was also
   compiling other projects (load average 10 to 37). Throughput swung up to 3× between
   runs for every framework, so the table reports each framework's best run.
-  bext's best is out of 12 runs, the Node apps' best out of 9, which gives the
+  bext's best is out of 15 runs, the Node apps' best out of 9, which gives the
   Node apps more chances, not fewer.
 - **Process model.** Each Node server runs as one process (one JS thread). bext runs
   its default pool of 4 V8 worker processes, so it can use several cores. That is how
