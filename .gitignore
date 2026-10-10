@@ -12,6 +12,7 @@ apps/*/.output/
 apps/*/.vercel/
 apps/*/server/
 apps/*/tmp/
+apps/*/.bext/
 *.tsbuildinfo
 
 # logs / os
