@@ -19,8 +19,8 @@ Best run per framework (box shared with other workloads, see below).
 
 | Framework        | Client JS (gz) | TTFB (p50) | RPS (uncached) | p99      | Cold start | Build  | C/T/S |
 |------------------|---------------:|-----------:|---------------:|---------:|-----------:|-------:|:---:|
-| **bext (PRISM)** | 5.58 KB        | **2.9 ms** | **16,958**     | **4.1 ms** | 256 ms   | ~4 KB* | ✅ |
-| Astro            | **0.33 KB**    | 11.3 ms    | 4,142          | 19.5 ms  | **150 ms** | 432 KB | ✅ |
+| **bext (PRISM)** | 5.58 KB        | **2.9 ms** | **16,958**     | **4.1 ms** | **109 ms** | ~4 KB* | ✅ |
+| Astro            | **0.33 KB**    | 11.3 ms    | 4,142          | 19.5 ms  | 150 ms     | 432 KB | ✅ |
 | Remix            | 101.3 KB       | 11.1 ms    | 1,119          | 67.9 ms  | 384 ms     | 335 KB | ✅ |
 | Qwik             | 34.9 KB        | 43.7 ms    | 906            | 70.4 ms  | 157 ms     | 249 KB | ✅ |
 | Next.js          | 144.8 KB       | 20.3 ms    | 622            | 127.0 ms | 537 ms     | 5.2 MB | ✅ |
@@ -29,7 +29,7 @@ Every run (`results/runs.json`), RPS sorted:
 
 | Framework | Runs | RPS per run |
 |---|--:|---|
-| bext    | 6 | 6,750 · 9,914 · 11,878 · 12,476 · 15,173 · 16,958 |
+| bext    | 9 | 6,750 · 9,914 · 10,497 · 10,823 · 11,878 · 12,476 · 14,718 · 15,173 · 16,958 |
 | Astro   | 9 | 1,673 · 1,809 · 1,813 · 1,871 · 3,592 · 3,935 · 4,025 · 4,030 · 4,142 |
 | Remix   | 9 | 322 · 342 · 371 · 372 · 854 · 1,053 · 1,073 · 1,100 · 1,119 |
 | Qwik    | 9 | 348 · 350 · 351 · 382 · 569 · 880 · 888 · 905 · 906 |
@@ -37,8 +37,8 @@ Every run (`results/runs.json`), RPS sorted:
 
 The low runs coincide with heavy compile jobs from another project on the same box
 (load average up to 37 on 24 cores). Each framework's best run is its least disturbed
-one; the Node apps had 9 chances, bext 6 (the last 3 on the release with the
-cold-start fix below).
+one; the Node apps had 9 chances, bext 9 (the last 6 on releases with the
+cold-start fixes below).
 
 ## What the uncached numbers say
 
@@ -56,11 +56,17 @@ comparable and the change is bext's.
 islands + shared runtime); Astro wins outright at 0.33 KB of hand-written vanilla
 `<script>`, Qwik 35, Remix 101, Next 145.
 
-**Cold start: 256 ms**, between Remix (384) and Astro (150). The first runs of this
-re-measure showed ~3.3 s: bext's continuous profiler initialized pprof (allocating
-and zeroing a sample table of tens of MB) before the server listened. bext now starts
-the profiler 10 s after boot (`perf(profiling): build the continuous profiler off
-the boot path`); spawn to first 200 went from 2.4 to 5 s down to ~160 ms in isolation.
+**Cold start: 109 ms, now the fastest of the five** (Astro 150, Qwik 157, Remix 384,
+Next 537). The first runs of this re-measure showed ~3.3 s. Profiling bext's boot
+found four causes, all fixed and deployed in bext:
+
+| Fix | Cold start after |
+|---|--:|
+| (start of re-run) | 2.4 to 5 s |
+| continuous profiler starts 10 s after boot instead of before listening | ~160 to 300 ms |
+| actix route regexes compiled once per process, not once per HTTP thread | |
+| disk compile-cache prune moved off the first request | ~100 to 300 ms |
+| allocator stops requesting transparent huge pages (compaction stalls) | **~110 ms**, steady |
 
 **Cached mode.** With its built-in ISR (one config line) bext serves the same page at
 ~44,000 RPS / 0.95 ms TTFB / ~4 ms p99 standalone on this loaded box. (June's 282,776
@@ -87,8 +93,8 @@ React hydrates within a frame. The hydration-vs-resumption gap needs throttled m
 - **Harness fixes:** `run_node` resolved the app directory from the previous loop
   iteration's variable (harmless inside the loop, wrong outside it); the proof files
   are now valid JSON.
-- **bext cold start fixed during the re-run** (profiler moved off the boot path, see
-  above); the bext row's cold start comes from the fixed release.
+- **bext cold start fixed during the re-run** (four boot-path fixes, see above); the
+  bext row's cold start comes from the fixed release.
 - **bext's islands were broken in production** when this re-run started: the shared
   resume runtime shipped as raw ESM, so all three interactions failed. Fixed in bext
   (`fix(turbopack): inline type import specifiers no longer ship the entry as raw ESM`)
