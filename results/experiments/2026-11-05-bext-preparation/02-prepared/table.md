@@ -1,0 +1,5 @@
+Server CPU affinity: `10` (1 logical CPU(s) for the entire server process tree).
+
+| Framework | Client JS (KiB gz) | TTFB p50 (ms) | RPS median | RPS min–max | p99 (ms) | Process start (ms) | Output (KiB) | C/T/S |
+|---|---:|---:|---:|---:|---:|---:|---:|:---:|
+| bext (PRISM) | 5.71 | 18.93 | 2,642 | 2,642–2,642 | 37.61 | 95 | 405.8 | ✓ |

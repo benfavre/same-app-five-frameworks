@@ -1,0 +1,47 @@
+{
+  "status": "complete",
+  "method": "three paired groups, AB/BA/AB; one-CPU mask and identical worker/app/runtime inputs; no response cache",
+  "medians": {
+    "control": {
+      "rps": 2156.408812464892,
+      "p99_ms": 67.1,
+      "cpu_ms_per_request": 0.4613
+    },
+    "prepared": {
+      "rps": 2586.990853440704,
+      "p99_ms": 39.63,
+      "cpu_ms_per_request": 0.3902
+    }
+  },
+  "pairedResults": [
+    {
+      "control": "01-control",
+      "prepared": "02-prepared",
+      "rpsIncreasePercent": 22.50464002118995,
+      "cpuCostReductionPercent": 16.973769781053537
+    },
+    {
+      "control": "04-control",
+      "prepared": "03-prepared",
+      "rpsIncreasePercent": 17.831357831142093,
+      "cpuCostReductionPercent": 13.94736842105263
+    },
+    {
+      "control": "05-control",
+      "prepared": "06-prepared",
+      "rpsIncreasePercent": 21.12651863110404,
+      "cpuCostReductionPercent": 16.58828559213339
+    }
+  ],
+  "rpsMedianIncreasePercent": 19.967551536929285,
+  "cpuMedianReductionPercent": 15.412963364404941,
+  "sourceFreshnessCases": 14,
+  "sourceFreshnessPassed": true,
+  "productionChanged": false,
+  "scope": "Widget Showcase, one CPU, three paired groups on a shared host; no universal or production-rollout qualification",
+  "astroReference": {
+    "rps": 4290,
+    "cpu_ms_per_request": 0.2325
+  },
+  "furtherCpuReductionToMatchAstroPercent": 40.41517170681701
+}

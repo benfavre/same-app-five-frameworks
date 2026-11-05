@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-11-05T20:53:56.124381+00:00",
+  "loadBefore": [
+    5.220703125,
+    5.3193359375,
+    4.6630859375
+  ],
+  "startCommand": "BEXT_PRISM_RENDER_CACHE=0 BEXT_V8_POOL_PER_WORKER_CAP=64 BEXT_V8_POOL_QUEUE_DEPTH=256 ${BEXT_BIN:-bext-server} run . --listen 127.0.0.1:8105",
+  "finishedAt": "2026-11-05T20:54:16.802776+00:00",
+  "loadAfter": [
+    5.38134765625,
+    5.36083984375,
+    4.69189453125
+  ]
+}

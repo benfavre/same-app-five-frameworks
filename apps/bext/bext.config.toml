@@ -16,4 +16,4 @@ swr_secs = 30
 [build]
 watch_dirs = ["src/app", "src/components", "src/lib"]
 debounce_ms = 100
-live_reload = true
+live_reload = false

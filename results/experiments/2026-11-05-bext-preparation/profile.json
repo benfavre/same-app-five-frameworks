@@ -1,0 +1,33 @@
+{
+  "method": "own benchmark server and four V8 children, one hardware thread, perf cpu-clock at 199 Hz, DWARF 8192 bytes",
+  "samples": 2220,
+  "lostSamples": 0,
+  "durationSeconds": 12,
+  "rawDataLocalPath": "/home/infra-sj278/same-app-five-frameworks/.benchmark-runtime/lead-profile-20261105/perf.data",
+  "rawDataSha256": "2608da5f97a18601197673daf68f8ad4314aacfd3e24f7f7a92c1a9b4148e5d6",
+  "hotspots": [
+    {
+      "label": "BLAKE3 hashing in legacy V8 workers",
+      "percent": 9.86,
+      "type": "self"
+    },
+    {
+      "label": "ICU Unicode lowercasing",
+      "percent": 4.73,
+      "type": "self"
+    },
+    {
+      "label": "V8 string to Rust conversion",
+      "percent": 3.33,
+      "type": "self"
+    },
+    {
+      "label": "route wrapper preparation",
+      "percent": 4.77,
+      "type": "inclusive; do not add to descendant costs"
+    }
+  ],
+  "scope": "diagnostic profiling; performance claims use separate unprofiled confirmation runs",
+  "binarySha256": "83b854fe1274d44df46089f81b9e8c4185636b1e08031eeef71b747f266caa24",
+  "frameworkSha256": "f5f38ffd3e72d19791ab88aab0b2cf92324e537d26f5e48c97096001c2d2bdba"
+}

@@ -1,0 +1,106 @@
+{
+  "aggregation": "median of equal repeat sweeps; cold start is median of all process starts",
+  "startedAt": "2026-11-05T21:18:19.150904+00:00",
+  "finishedAt": "2026-11-05T21:18:38.830363+00:00",
+  "cpuBudget": {
+    "serverCpus": [
+      10
+    ],
+    "clientCpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23
+    ],
+    "runnerCpuAffinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23
+    ],
+    "bextV8Workers": 4,
+    "bextHttpWorkers": 1
+  },
+  "frameworks": [
+    {
+      "framework": "bext (PRISM)",
+      "id": "bext",
+      "run_count": 1,
+      "runs": [
+        {
+          "run": "run-1",
+          "rps": 2624.0478714149285,
+          "ttfb_ms": 18.223828,
+          "p99_ms": 41.355598,
+          "client_js_gz_kb": 5.7119140625,
+          "initial_client_js_gz_kb": 5.7119140625,
+          "js_reqs": 4,
+          "build_kb": 405.8046875,
+          "http_200_responses": 21036,
+          "average_cpu_cores": 0.8988471507145182,
+          "cpu_ms_per_request": 0.37697280851872983
+        }
+      ],
+      "rps_min": 2624,
+      "rps_max": 2624,
+      "cold_ms": 82.94,
+      "cold_samples_ms": [
+        82.935
+      ],
+      "ok": "CTS",
+      "theme_persistence": true,
+      "uncached": true,
+      "ssr_cards": 24,
+      "ssr_products": 24,
+      "success": 1.0,
+      "rps": 2624,
+      "ttfb_ms": 18.22,
+      "p99_ms": 41.36,
+      "client_js_gz_kb": 5.71,
+      "initial_client_js_gz_kb": 5.71,
+      "js_reqs": 4,
+      "build_kb": 405.8,
+      "server_cpu_affinity": [
+        10
+      ],
+      "average_cpu_cores": 0.8988,
+      "cpu_ms_per_request": 0.377
+    }
+  ]
+}

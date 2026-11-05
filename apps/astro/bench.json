@@ -2,6 +2,5 @@
   "framework": "Astro",
   "port": 8103,
   "buildDir": "dist",
-  "start": "HOST=127.0.0.1 PORT=8103 node ./dist/server/entry.mjs",
-  "buildBytes": 442639
+  "start": "HOST=127.0.0.1 PORT=8103 node ./dist/server/entry.mjs"
 }

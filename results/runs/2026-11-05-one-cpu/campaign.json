@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "frameworks": [
+    "next",
+    "remix",
+    "astro",
+    "qwik",
+    "bext"
+  ],
+  "repeats": 3,
+  "runs": [
+    {
+      "directory": "run-1",
+      "order": [
+        "next",
+        "remix",
+        "astro",
+        "qwik",
+        "bext"
+      ]
+    }
+  ],
+  "startedAt": "2026-11-05T20:43:50.823669+00:00",
+  "error": "qwik: failed SSR/browser contract; see /home/infra-sj278/same-app-five-frameworks/results/runs/2026-11-05-one-cpu/run-1/qwik.browser.json",
+  "finishedAt": "2026-11-05T20:45:04.232162+00:00"
+}

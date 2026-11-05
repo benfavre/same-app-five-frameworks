@@ -2,6 +2,5 @@
   "framework": "Next.js",
   "port": 8101,
   "buildDir": ".next",
-  "start": "npx next start -p 8101",
-  "buildBytes": 5373055
+  "start": "node node_modules/next/dist/bin/next start --hostname 127.0.0.1 -p 8101"
 }

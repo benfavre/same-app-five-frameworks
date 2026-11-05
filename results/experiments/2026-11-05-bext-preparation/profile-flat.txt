@@ -1,0 +1,41 @@
+9.86% bext-v8-eval-wo bext-server [.] blake3_hash_many_avx2 - -
+4.73% bext-v8-eval-wo bext-server [.] icu_77::(anonymous namespace)::toLower(int, unsigned int, char16_t*, int, char16_t const*, UCaseContext*, int, int, icu_77::Edits*, UErrorCode&) - -
+3.33% bext-v8-eval-wo bext-server [.] _RNvMs4_NtCskvQxFKbegzD_2v86stringNtNtB7_4data6String20to_rust_string_lossy - -
+1.49% actix-rt|system bext-server [.] _mi_page_malloc_zero - -
+1.22% actix-rt|system [kernel.kallsyms] [k] _raw_spin_unlock_irqrestore - -
+1.22% bext-server libc.so.6 [.] __memmove_avx_unaligned_erms - -
+1.17% bext-v8-eval-wo libc.so.6 [.] __memmove_avx_unaligned_erms - -
+1.13% bext-server [kernel.kallsyms] [k] _raw_spin_unlock_irqrestore - -
+1.08% bext-profiler-r bext-server [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation16parse_attributesINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace - -
+0.81% actix-rt|system bext-server [.] mi_free - -
+0.77% actix-rt|system libc.so.6 [.] __memmove_avx_unaligned_erms - -
+0.68% bext-profiler-r [kernel.kallsyms] [k] clear_page_erms - -
+0.68% bext-v8-eval-wo bext-server [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&) - -
+0.63% actix-rt|system [kernel.kallsyms] [k] do_syscall_64 - -
+0.63% bext-v8-eval-wo [kernel.kallsyms] [k] _raw_spin_unlock_irqrestore - -
+0.59% actix-rt|system [kernel.kallsyms] [k] link_path_walk.part.0.constprop.0 - -
+0.54% actix-rt|system bext-server [.] _RNCNvNtNtCsdlIjXQm1snb_11bext_server12ssr_pipeline5prism26handle_prism_request_inner0B7_ - -
+0.54% bext-profiler-r bext-server [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation5parseINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace - -
+0.54% bext-v8-eval-wo bext-server [.] Builtins_RegExpReplace - -
+0.50% actix-rt|system [kernel.kallsyms] [k] __d_lookup_rcu - -
+0.50% actix-rt|system [nf_tables] [k] nft_do_chain - -
+0.50% actix-rt|system bext-server [.] mi_theap_umalloc - -
+0.50% actix-rt|system libc.so.6 [.] statx - -
+0.50% bext-profiler-r [kernel.kallsyms] [k] do_user_addr_fault - -
+0.45% bext-v8-eval-wo libc.so.6 [.] __memchr_avx2 - -
+0.41% actix-rt|system libc.so.6 [.] getenv - -
+0.41% bext-v8-pool-re [kernel.kallsyms] [k] _copy_to_iter - -
+0.41% bext-v8-pool-wr bext-server [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended - -
+0.36% actix-rt|system [kernel.kallsyms] [k] srso_alias_safe_ret - -
+0.36% bext-v8-eval-wo bext-server [.] u_memcpy_77 - -
+0.36% bext-v8-pool-wr [kernel.kallsyms] [k] _raw_spin_unlock_irqrestore - -
+0.32% actix-rt|system bext-server [.] _RINvMNtCs6oZr1Inkksd_12actix_router8resourceNtB3_11ResourceDef21capture_match_info_fnNtNtCsl5Wgh76sR8I_9actix_web7service14ServiceRequestNCINvMNtB5_6routerINtB2h_6RouterINtNtCseo0TUlPad4f_5alloc5boxed3BoxDINtCs3qM3leNkEqp_13actix_service7ServiceB1l_Ep6FutureINtNtCsiYoX4ApF2vj_4core3pin3PinIB2I_DNtNtNtB4d_6future6future6Futurep6OutputINtNtB4d_6result6ResultNtB
+0.32% bext-profiler-r [kernel.kallsyms] [k] _raw_spin_unlock_irqrestore - -
+0.32% bext-profiler-r libc.so.6 [.] __memmove_avx_unaligned_erms - -
+0.32% bext-v8-eval-wo bext-server [.] Builtins_GetProperty - -
+0.32% bext-v8-eval-wo bext-server [.] Builtins_StringToLowerCaseIntl - -
+0.32% bext-v8-pool-re libc.so.6 [.] __libc_recv - -
+0.27% actix-rt|system bext-server [.] _RNCNvXs_NtNtCsdlIjXQm1snb_11bext_server10middleware11request_logINtB6_23RequestLoggerMiddlewareNtNtCsl5Wgh76sR8I_9actix_web11app_service10AppRoutingEINtCs3qM3leNkEqp_13actix_service7ServiceNtNtB1z_7service14ServiceRequestE4calls2_0Ba_ - -
+0.27% actix-rt|system bext-server [.] _RNvNtNtCsiYoX4ApF2vj_4core3str8converts9from_utf8 - -
+0.27% actix-rt|system libc.so.6 [.] __strncmp_avx2 - -
+0.27% bext-v8-eval-wo bext-server [.] Builtins_StringIndexOf - -

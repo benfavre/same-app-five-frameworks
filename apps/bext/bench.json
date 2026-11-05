@@ -1,7 +1,6 @@
 {
   "framework": "bext (PRISM)",
   "port": 8105,
-  "buildDir": ".bext (compiled bundle cache)",
-  "start": "BEXT_V8_POOL_PER_WORKER_CAP=64 BEXT_V8_POOL_QUEUE_DEPTH=256 ${BEXT_BIN:-bext-server} run . --listen 127.0.0.1:8105",
-  "buildBytes": 3960
+  "buildDir": ".bext",
+  "start": "BEXT_PRISM_RENDER_CACHE=0 BEXT_V8_POOL_PER_WORKER_CAP=64 BEXT_V8_POOL_QUEUE_DEPTH=256 ${BEXT_BIN:-bext-server} run . --listen 127.0.0.1:8105"
 }
