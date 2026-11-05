@@ -127,21 +127,30 @@ try {
     const inp = await page.$('input[type=search]') || await page.$('input');
     if (inp) {
       await inp.click();
-      await inp.type("NiMbUs", { delay: 8 });
-      await sleep(250);
+      // Use the same typing rate for every entry and wait for the asserted DOM
+      // state instead of assuming a fixed 250 ms sleep is always sufficient.
+      await inp.type("NiMbUs", { delay: 50 });
+      const expected = products.filter((p) => p.name.toLowerCase().includes("nimbus")).length;
+      await page.waitForFunction((expected) =>
+        [...document.querySelectorAll('[data-name], .card, article')]
+          .filter((e) => e.offsetParent !== null).length === expected,
+        { timeout: 5000 }, expected).catch(() => {});
       const visAfter = await page.evaluate(() =>
         [...document.querySelectorAll('[data-name], .card, article')].filter((e) => e.offsetParent !== null).length);
-      const expected = products.filter((p) => p.name.toLowerCase().includes("nimbus")).length;
+      const filteredQuery = await inp.evaluate((e) => e.value);
       await inp.focus();
       await page.keyboard.down("Control");
       await page.keyboard.press("a");
       await page.keyboard.up("Control");
       await inp.press("Backspace");
-      await sleep(250);
+      await page.waitForFunction(() =>
+        [...document.querySelectorAll('[data-name], .card, article')]
+          .filter((e) => e.offsetParent !== null).length === 24,
+        { timeout: 5000 }).catch(() => {});
       const visReset = await page.evaluate(() =>
         [...document.querySelectorAll('[data-name], .card, article')].filter((e) => e.offsetParent !== null).length);
-      searchCounts = { before: visBefore, filtered: visAfter, expected, reset: visReset };
-      searchOk = visBefore === 24 && visAfter === expected && visReset === 24;
+      searchCounts = { before: visBefore, filtered: visAfter, expected, reset: visReset, filteredQuery };
+      searchOk = visBefore === 24 && visAfter === expected && visReset === 24 && filteredQuery.toLowerCase() === "nimbus";
     }
   } catch {}
 
