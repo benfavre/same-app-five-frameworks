@@ -91,7 +91,15 @@ def summarize_campaign(path):
 
 
 def table(summary):
-    lines = ["| Framework | Client JS (KiB gz) | TTFB p50 (ms) | RPS median | RPS min–max | p99 (ms) | Process start (ms) | Output (KiB) | C/T/S |",
+    budget = summary.get("cpuBudget")
+    if budget and budget.get("serverCpus"):
+        mask = ",".join(map(str, budget["serverCpus"]))
+        caption = f"Server CPU affinity: `{mask}` ({len(budget['serverCpus'])} logical CPU(s) for the entire server process tree)."
+    elif budget is not None:
+        caption = "Server CPU affinity: unrestricted; configured-server throughput, not an equal-CPU comparison."
+    else:
+        caption = "CPU budget was not recorded for this campaign; these are not verified per-CPU results."
+    lines = [caption, "", "| Framework | Client JS (KiB gz) | TTFB p50 (ms) | RPS median | RPS min–max | p99 (ms) | Process start (ms) | Output (KiB) | C/T/S |",
              "|---|---:|---:|---:|---:|---:|---:|---:|:---:|"]
     for row in sorted(summary["frameworks"], key=lambda r: r["rps"], reverse=True):
         lines.append(f"| {row['framework']} | {row['client_js_gz_kb']:.2f} | {row['ttfb_ms']:.2f} | "

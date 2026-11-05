@@ -1,142 +1,177 @@
-# Same app, five frameworks — 2026-11-05
+# Same app, five frameworks — equal CPU budget, 2026-11-05
 
-Production SSR measurement on activ-2, 19:51:59–19:56:35 UTC. Three equal sweeps
-per framework; medians below retain every attempt. Every entry passed the uncached
-idle/load proof, all 24 SSR product checks, and counter/theme/search checks in a
-real browser, including theme persistence and search reset.
+**The original headline was not an equal-CPU comparison.** bext's ~15,900 RPS
+used four V8 subprocesses plus a multi-threaded HTTP/controller process with access
+to all host CPUs. A fresh reproduction consumed about eight logical CPUs' worth of
+CPU time. Counting four render workers alone understated its total CPU use.
 
-| Framework | Client JS (KiB gz) | TTFB p50 (ms) | RPS median | RPS min–max | p99 (ms) | Process start (ms) | Output (KiB) | C/T/S |
-|---|---:|---:|---:|---:|---:|---:|---:|:---:|
-| bext (PRISM) | 5.71 | 3.10 | 15,874 | 15,116–15,889 | 4.70 | 66 | 405.8 | ✓ |
-| Astro | 0.33 | 8.68 | 5,446 | 5,372–5,714 | 14.02 | 141 | 478.9 | ✓ |
-| Qwik | 34.79 | 34.41 | 1,176 | 1,174–1,183 | 75.28 | 153 | 251.3 | ✓ |
-| React Router (Remix) | 113.19 | 12.86 | 1,076 | 1,042–1,137 | 59.22 | 172 | 378.7 | ✓ |
-| Next.js | 134.55 | 17.43 | 687 | 674–689 | 97.08 | 323 | 5,049.4 | ✓ |
+The headline below gives every server process, child process and helper thread
+**the same one-hardware-thread budget (CPU 10)**. Astro leads this comparison.
+All five use the same app/dependencies/bext snapshot as the earlier November run.
 
-TTFB and p99 are the medians of the corresponding per-sweep percentiles, not
-percentiles pooled across runs. Process start is the median of nine fresh process
-starts per framework. Output sizes are qualified below. C/T/S = counter / theme /
-search; theme persistence is also required.
+## Equal-CPU results
 
-## Versions and environment
+| Framework | RPS median | RPS min–max | TTFB p50 | p99 | JS gzip | CPU ms/request |
+|---|---:|---:|---:|---:|---:|---:|
+| Astro | 4,290 | 4,169–4,336 | 9.93 ms | 36.89 ms | 0.33 KiB | 0.233 |
+| bext (PRISM) | 2,102 | 2,079–2,175 | 22.94 ms | 65.00 ms | 5.71 KiB | 0.475 |
+| Next.js | 448 | 441–453 | 28.63 ms | 170.24 ms | 134.55 KiB | 2.233 |
+| Qwik | 415 | 365–417 | 95.86 ms | 187.43 ms | 34.79 KiB | 2.398 |
+| React Router (Remix) | 369 | 365–378 | 39.72 ms | 190.14 ms | 113.19 KiB | 2.708 |
+
+Three equal sweeps each, eight seconds at concurrency 50, after a two-second
+warmup. RPS/TTFB/p99 are medians of per-sweep measurements; every sweep is retained.
+TTFB is first-byte p50 **under load**. CPU ms/request uses sampled total server-tree
+CPU time, so includes the small amount of proof traffic/background work.
+
+All 15 entries passed all 24 SSR-product checks, counter/theme/search, theme
+persistence, search reset, uncached idle/load proof, HTTP status checks, and CPU
+affinity audits. **182,870 measured HTTP 200 responses, zero transport errors
+or non-200s.** All server/helper-thread masks stayed within CPU 10.
+
+bext's headline configuration retains four V8 workers but has one HTTP worker;
+all share the same one logical CPU. A strict one-V8-worker control is shown below,
+so the result does not depend on retaining multiple render processes.
+
+## bext controls: CPU time, not worker count
+
+| CPU affinity | V8 / HTTP workers | RPS median | RPS min–max | CPU seconds | Audit wall seconds | Avg logical CPUs occupied |
+|---|---:|---:|---:|---:|---:|---:|
+| CPU 10 only | 4 / 1 | 2,102 | 2,079–2,175 | 7.99 | 8.77 | 0.91 |
+| CPU 10 only | 1 / 1 | 1,967 | 1,944–1,982 | 8.01 | 8.77 | 0.91 |
+| CPU 10 only | 4 / 24 | 2,090 | 1,946–2,115 | 8.07 | 8.76 | 0.92 |
+| All 24 logical CPUs allowed | 4 / 24 | 15,769 | 15,538–16,030 | 69.67 | 8.80 | 7.91 |
+
+Each control has three complete, validated sweeps. CPU seconds, wall seconds and
+occupied-CPU figures are medians of the individual measurements. “Logical CPUs
+occupied” is summed server-tree CPU seconds divided by audit wall time; it does
+not count worker processes or physical cores.
+
+The decisive paired control keeps **four V8 workers and 24 HTTP workers** in both
+cases. Changing CPU affinity from all 24 logical CPUs to CPU 10 reduced the median
+from **15,769 to 2,090 RPS**, about **7.5×**.
+This supports the conclusion that the previous high-throughput headline depended
+heavily on access to more CPU. It was a configured-instance comparison, not
+per-core evidence that bext renders faster than Astro.
+
+With the same one-CPU budget, **Astro (4,290 RPS) is about
+2.04× bext's four-worker result (2,102)**.
+The one-V8-worker bext result is **1,967 RPS**. Pool size 1 uses a
+different single-worker IPC dispatch path in this binary; showing both controls
+avoids treating worker-count changes as a pure CPU-budget experiment. The paired
+24-HTTP-worker comparison above changes only the requested CPU affinity.
+
+In the first unrestricted audit, the controller/master consumed **37.25 CPU-seconds**
+and the four V8 subprocesses about **8.1 CPU-seconds each**. That is why simply
+dividing the original RPS by four would not correctly normalize total CPU use.
+Node's GC/JIT helpers can also use other CPUs despite there being one Node server
+process; affinity limits all of them in the new headline.
+
+## Every headline run
+
+| Framework | Sweep 1 | Sweep 2 | Sweep 3 |
+|---|---:|---:|---:|
+| Astro | 4,336 | 4,169 | 4,290 |
+| bext (PRISM) | 2,079 | 2,102 | 2,175 |
+| Next.js | 441 | 453 | 448 |
+| Qwik | 365 | 417 | 415 |
+| React Router (Remix) | 365 | 378 | 369 |
+
+Orders: Next → React Router → Astro → Qwik → bext; Astro → Qwik → bext → Next →
+React Router; bext → Next → React Router → Astro → Qwik. No best-run selection.
+
+## CPU enforcement and measurement limits
+
+- Linux `taskset` applies CPU 10 to each server before startup. Children and helper
+  threads inherit the mask. During load, the audit samples the full descendant
+  process tree every 250 ms and checks every thread's affinity. A mask escape,
+  missing audit or audit error fails the campaign/summary.
+- The benchmark runner, oha and browser are restricted to CPUs
+  `0-9,11-21,23`, excluding both CPU 10 and its SMT sibling CPU 22. This is the same
+  client mask for every CPU-controlled experiment and for the new unrestricted
+  bext control.
+- CPU 10 is **one hardware thread**, not both SMT threads of a physical core.
+  Affinity does not reserve an exclusive core on this shared machine. Other host
+  work, SMT sibling activity, power/frequency changes and cache effects can still
+  affect results. Three short sweeps give observed ranges, not confidence bounds.
+- CPU accounting sums each observed process's own user+system ticks from `/proc`;
+  child CPU is counted from child processes, not added again from the parent's
+  child-time fields. The clock is 100 Hz on this host. Process counts stayed stable
+  during these load tests. Very short-lived unobserved children would not be a
+  precise profiler trace.
+- The audit window starts before spawning oha and includes its URL-file parsing
+  and final accounting, so it is roughly 8.8 seconds for an eight-second load.
+  This explains the ~0.91 occupied-CPU average in the one-CPU runs. The actual
+  CPU-affinity cap remains one throughout.
+
+## Versions and identical inputs
 
 | Entry | Measured versions |
 |---|---|
 | Next.js | Next 16.4.5; React / React DOM 19.3.1 |
-| React Router (the Remix entry) | React Router / Node / Serve 8.5.1; React / React DOM 19.3.1; Vite 8.3.6 |
+| React Router (Remix entry) | React Router / Node / Serve 8.5.1; React / React DOM 19.3.1; Vite 8.3.6 |
 | Astro | Astro 7.4.6; @astrojs/node 11.1.10; Vite 8.3.6 |
 | Qwik | Qwik / Qwik City 1.20.3; Vite 7.3.7; Express 4.22.2 |
-| bext | Local production-runtime snapshot, version 0.2.9; exact binary/toolkit hashes below |
+| bext | Local runtime snapshot 0.2.9, same exact binary and toolkit as the unrestricted run |
 
-The four framework versions were checked against the npm registry's current
-`latest` releases before installing. Qwik stays on its supported Vite 7 line.
-Each package's lockfile records the resolved dependencies.
+Host: AMD Ryzen 9 5900X, 12 physical cores / 24 logical CPUs, shared Linux activ-2.
+Node v26.12.1; npm 11.10.1; oha 1.14.0; Puppeteer 25.16.0; Chrome 152.0.7977.75.
 
-- AMD Ryzen 9 5900X: **12 physical cores / 24 logical CPUs**, shared Linux host.
-- Node **v26.12.1**, npm **11.10.1**, oha **1.14.0**, Puppeteer **25.16.0**,
-  Chrome **152.0.7977.75**.
-- Measured app/harness source commit: `97453c9`. Per-file SHA-256 hashes are recorded
-  as well, including all lockfiles. No instrumentation changed during the campaign.
-- bext binary SHA-256: `83b854fe1274d44df46089f81b9e8c4185636b1e08031eeef71b747f266caa24`.
-- bext toolkit tree SHA-256: `f5f38ffd3e72d19791ab88aab0b2cf92324e537d26f5e48c97096001c2d2bdba`.
-  The toolkit file hashes are in the metadata. The binary and toolkit were copied
-  to a private local snapshot before measuring; production services were not changed.
-- Recorded one-minute load averages before/after entries ranged **4.77–7.74**.
-  These samples are not a continuous CPU-utilization trace.
+Measurement source commit: `56ec45a5819ef982f28f493aae36f6c2e0c3116d`; per-file source and
+lockfile hashes are recorded in each campaign's metadata. The app code was not
+changed for this CPU comparison. No measurement instrumentation changed between
+the four completed CPU campaigns. CPU captions were added to the table formatter
+after the experiments.
 
-## Every measured run
+bext binary SHA-256: `83b854fe1274d44df46089f81b9e8c4185636b1e08031eeef71b747f266caa24`.
+Toolkit tree SHA-256: `f5f38ffd3e72d19791ab88aab0b2cf92324e537d26f5e48c97096001c2d2bdba`.
+Production services and their CPU allocation were not changed.
 
-| Framework | Sweep 1 | Sweep 2 | Sweep 3 |
-|---|---:|---:|---:|
-| bext (PRISM) | 15,889 | 15,874 | 15,116 |
-| Astro | 5,372 | 5,714 | 5,446 |
-| Qwik | 1,174 | 1,176 | 1,183 |
-| React Router (Remix) | 1,042 | 1,137 | 1,076 |
-| Next.js | 674 | 687 | 689 |
+## Other protocol details
 
-Sweep orders: Next → React Router → Astro → Qwik → bext; Astro → Qwik → bext →
-Next → React Router; bext → Next → React Router → Astro → Qwik.
+- `oha -z 8s -c 50 -w --http-version 1.1`, keep-alive, all responses must be HTTP
+  200, successRate=1 and errorDistribution empty. Every load is preceded by a
+  two-second warmup. Framework response caches are disabled, including bext's
+  `BEXT_PRISM_RENDER_CACHE=0`; admission overrides remain cap 64 / queue 256.
+- oha randomly samples one million distinct query URLs **with replacement**;
+  individual request URLs can repeat. Freshness relies on uncached configuration
+  and timestamp checks during the actual load, not guaranteed URL uniqueness.
+- Client JS uses the same gzip level 6 for every distinct external JS resource
+  plus concatenated inline script bodies, including serialized data. It covers
+  initial visit and all three interactions, stopping before the persistence reload.
+  Astro uses vanilla DOM scripting; the other entries include their reactive or
+  resume runtimes. KiB means 1,024 bytes.
+- Process start is median of nine spawn-to-first-complete-200 samples per framework
+  with warm filesystem/compile caches and direct local launchers. No cold-machine,
+  mobile-throttled or navigation-to-interactive claim is made.
+- Output sizes in the machine-readable summary count Next `.next` excluding
+  compiler `cache` and `diagnostics`, React Router `build`, Astro `dist`, and Qwik
+  `dist` plus `server`. Separate dependencies/runtime executables are excluded.
+  bext's `.bext` output includes runtime databases/WAL and wrappers, so it is not
+  equivalent to a Node deployment artifact or a total deployment footprint.
 
-Across all 15 measured load tests: **578,520 HTTP 200 responses**, no non-200s,
-no transport errors. There were **45 process-start samples**, 15 successful browser
-checks, and **300 distinct under-load render samples** (20 within each entry).
-Warmup traffic is separate from the measured response count.
+## Rejected attempt and evidence
 
-## How to read these results
+The first CPU campaign was rejected when Qwik's search check reported zero cards
+instead of three. It remains [recorded as failed](results/runs/2026-11-05-one-cpu/campaign.json).
+The browser tester now types at the same 50 ms/character rate for every entry,
+waits up to five seconds for the expected search DOM state, and records the actual
+query. It still fails if the query or result count is wrong. This changes the
+post-load functional-check protocol, not the timed HTTP load. All completed CPU
+campaigns use that same tester; the failed attempt is not included in medians.
 
-bext has the highest configured-server throughput in this workload: about
-**2.9× Astro**, **13.5× Qwik**, **14.8× React Router**, and **23.1× Next.js**.
-Astro ships the least JS at **0.33 KiB** using a vanilla DOM script. bext's three
-resumable islands and shared runtime total **5.71 KiB**. These are measurements of
-one small app, not general rankings of the frameworks.
+- [Headline: every framework on one CPU](results/runs/2026-11-05-one-cpu-final/)
+- [bext: one V8 / one HTTP worker on one CPU](results/runs/2026-11-05-one-cpu-one-v8/)
+- [bext: original four V8 / 24 HTTP workers on one CPU](results/runs/2026-11-05-bext-original-one-cpu/)
+- [bext: original worker settings with all CPUs allowed](results/runs/2026-11-05-bext-original-cpu-audit/)
+- [Earlier unrestricted November writeup](results/history/2026-11-05-configured-servers.md)
+- [October writeup](results/history/2026-10-10.md)
 
-TTFB is measured **under concurrency 50**. Qwik's p50 first byte is 34.41 ms; its
-p99 response is 75.28 ms. Idle browser navigation timings are separate diagnostics
-and do not replace this column.
-
-The old headline selected the fastest of 9 Node runs and 15 bext runs. This report
-uses medians of three equal sweeps; it also changes framework versions, Node,
-startup launchers, output accounting, and waits for in-flight load requests. These
-changes prevent a clean attribution of differences to framework improvements.
-The [October writeup](results/history/2026-10-10.md) and its raw runs remain archived.
-The README's stale June table has been replaced with this campaign.
-
-## Measurement details and limits
-
-Final audit corrected the descriptive `uniqueLoadUrls` metadata flag: oha selects
-URLs with replacement. The correction and original flag value are recorded in
-`metadataCorrections`; the requests, raw timings, cache configuration and results
-were unchanged. Future runner metadata describes the URL pool explicitly.
-
-- Every entry has a two-second warmup and an eight-second load test using
-  `oha -z 8s -c 50 -w --http-version 1.1`. HTTP/1.1 keep-alive, with queries sampled
-  randomly from one million distinct `?r=` URLs; individual URLs can repeat, as
-  documented by [oha v1.14.0](https://github.com/hatoo/oha/blob/v1.14.0/README.md#urls-from-file-feature).
-  Freshness relies on the uncached framework configuration and live timestamp
-  checks. bext also sets `BEXT_PRISM_RENDER_CACHE=0` and
-  uses the same admission-cap overrides as the October comparison (64 per worker,
-  queue depth 256). Timestamp proof is collected during the actual measured load.
-- bext uses its default pool of four V8 subprocesses. The Node entries use their
-  normal single server process. This is a comparison of the configured servers,
-  not throughput at equal CPU budgets or an equal-worker experiment.
-- Client JS sums each distinct external JS resource compressed at gzip level 6
-  and concatenated inline script bodies at the same level. Serialized inline data
-  is included. Counting covers the initial visit and all three interactions, then
-  stops before the persistence reload. Initial and post-interaction totals happened
-  to be identical for all five entries in these runs.
-- Process start means spawn to first complete HTTP 200, with warm OS/filesystem
-  and compile caches. Three starts per framework per sweep; 5 ms polling. Local
-  Node entrypoints are invoked directly. The former `npx` launcher overhead is
-  absent, so October startup numbers are not directly comparable. This is not a
-  cold-machine/deployment-time measurement.
-- Node output sizes are actual file-byte sums: Next `.next` excluding compiler
-  `cache` and `diagnostics`; React Router `build`; Astro `dist`; Qwik `dist` plus
-  `server`. Only those output directories are counted; separate dependency installs
-  and runtime executables are excluded.
-- **bext's 405.8 KiB output is generated `.bext` runtime state**, including local
-  SQLite databases/WAL files and route wrappers, measured while serving. It is
-  not equivalent to the Node build artifacts and can vary as runtime state changes.
-  Its external runtime binary and shared toolkit are excluded. The earlier fixed
-  “~4 KB build” claim should not be read as a deployment footprint.
-- No network or mobile CPU throttling. The post-settle click latency is diagnostic,
-  not navigation-to-interactive; no TTI claim is made.
-- Three short sweeps on a shared host provide a useful refresh and an observed
-  range, not a confidence interval or an isolated-hardware capacity guarantee.
-
-## Evidence and reproduction
-
-- [Campaign status and run order](results/runs/2026-11-05/campaign.json)
-- [Toolchain, source and runtime hashes](results/runs/2026-11-05/metadata.json)
-- [Summary with all per-run metrics and startup samples](results/runs/2026-11-05/summary.json)
-- [Sweep 1](results/runs/2026-11-05/run-1/), [sweep 2](results/runs/2026-11-05/run-2/),
-  [sweep 3](results/runs/2026-11-05/run-3/): raw oha, warmup, browser, proof, output
-  size and environment JSON for every entry.
+The four completed CPU campaigns contain **24 validated load/browser entries**,
+**658,451 measured HTTP 200 responses**, no load errors, and no CPU-affinity
+violations. The four production builds previously passed; ten harness-integrity
+tests now include CPU-mask escape detection, child CPU accounting, and rejection
+of missing/invalid audits. All benchmark processes were stopped.
 
 [README reproduction commands](README.md#reproduce) and [SPEC.md](SPEC.md) describe
-the contract. Failed or incomplete campaigns are not publishable, and occupied
-ports are never cleared by killing existing processes.
-
-Validation: all four production builds passed; Next's build type check and Qwik's
-build type/lint checks passed; seven harness-integrity tests passed. The full
-campaign passed the runtime contract for every entry in every sweep. All benchmark
-processes were stopped after their measurements.
+the contract. The latest published JSON points to the equal-CPU headline campaign.

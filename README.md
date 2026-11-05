@@ -1,46 +1,60 @@
 # Same App, Five Frameworks
 
-One small app in Next.js, React Router (the Remix entry), Astro, Qwik, and bext:
-24 server-rendered product cards, a counter, a persisted theme toggle, and live
-client-side search. Every measured request renders fresh HTML.
+The same 24-product SSR app, counter, persisted theme toggle, and live search in
+Next.js, React Router (the Remix entry), Astro, Qwik, and bext. Every measured
+request renders fresh HTML.
 
-## Current results — 2026-11-05
+## Current results — equal CPU budget, 2026-11-05
 
-| Framework | Version | Client JS (KiB gz) | RPS median | TTFB p50 (ms) | p99 (ms) |
-|---|---|---:|---:|---:|---:|
-| bext (PRISM) | 0.2.9* | 5.71 | 15,874 | 3.10 | 4.70 |
-| Astro | 7.4.6 | 0.33 | 5,446 | 8.68 | 14.02 |
-| Qwik | 1.20.3 | 34.79 | 1,176 | 34.41 | 75.28 |
-| React Router (Remix) | 8.5.1 | 113.19 | 1,076 | 12.86 | 59.22 |
-| Next.js | 16.4.5 | 134.55 | 687 | 17.43 | 97.08 |
+**Every server, child process and helper thread is pinned to one hardware thread
+(CPU 10).** The load generator is kept off that physical core and its SMT sibling.
+Three equal eight-second sweeps per framework, concurrency 50; medians and every
+sweep's range below. All raw data, including CPU affinity audits, is retained.
 
-*The local bext runtime and toolkit are identified by exact SHA-256 hashes in the [run metadata](results/runs/2026-11-05/metadata.json).
+| Framework | Version | RPS median | RPS min–max | TTFB p50 | p99 | JS gzip |
+|---|---|---:|---:|---:|---:|---:|
+| Astro | 7.4.6 | 4,290 | 4,169–4,336 | 9.93 ms | 36.89 ms | 0.33 KiB |
+| bext (PRISM) | 0.2.9* | 2,102 | 2,079–2,175 | 22.94 ms | 65.00 ms | 5.71 KiB |
+| Next.js | 16.4.5 | 448 | 441–453 | 28.63 ms | 170.24 ms | 134.55 KiB |
+| Qwik | 1.20.3 | 415 | 365–417 | 95.86 ms | 187.43 ms | 34.79 KiB |
+| React Router (Remix) | 8.5.1 | 369 | 365–378 | 39.72 ms | 190.14 ms | 113.19 KiB |
 
-Three equal sweeps per framework on activ-2 (AMD Ryzen 9 5900X, 12 cores / 24
-threads), production servers over loopback. Node v26.12.1, oha 1.14.0, Puppeteer
-25.16.0 and Chrome 152.0.7977.75. RPS, TTFB and p99 are medians across the three
-sweeps; [the full ranges and every run](RESULTS.md) are retained. These are
-observations on a shared host.
+*The local bext runtime/toolkit is identified by exact SHA-256 hashes in the
+[metadata](results/runs/2026-11-05-one-cpu-final/metadata.json). Its four V8 workers
+and one HTTP worker all share the same single CPU. A separate one-V8-worker
+control and unrestricted configured-server control are in [RESULTS.md](RESULTS.md).
 
-[RESULTS.md](RESULTS.md) explains the versions, raw evidence, startup and size
-measurements, and limits of comparisons with the older results.
+**Astro leads this equal-CPU comparison.** The previous ~15,900-RPS bext headline
+used an unrestricted multi-core configuration. A fresh reproduction of that
+configuration consumed about eight CPUs' worth of server CPU time. The original
+[configured-server writeup](results/history/2026-11-05-configured-servers.md)
+remains archived; those numbers are not per-core results.
+
+Measured on shared activ-2: AMD Ryzen 9 5900X (12 physical cores / 24 logical CPUs),
+Node v26.12.1, oha 1.14.0, Puppeteer 25.16.0, Chrome 152.0.7977.75. Affinity imposes
+a CPU-access limit; it does not reserve an exclusive core on a shared host. One
+Node process can use helper threads, so process counts alone do not define a CPU
+budget. TTFB and p99 here are measured under load.
 
 ## What is checked
 
-- Uncached SSR: two different idle timestamps plus 20 different timestamps sampled
-  during the actual load test. oha samples a pool of one million distinct query
-  URLs with replacement; bext's render-result cache is explicitly disabled.
-- All 24 card elements and product names exist in the raw server HTML.
+- Fresh rendering: different idle timestamps plus 20 distinct timestamps sampled
+  during each measured load test. oha samples from one million query URLs with
+  replacement; bext's render-result cache is explicitly disabled.
+- All 24 card elements and product names exist in the raw SSR HTML.
 - A real browser increments the counter, toggles and persists the theme across a
-  reload, filters the expected cards with mixed-case input, and restores all cards
-  when the input is cleared.
-- Every measured load response is HTTP 200, with no transport errors. Missing or
-  failed evidence fails the campaign and prevents publication.
+  reload, filters the expected products with mixed-case input, and restores the
+  complete list when the input is cleared. Every framework uses the same typing
+  rate and waits for the asserted search DOM state.
+- Every load response is HTTP 200, with no transport errors. The server process
+  tree and every thread's affinity are sampled during the load interval. Missing
+  or failed evidence, including an escaped CPU mask, prevents publication.
 
 ## Reproduce
 
-Requires Node >=22.23.4, npm, Python 3, oha, and Chrome (Puppeteer downloads a
-compatible browser during installation; `CHROME=/path/to/chrome` overrides it).
+Requires Linux with `taskset`, Node >=22.23.4, npm, Python 3, oha and Chrome.
+Puppeteer downloads a compatible browser during installation;
+`CHROME=/path/to/chrome` overrides it.
 
 ```bash
 npm ci
@@ -48,51 +62,45 @@ for fw in next remix astro qwik; do
   (cd "apps/$fw" && npm ci && npm run build) || exit 1
 done
 
-# bext runs as a separate production server, with an external runtime/toolkit:
 export BEXT_BIN=/absolute/path/to/bext-server
 export BEXT_SHARED_FRAMEWORK_DIR=/absolute/path/to/bext/sites/shared/framework
 
-npm run benchmark
-npm run summarize -- --publish
+# CPU IDs below are for activ-2. Choose available IDs on another host;
+# keep the server CPU and its SMT sibling out of the client mask.
+npm run benchmark -- --server-cpus 10 --client-cpus 0-9,11-21,23 \
+  --bext-v8-workers 4 --bext-http-workers 1 \
+  --output results/runs/local-one-cpu
+npm run summarize -- results/runs/local-one-cpu --publish
 ```
 
-The runner prints its new `results/runs/<campaign>/` directory. To summarize an
-explicit campaign: `npm run summarize -- results/runs/<campaign> --publish`.
-The summary refuses incomplete or failed campaigns. `--publish` updates the local
-`results/results.json` and `results/latest.json`; it does not push to GitHub.
+Each output directory must be new. Occupied ports fail safely; the runner only
+stops process groups it starts. `bash harness/run-all.sh` is equivalent to
+`npm run benchmark`. Without CPU/worker options, the runner measures unrestricted
+configured servers; label that separately from equal-CPU results.
 
-To measure only the four Node apps, choose them explicitly:
-
-```bash
-npm run benchmark -- --frameworks next remix astro qwik
-```
-
-Defaults: three sweeps, three process starts per entry per sweep, two-second
-warmup, then `oha -z 8s -c 50 -w` with HTTP/1.1 keep-alive. The framework order
-rotates across sweeps. Override `--repeats`, `--duration`, `--concurrency`,
-`--cold-samples`, or `--output` as needed. Output directories must be new. Occupied
-ports are an error; the runner only stops the process groups it starts.
-`bash harness/run-all.sh` is the equivalent compatibility entrypoint.
+To omit bext, add `--frameworks next remix astro qwik`. Override `--repeats`,
+`--duration`, `--concurrency`, or `--cold-samples` as needed. Defaults are three
+sweeps, three process starts per entry per sweep, a two-second warmup, then
+`oha -z 8s -c 50 -w` with HTTP/1.1 keep-alive. The order rotates across sweeps.
+`--publish` updates local results JSON; it does not push to GitHub.
 
 ## Measurements and limits
 
-Client JS uses one uniform gzip encoder (level 6) for each external JS resource
-plus concatenated inline script bodies, including serialized data. It includes
-code fetched during the three interactions; the initial-visit size is also saved.
-KiB means 1,024 bytes. Astro implements the interactions with a small vanilla DOM
-script, while the other entries ship their respective reactive/resume runtimes.
+Client JS uses uniform gzip level 6 for each external JS resource plus concatenated
+inline script bodies, including serialized data. It includes code fetched during
+the three interactions; counting stops before the persistence reload. KiB means
+1,024 bytes. Astro uses a small vanilla DOM script; the other entries ship their
+reactive/resume runtimes.
 
-TTFB is p50 under concurrency 50, not idle navigation latency. Process start is
-spawn-to-first-complete-200 with warm filesystem/compilation caches, without `npx`
-launcher overhead. Output sizes exclude dependencies and server/runtime binaries;
-bext's row describes generated runtime state, including local databases, which is
-not equivalent to a Node build artifact. The bext server uses four V8
-workers; each Node server uses its default single process. This compares the
-configured servers, not equal per-core efficiency. No mobile throttling or
-navigation-to-interactive result is claimed.
+Process start is spawn-to-first-complete-200 with warm filesystem/compilation
+caches, without `npx` overhead. Output sizes exclude separate dependency installs
+and server/runtime executables; bext's `.bext` runtime-state directory is not
+equivalent to a Node build artifact. No mobile-throttling or navigation-to-
+interactive claim is made. Three short sweeps on a shared host show observed
+ranges, not confidence intervals.
 
-[The canonical contract](SPEC.md), [current evidence](results/runs/2026-11-05/),
-and [October's historical writeup](results/history/2026-10-10.md) are included.
-Harness integrity checks: `python3 -m unittest discover -s harness -p 'test_*.py'`.
+[Canonical contract](SPEC.md), [CPU-controlled evidence](results/runs/2026-11-05-one-cpu-final/),
+and [detailed results and controls](RESULTS.md). Harness integrity tests:
+`python3 -m unittest discover -s harness -p 'test_*.py'`.
 
 MIT licensed.

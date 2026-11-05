@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "status": "complete",
+  "frameworks": [
+    "bext"
+  ],
+  "repeats": 3,
+  "runs": [
+    {
+      "directory": "run-1",
+      "order": [
+        "bext"
+      ]
+    },
+    {
+      "directory": "run-2",
+      "order": [
+        "bext"
+      ]
+    },
+    {
+      "directory": "run-3",
+      "order": [
+        "bext"
+      ]
+    }
+  ],
+  "startedAt": "2026-11-05T20:53:34.605227+00:00",
+  "finishedAt": "2026-11-05T20:54:37.597244+00:00"
+}

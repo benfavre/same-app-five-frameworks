@@ -36,6 +36,12 @@ Server-rendered page containing, in order:
 - No analytics, no extra fonts, no images. Minimal CSS, inline or one small file.
 - Production build + production server. No dev mode in any measurement.
 - Each app's prod server binds to its assigned port (see ports.txt).
+- Compare CPU budgets explicitly. One Node server process is not a guarantee of
+  one CPU: GC/JIT helpers can run on other threads. For an equal-CPU headline,
+  apply the same `--server-cpus` affinity mask to every server and descendant,
+  and keep the load generator off that physical core and its SMT sibling.
+  Unrestricted/default-worker results must be labeled as configured-server
+  throughput, not per-core performance.
 - Every request must render fresh. A positive server-rendered `data-rendered-at`
   timestamp must change between two idle requests and across 20 responses sampled
   during the measured load test. oha samples from one million distinct `?r=` URLs
@@ -66,10 +72,22 @@ Server-rendered page containing, in order:
   and clearing the input restores all 24 cards. Verify all 24 names and card
   elements in the raw SSR HTML. The click latency after settling is diagnostic,
   not a navigation-to-interactive measurement.
+- **CPU audit** — sample the server process tree every 250 ms during the load
+  interval. Record process CPU ticks and every thread's affinity mask. Any escaped
+  mask, missing CPU evidence, or audit error fails the campaign/summary. The audit
+  window includes oha startup/URL-file parsing and final accounting; sampled CPU
+  seconds and average occupied CPUs are diagnostics, not a precise profiler trace.
+  CPU ms/request divides server-tree CPU time by the measured HTTP-200 count;
+  the small amount of proof traffic and server background work is included.
 
 Default campaign: three serialized sweeps of every framework, with order rotated
 between sweeps. Report medians and the full RPS range; retain every run, without
 selecting the best attempt. All sizes displayed as KiB (1,024 bytes).
+
+Linux resource controls: `--server-cpus` and `--client-cpus` accept CPU IDs/ranges;
+`--bext-v8-workers` and `--bext-http-workers` record explicit worker overrides.
+`taskset` affinity is inherited by child processes and threads, then verified by
+the audit. It does not reserve exclusive use of a physical core on a shared host.
 
 ## Output contract (each app dir must provide)
 - `bench.json` at the app root:
