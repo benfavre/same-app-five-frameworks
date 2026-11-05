@@ -1,111 +1,142 @@
-# Head-to-head: bext vs Next.js / Remix / Astro / Qwik, UNCACHED
+# Same app, five frameworks — 2026-11-05
 
-Same app ("Widget Showcase", see SPEC.md) built idiomatically on each framework:
-SSR header + hero + 24 server-rendered product cards + three interactive units
-(counter, theme toggle, client-side search). All five verified working in a real
-headless browser (**C/T/S** = Counter / Theme / Search) in every run.
+Production SSR measurement on activ-2, 19:51:59–19:56:35 UTC. Three equal sweeps
+per framework; medians below retain every attempt. Every entry passed the uncached
+idle/load proof, all 24 SSR product checks, and counter/theme/search checks in a
+real browser, including theme persistence and search reset.
 
-**Fairness:** every framework renders **fresh on every request**: no ISR cache
-(bext `force-dynamic`), no prerendered static (Next.js `force-dynamic`, Astro
-`prerender=false`). Proven per app and per run by a server-rendered `data-rendered-at`
-timestamp that must differ between two idle requests **and** across 20 responses
-sampled during the load test. Each load request carries a unique `?r=` query so no
-URL-keyed response cache can stand in for the renderer.
+| Framework | Client JS (KiB gz) | TTFB p50 (ms) | RPS median | RPS min–max | p99 (ms) | Process start (ms) | Output (KiB) | C/T/S |
+|---|---:|---:|---:|---:|---:|---:|---:|:---:|
+| bext (PRISM) | 5.71 | 3.10 | 15,874 | 15,116–15,889 | 4.70 | 66 | 405.8 | ✓ |
+| Astro | 0.33 | 8.68 | 5,446 | 5,372–5,714 | 14.02 | 141 | 478.9 | ✓ |
+| Qwik | 34.79 | 34.41 | 1,176 | 1,174–1,183 | 75.28 | 153 | 251.3 | ✓ |
+| React Router (Remix) | 113.19 | 12.86 | 1,076 | 1,042–1,137 | 59.22 | 172 | 378.7 | ✓ |
+| Next.js | 134.55 | 17.43 | 687 | 674–689 | 97.08 | 323 | 5,049.4 | ✓ |
 
-Measured 2026-10-10 on activ-2 (24 cores, node 25, prod builds, loopback), each
-framework as its own process. Client JS = every JS resource + inline scripts the page
-loads, gzipped by us at one fixed level. TTFB / RPS / p99 from `oha -z 8s -c 50`.
-Best run per framework (box shared with other workloads, see below).
+TTFB and p99 are the medians of the corresponding per-sweep percentiles, not
+percentiles pooled across runs. Process start is the median of nine fresh process
+starts per framework. Output sizes are qualified below. C/T/S = counter / theme /
+search; theme persistence is also required.
 
-| Framework        | Client JS (gz) | TTFB (p50) | RPS (uncached) | p99      | Cold start | Build  | C/T/S |
-|------------------|---------------:|-----------:|---------------:|---------:|-----------:|-------:|:---:|
-| **bext (PRISM)** | 5.58 KB        | **2.9 ms** | **16,958**     | **4.1 ms** | **54 ms**  | ~4 KB* | ✅ |
-| Astro            | **0.33 KB**    | 11.3 ms    | 4,142          | 19.5 ms  | 150 ms     | 432 KB | ✅ |
-| Remix            | 101.3 KB       | 11.1 ms    | 1,119          | 67.9 ms  | 384 ms     | 335 KB | ✅ |
-| Qwik             | 34.9 KB        | 43.7 ms    | 906            | 70.4 ms  | 157 ms     | 249 KB | ✅ |
-| Next.js          | 144.8 KB       | 20.3 ms    | 622            | 127.0 ms | 537 ms     | 5.2 MB | ✅ |
+## Versions and environment
 
-Every run (`results/runs.json`), RPS sorted:
+| Entry | Measured versions |
+|---|---|
+| Next.js | Next 16.4.5; React / React DOM 19.3.1 |
+| React Router (the Remix entry) | React Router / Node / Serve 8.5.1; React / React DOM 19.3.1; Vite 8.3.6 |
+| Astro | Astro 7.4.6; @astrojs/node 11.1.10; Vite 8.3.6 |
+| Qwik | Qwik / Qwik City 1.20.3; Vite 7.3.7; Express 4.22.2 |
+| bext | Local production-runtime snapshot, version 0.2.9; exact binary/toolkit hashes below |
 
-| Framework | Runs | RPS per run |
-|---|--:|---|
-| bext    | 15 | 5,750 · 6,049 · 6,535 · 6,750 · 9,914 · 10,497 · 10,823 · 10,899 · 11,878 · 12,476 · 14,716 · 14,718 · 15,168 · 15,173 · 16,958 |
-| Astro   | 9 | 1,673 · 1,809 · 1,813 · 1,871 · 3,592 · 3,935 · 4,025 · 4,030 · 4,142 |
-| Remix   | 9 | 322 · 342 · 371 · 372 · 854 · 1,053 · 1,073 · 1,100 · 1,119 |
-| Qwik    | 9 | 348 · 350 · 351 · 382 · 569 · 880 · 888 · 905 · 906 |
-| Next.js | 9 | 215 · 217 · 220 · 244 · 281 · 339 · 583 · 588 · 622 |
+The four framework versions were checked against the npm registry's current
+`latest` releases before installing. Qwik stays on its supported Vite 7 line.
+Each package's lockfile records the resolved dependencies.
 
-The low runs coincide with heavy compile jobs from another project on the same box
-(load average up to 37 on 24 cores). Each framework's best run is its least disturbed
-one; the Node apps had 9 chances, bext 15 (the last 12 on releases with the
-cold-start fixes below).
+- AMD Ryzen 9 5900X: **12 physical cores / 24 logical CPUs**, shared Linux host.
+- Node **v26.12.1**, npm **11.10.1**, oha **1.14.0**, Puppeteer **25.16.0**,
+  Chrome **152.0.7977.75**.
+- Measured app/harness source commit: `97453c9`. Per-file SHA-256 hashes are recorded
+  as well, including all lockfiles. No instrumentation changed during the campaign.
+- bext binary SHA-256: `83b854fe1274d44df46089f81b9e8c4185636b1e08031eeef71b747f266caa24`.
+- bext toolkit tree SHA-256: `f5f38ffd3e72d19791ab88aab0b2cf92324e537d26f5e48c97096001c2d2bdba`.
+  The toolkit file hashes are in the metadata. The binary and toolkit were copied
+  to a private local snapshot before measuring; production services were not changed.
+- Recorded one-minute load averages before/after entries ranged **4.77–7.74**.
+  These samples are not a continuous CPU-utilization trace.
 
-## What the uncached numbers say
+## Every measured run
 
-**bext is the fastest renderer, by a wider margin than in June.** A full V8 render per
-request at **16,958 RPS**, **2.9 ms** first byte and **4.1 ms** p99: about 4× Astro,
-15× Remix, 19× Qwik, 27× Next.js. June measured 4,742 RPS at a 71 ms p99.
+| Framework | Sweep 1 | Sweep 2 | Sweep 3 |
+|---|---:|---:|---:|
+| bext (PRISM) | 15,889 | 15,874 | 15,116 |
+| Astro | 5,372 | 5,714 | 5,446 |
+| Qwik | 1,174 | 1,176 | 1,183 |
+| React Router (Remix) | 1,042 | 1,137 | 1,076 |
+| Next.js | 674 | 687 | 689 |
 
-**The tail flipped.** Astro had the tightest p99 in June (20 ms vs 71). bext's is now
-4.1 ms against Astro's 19.5.
+Sweep orders: Next → React Router → Astro → Qwik → bext; Astro → Qwik → bext →
+Next → React Router; bext → Next → React Router → Astro → Qwik.
 
-**The Node frameworks barely moved** (within about 10% of June), so the rig is
-comparable and the change is bext's.
+Across all 15 measured load tests: **578,520 HTTP 200 responses**, no non-200s,
+no transport errors. There were **45 process-start samples**, 15 successful browser
+checks, and **300 distinct under-load render samples** (20 within each entry).
+Warmup traffic is separate from the measured response count.
 
-**Client JS is unchanged: kilobytes, not megabytes.** bext ships 5.6 KB (3 resumable
-islands + shared runtime); Astro wins outright at 0.33 KB of hand-written vanilla
-`<script>`, Qwik 35, Remix 101, Next 145.
+## How to read these results
 
-**Cold start: 54 ms, now the fastest of the five** (Astro 150, Qwik 157, Remix 384,
-Next 537). The first runs of this re-measure showed ~3.3 s. Profiling bext's boot
-found these causes, all fixed and deployed in bext:
+bext has the highest configured-server throughput in this workload: about
+**2.9× Astro**, **13.5× Qwik**, **14.8× React Router**, and **23.1× Next.js**.
+Astro ships the least JS at **0.33 KiB** using a vanilla DOM script. bext's three
+resumable islands and shared runtime total **5.71 KiB**. These are measurements of
+one small app, not general rankings of the frameworks.
 
-| Fix | Cold start after |
-|---|--:|
-| (start of re-run) | 2.4 to 5 s |
-| continuous profiler starts 10 s after boot instead of before listening | ~160 to 300 ms |
-| actix route regexes compiled once per process, not once per HTTP thread | |
-| disk compile-cache prune moved off the first request | ~100 to 300 ms |
-| allocator stops requesting transparent huge pages (compaction stalls) | ~110 ms, steady |
-| actix HTTP workers build their apps concurrently (were built one after another) | |
-| V8 workers create their isolate and a warm context at boot, not on the first request | ~75 ms |
-| compiler self-test and V8 worker spawns run concurrently; first page reuses the warm context; bytecode-cache prune off the render path | |
-| packed relocations (9.7 MB table → 110 KB); libphp loaded only by processes that run PHP (17 → 5 libraries per exec) | **~55-60 ms** |
+TTFB is measured **under concurrency 50**. Qwik's p50 first byte is 34.41 ms; its
+p99 response is 75.28 ms. Idle browser navigation timings are separate diagnostics
+and do not replace this column.
 
-**Cached mode.** With its built-in ISR (one config line) bext serves the same page at
-~44,000 RPS / 0.95 ms TTFB / ~4 ms p99 standalone on this loaded box. (June's 282,776
-RPS was measured on the fleet front server on a quiet box, a different setup.)
+The old headline selected the fastest of 9 Node runs and 15 bext runs. This report
+uses medians of three equal sweeps; it also changes framework versions, Node,
+startup launchers, output accounting, and waits for in-flight load requests. These
+changes prevent a clean attribution of differences to framework improvements.
+The [October writeup](results/history/2026-10-10.md) and its raw runs remain archived.
+The README's stale June table has been replaced with this campaign.
 
-**TTI inconclusive (~50 to 70 ms for all):** on a fast box over loopback even 145 KB of
-React hydrates within a frame. The hydration-vs-resumption gap needs throttled mobile.
+## Measurement details and limits
 
-\* bext has no heavyweight build (compiles on demand; ~4 KB bundle cache).
+Final audit corrected the descriptive `uniqueLoadUrls` metadata flag: oha selects
+URLs with replacement. The correction and original flag value are recorded in
+`metadataCorrections`; the requests, raw timings, cache configuration and results
+were unchanged. Future runner metadata describes the URL pool explicitly.
 
-## What changed since the June run
+- Every entry has a two-second warmup and an eight-second load test using
+  `oha -z 8s -c 50 -w --http-version 1.1`. HTTP/1.1 keep-alive, with queries sampled
+  randomly from one million distinct `?r=` URLs; individual URLs can repeat, as
+  documented by [oha v1.14.0](https://github.com/hatoo/oha/blob/v1.14.0/README.md#urls-from-file-feature).
+  Freshness relies on the uncached framework configuration and live timestamp
+  checks. bext also sets `BEXT_PRISM_RENDER_CACHE=0` and
+  uses the same admission-cap overrides as the October comparison (64 per worker,
+  queue depth 256). Timestamp proof is collected during the actual measured load.
+- bext uses its default pool of four V8 subprocesses. The Node entries use their
+  normal single server process. This is a comparison of the configured servers,
+  not throughput at equal CPU budgets or an equal-worker experiment.
+- Client JS sums each distinct external JS resource compressed at gzip level 6
+  and concatenated inline script bodies at the same level. Serialized inline data
+  is included. Counting covers the initial visit and all three interactions, then
+  stops before the persistence reload. Initial and post-interaction totals happened
+  to be identical for all five entries in these runs.
+- Process start means spawn to first complete HTTP 200, with warm OS/filesystem
+  and compile caches. Three starts per framework per sweep; 5 ms polling. Local
+  Node entrypoints are invoked directly. The former `npx` launcher overhead is
+  absent, so October startup numbers are not directly comparable. This is not a
+  cold-machine/deployment-time measurement.
+- Node output sizes are actual file-byte sums: Next `.next` excluding compiler
+  `cache` and `diagnostics`; React Router `build`; Astro `dist`; Qwik `dist` plus
+  `server`. Only those output directories are counted; separate dependency installs
+  and runtime executables are excluded.
+- **bext's 405.8 KiB output is generated `.bext` runtime state**, including local
+  SQLite databases/WAL files and route wrappers, measured while serving. It is
+  not equivalent to the Node build artifacts and can vary as runtime state changes.
+  Its external runtime binary and shared toolkit are excluded. The earlier fixed
+  “~4 KB build” claim should not be read as a deployment footprint.
+- No network or mobile CPU throttling. The post-settle click latency is diagnostic,
+  not navigation-to-interactive; no TTI claim is made.
+- Three short sweeps on a shared host provide a useful refresh and an observed
+  range, not a confidence interval or an isolated-hardware capacity guarantee.
 
-- **bext runs as its own process** (`apps/bext/bench.json`, started and stopped by the
-  harness like the Node apps) instead of on the shared production front server. Its
-  default 4-worker V8 pool is kept; the admission caps are raised so it queues excess
-  requests like the Node servers instead of answering 503. Zero non-200s in every run.
-- **Unique query per load request + under-load proof.** bext's render-result cache can
-  keep a page after two byte-identical renders; at 50 concurrent requests two renders
-  of this page can share a millisecond, look identical, and get replayed. The June
-  idle check could not see that. The harness now samples during load and every load
-  request is unique.
-- **Cold start is now spawn-to-first-200 for everyone**, bext included (June's 10 ms
-  was the first request on an always-on server).
-- **Harness fixes:** `run_node` resolved the app directory from the previous loop
-  iteration's variable (harmless inside the loop, wrong outside it); the proof files
-  are now valid JSON.
-- **bext cold start fixed during the re-run** (boot-path fixes, see above); the
-  bext row's cold start comes from the fixed release.
-- **bext's islands were broken in production** when this re-run started: the shared
-  resume runtime shipped as raw ESM, so all three interactions failed. Fixed in bext
-  (`fix(turbopack): inline type import specifiers no longer ship the entry as raw ESM`)
-  and deployed before these runs.
+## Evidence and reproduction
 
-## Reproduce
-- `harness/run-all.sh`: full sweep (cold start, uncached proof, TTFB, oha, browser)
-- `harness/h2h-measure.mjs`: per-page client JS + interaction verify
-- `harness/summarize.py`: one sweep's table + `results/results.json`
-- `results/runs/<run>/`: raw oha JSON, `*.proof` (uncached evidence), browser JSON
+- [Campaign status and run order](results/runs/2026-11-05/campaign.json)
+- [Toolchain, source and runtime hashes](results/runs/2026-11-05/metadata.json)
+- [Summary with all per-run metrics and startup samples](results/runs/2026-11-05/summary.json)
+- [Sweep 1](results/runs/2026-11-05/run-1/), [sweep 2](results/runs/2026-11-05/run-2/),
+  [sweep 3](results/runs/2026-11-05/run-3/): raw oha, warmup, browser, proof, output
+  size and environment JSON for every entry.
+
+[README reproduction commands](README.md#reproduce) and [SPEC.md](SPEC.md) describe
+the contract. Failed or incomplete campaigns are not publishable, and occupied
+ports are never cleared by killing existing processes.
+
+Validation: all four production builds passed; Next's build type check and Qwik's
+build type/lint checks passed; seven harness-integrity tests passed. The full
+campaign passed the runtime contract for every entry in every sweep. All benchmark
+processes were stopped after their measurements.

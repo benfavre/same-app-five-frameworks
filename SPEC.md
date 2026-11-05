@@ -38,14 +38,17 @@ Server-rendered page containing, in order:
 - Each app's prod server binds to its assigned port (see ports.txt).
 - Every request must render fresh. A positive server-rendered `data-rendered-at`
   timestamp must change between two idle requests and across 20 responses sampled
-  during the measured load test. Every load request has a unique `?r=` query.
-  bext's render-result cache is also explicitly disabled.
+  during the measured load test. oha samples from one million distinct `?r=` URLs
+  with replacement; individual request URLs can repeat. Framework response caches
+  must be disabled explicitly, including bext's render-result cache.
 
 ## Metrics (collected centrally by the harness, identically for all)
 - **build_bytes** — measured production output files (Qwik: `dist` + `server`;
-  Next: `.next` excluding compiler `cache` and `diagnostics`; bext: its on-demand
-  `.bext` cache). Excludes dependencies and framework/server executables. This is
-  an output-size observation, not total deployment footprint.
+  Next: `.next` excluding compiler `cache` and `diagnostics`; bext: its generated
+  `.bext` directory, including local runtime databases and route wrappers).
+  Excludes dependencies and framework/server executables. The bext state directory
+  is not equivalent to a Node build artifact; none of these sizes is a total
+  deployment footprint.
 - **client_js_gz** — sum of each distinct external JS resource gzipped at level 6,
   plus concatenated inline script bodies (including serialized script data) gzipped
   at the same level. Count a fresh browser visit and the three interactions; stop
@@ -55,7 +58,7 @@ Server-rendered page containing, in order:
   warm; report the median of all process starts. Poll at 5 ms intervals. Start
   commands invoke local Node entrypoints directly, without `npx` startup overhead.
 - **ttfb_ms** — first-byte p50 during load, from `oha` (not an idle curl latency).
-- **rps / p99** — `oha -z 8s -c 50 -w`, HTTP/1.1 keep-alive, unique URLs, after a
+- **rps / p99** — `oha -z 8s -c 50 -w`, HTTP/1.1 keep-alive, varied query URLs, after a
   2-second warmup. Wait for in-flight requests at the deadline. Require only HTTP
   200 responses, successRate=1 and an empty error distribution.
 - **interaction checks** — counter increments, theme toggles and persists after a

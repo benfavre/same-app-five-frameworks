@@ -21,6 +21,7 @@ import urllib.request
 
 ROOT = Path(__file__).resolve().parent.parent
 FRAMEWORKS = ["next", "remix", "astro", "qwik", "bext"]
+LOAD_URL_COUNT = 1_000_000
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
@@ -76,7 +77,8 @@ def metadata(args):
         "versions": versions(args.frameworks),
         "parameters": {"repeats": args.repeats, "durationSeconds": args.duration,
                        "concurrency": args.concurrency, "coldSamples": args.cold_samples,
-                       "warmupSeconds": 2, "httpVersion": "1.1", "uniqueLoadUrls": True,
+                       "warmupSeconds": 2, "httpVersion": "1.1", "uniqueLoadUrls": False,
+                       "loadUrlPoolSize": LOAD_URL_COUNT, "loadUrlSelection": "random with replacement",
                        "waitForOngoingRequests": True, "underLoadSamples": 20},
     }
     if "bext" in args.frameworks:
@@ -195,7 +197,10 @@ def measure(fw, bench, directory, args):
         if r1 == r2:
             raise RuntimeError(f"{fw}: idle render timestamp did not change")
         with tempfile.NamedTemporaryFile(mode="w", prefix="same-app-urls-", suffix=".txt") as urls:
-            urls.writelines(f"{url}?r={index}\n" for index in range(1_000_000))
+            # oha samples this file randomly, with replacement. Distinct entries
+            # do not guarantee distinct requests; explicitly disable response
+            # caches and verify fresh render timestamps during the load test.
+            urls.writelines(f"{url}?r={index}\n" for index in range(LOAD_URL_COUNT))
             urls.flush()
             base = ["oha", "-c", str(args.concurrency), "-w", "--no-tui", "--http-version", "1.1",
                     "--output-format", "json", "--urls-from-file", urls.name]
