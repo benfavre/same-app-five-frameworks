@@ -3,7 +3,11 @@ import importlib.util
 import json
 from pathlib import Path
 import socket
+import os
+import subprocess
+import sys
 import tempfile
+import time
 import unittest
 
 from summarize import summarize_campaign
@@ -79,8 +83,56 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             summarize_campaign(self.root)
 
+    def test_cpu_campaign_requires_valid_audits_for_every_entry(self):
+        self.write("metadata.json", {"cpuBudget": {"serverCpus": [0]}})
+        for i in range(3):
+            self.write(f"run-{i}/next.cpu.json", {
+                "requestedCpuAffinity": [0], "cpuSeconds": 1, "averageCpuCores": 0.9,
+                "errors": [], "affinityViolations": [], "samples": [{}, {}],
+                "processes": [{"threadCpuAffinities": [[0]]}]})
+        summarize_campaign(self.root)
+        self.change("run-0/next.cpu.json", processes=[{"threadCpuAffinities": [[1]]}])
+        with self.assertRaises(ValueError):
+            summarize_campaign(self.root)
+        (self.root / "run-0/next.cpu.json").unlink()
+        with self.assertRaises(FileNotFoundError):
+            summarize_campaign(self.root)
+
 
 class ProcessSafetyTests(unittest.TestCase):
+    def test_cpu_audit_detects_a_thread_outside_the_budget(self):
+        cpus = sorted(os.sched_getaffinity(0))
+        if len(cpus) < 2:
+            self.skipTest("requires two available CPU IDs")
+        child = subprocess.Popen([sys.executable, "-c", "import time; time.sleep(30)"])
+        try:
+            os.sched_setaffinity(child.pid, {cpus[0]})
+            audit = runner.CpuAudit(child.pid, [cpus[0]])
+            audit.started = time.perf_counter()
+            audit.sample()
+            self.assertFalse(audit.violations)
+            os.sched_setaffinity(child.pid, {cpus[1]})
+            audit.sample()
+            self.assertTrue(audit.violations)
+        finally:
+            child.terminate()
+            child.wait(timeout=5)
+
+    def test_cpu_audit_accounts_for_the_server_child_process(self):
+        child = subprocess.Popen([sys.executable, "-c",
+            "import subprocess,sys,time; subprocess.run([sys.executable,'-c',"
+            "'import time; end=time.monotonic()+0.5; exec(\"while time.monotonic()<end: pass\")'])"])
+        try:
+            audit = runner.CpuAudit(child.pid)
+            audit.start()
+            time.sleep(0.35)
+            result = audit.stop()
+            self.assertGreaterEqual(len(result["processes"]), 2)
+            self.assertGreater(result["cpuSeconds"], 0.05)
+            self.assertFalse(result["errors"])
+        finally:
+            child.wait(timeout=5)
+
     def test_occupied_port_is_rejected_without_stopping_its_listener(self):
         with socket.socket() as listener:
             listener.bind(("127.0.0.1", 0))

@@ -17,6 +17,8 @@ def read(path):
 
 def summarize_campaign(path):
     campaign = read(path / "campaign.json")
+    metadata = read(path / "metadata.json") if (path / "metadata.json").exists() else {}
+    cpu_budget = metadata.get("cpuBudget")
     if campaign["status"] != "complete" or len(campaign["runs"]) != campaign["repeats"]:
         raise ValueError("campaign is incomplete or failed")
     if len({run["directory"] for run in campaign["runs"]}) != campaign["repeats"]:
@@ -46,6 +48,17 @@ def summarize_campaign(path):
                 raise ValueError(f"{prefix}: HTTP/load errors")
             if not cold["samplesMs"] or min(cold["samplesMs"]) <= 0 or build["bytes"] <= 0:
                 raise ValueError(f"{prefix}: missing cold/build measurements")
+            cpu = None
+            if cpu_budget is not None:
+                cpu = read(prefix.with_suffix(".cpu.json"))
+                expected = cpu_budget["serverCpus"]
+                if cpu["errors"] or cpu["affinityViolations"] or len(cpu["samples"]) < 2:
+                    raise ValueError(f"{prefix}: CPU audit failed")
+                if cpu["requestedCpuAffinity"] != expected or cpu["cpuSeconds"] <= 0:
+                    raise ValueError(f"{prefix}: CPU audit does not match campaign budget")
+                if expected and any(not set(mask) <= set(expected) for process in cpu["processes"]
+                                    for mask in process["threadCpuAffinities"]):
+                    raise ValueError(f"{prefix}: server thread escaped CPU mask")
             cold_samples.extend(cold["samplesMs"])
             runs.append({
                 "run": run["directory"], "rps": oha["summary"]["requestsPerSec"],
@@ -56,6 +69,9 @@ def summarize_campaign(path):
                 "js_reqs": browser["jsReqs"], "build_kb": build["bytes"] / 1024,
                 "http_200_responses": oha["statusCodeDistribution"]["200"],
             })
+            if cpu:
+                runs[-1]["average_cpu_cores"] = cpu["averageCpuCores"]
+                runs[-1]["cpu_ms_per_request"] = cpu["cpuSeconds"] / oha["statusCodeDistribution"]["200"] * 1000
         row = {"framework": NAMES[fw], "id": fw, "run_count": len(runs), "runs": runs,
                "rps_min": round(min(r["rps"] for r in runs)), "rps_max": round(max(r["rps"] for r in runs)),
                "cold_ms": round(statistics.median(cold_samples), 2), "cold_samples_ms": cold_samples,
@@ -64,9 +80,14 @@ def summarize_campaign(path):
         for key in ["rps", "ttfb_ms", "p99_ms", "client_js_gz_kb", "initial_client_js_gz_kb", "js_reqs", "build_kb"]:
             value = statistics.median(r[key] for r in runs)
             row[key] = round(value) if key in {"rps", "js_reqs"} else round(value, 2)
+        if cpu_budget is not None:
+            row["server_cpu_affinity"] = cpu_budget["serverCpus"]
+            for key in ["average_cpu_cores", "cpu_ms_per_request"]:
+                row[key] = round(statistics.median(r[key] for r in runs), 4)
         rows.append(row)
     return {"aggregation": "median of equal repeat sweeps; cold start is median of all process starts",
-            "startedAt": campaign["startedAt"], "finishedAt": campaign["finishedAt"], "frameworks": rows}
+            "startedAt": campaign["startedAt"], "finishedAt": campaign["finishedAt"],
+            "cpuBudget": cpu_budget, "frameworks": rows}
 
 
 def table(summary):

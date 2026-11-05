@@ -16,6 +16,7 @@ import statistics
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 import urllib.request
 
@@ -60,6 +61,119 @@ def versions(frameworks):
     return result
 
 
+def cpu_list(value):
+    cpus = set()
+    for part in value.split(","):
+        bounds = part.split("-")
+        if len(bounds) == 1:
+            cpus.add(int(part))
+        elif len(bounds) == 2:
+            start, end = map(int, bounds)
+            if start > end:
+                raise argparse.ArgumentTypeError("CPU ranges must be ascending")
+            cpus.update(range(start, end + 1))
+        else:
+            raise argparse.ArgumentTypeError("expected CPU list such as 2 or 2,4-6")
+    if not cpus or min(cpus) < 0:
+        raise argparse.ArgumentTypeError("CPU numbers must be non-negative")
+    return sorted(cpus)
+
+
+def process_tree(pid):
+    processes = {}
+    for directory in Path("/proc").glob("[0-9]*"):
+        try:
+            fields = (directory / "stat").read_text().rpartition(")")[2].split()
+            processes[int(directory.name)] = {
+                "pid": int(directory.name), "parent": int(fields[1]),
+                "startTicks": int(fields[19]), "cpuTicks": int(fields[11]) + int(fields[12]),
+            }
+        except (OSError, ValueError, IndexError):
+            continue
+    selected = {pid}
+    while True:
+        descendants = {p for p, data in processes.items() if data["parent"] in selected}
+        if descendants <= selected:
+            break
+        selected |= descendants
+    result = []
+    for child in selected:
+        if child not in processes:
+            continue
+        data = processes[child]
+        affinities = []
+        for task in Path(f"/proc/{child}/task").glob("[0-9]*"):
+            try:
+                affinities.append(sorted(os.sched_getaffinity(int(task.name))))
+            except ProcessLookupError:
+                continue
+        data["threadCount"] = len(affinities)
+        data["threadCpuAffinities"] = sorted({tuple(mask) for mask in affinities})
+        result.append(data)
+    return result
+
+
+class CpuAudit:
+    """Sample the server and descendants, including every thread's CPU mask."""
+    def __init__(self, pid, allowed=None):
+        self.pid, self.allowed = pid, set(allowed) if allowed else None
+        self.initial, self.latest = {}, {}
+        self.samples, self.violations, self.errors = [], [], []
+        self.event = threading.Event()
+        self.thread = None
+
+    def sample(self):
+        snapshot = process_tree(self.pid)
+        if not snapshot:
+            raise RuntimeError("server process disappeared during CPU audit")
+        first = not self.samples
+        for process in snapshot:
+            key = f"{process['pid']}:{process['startTicks']}"
+            if first:
+                self.initial[key] = process["cpuTicks"]
+            self.latest[key] = process
+            for mask in process["threadCpuAffinities"]:
+                if self.allowed is not None and not set(mask) <= self.allowed:
+                    self.violations.append({"pid": process["pid"], "cpuAffinity": mask})
+        self.samples.append({"elapsedSeconds": time.perf_counter() - self.started,
+                             "processCount": len(snapshot),
+                             "threadCount": sum(p["threadCount"] for p in snapshot)})
+
+    def start(self):
+        self.started = time.perf_counter()
+        self.sample()
+
+        def monitor():
+            while not self.event.wait(0.25):
+                try:
+                    self.sample()
+                except Exception as error:
+                    self.errors.append(str(error))
+                    return
+
+        self.thread = threading.Thread(target=monitor, daemon=True)
+        self.thread.start()
+
+    def stop(self):
+        self.event.set()
+        if self.thread:
+            self.thread.join(timeout=5)
+            if self.thread.is_alive():
+                raise RuntimeError("CPU audit thread did not stop")
+        self.sample()
+        wall = time.perf_counter() - self.started
+        tick_rate = os.sysconf("SC_CLK_TCK")
+        processes = [{**data, "cpuSeconds": (data["cpuTicks"] - self.initial.get(key, 0)) / tick_rate}
+                     for key, data in self.latest.items()]
+        cpu_seconds = sum(p["cpuSeconds"] for p in processes)
+        return {"method": "sampled /proc server process tree; all thread affinity masks",
+                "sampleIntervalSeconds": 0.25, "clockTicksPerSecond": tick_rate,
+                "wallSeconds": wall, "cpuSeconds": cpu_seconds, "averageCpuCores": cpu_seconds / wall,
+                "requestedCpuAffinity": sorted(self.allowed) if self.allowed else None,
+                "affinityViolations": self.violations, "errors": self.errors,
+                "samples": self.samples, "processes": processes}
+
+
 def metadata(args):
     cpu = next(line.split(":", 1)[1].strip() for line in Path("/proc/cpuinfo").read_text().splitlines()
                if line.startswith("model name"))
@@ -80,6 +194,9 @@ def metadata(args):
                        "warmupSeconds": 2, "httpVersion": "1.1", "uniqueLoadUrls": False,
                        "loadUrlPoolSize": LOAD_URL_COUNT, "loadUrlSelection": "random with replacement",
                        "waitForOngoingRequests": True, "underLoadSamples": 20},
+        "cpuBudget": {"serverCpus": args.server_cpus, "clientCpus": args.client_cpus,
+                      "runnerCpuAffinity": sorted(os.sched_getaffinity(0)),
+                      "bextV8Workers": args.bext_v8_workers, "bextHttpWorkers": args.bext_http_workers},
     }
     if "bext" in args.frameworks:
         binary = Path(shutil.which(os.environ.get("BEXT_BIN", "bext-server")) or "")
@@ -97,6 +214,10 @@ def metadata(args):
             "overrides": {"BEXT_PRISM_RENDER_CACHE": "0", "BEXT_V8_POOL_PER_WORKER_CAP": "64",
                           "BEXT_V8_POOL_QUEUE_DEPTH": "256"},
         }
+        if args.bext_v8_workers is not None:
+            result["bext"]["overrides"]["BEXT_V8_POOL_SIZE"] = str(args.bext_v8_workers)
+        if args.bext_http_workers is not None:
+            result["bext"]["overrides"]["BEXT_HTTP_WORKERS"] = str(args.bext_http_workers)
     return result
 
 
@@ -110,12 +231,21 @@ def port_is_free(port):
 
 
 @contextmanager
-def server(fw, bench, directory, label):
+def server(fw, bench, directory, label, args=None):
     port_is_free(bench["port"])
     with (directory / f"{fw}.{label}.log").open("w") as log:
         started = time.perf_counter()
-        proc = subprocess.Popen(["bash", "-c", bench["start"]], cwd=ROOT / "apps" / fw,
-                                env={**os.environ, "NODE_ENV": "production"},
+        command = ["bash", "-c", bench["start"]]
+        env = {**os.environ, "NODE_ENV": "production"}
+        if args is not None:
+            if args.server_cpus:
+                command = ["taskset", "--cpu-list", ",".join(map(str, args.server_cpus))] + command
+            if fw == "bext":
+                if args.bext_v8_workers is not None:
+                    env["BEXT_V8_POOL_SIZE"] = str(args.bext_v8_workers)
+                if args.bext_http_workers is not None:
+                    env["BEXT_HTTP_WORKERS"] = str(args.bext_http_workers)
+        proc = subprocess.Popen(command, cwd=ROOT / "apps" / fw, env=env,
                                 stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         try:
             yield proc, started
@@ -186,10 +316,10 @@ def measure(fw, bench, directory, args):
     print(f"  {fw}: {args.cold_samples} process starts", flush=True)
     cold = []
     for index in range(args.cold_samples):
-        with server(fw, bench, directory, f"cold-{index + 1}") as (proc, started):
+        with server(fw, bench, directory, f"cold-{index + 1}", args) as (proc, started):
             cold.append(round(ready(proc, url, started), 3))
     write_json(prefix.with_suffix(".cold.json"), {"samplesMs": cold, "medianMs": statistics.median(cold)})
-    with server(fw, bench, directory, "server") as (proc, started):
+    with server(fw, bench, directory, "server", args) as (proc, started):
         ready(proc, url, started)
         r1 = stamp(url)
         time.sleep(1.1)
@@ -211,8 +341,11 @@ def measure(fw, bench, directory, args):
             samples = []
             print(f"  {fw}: {args.duration}s load, concurrency {args.concurrency}", flush=True)
             with prefix.with_suffix(".oha.json").open("w") as output, prefix.with_suffix(".oha.log").open("w") as errors:
-                load = subprocess.Popen(base + ["-z", f"{args.duration}s"], stdout=output, stderr=errors, env=oha_env)
+                audit = CpuAudit(proc.pid, args.server_cpus)
+                audit.start()
+                load = None
                 try:
+                    load = subprocess.Popen(base + ["-z", f"{args.duration}s"], stdout=output, stderr=errors, env=oha_env)
                     time.sleep(1)
                     for index in range(20):
                         if load.poll() is not None:
@@ -222,9 +355,13 @@ def measure(fw, bench, directory, args):
                     if load.wait(timeout=args.duration + 30) != 0:
                         raise RuntimeError("oha failed; see its log")
                 finally:
-                    if load.poll() is None:
+                    if load is not None and load.poll() is None:
                         load.terminate()
                         load.wait(timeout=5)
+                    cpu = audit.stop()
+                    write_json(prefix.with_suffix(".cpu.json"), cpu)
+                if cpu["affinityViolations"] or cpu["errors"]:
+                    raise RuntimeError(f"{fw}: CPU affinity audit failed; see {prefix}.cpu.json")
             oha = json.loads(prefix.with_suffix(".oha.json").read_text())
             statuses = oha["statusCodeDistribution"]
             if set(statuses) != {"200"} or not statuses["200"] or oha.get("errorDistribution") or oha["summary"]["successRate"] != 1:
@@ -257,9 +394,23 @@ def main():
     parser.add_argument("--duration", type=int, default=8)
     parser.add_argument("--concurrency", type=int, default=50)
     parser.add_argument("--cold-samples", type=int, default=3)
+    parser.add_argument("--server-cpus", type=cpu_list, help="CPU affinity for every server and its descendants")
+    parser.add_argument("--client-cpus", type=cpu_list, help="CPU affinity for runner, oha and Chrome; use CPUs outside the server core")
+    parser.add_argument("--bext-v8-workers", type=int, help="explicit BEXT_V8_POOL_SIZE (1–16)")
+    parser.add_argument("--bext-http-workers", type=int, help="explicit BEXT_HTTP_WORKERS")
     args = parser.parse_args()
     if min(args.repeats, args.concurrency, args.cold_samples) < 1 or args.duration < 4:
         parser.error("positive repeats/concurrency/cold samples and duration >= 4s required")
+    available = os.sched_getaffinity(0)
+    for cpus in [args.server_cpus, args.client_cpus]:
+        if cpus and not set(cpus) <= available:
+            parser.error(f"CPU mask is outside available CPUs: {sorted(available)}")
+    if args.bext_v8_workers is not None and not 1 <= args.bext_v8_workers <= 16:
+        parser.error("bext V8 worker count must be between 1 and 16")
+    if args.bext_http_workers is not None and args.bext_http_workers < 1:
+        parser.error("bext HTTP worker count must be positive")
+    if args.client_cpus:
+        os.sched_setaffinity(0, args.client_cpus)
     args.output = args.output.resolve()
     args.output.mkdir(parents=True, exist_ok=False)
     manifest = {"schemaVersion": 1, "status": "running", "frameworks": args.frameworks,
