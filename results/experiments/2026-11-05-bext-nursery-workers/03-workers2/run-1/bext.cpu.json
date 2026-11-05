@@ -1,0 +1,216 @@
+{
+  "method": "sampled /proc server process tree; all thread affinity masks",
+  "sampleIntervalSeconds": 0.25,
+  "clockTicksPerSecond": 100,
+  "wallSeconds": 8.753045381978154,
+  "cpuSeconds": 8.07,
+  "averageCpuCores": 0.9219648302767296,
+  "requestedCpuAffinity": [
+    10
+  ],
+  "affinityViolations": [],
+  "errors": [],
+  "samples": [
+    {
+      "elapsedSeconds": 0.035488056018948555,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 0.32006968930363655,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 0.6048759799450636,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 0.8874029535800219,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 1.168466478586197,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 1.457592373713851,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 1.7376212235540152,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 2.0173054933547974,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 2.3029466290026903,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 2.599167138338089,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 2.879028055816889,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 3.1633034236729145,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 3.4470076356083155,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 3.7281878665089607,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 4.00887755677104,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 4.290273515507579,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 4.5742381904274225,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 4.854859955608845,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 5.135900676250458,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 5.415535775944591,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 5.696864601224661,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 5.978327324613929,
+      "processCount": 3,
+      "threadCount": 79
+    },
+    {
+      "elapsedSeconds": 6.258901132270694,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 6.546919820830226,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 6.833601260557771,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 7.129377676174045,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 7.425424451008439,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 7.719039907678962,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 8.015111111104488,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 8.295074068009853,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 8.5771373398602,
+      "processCount": 3,
+      "threadCount": 78
+    },
+    {
+      "elapsedSeconds": 8.753041783347726,
+      "processCount": 3,
+      "threadCount": 78
+    }
+  ],
+  "processes": [
+    {
+      "pid": 218196,
+      "parent": 218174,
+      "startTicks": 1270092670,
+      "cpuTicks": 228,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          10
+        ]
+      ],
+      "cpuSeconds": 1.76
+    },
+    {
+      "pid": 218197,
+      "parent": 218174,
+      "startTicks": 1270092670,
+      "cpuTicks": 226,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          10
+        ]
+      ],
+      "cpuSeconds": 1.74
+    },
+    {
+      "pid": 218174,
+      "parent": 217820,
+      "startTicks": 1270092669,
+      "cpuTicks": 556,
+      "threadCount": 36,
+      "threadCpuAffinities": [
+        [
+          10
+        ]
+      ],
+      "cpuSeconds": 4.57
+    }
+  ]
+}

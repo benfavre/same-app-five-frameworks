@@ -23,7 +23,12 @@ import urllib.request
 ROOT = Path(__file__).resolve().parent.parent
 FRAMEWORKS = ["next", "remix", "astro", "qwik", "bext"]
 LOAD_URL_COUNT = 1_000_000
-PERFORMANCE_FLAGS = {"BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES"}
+PERFORMANCE_FLAGS = {name: {"0", "1"} for name in [
+    "BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES", "BEXT_V8_LEGACY_HASH_HINT",
+    "BEXT_PRISM_TOKEN_SCAN", "BEXT_PRISM_NATIVE_HTML_SCAN",
+]}
+PERFORMANCE_FLAGS["BEXT_V8_PREPARED_TEXT"] = {"0", "2"}
+PERFORMANCE_FLAGS["BEXT_V8_MAX_SEMI_SPACE_MB"] = {"4", "8", "16"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
@@ -82,8 +87,9 @@ def cpu_list(value):
 
 def performance_flag(value):
     key, separator, setting = value.partition("=")
-    if not separator or key not in PERFORMANCE_FLAGS or setting not in {"0", "1"}:
-        raise argparse.ArgumentTypeError("expected an allowed performance flag as NAME=0 or NAME=1: " + ", ".join(sorted(PERFORMANCE_FLAGS)))
+    if not separator or key not in PERFORMANCE_FLAGS or setting not in PERFORMANCE_FLAGS[key]:
+        allowed = ", ".join(f"{name}={'|'.join(sorted(values))}" for name, values in sorted(PERFORMANCE_FLAGS.items()))
+        raise argparse.ArgumentTypeError("expected an allowed performance setting: " + allowed)
     return key, setting
 
 
@@ -227,6 +233,8 @@ def metadata(args):
         if args.bext_http_workers is not None:
             result["bext"]["overrides"]["BEXT_HTTP_WORKERS"] = str(args.bext_http_workers)
         result["bext"]["overrides"].update(dict(args.bext_flag))
+        if args.bext_log_filter is not None:
+            result["bext"]["overrides"]["RUST_LOG"] = args.bext_log_filter
     return result
 
 
@@ -255,6 +263,8 @@ def server(fw, bench, directory, label, args=None):
                 if args.bext_http_workers is not None:
                     env["BEXT_HTTP_WORKERS"] = str(args.bext_http_workers)
                 env.update(dict(getattr(args, "bext_flag", [])))
+                if getattr(args, "bext_log_filter", None) is not None:
+                    env["RUST_LOG"] = args.bext_log_filter
         proc = subprocess.Popen(command, cwd=ROOT / "apps" / fw, env=env,
                                 stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         try:
@@ -408,8 +418,10 @@ def main():
     parser.add_argument("--client-cpus", type=cpu_list, help="CPU affinity for runner, oha and Chrome; use CPUs outside the server core")
     parser.add_argument("--bext-v8-workers", type=int, help="explicit BEXT_V8_POOL_SIZE (1–16)")
     parser.add_argument("--bext-http-workers", type=int, help="explicit BEXT_HTTP_WORKERS")
+    parser.add_argument("--bext-log-filter", choices=["info", "warn"],
+                        help="record and set RUST_LOG for bext; use to measure detailed tracing overhead")
     parser.add_argument("--bext-flag", action="append", type=performance_flag, default=[],
-                        help="record and apply an allowlisted performance flag (NAME=0 or NAME=1); response-cache controls are excluded")
+                        help="record and apply an allowlisted performance setting (NAME=value); response-cache controls are excluded")
     args = parser.parse_args()
     if min(args.repeats, args.concurrency, args.cold_samples) < 1 or args.duration < 4:
         parser.error("positive repeats/concurrency/cold samples and duration >= 4s required")

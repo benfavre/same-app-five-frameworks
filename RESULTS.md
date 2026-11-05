@@ -213,7 +213,7 @@ inclusive time in wrapper preparation. Inclusive/descendant costs overlap and
 must not be added. Profiling perturbs timing; the speed figures above are from
 separate unprofiled processes.
 
-The legacy `EvalThreadState::process_request` currently ignores the provided
+The frozen baseline's legacy `EvalThreadState::process_request` ignores the provided
 bundle hash and recomputes cache keys. The multiplex path already consumes that
 identity, but changing dispatcher mode also changes scheduling costs; its losing
 screen shows why the narrower hash-reuse change is a better next experiment.
@@ -232,7 +232,7 @@ reference's 4,290 RPS. Its 0.390 CPU ms/request must fall by roughly
 **40% further**, to below Astro's 0.233, to match that reference
 on this fixed workload.
 
-The next engineering work, in order:
+The engineering priorities at that checkpoint were, in order:
 
 1. Make a prepared execution plan the normal warm path: retain immutable route,
    wrapper, alias and compiled-function metadata while keeping request props,
@@ -252,7 +252,7 @@ Reproduce the candidate with the normal one-CPU command plus
 `--bext-flag BEXT_PRISM_PREPARED_PAGES=1 --bext-flag BEXT_V8_MULTIPLEX=0`.
 Run `python3 harness/check-prepared-source.py --output /path/to/freshness.json` for
 the disposable source check (same BEXT_BIN/BEXT_SHARED_FRAMEWORK_DIR environment).
-Only allowlisted boolean performance flags can be passed through the harness;
+Only allowlisted performance settings can be passed through the harness;
 response-cache flags are excluded from that option.
 
 Evidence: [preliminary modes](results/experiments/2026-11-05-bext-preliminary/),
@@ -262,3 +262,142 @@ Evidence: [preliminary modes](results/experiments/2026-11-05-bext-preliminary/),
 The raw 18 MiB perf trace is retained locally at the path/hash in that summary.
 The primary results JSON and headline remain the default equal-CPU comparison;
 this opt-in improvement is a separately labeled experiment.
+
+## Native hash reuse and recovered scanner/text paths
+
+The legacy V8 driver now has an opt-in patch to honor the bundle identity already
+supplied by its worker: [bext PR #420](https://github.com/benfavre/bext/pull/420).
+Missing identities still hash the code. Page/API cache namespaces, shell identity,
+changed-code invalidation and per-request execution remain intact. This reuses
+code identity, never rendered responses. The flag defaults off.
+
+The canonical 18-feature PHP-ZTS release build passed, with unchanged private
+source and external-dependency fingerprints. Its SHA-256 is
+`964164876c0ca891595e6234ffa3fbb9bbdbe735ac622b09275c910c0e127ed7`.
+The release V8 suite passed **228 tests**, zero failed, four pre-existing ignored.
+Five new tests cover hash fallback/reuse, fresh page/API data, changed code and
+shell changes. The [build provenance](results/experiments/2026-11-05-bext-native-hash/build-provenance.json)
+links the recovered source and focused patch commits to the artifact.
+
+Nine fresh process runs use balanced **ABC / BCA / CAB** order: A=frozen native83,
+B=rebuilt with hash reuse off, C=the same rebuilt binary with reuse on. Preparation
+is on and multiplex off throughout. All processes/threads share CPU10; clients
+exclude it and its SMT sibling. Every run retains the same eight-second,
+50-connection load, frozen SDK/app, two-second warmup, browser interactions,
+24 SSR products, fresh render timestamps and strict HTTP200/affinity checks.
+
+| Mode | RPS median | RPS range | CPU ms/request | p99 median |
+|---|---:|---:|---:|---:|
+| Frozen native83, prepared | 2,570 | 2,440–2,594 | 0.3929 | 40.49 ms |
+| Rebuilt, hash reuse off | 2,576 | 2,333–2,625 | 0.3931 | 40.59 ms |
+| Rebuilt, hash reuse on | 2,968 | 2,730–3,113 | 0.3379 | 37.00 ms |
+
+Hash reuse gives **15.2% more median throughput** and **14.0% less CPU/request**
+against its same-artifact control. The three paired RPS gains are 33.4%, 6.0% and
+13.1%; shared-host variation is material. These are descriptive three-block
+measurements, not confidence intervals. The frozen release remains a separate
+control, so unrelated rebuild changes cannot silently stand in for the patch.
+
+[Same-artifact diagnostic profiles](results/experiments/2026-11-05-bext-native-hash/profiles/profile.json)
+show BLAKE3 AVX2 self time at **13.36% off**, absent above the report's **0.25%**
+threshold on. These instrumented runs are excluded from throughput summaries.
+[Off](results/experiments/2026-11-05-bext-native-hash/source-freshness-0.json) and
+[on](results/experiments/2026-11-05-bext-native-hash/source-freshness-1.json) source
+checks pass **36 cases**, including page/layout/import edits, layout deletion and
+re-addition, fresh render stamps, and **192 GET/POST probes** for changing API
+source and request data. All source edits occur in disposable copies.
+
+A separate corrected screen tested existing token scanning, prepared text mode2
+and native HTML scanning. An independent **AB / BA / AB** confirmation compares
+hash/preparation alone with their combination; process isolation and the default
+pool/shared-memory/async transport are unchanged.
+
+| Mode | RPS median | CPU ms/request | p99 median |
+|---|---:|---:|---:|
+| Hash + preparation | 3,053 | 0.3295 | 33.37 ms |
+| Plus scanner1 / text2 / native HTML1 | 3,406 | 0.2962 | 31.02 ms |
+
+The second comparison adds **11.6% throughput** and reduces CPU/request **10.1%**;
+all three paired RPS gains are positive (4.6%, 13.0%, 12.3%). The confirmation
+result is separate from the exploratory screen's fastest run. Its complete
+[screen and confirmation evidence](results/experiments/2026-11-05-bext-existing-flags-corrected/)
+is retained. The combined mode still trails Astro's earlier **4,290 RPS**
+reference; it has not established a lead or production rollout qualification.
+
+The initial [transport screen](results/experiments/2026-11-05-bext-existing-flags/screen.json)
+failed and is retained. Explicitly setting `BEXT_V8_SUBPROCESS=1` bypasses the
+standalone bootstrap that supplies `POOL=1`, `SHM_IPC=1` and `ASYNC_EVAL=1`;
+this accidentally selected the older serialized path. Its controls crashed in
+`tracing_subscriber::Subscriber::try_close`. An in-process diagnostic also
+crashed and is excluded. Successful cases in that failed screen are not evidence
+for the corrected combination. The harness no longer accepts the transport
+override. No failed run is published as a pass.
+
+The history audit found all three `perf/*` branches already merged into local
+and GitHub master. The missing native work was in a November4 WIP snapshot.
+[Draft recovery PR #419](https://github.com/benfavre/bext/pull/419) preserves 81
+native paths, 19 SDK source paths and qualification notes without publishing
+the snapshot's unrelated application files/artifacts. The two master histories
+diverge, and their whole-tree merge has 100 conflicts. Recovery needs deliberate
+native/SDK reconciliation; failed historical experiments retain their original
+opt-in behavior and are not activated by a source push.
+
+No production binary, configuration or service changed. The headline/default
+equal-CPU campaign and `results/latest.json` remain unchanged; these are labeled
+optimization experiments.
+
+An eight-case [nursery/worker screen](results/experiments/2026-11-05-bext-nursery-workers/screen.json)
+tested one/two/four V8 workers and 4/8MiB nursery limits on the same single CPU.
+The selected two-worker/4MiB case subsequently confirmed at 3,444 versus 3,389 RPS
+(+1.6%), with one pair using slightly more CPU. This small, variable increment
+does not justify replacing the established four-worker/default-nursery setup.
+
+A separate [detailed-tracing comparison](results/experiments/2026-11-05-bext-tracing/analysis.json)
+uses `--bext-log-filter warn` with the established four-worker combination.
+It records 3,312 -> 3,517 median RPS (+6.2%) and 0.3032 -> 0.2857 CPU ms/request
+(-5.8%). All three paired throughput gains are positive (6.7%, 5.0%, 5.5%).
+This is an observability tradeoff: detailed Rust tracing is reduced. The runner
+separately counts complete HTTP access-log records and verifies they remain
+present for every measured request; no render/cache/CPU-budget work is skipped.
+The continuous profiler retains its existing default. This configuration gain
+is kept separate from the native hash and scanner/text contributions.
+
+The combined scanner/text mode also passes
+[18 further source/API freshness cases](results/experiments/2026-11-05-bext-existing-flags-corrected/source-freshness-combined.json)
+and [34 SDK regressions / 351 assertions](results/experiments/2026-11-05-bext-existing-flags-corrected/sdk-regressions.json),
+covering Unicode/mixed-case metadata, buffered/streaming output and async callback
+ordering. No HTTP access-logging or process-isolation tradeoff is made by those
+code-path settings.
+
+## Fresh five-framework sweep with the Bext candidate
+
+The final candidate sweep reruns **all five frameworks**, with three rotating
+sweeps, three process starts per entry, the same eight-second/50-connection load
+and one logical CPU for each entire server tree. Bext uses the new native binary,
+the same frozen SDK/app, preparation/hash/scanner/text/native-HTML settings above,
+four V8 workers, one HTTP worker, the default nursery/transport and `RUST_LOG=warn`.
+HTTP access logging remains enabled. The other four entries retain their normal
+production configurations. This is an opt-in Bext candidate, not a new default.
+
+| Framework | RPS median | RPS range | CPU ms/request | p99 median |
+|---|---:|---:|---:|---:|
+| Astro | 4,252 | 4,179–4,299 | 0.2346 | 37.58 ms |
+| bext candidate | 3,469 | 3,448–3,477 | 0.2902 | 31.78 ms |
+| Next.js | 443 | 441–452 | 2.2512 | 181.36 ms |
+| Qwik | 401 | 394–430 | 2.4846 | 187.89 ms |
+| React Router | 359 | 355–364 | 2.7868 | 199.21 ms |
+
+All **15 load/browser entries** pass, covering **214,542 measured HTTP200
+responses**, zero load errors and zero CPU-affinity violations. Counter, theme,
+theme persistence, mixed-case search/reset, all24 SSR products and changing
+render stamps pass for each entry. [Raw campaign](results/experiments/2026-11-05-five-frameworks-bext-candidate/),
+[summary JSON](results/experiments/2026-11-05-five-frameworks-bext-candidate/summary.json)
+and [full table](results/experiments/2026-11-05-five-frameworks-bext-candidate/table.md)
+retain versions, binary/SDK/source identities and explicit configuration.
+
+Bext remains second in throughput. Matching this contemporary Astro reference
+requires about **22.6% more throughput**, or **19.2% less CPU/request** than this
+candidate. The lower observed Bext p99 is a separate short-run measurement, not
+a throughput lead or a general tail-latency guarantee. The next profiling target
+is controller/worker allocation, string ownership and handoff overhead after the
+now-measured hash and scanner/text costs; tuning the nursery did not close it.

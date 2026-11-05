@@ -1,0 +1,213 @@
+{
+  "status": "complete",
+  "method": "AB/BA/AB; same one-CPU server/binary/SDK/flags; only detailed Rust tracing filter differs",
+  "medians": {
+    "control": {
+      "rps": 3312.2795171369685,
+      "p99_ms": 33.275419,
+      "cpu_ms_per_request": 0.30315598959315265
+    },
+    "candidate": {
+      "rps": 3517.3331750839666,
+      "p99_ms": 29.497546999999997,
+      "cpu_ms_per_request": 0.28570414537194777
+    }
+  },
+  "cells": [
+    {
+      "directory": "01-control",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 3312.2795171369685,
+      "ttfb_ms": 14.902954,
+      "p99_ms": 33.275419,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 26521,
+      "average_cpu_cores": 0.9205857262882987,
+      "cpu_ms_per_request": 0.30315598959315265,
+      "block": 1,
+      "arm": "control",
+      "rustLog": "standalone default",
+      "httpAccessLogCount": 32877,
+      "warmContextInfoLogCount": 0
+    },
+    {
+      "directory": "02-candidate",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 3532.726721320352,
+      "ttfb_ms": 13.770447,
+      "p99_ms": 29.497546999999997,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 28291,
+      "average_cpu_cores": 0.9213489152939494,
+      "cpu_ms_per_request": 0.2848962567601004,
+      "block": 1,
+      "arm": "candidate",
+      "rustLog": "warn",
+      "httpAccessLogCount": 35008,
+      "warmContextInfoLogCount": 0
+    },
+    {
+      "directory": "03-candidate",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 3517.3331750839666,
+      "ttfb_ms": 13.703524,
+      "p99_ms": 29.172244,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 28176,
+      "average_cpu_cores": 0.9213642386003233,
+      "cpu_ms_per_request": 0.28570414537194777,
+      "block": 2,
+      "arm": "candidate",
+      "rustLog": "warn",
+      "httpAccessLogCount": 33801,
+      "warmContextInfoLogCount": 0
+    },
+    {
+      "directory": "04-control",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 3349.576310193363,
+      "ttfb_ms": 14.519003000000001,
+      "p99_ms": 31.571655999999997,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 26879,
+      "average_cpu_cores": 0.9077501692249763,
+      "cpu_ms_per_request": 0.29986234606942225,
+      "block": 2,
+      "arm": "control",
+      "rustLog": "standalone default",
+      "httpAccessLogCount": 33583,
+      "warmContextInfoLogCount": 0
+    },
+    {
+      "directory": "05-control",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 3301.3512313371048,
+      "ttfb_ms": 14.566314,
+      "p99_ms": 33.501338,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 26446,
+      "average_cpu_cores": 0.9175456242525872,
+      "cpu_ms_per_request": 0.30515011721999546,
+      "block": 3,
+      "arm": "control",
+      "rustLog": "standalone default",
+      "httpAccessLogCount": 32906,
+      "warmContextInfoLogCount": 0
+    },
+    {
+      "directory": "06-candidate",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 3482.0052298585624,
+      "ttfb_ms": 13.782783,
+      "p99_ms": 31.6291,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 27907,
+      "average_cpu_cores": 0.9206116210955532,
+      "cpu_ms_per_request": 0.29024975812520154,
+      "block": 3,
+      "arm": "candidate",
+      "rustLog": "warn",
+      "httpAccessLogCount": 34452,
+      "warmContextInfoLogCount": 0
+    }
+  ],
+  "pairedResults": [
+    {
+      "block": 1,
+      "rpsIncreasePercent": 6.655452930311001,
+      "cpuCostReductionPercent": 6.023213612753475
+    },
+    {
+      "block": 2,
+      "rpsIncreasePercent": 5.008301031389828,
+      "cpuCostReductionPercent": 4.721566706543623
+    },
+    {
+      "block": 3,
+      "rpsIncreasePercent": 5.472122953978742,
+      "cpuCostReductionPercent": 4.8829603050919435
+    }
+  ],
+  "rpsIncreasePercent": 6.190711166919871,
+  "cpuCostReductionPercent": 5.7567209028678406,
+  "httpAccessLoggingPreserved": true,
+  "productionChanged": false
+}

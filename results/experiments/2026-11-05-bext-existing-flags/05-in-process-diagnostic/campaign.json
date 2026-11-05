@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "frameworks": [
+    "bext"
+  ],
+  "repeats": 1,
+  "runs": [
+    {
+      "directory": "run-1",
+      "order": [
+        "bext"
+      ]
+    }
+  ],
+  "startedAt": "2026-11-05T22:19:09.514771+00:00",
+  "error": "bext: load errors or non-200s: {'200': 17809}, {'connection closed before message completed': 1, 'connection error': 49}",
+  "finishedAt": "2026-11-05T22:19:24.732891+00:00"
+}

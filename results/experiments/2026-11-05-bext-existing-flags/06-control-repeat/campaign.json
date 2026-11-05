@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "frameworks": [
+    "bext"
+  ],
+  "repeats": 1,
+  "runs": [
+    {
+      "directory": "run-1",
+      "order": [
+        "bext"
+      ]
+    }
+  ],
+  "startedAt": "2026-11-05T22:19:24.788694+00:00",
+  "error": "bext: load errors or non-200s: {'200': 8899}, {'Connection refused (os error 111)': 506472, 'connection closed before message completed': 1, 'connection error': 87}",
+  "finishedAt": "2026-11-05T22:19:39.832135+00:00"
+}

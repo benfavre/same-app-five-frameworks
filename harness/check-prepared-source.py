@@ -10,6 +10,7 @@ import shutil
 import tempfile
 import time
 from types import SimpleNamespace
+import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("runner", ROOT / "harness/run-benchmark.py")
@@ -22,6 +23,7 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--server-cpu", type=int, default=10)
     parser.add_argument("--port", type=int, default=18105)
+    parser.add_argument("--legacy-hash-hint", type=int, choices=[0, 1], default=0)
     args = parser.parse_args()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     available = os.sched_getaffinity(0)
@@ -35,6 +37,7 @@ def main():
     result = {"status": "running", "cases": [], "serverCpu": args.server_cpu,
               "clientCpus": sorted(client_cpus), "fixtureCopiesOnly": True,
               "liveReload": True, "watcherWarmupSeconds": 1.25,
+              "legacyHashHint": args.legacy_hash_hint,
               "note": "Source edits use the documented one-second watcher in disposable fixtures; timed benchmarks retain live_reload=false."}
     original_root = runner.ROOT
     url = f"http://127.0.0.1:{args.port}/"
@@ -53,6 +56,27 @@ def main():
             time.sleep(0.1)
         raise RuntimeError(f"prepared={mode}: {name} did not reflect current source")
 
+    def observe_api(mode, name, marker):
+        started = time.monotonic()
+        for method in ["GET", "POST"]:
+            for index in range(12):
+                value = f"{name}-{method}-{index}"
+                data = json.dumps({"value": value}).encode() if method == "POST" else None
+                req = urllib.request.Request(url + "api/hash-probe?value=" + value,
+                    data=data, headers={"Content-Type": "application/json"}, method=method)
+                deadline = time.monotonic() + 10
+                while True:
+                    with urllib.request.urlopen(req, timeout=3) as response:
+                        actual = json.load(response)
+                    if actual == {"code": marker, "value": value}:
+                        break
+                    if time.monotonic() >= deadline:
+                        raise RuntimeError(f"{name}: {method} returned stale source or request data: {actual}")
+                    time.sleep(0.1)
+        result["cases"].append({"preparedPages": mode, "case": name,
+            "requests": 24, "methods": ["GET", "POST"], "code": marker,
+            "elapsedMs": round((time.monotonic() - started) * 1000, 2)})
+
     try:
         for enabled in [0, 1]:
             with tempfile.TemporaryDirectory(prefix="prepared-source-", dir=ROOT / ".benchmark-runtime") as directory:
@@ -64,12 +88,25 @@ def main():
                 config_source = config.read_text()
                 assert "live_reload = false" in config_source
                 config.write_text(config_source.replace("live_reload = false", "live_reload = true"))
+                api = app / "src/app/api/hash-probe/route.ts"
+                api.parent.mkdir(parents=True)
+                api_source = '''export const dynamic = "force-dynamic";
+export async function GET(req: Request) {
+  return {code: "original", value: new URL(req.url).searchParams.get("value")};
+}
+export async function POST(req: Request) {
+  const body = await req.json();
+  return {code: "original", value: body.value};
+}
+'''
+                api.write_text(api_source)
                 runner.ROOT = fixture_root
                 bench = json.loads((app / "bench.json").read_text())
                 bench["start"] = bench["start"].replace(f":{bench['port']}", f":{args.port}")
                 bench["port"] = args.port
                 options = SimpleNamespace(server_cpus=[args.server_cpu], bext_v8_workers=4, bext_http_workers=1,
-                    bext_flag=[("BEXT_PRISM_PREPARED_PAGES", str(enabled)), ("BEXT_V8_MULTIPLEX", "0")])
+                    bext_flag=[("BEXT_PRISM_PREPARED_PAGES", str(enabled)), ("BEXT_V8_MULTIPLEX", "0"),
+                               ("BEXT_V8_LEGACY_HASH_HINT", str(args.legacy_hash_hint))])
                 page, layout, products = [app / p for p in ["src/app/page.tsx", "src/app/layout.tsx", "src/lib/products.ts"]]
                 with runner.server("bext", bench, args.output.parent, f"freshness-{enabled}", options) as (proc, started):
                     runner.ready(proc, url, started)
@@ -77,6 +114,9 @@ def main():
                     # baseline; edit only after that initial snapshot exists.
                     time.sleep(1.25)
                     observe(enabled, "initial", lambda b: "<h1>Widget Showcase</h1>" in b)
+                    observe_api(enabled, "api-fresh-request-data", "original")
+                    api.write_text(api_source.replace('"original"', '"changed"'))
+                    observe_api(enabled, "api-source-edit", "changed")
                     source = page.read_text()
                     assert "<h1>Widget Showcase</h1>" in source
                     page.write_text(source.replace("<h1>Widget Showcase</h1>", "<h1>Prepared Page Change</h1>"))

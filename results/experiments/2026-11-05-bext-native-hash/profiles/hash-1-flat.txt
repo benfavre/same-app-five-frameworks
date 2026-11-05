@@ -1,0 +1,70 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cpu-clock'
+# Event count (approx.): 7366833250
+#
+# Overhead  Command          Shared Object      Symbol
+# ........  ...............  .................  ....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+     5.53%  bext-v8-eval-wo  bext-server        [.] icu_77::(anonymous namespace)::toLower(int, unsigned int, char16_t*, int, char16_t const*, UCaseContext*, int, int, icu_77::Edits*, UErrorCode&)
+     5.12%  bext-v8-eval-wo  bext-server        [.] _RNvMs4_NtCskvQxFKbegzD_2v86stringNtNtB7_4data6String20to_rust_string_lossy
+     1.84%  bext-v8-eval-wo  libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.71%  actix-rt|system  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     1.50%  bext-server      libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.23%  bext-server      [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     1.16%  actix-rt|system  bext-server        [.] _mi_page_malloc_zero
+     0.95%  actix-rt|system  libc.so.6          [.] __memmove_avx_unaligned_erms
+     0.75%  actix-rt|system  bext-server        [.] _RNCNvNtNtCskwFplFAtzgh_11bext_server12ssr_pipeline5prism26handle_prism_request_inner0B7_
+     0.75%  bext-v8-eval-wo  bext-server        [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     0.68%  bext-v8-eval-wo  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.61%  actix-rt|system  [kernel.kallsyms]  [k] do_syscall_64
+     0.61%  actix-rt|system  [kernel.kallsyms]  [k] link_path_walk.part.0.constprop.0
+     0.61%  bext-profiler-r  bext-server        [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation16parse_attributesINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace
+     0.55%  bext-profiler-r  [kernel.kallsyms]  [k] do_user_addr_fault
+     0.55%  bext-v8-eval-wo  bext-server        [.] Builtins_RegExpReplace
+     0.55%  bext-v8-eval-wo  bext-server        [.] Builtins_StringAdd_CheckNone
+     0.55%  bext-v8-pool-wr  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.48%  bext-access-log  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.48%  bext-v8-eval-wo  bext-server        [.] Builtins_StringToLowerCaseIntl
+     0.48%  bext-v8-eval-wo  bext-server        [.] void v8::internal::CopyChars<unsigned char, unsigned short>(unsigned short*, unsigned char const*, unsigned long)
+     0.48%  bext-v8-eval-wo  libc.so.6          [.] malloc
+     0.41%  actix-rt|system  libc.so.6          [.] __memset_avx2_unaligned_erms
+     0.41%  actix-rt|system  libc.so.6          [.] statx
+     0.41%  bext-v8-eval-wo  bext-server        [.] Builtins_StringIndexOf
+     0.34%  actix-rt|system  [kernel.kallsyms]  [k] inode_permission
+     0.34%  actix-rt|system  [kernel.kallsyms]  [k] walk_component
+     0.34%  actix-rt|system  [nf_tables]        [k] nft_do_chain
+     0.34%  bext-profiler-r  [kernel.kallsyms]  [k] clear_page_erms
+     0.34%  bext-profiler-r  bext-server        [.] _RNvMs4_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB5_13Abbreviations6insert
+     0.34%  bext-profiler-r  bext-server        [.] mi_page_free_list_extend
+     0.34%  bext-profiler-r  libc.so.6          [.] __memmove_avx_unaligned_erms
+     0.34%  bext-server      bext-server        [.] _RNvNtCsbeX7nbLCz7w_7bext_v810subprocess15run_eval_worker
+     0.34%  bext-v8-eval-wo  bext-server        [.] Builtins_AsyncFunctionEnter
+     0.34%  bext-v8-eval-wo  bext-server        [.] v8::internal::FastJsonStringifier<unsigned char>::SerializeObject(v8::internal::ContinuationRecord, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.34%  bext-v8-eval-wo  bext-server        [.] v8::internal::Handle<v8::internal::JSObject> v8::internal::JsonParser<unsigned char>::BuildJsonObject<false>(v8::internal::JsonParser<unsigned char>::JsonContinuation const&, v8::internal::DirectHandle<v8::internal::Map>)
+     0.34%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, bool, v8::internal::Handle<v8::internal::Object>)
+     0.34%  bext-v8-pool-re  bext-server        [.] _RINvNtCs9ALYTKQbEpY_3std2io18default_read_exactNtNtNtNtNtB4_2os4unix3net6stream10UnixStreamECsbeX7nbLCz7w_7bext_v8
+     0.34%  bext-v8-pool-re  libc.so.6          [.] __libc_recv
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] __d_lookup_rcu
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] check_heap_object
+     0.27%  actix-rt|system  bext-server        [.] _RINvMNtCs6oZr1Inkksd_12actix_router8resourceNtB3_11ResourceDef21capture_match_info_fnNtNtCsl5Wgh76sR8I_9actix_web7service14ServiceRequestNCINvMNtB5_6routerINtB2h_6RouterINtNtCseo0TUlPad4f_5alloc5boxed3BoxDINtCs3qM3leNkEqp_13actix_service7ServiceB1l_Ep6FutureINtNtCsiYoX4ApF2vj_4core3pin3PinIB2I_DNtNtNtB4d_6future6future6Futurep6OutputINtNtB4d_6result6ResultNtB1n_15ServiceResponseNtNtNtB1p_5error5error5ErrorEEL_EEp5ErrorB67_p8ResponseB5K_EL_EINtNtB2M_3vec3VecIB2I_DNtNtB1p_5guard5GuardEL_EEE12recognize_fnB1l_NCNvXs3_NtB1p_11app_serviceNtB8l_10AppRoutingIB3i_B1l_E4call0E0EB1p_
+     0.27%  actix-rt|system  bext-server        [.] _RNvMs4_NtNtCs31qw4EiS7VD_5regex5regex6stringNtB5_5Regex11captures_at.llvm.6203076296542837917
+     0.27%  actix-rt|system  bext-server        [.] _RNvMsP_NtNtCs1gwkPHDHBr1_4http6header4nameNtB5_14StandardHeader10from_bytes
+     0.27%  actix-rt|system  bext-server        [.] _RNvXs8_NtCs2Z7LRvcAFy8_10serde_json4readNtB5_7StrReadNtB5_4Read9parse_str
+     0.27%  actix-rt|system  bext-server        [.] mi_malloc_aligned
+     0.27%  actix-rt|system  bext-server        [.] mi_theap_umalloc
+     0.27%  actix-rt|system  libc.so.6          [.] getenv
+     0.27%  bext-profiler-r  bext-server        [.] _RNvMs6_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB5_10Attributes4push
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_StringPrototypeReplace
+     0.27%  bext-v8-eval-wo  bext-server        [.] bool v8::internal::JsonStringifier::SerializeString<false>(v8::internal::Handle<v8::internal::String>)
+     0.27%  bext-v8-eval-wo  bext-server        [.] v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&)
+     0.27%  bext-v8-pool-re  [kernel.kallsyms]  [k] _copy_to_iter
+     0.27%  bext-v8-pool-re  bext-server        [.] _RNvNtNtCsiYoX4ApF2vj_4core3str8converts9from_utf8
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

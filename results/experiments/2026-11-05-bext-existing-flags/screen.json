@@ -1,0 +1,128 @@
+{
+  "status": "failed",
+  "kind": "exploratory screen; fresh confirmation required",
+  "cells": [
+    {
+      "directory": "01-control",
+      "exitCode": 1,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "0",
+        "BEXT_V8_PREPARED_TEXT": "0",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "0",
+        "BEXT_V8_SUBPROCESS": "1"
+      },
+      "status": "failed",
+      "name": "control",
+      "crashIsolationChanged": false
+    },
+    {
+      "directory": "02-scanner",
+      "exitCode": 1,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "0",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "0",
+        "BEXT_V8_SUBPROCESS": "1"
+      },
+      "status": "failed",
+      "name": "scanner",
+      "crashIsolationChanged": false
+    },
+    {
+      "directory": "03-text",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "0",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "0",
+        "BEXT_V8_SUBPROCESS": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 1678.3238534501456,
+      "ttfb_ms": 26.518694999999997,
+      "p99_ms": 121.22466299999999,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 13464,
+      "average_cpu_cores": 0.9135938780160295,
+      "cpu_ms_per_request": 0.59640522875817,
+      "name": "text",
+      "crashIsolationChanged": false
+    },
+    {
+      "directory": "04-combined",
+      "exitCode": 0,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_SUBPROCESS": "1"
+      },
+      "status": "complete",
+      "run": "run-1",
+      "rps": 1625.71670888126,
+      "ttfb_ms": 26.448815,
+      "p99_ms": 135.049303,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 13039,
+      "average_cpu_cores": 0.9100002184868885,
+      "cpu_ms_per_request": 0.6150778433928982,
+      "name": "combined",
+      "crashIsolationChanged": false
+    },
+    {
+      "directory": "05-in-process-diagnostic",
+      "exitCode": 1,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_SUBPROCESS": "0"
+      },
+      "status": "failed",
+      "name": "in-process-diagnostic",
+      "crashIsolationChanged": true
+    },
+    {
+      "directory": "06-control-repeat",
+      "exitCode": 1,
+      "flags": {
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_TOKEN_SCAN": "0",
+        "BEXT_V8_PREPARED_TEXT": "0",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "0",
+        "BEXT_V8_SUBPROCESS": "1"
+      },
+      "status": "failed",
+      "name": "control-repeat",
+      "crashIsolationChanged": false
+    }
+  ],
+  "error": "Control crashes; explicitly setting BEXT_V8_SUBPROCESS=1 bypassed standalone pool/shared-memory/async defaults.",
+  "scope": "Legacy transport screen; not comparable to the validated default-backend hash campaign.",
+  "crashSymbol": "tracing_subscriber layered Subscriber::try_close (addr2line, offset 0x58ad6e3)",
+  "correctedExperiment": "2026-11-05-bext-existing-flags-corrected"
+}
