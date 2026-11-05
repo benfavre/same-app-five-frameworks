@@ -23,7 +23,11 @@ import urllib.request
 ROOT = Path(__file__).resolve().parent.parent
 FRAMEWORKS = ["next", "remix", "astro", "qwik", "bext"]
 LOAD_URL_COUNT = 1_000_000
-PERFORMANCE_FLAGS = {"BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES", "BEXT_V8_LEGACY_HASH_HINT"}
+PERFORMANCE_FLAGS = {name: {"0", "1"} for name in [
+    "BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES", "BEXT_V8_LEGACY_HASH_HINT",
+    "BEXT_PRISM_TOKEN_SCAN", "BEXT_PRISM_NATIVE_HTML_SCAN", "BEXT_V8_SUBPROCESS",
+]}
+PERFORMANCE_FLAGS["BEXT_V8_PREPARED_TEXT"] = {"0", "2"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
@@ -82,8 +86,9 @@ def cpu_list(value):
 
 def performance_flag(value):
     key, separator, setting = value.partition("=")
-    if not separator or key not in PERFORMANCE_FLAGS or setting not in {"0", "1"}:
-        raise argparse.ArgumentTypeError("expected an allowed performance flag as NAME=0 or NAME=1: " + ", ".join(sorted(PERFORMANCE_FLAGS)))
+    if not separator or key not in PERFORMANCE_FLAGS or setting not in PERFORMANCE_FLAGS[key]:
+        allowed = ", ".join(f"{name}={'|'.join(sorted(values))}" for name, values in sorted(PERFORMANCE_FLAGS.items()))
+        raise argparse.ArgumentTypeError("expected an allowed performance setting: " + allowed)
     return key, setting
 
 
@@ -409,7 +414,7 @@ def main():
     parser.add_argument("--bext-v8-workers", type=int, help="explicit BEXT_V8_POOL_SIZE (1–16)")
     parser.add_argument("--bext-http-workers", type=int, help="explicit BEXT_HTTP_WORKERS")
     parser.add_argument("--bext-flag", action="append", type=performance_flag, default=[],
-                        help="record and apply an allowlisted performance flag (NAME=0 or NAME=1); response-cache controls are excluded")
+                        help="record and apply an allowlisted performance setting (NAME=value); response-cache controls are excluded")
     args = parser.parse_args()
     if min(args.repeats, args.concurrency, args.cold_samples) < 1 or args.duration < 4:
         parser.error("positive repeats/concurrency/cold samples and duration >= 4s required")
