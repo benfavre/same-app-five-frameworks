@@ -25,9 +25,10 @@ FRAMEWORKS = ["next", "remix", "astro", "qwik", "bext"]
 LOAD_URL_COUNT = 1_000_000
 PERFORMANCE_FLAGS = {name: {"0", "1"} for name in [
     "BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES", "BEXT_V8_LEGACY_HASH_HINT",
-    "BEXT_PRISM_TOKEN_SCAN", "BEXT_PRISM_NATIVE_HTML_SCAN", "BEXT_V8_SUBPROCESS",
+    "BEXT_PRISM_TOKEN_SCAN", "BEXT_PRISM_NATIVE_HTML_SCAN",
 ]}
 PERFORMANCE_FLAGS["BEXT_V8_PREPARED_TEXT"] = {"0", "2"}
+PERFORMANCE_FLAGS["BEXT_V8_MAX_SEMI_SPACE_MB"] = {"4", "8", "16"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
