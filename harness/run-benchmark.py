@@ -23,7 +23,7 @@ import urllib.request
 ROOT = Path(__file__).resolve().parent.parent
 FRAMEWORKS = ["next", "remix", "astro", "qwik", "bext"]
 LOAD_URL_COUNT = 1_000_000
-PERFORMANCE_FLAGS = {"BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES"}
+PERFORMANCE_FLAGS = {"BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES", "BEXT_V8_LEGACY_HASH_HINT"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
