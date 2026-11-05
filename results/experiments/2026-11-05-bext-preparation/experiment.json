@@ -1,0 +1,58 @@
+{
+  "status": "complete",
+  "order": [
+    "control",
+    "prepared",
+    "prepared",
+    "control",
+    "control",
+    "prepared"
+  ],
+  "method": "three paired groups, AB/BA/AB; one-CPU mask and identical worker/app/runtime inputs; no response cache",
+  "startedAt": "2026-11-05T21:22:07.336466+00:00",
+  "runs": [
+    {
+      "profile": "control",
+      "campaign": "01-control",
+      "rps": 2156.408812464892,
+      "p99_ms": 68.55,
+      "cpu_ms_per_request": 0.4613
+    },
+    {
+      "profile": "prepared",
+      "campaign": "02-prepared",
+      "rps": 2641.700853095333,
+      "p99_ms": 37.61,
+      "cpu_ms_per_request": 0.383
+    },
+    {
+      "profile": "prepared",
+      "campaign": "03-prepared",
+      "rps": 2580.8934092537293,
+      "p99_ms": 42.52,
+      "cpu_ms_per_request": 0.3924
+    },
+    {
+      "profile": "control",
+      "campaign": "04-control",
+      "rps": 2190.328157766179,
+      "p99_ms": 67.1,
+      "cpu_ms_per_request": 0.456
+    },
+    {
+      "profile": "control",
+      "campaign": "05-control",
+      "rps": 2135.7757844254525,
+      "p99_ms": 66.49,
+      "cpu_ms_per_request": 0.4678
+    },
+    {
+      "profile": "prepared",
+      "campaign": "06-prepared",
+      "rps": 2586.990853440704,
+      "p99_ms": 39.63,
+      "cpu_ms_per_request": 0.3902
+    }
+  ],
+  "finishedAt": "2026-11-05T21:24:06.147553+00:00"
+}

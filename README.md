@@ -36,6 +36,11 @@ a CPU-access limit; it does not reserve an exclusive core on a shared host. One
 Node process can use helper threads, so process counts alone do not define a CPU
 budget. TTFB and p99 here are measured under load.
 
+A separate [profile-guided experiment](RESULTS.md#profile-guided-improvement-prepared-page-setup)
+measured **2,156 → 2,587 RPS (+20%)** by reusing prepared route/compiler setup,
+with no extra CPU or rendered-response caching. It passes source-invalidation
+checks but still trails Astro; it is an opt-in result, separate from the headline.
+
 ## What is checked
 
 - Fresh rendering: different idle timestamps plus 20 distinct timestamps sampled

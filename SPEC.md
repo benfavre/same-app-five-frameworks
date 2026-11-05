@@ -89,6 +89,12 @@ Linux resource controls: `--server-cpus` and `--client-cpus` accept CPU IDs/rang
 `taskset` affinity is inherited by child processes and threads, then verified by
 the audit. It does not reserve exclusive use of a physical core on a shared host.
 
+Performance experiments may use `--bext-flag NAME=0|1` for the explicitly
+allowlisted prepared-page and evaluation-dispatch controls. The input is recorded
+in metadata, and response-cache switches cannot be passed through this option.
+Keep opt-in experiments separate from the default-profile headline. Compiler and
+route metadata can be reused; request data, loaders and rendered HTML stay fresh.
+
 ## Output contract (each app dir must provide)
 - `bench.json` at the app root:
   `{ "framework": "...", "port": N, "buildDir": "...", "start": "<cmd>" }`

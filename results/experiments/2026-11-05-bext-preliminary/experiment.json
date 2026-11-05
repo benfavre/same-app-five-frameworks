@@ -1,0 +1,10 @@
+{
+  "purpose": "preliminary diagnostic screen; not the confirmation dataset",
+  "profiles": [
+    "control",
+    "prepared",
+    "multiplex",
+    "both"
+  ],
+  "selection": "confirm prepared-page preparation only; multiplex alone did not improve throughput"
+}

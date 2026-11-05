@@ -175,3 +175,90 @@ of missing/invalid audits. All benchmark processes were stopped.
 
 [README reproduction commands](README.md#reproduce) and [SPEC.md](SPEC.md) describe
 the contract. The latest published JSON points to the equal-CPU headline campaign.
+
+## Profile-guided improvement: prepared page setup
+
+A follow-up asks how to close bext's equal-CPU gap. The first measured improvement
+reuses prepared route/compiler inputs, without caching rendered HTML or changing
+the fixture. `BEXT_PRISM_PREPARED_PAGES=1` is an existing opt-in path; this experiment
+does not change the engine binary or production configuration.
+
+Three paired groups ran in **AB / BA / AB** order (A=control, B=prepared). Every
+process uses CPU 10, four V8 workers, one HTTP worker, multiplex explicitly off,
+render-result caching off, and the same binary, toolkit and app inputs. Each load
+is eight seconds at concurrency 50 after the same two-second warmup.
+
+| Mode | RPS median | RPS range | CPU ms/request | p99 median |
+|---|---:|---:|---:|---:|
+| control | 2,156 | 2,136–2,190 | 0.4613 | 67.10 ms |
+| prepared | 2,587 | 2,581–2,642 | 0.3902 | 39.63 ms |
+
+The ratio of medians is **20.0% more throughput** and
+**15.4% less CPU per request**. The three paired RPS increases
+were 22.5%, 17.8% and 21.1%.
+These are three groups on a shared host, not a confidence interval or universal
+speed guarantee. All six load/browser/CPU/fresh-render checks passed, covering
+114,528 measured HTTP 200 responses with no load errors or affinity violations.
+
+The independent preliminary screen is retained: control 2,170; prepared 2,620;
+multiplex alone 2,083; both 2,624 RPS. Multiplexing alone did not improve throughput,
+and the combined mode did not establish a useful gain over preparation alone, so
+only preparation was taken into the paired confirmation. No screen run is used
+as the confirmation result.
+
+The native CPU profile contained 2,220 samples, zero lost, from only the benchmark
+server and its four children on one CPU. It found 9.86% self time in BLAKE3 hashing,
+4.73% in Unicode lowercasing, 3.33% in V8-to-Rust string conversion, and 4.77%
+inclusive time in wrapper preparation. Inclusive/descendant costs overlap and
+must not be added. Profiling perturbs timing; the speed figures above are from
+separate unprofiled processes.
+
+The legacy `EvalThreadState::process_request` currently ignores the provided
+bundle hash and recomputes cache keys. The multiplex path already consumes that
+identity, but changing dispatcher mode also changes scheduling costs; its losing
+screen shows why the narrower hash-reuse change is a better next experiment.
+
+The [source-invalidation probe](results/experiments/2026-11-05-bext-preparation/source-freshness.json)
+passed **14 cases** across preparation off/on: initial render, page edit, layout
+edit, imported-data edit, layout deletion, layout re-addition, and a fresh render
+timestamp afterward. It uses disposable fixture copies with `live_reload=true`
+and waits for the watcher's first one-second baseline scan. Timed performance
+runs keep `live_reload=false`. Two setup failures remain recorded: the initial
+probe with watching disabled, then a probe that edited before the initial watcher
+snapshot. Neither failed setup is represented as a successful invalidation check.
+
+Preparation still does **not** lead Astro: 2,587 versus the CPU-controlled
+reference's 4,290 RPS. Its 0.390 CPU ms/request must fall by roughly
+**40% further**, to below Astro's 0.233, to match that reference
+on this fixed workload.
+
+The next engineering work, in order:
+
+1. Make a prepared execution plan the normal warm path: retain immutable route,
+   wrapper, alias and compiled-function metadata while keeping request props,
+   loaders and HTML fresh. The measured preparation gain supports this direction;
+   broader invalidation and memory checks are needed before changing defaults.
+2. Honor the precomputed bundle identity on the legacy evaluation path, with
+   fallback hashing when absent and tests for changed bundles/shells. This targets
+   the observed hashing cost without switching to the slower dispatcher mode.
+3. Remove repeated whole-document Unicode case folding and intermediate string
+   conversions; scan ASCII tag names and carry owned UTF-8 output through to HTTP.
+   Preserve Unicode, streaming, metadata and CSP behavior in the shared paths.
+4. Profile and reduce controller/worker allocations and handoffs after those
+   changes. The original CPU split was about half controller, half V8 workers, so
+   renderer-only micro-optimizations cannot remove all of the gap.
+
+Reproduce the candidate with the normal one-CPU command plus
+`--bext-flag BEXT_PRISM_PREPARED_PAGES=1 --bext-flag BEXT_V8_MULTIPLEX=0`.
+Run `python3 harness/check-prepared-source.py --output /path/to/freshness.json` for
+the disposable source check (same BEXT_BIN/BEXT_SHARED_FRAMEWORK_DIR environment).
+Only allowlisted boolean performance flags can be passed through the harness;
+response-cache flags are excluded from that option.
+
+Evidence: [preliminary modes](results/experiments/2026-11-05-bext-preliminary/),
+[paired manifest and runs](results/experiments/2026-11-05-bext-preparation/),
+[analysis JSON](results/experiments/2026-11-05-bext-preparation/analysis.json), and
+[profile summary](results/experiments/2026-11-05-bext-preparation/profile.json).
+The raw 18 MiB perf trace is retained locally at the path/hash in that summary.
+The primary results JSON and headline remain the default equal-CPU comparison;
+this opt-in improvement is a separately labeled experiment.

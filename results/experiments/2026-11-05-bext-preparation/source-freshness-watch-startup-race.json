@@ -1,0 +1,41 @@
+{
+  "status": "failed",
+  "cases": [
+    {
+      "preparedPages": 0,
+      "case": "initial",
+      "status": 200,
+      "renderedAt": "1793914069201",
+      "elapsedMs": 11.42
+    }
+  ],
+  "serverCpu": 10,
+  "clientCpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    23
+  ],
+  "fixtureCopiesOnly": true,
+  "liveReload": true,
+  "note": "Source edits use the documented watch mode in disposable fixtures; timed benchmarks retain live_reload=false.",
+  "error": "prepared=0: page-edit did not reflect current source"
+}
