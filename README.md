@@ -89,6 +89,34 @@ sweeps, three process starts per entry per sweep, a two-second warmup, then
 `oha -z 8s -c 50 -w` with HTTP/1.1 keep-alive. The order rotates across sweeps.
 `--publish` updates local results JSON; it does not push to GitHub.
 
+For the measured native improvement, build [bext PR #420](https://github.com/benfavre/bext/pull/420)
+and add these settings to the one-CPU command:
+
+```bash
+--bext-flag BEXT_PRISM_PREPARED_PAGES=1 --bext-flag BEXT_V8_MULTIPLEX=0 \
+--bext-flag BEXT_V8_LEGACY_HASH_HINT=1 --bext-flag BEXT_PRISM_TOKEN_SCAN=1 \
+--bext-flag BEXT_V8_PREPARED_TEXT=2 --bext-flag BEXT_PRISM_NATIVE_HTML_SCAN=1
+```
+
+Keep the same frozen SDK while comparing native binaries. To separate a rebuild
+from its opt-in change, use the balanced three-block runner:
+
+```bash
+python3 harness/compare-bext-binaries.py --original /path/to/frozen-bext-server \
+  --candidate /path/to/rebuilt-bext-server --framework /path/to/frozen-sdk \
+  --output results/experiments/local-native-comparison
+```
+
+`harness/check-prepared-source.py --legacy-hash-hint 1 --output /path/to/proof.json`
+checks page/layout/import/API invalidation and fresh request data in disposable
+fixtures. Performance settings are allowlisted; response-cache and transport
+overrides are excluded. The native transport defaults must be preserved: setting
+`BEXT_V8_SUBPROCESS=1` explicitly skips other standalone defaults in this version.
+`--bext-log-filter warn` records a separate detailed-tracing tradeoff; HTTP access
+logging is still checked. The [fresh five-framework candidate sweep](results/experiments/2026-11-05-five-frameworks-bext-candidate/table.md)
+measures Bext at 3,469 versus Astro at 4,252 RPS on one CPU. Default headline
+results remain separate from these opt-in measurements.
+
 ## Measurements and limits
 
 Client JS uses uniform gzip level 6 for each external JS resource plus concatenated

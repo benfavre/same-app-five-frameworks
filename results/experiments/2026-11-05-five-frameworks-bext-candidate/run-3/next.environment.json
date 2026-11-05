@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-11-05T22:39:26.783834+00:00",
+  "loadBefore": [
+    4.185546875,
+    4.93505859375,
+    5.29833984375
+  ],
+  "startCommand": "node node_modules/next/dist/bin/next start --hostname 127.0.0.1 -p 8101",
+  "finishedAt": "2026-11-05T22:39:45.546881+00:00",
+  "loadAfter": [
+    3.9541015625,
+    4.84033203125,
+    5.25830078125
+  ]
+}

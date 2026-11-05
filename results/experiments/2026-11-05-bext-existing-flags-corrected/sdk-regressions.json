@@ -1,0 +1,17 @@
+{
+  "command": [
+    "taskset",
+    "-c",
+    "0",
+    "/home/infra-sj278/.local/bin/bun-test",
+    "src/prism-token-scan.test.ts",
+    "src/prism-response.test.ts",
+    "src/prism-metadata-scheduling.test.ts"
+  ],
+  "exitCode": 0,
+  "passed": true,
+  "testsPassed": 34,
+  "testsFailed": 0,
+  "assertions": 351,
+  "frameworkSha256": "f5f38ffd3e72d19791ab88aab0b2cf92324e537d26f5e48c97096001c2d2bdba"
+}

@@ -1,0 +1,60 @@
+{
+  "status": "failed",
+  "cases": [
+    {
+      "directory": "01-control",
+      "status": "failed",
+      "crashLines": [
+        "[bext-server CRASH] sig=11 fault_addr=0x7d9e6a923ff8 pid=4110329 tid=4110385 thread=actix-rt|system rip=0x57f792e336e3 off=0x58ad6e3"
+      ],
+      "backendWarnings": [
+        "{\"timestamp\":\"2026-11-05T22:17:59.728501Z\",\"level\":\"WARN\",\"fields\":{\"message\":\"BEXT_V8_POOL_SIZE > 1 but BEXT_V8_POOL is not set \u2014 pool path disabled, only first worker used\",\"pool_size\":4},\"target\":\"bext_server\"}"
+      ]
+    },
+    {
+      "directory": "02-scanner",
+      "status": "failed",
+      "crashLines": [
+        "[bext-server CRASH] sig=11 fault_addr=0x71b7efdffff8 pid=4120502 tid=4120584 thread=actix-rt|system rip=0x5b7b14c766e3 off=0x58ad6e3"
+      ],
+      "backendWarnings": [
+        "{\"timestamp\":\"2026-11-05T22:18:15.616106Z\",\"level\":\"WARN\",\"fields\":{\"message\":\"BEXT_V8_POOL_SIZE > 1 but BEXT_V8_POOL is not set \u2014 pool path disabled, only first worker used\",\"pool_size\":4},\"target\":\"bext_server\"}"
+      ]
+    },
+    {
+      "directory": "03-text",
+      "status": "complete",
+      "crashLines": [],
+      "backendWarnings": [
+        "{\"timestamp\":\"2026-11-05T22:18:31.400048Z\",\"level\":\"WARN\",\"fields\":{\"message\":\"BEXT_V8_POOL_SIZE > 1 but BEXT_V8_POOL is not set \u2014 pool path disabled, only first worker used\",\"pool_size\":4},\"target\":\"bext_server\"}"
+      ]
+    },
+    {
+      "directory": "04-combined",
+      "status": "complete",
+      "crashLines": [],
+      "backendWarnings": [
+        "{\"timestamp\":\"2026-11-05T22:18:51.096083Z\",\"level\":\"WARN\",\"fields\":{\"message\":\"BEXT_V8_POOL_SIZE > 1 but BEXT_V8_POOL is not set \u2014 pool path disabled, only first worker used\",\"pool_size\":4},\"target\":\"bext_server\"}"
+      ]
+    },
+    {
+      "directory": "05-in-process-diagnostic",
+      "status": "failed",
+      "crashLines": [
+        "[bext-server CRASH] sig=11 fault_addr=0x7ce93c00a2a4 pid=4151703 tid=4151738 thread=bext-prism-pool rip=0x7ce9a3ac7a10 off=0x20a603234a10"
+      ],
+      "backendWarnings": []
+    },
+    {
+      "directory": "06-control-repeat",
+      "status": "failed",
+      "crashLines": [
+        "[bext-server CRASH] sig=11 fault_addr=0x741a4d326ff8 pid=4161090 tid=4161134 thread=actix-rt|system rip=0x5f269b0386e3 off=0x58ad6e3"
+      ],
+      "backendWarnings": [
+        "{\"timestamp\":\"2026-11-05T22:19:26.462180Z\",\"level\":\"WARN\",\"fields\":{\"message\":\"BEXT_V8_POOL_SIZE > 1 but BEXT_V8_POOL is not set \u2014 pool path disabled, only first worker used\",\"pool_size\":4},\"target\":\"bext_server\"}"
+      ]
+    }
+  ],
+  "configurationDifference": "Explicit SUBPROCESS=1 skips standalone initialization of POOL, SHM_IPC and ASYNC_EVAL; corrected campaign leaves it unset."
+}

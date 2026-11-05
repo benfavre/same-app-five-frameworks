@@ -1,0 +1,71 @@
+{
+  "build": {
+    "at": 1793916834.3162253,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 894.4320719204843,
+    "peak_rss_kib": 6280224,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "964164876c0ca891595e6234ffa3fbb9bbdbe735ac622b09275c910c0e127ed7",
+    "binary_bytes": 1095126560,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "sourceCommit": "e0d4bff984de042fba9bc152582acc8ff6d3cc19",
+  "recoveryCommit": "d81d58e95a0db12f703eed6fce78b376d40a74cd",
+  "privateBuildInputManifestSha256": "896de91d19e6f191c03140a4e8501300943ddeff6d59e47c97f6927b03ca58fb",
+  "externalDependencyManifestSha256": "ce5a974c0ef69e11b8ae2be47087c862789fa4fe1b2c2d904d9cd8705806ef5b",
+  "v8Tests": {
+    "at": 1793915920.660452,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--lib",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 84.40952944010496,
+    "peak_rss_kib": 3243540,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 228,
+        "failed": 0,
+        "ignored": 4,
+        "measured": 0,
+        "filtered": 0
+      }
+    ]
+  },
+  "rustc": "rustc 1.96.0-nightly (69370dc4a 2026-03-05)",
+  "nativeBinaryInstalled": false
+}

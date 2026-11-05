@@ -1,0 +1,75 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cpu-clock'
+# Event count (approx.): 7597989000
+#
+# Overhead  Command          Shared Object      Symbol
+# ........  ...............  .................  ........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+    13.36%  bext-v8-eval-wo  bext-server        [.] blake3_hash_many_avx2
+     4.83%  bext-v8-eval-wo  bext-server        [.] icu_77::(anonymous namespace)::toLower(int, unsigned int, char16_t*, int, char16_t const*, UCaseContext*, int, int, icu_77::Edits*, UErrorCode&)
+     3.57%  bext-v8-eval-wo  bext-server        [.] _RNvMs4_NtCskvQxFKbegzD_2v86stringNtNtB7_4data6String20to_rust_string_lossy
+     1.72%  bext-v8-eval-wo  libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.12%  bext-v8-eval-wo  bext-server        [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     1.06%  actix-rt|system  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.99%  actix-rt|system  bext-server        [.] _mi_page_malloc_zero
+     0.99%  actix-rt|system  bext-server        [.] mi_free
+     0.99%  actix-rt|system  libc.so.6          [.] __memmove_avx_unaligned_erms
+     0.99%  bext-server      libc.so.6          [.] __memmove_avx_unaligned_erms
+     0.86%  bext-v8-eval-wo  bext-server        [.] void v8::internal::CopyChars<unsigned char, unsigned short>(unsigned short*, unsigned char const*, unsigned long)
+     0.79%  bext-server      [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.73%  actix-rt|system  [kernel.kallsyms]  [k] link_path_walk.part.0.constprop.0
+     0.66%  bext-profiler-r  [kernel.kallsyms]  [k] do_user_addr_fault
+     0.66%  bext-profiler-r  bext-server        [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation16parse_attributesINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace
+     0.53%  actix-rt|system  libc.so.6          [.] statx
+     0.53%  bext-v8-eval-wo  libc.so.6          [.] __memchr_avx2
+     0.46%  bext-v8-eval-wo  bext-server        [.] Builtins_StringAdd_CheckNone
+     0.46%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, bool, v8::internal::Handle<v8::internal::Object>)
+     0.46%  bext-v8-pool-wr  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.40%  actix-rt|system  [kernel.kallsyms]  [k] do_syscall_64
+     0.40%  actix-rt|system  [nf_tables]        [k] nft_do_chain
+     0.40%  bext-access-log  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.40%  bext-v8-eval-wo  bext-server        [.] Builtins_AsyncFunctionEnter
+     0.33%  actix-rt|system  [kernel.kallsyms]  [k] __d_lookup_rcu
+     0.33%  actix-rt|system  [kernel.kallsyms]  [k] kmem_cache_alloc
+     0.33%  actix-rt|system  bext-server        [.] _RNvXs2_NtNtCs9ALYTKQbEpY_3std4hash6randomNtB5_13DefaultHasherNtNtCsiYoX4ApF2vj_4core4hash6Hasher5write.llvm.15226525145654968471
+     0.33%  bext-profiler-r  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.33%  bext-profiler-r  [kernel.kallsyms]  [k] mem_cgroup_commit_charge
+     0.33%  bext-server      libc.so.6          [.] __libc_recv
+     0.33%  bext-v8-eval-wo  [vdso]             [.] 0x0000000000000b03
+     0.33%  bext-v8-eval-wo  bext-server        [.] Builtins_RecordWriteSaveFP
+     0.33%  bext-v8-eval-wo  bext-server        [.] Builtins_StringPrototypeReplace
+     0.33%  bext-v8-eval-wo  bext-server        [.] Builtins_StringPrototypeSlice
+     0.33%  bext-v8-eval-wo  bext-server        [.] v8::internal::FastJsonStringifier<unsigned char>::SerializeObject(v8::internal::ContinuationRecord, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.33%  bext-v8-pool-re  [kernel.kallsyms]  [k] do_syscall_64
+     0.33%  bext-v8-pool-re  libc.so.6          [.] __libc_recv
+     0.33%  bext-v8-pool-wr  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.26%  actix-rt|system  [kernel.kallsyms]  [k] __virt_addr_valid
+     0.26%  actix-rt|system  bext-server        [.] _RINvYNtNtCs7XqPlFz7kRX_8foldhash4fast11RandomStateNtNtCsiYoX4ApF2vj_4core4hash11BuildHasher8hash_oneRNtNtNtCs1gwkPHDHBr1_4http6header4name10HeaderNameECskzFIfObzDlB_10actix_http
+     0.26%  actix-rt|system  bext-server        [.] _RNCNvNtCskwFplFAtzgh_11bext_server7handler10handle_ssr0B5_
+     0.26%  actix-rt|system  bext-server        [.] _RNCNvNtNtCskwFplFAtzgh_11bext_server12ssr_pipeline5prism26handle_prism_request_inner0B7_
+     0.26%  actix-rt|system  bext-server        [.] _RNvMs_NtNtCs1gwkPHDHBr1_4http6header4nameNtB4_10HeaderName10from_bytes
+     0.26%  actix-rt|system  bext-server        [.] _RNvNtNtCs1gwkPHDHBr1_4http6header4name9parse_hdr
+     0.26%  actix-rt|system  bext-server        [.] mi_theap_malloc_aligned
+     0.26%  bext-access-log  libc.so.6          [.] __GI___libc_write
+     0.26%  bext-profiler-r  bext-server        [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation5parseINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace
+     0.26%  bext-profiler-r  bext-server        [.] _RNvMs4_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB5_13Abbreviations6insert
+     0.26%  bext-server      [kernel.kallsyms]  [k] __fdget
+     0.26%  bext-server      [kernel.kallsyms]  [k] unix_stream_read_generic
+     0.26%  bext-v8-eval-wo  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.26%  bext-v8-eval-wo  bext-server        [.] Builtins_GetProperty
+     0.26%  bext-v8-eval-wo  bext-server        [.] Builtins_RegExpReplace
+     0.26%  bext-v8-eval-wo  bext-server        [.] _RINvCsjE3SpYnAqLC_6blake321compress_subtree_wideNtNtB2_4join10SerialJoinEB2_.llvm.3951889466948558155
+     0.26%  bext-v8-eval-wo  bext-server        [.] std::__Cr::optional<v8::internal::DirectHandle<v8::internal::InternalizedString> > v8::internal::StringTable::TryLookupKey<v8::internal::InternalizedStringKey, v8::internal::Isolate>(v8::internal::Isolate*, v8::internal::InternalizedStringKey*)
+     0.26%  bext-v8-eval-wo  bext-server        [.] v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*)
+     0.26%  bext-v8-eval-wo  bext-server        [.] void v8::internal::String::WriteToFlat2<unsigned char>(unsigned char*, v8::internal::Tagged<v8::internal::ConsString>, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.26%  bext-v8-eval-wo  libc.so.6          [.] __memset_avx2_unaligned_erms
+     0.26%  bext-v8-pool-re  bext-server        [.] _RNvNtNtCsiYoX4ApF2vj_4core3str8converts9from_utf8
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
