@@ -36,17 +36,42 @@ Server-rendered page containing, in order:
 - No analytics, no extra fonts, no images. Minimal CSS, inline or one small file.
 - Production build + production server. No dev mode in any measurement.
 - Each app's prod server binds to its assigned port (see ports.txt).
+- Every request must render fresh. A positive server-rendered `data-rendered-at`
+  timestamp must change between two idle requests and across 20 responses sampled
+  during the measured load test. Every load request has a unique `?r=` query.
+  bext's render-result cache is also explicitly disabled.
 
 ## Metrics (collected centrally by the harness, identically for all)
-- **build_bytes** — size of the production build output dir.
-- **client_js_gz** — sum of gzipped bytes of every `<script src>` the page loads
-  (the bytes a real browser downloads to run the page). The headline number.
-- **cold_start_ms** — spawn prod server → first HTTP 200 at `/`. Median of 3.
-- **ttfb_ms** — warm, median of 50 sequential `/` requests.
-- **rps / p99** — `oha -z 10s -c 50` against `/`.
-- **hydrate_ms** — puppeteer: navigation → counter click registers (interactive).
+- **build_bytes** — measured production output files (Qwik: `dist` + `server`;
+  Next: `.next` excluding compiler `cache` and `diagnostics`; bext: its on-demand
+  `.bext` cache). Excludes dependencies and framework/server executables. This is
+  an output-size observation, not total deployment footprint.
+- **client_js_gz** — sum of each distinct external JS resource gzipped at level 6,
+  plus concatenated inline script bodies (including serialized script data) gzipped
+  at the same level. Count a fresh browser visit and the three interactions; stop
+  counting before the persistence-check reload. Also record the initial-visit size.
+- **cold_start_ms** — spawn production server → first complete HTTP 200 at `/`.
+  Three fresh processes per sweep, with OS/filesystem and compilation caches left
+  warm; report the median of all process starts. Poll at 5 ms intervals. Start
+  commands invoke local Node entrypoints directly, without `npx` startup overhead.
+- **ttfb_ms** — first-byte p50 during load, from `oha` (not an idle curl latency).
+- **rps / p99** — `oha -z 8s -c 50 -w`, HTTP/1.1 keep-alive, unique URLs, after a
+  2-second warmup. Wait for in-flight requests at the deadline. Require only HTTP
+  200 responses, successRate=1 and an empty error distribution.
+- **interaction checks** — counter increments, theme toggles and persists after a
+  reload (then toggles back), mixed-case search matches exactly the expected cards,
+  and clearing the input restores all 24 cards. Verify all 24 names and card
+  elements in the raw SSR HTML. The click latency after settling is diagnostic,
+  not a navigation-to-interactive measurement.
+
+Default campaign: three serialized sweeps of every framework, with order rotated
+between sweeps. Report medians and the full RPS range; retain every run, without
+selecting the best attempt. All sizes displayed as KiB (1,024 bytes).
 
 ## Output contract (each app dir must provide)
 - `bench.json` at the app root:
-  `{ "framework": "...", "port": N, "buildDir": "...", "start": "<cmd>", "buildBytes": N }`
+  `{ "framework": "...", "port": N, "buildDir": "...", "start": "<cmd>" }`
+  (use `buildDirs: ["dist", "server"]` when multiple directories are required).
 - A working `start` command that serves the production build on `port`.
+- Evidence is isolated in `results/runs/<campaign>/run-N/`. A failed/missing check
+  fails the campaign and its summary; previous results cannot fill missing cells.

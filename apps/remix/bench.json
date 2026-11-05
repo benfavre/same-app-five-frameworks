@@ -1,7 +1,6 @@
 {
-  "framework": "Remix",
+  "framework": "React Router (Remix lineage)",
   "port": 8102,
   "buildDir": "build",
-  "start": "PORT=8102 npx react-router-serve ./build/server/index.js",
-  "buildBytes": 342581
+  "start": "HOST=127.0.0.1 PORT=8102 node node_modules/@react-router/serve/dist/cli.js ./build/server/index.js"
 }

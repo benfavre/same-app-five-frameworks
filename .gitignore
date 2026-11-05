@@ -14,7 +14,11 @@ apps/*/server/
 apps/*/tmp/
 apps/*/.bext/
 *.tsbuildinfo
+.benchmark-runtime/
+apps/next/next-env.d.ts
+apps/remix/.react-router/
 
 # logs / os
 *.log
 .DS_Store
+__pycache__/

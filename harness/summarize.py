@@ -1,77 +1,114 @@
 #!/usr/bin/env python3
-# Combine the per-app raw outputs into one results.json + a printed table.
-import json, os, sys
+"""Summarize one complete campaign; incomplete or failed evidence is an error."""
+import argparse
+import json
+from pathlib import Path
+import statistics
+import sys
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT = f"{ROOT}/results"
-APPS = f"{ROOT}/apps"
-ORDER = ["next", "remix", "astro", "qwik", "bext"]
-NAMES = {"next": "Next.js", "remix": "Remix", "astro": "Astro", "qwik": "Qwik", "bext": "bext (PRISM)"}
+ROOT = Path(__file__).resolve().parent.parent
+NAMES = {"next": "Next.js", "remix": "React Router (Remix)", "astro": "Astro",
+         "qwik": "Qwik", "bext": "bext (PRISM)"}
 
-def rd(p, default=None):
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def summarize_campaign(path):
+    campaign = read(path / "campaign.json")
+    if campaign["status"] != "complete" or len(campaign["runs"]) != campaign["repeats"]:
+        raise ValueError("campaign is incomplete or failed")
+    if len({run["directory"] for run in campaign["runs"]}) != campaign["repeats"]:
+        raise ValueError("campaign repeats must refer to distinct run directories")
+    rows = []
+    for fw in campaign["frameworks"]:
+        runs, cold_samples = [], []
+        for run in campaign["runs"]:
+            if sorted(run["order"]) != sorted(campaign["frameworks"]):
+                raise ValueError("each sweep must measure every selected framework exactly once")
+            prefix = path / run["directory"] / fw
+            browser = read(prefix.with_suffix(".browser.json"))
+            proof = read(prefix.with_suffix(".proof"))
+            oha = read(prefix.with_suffix(".oha.json"))
+            build = read(prefix.with_suffix(".build.json"))
+            cold = read(prefix.with_suffix(".cold.json"))
+            if not (browser["status"] == 200 and browser["ssrCards"] == 24 and browser["ssrProducts"] == 24
+                    and all(browser.get(key) for key in ["counterOk", "themeOk", "themePersistOk", "searchOk"])
+                    and not browser.get("resourceErrors")):
+                raise ValueError(f"{prefix}: browser/SSR contract failed")
+            if not (proof["uncached"] and proof["r1"] and proof["r2"] and proof["r1"] != proof["r2"]
+                    and len(proof["loadSamples"]) == 20 and len(set(proof["loadSamples"])) == 20
+                    and all(proof["loadSamples"])):
+                raise ValueError(f"{prefix}: uncached proof failed")
+            if not (set(oha["statusCodeDistribution"]) == {"200"} and oha["statusCodeDistribution"]["200"] > 0
+                    and oha["summary"]["successRate"] == 1 and not oha.get("errorDistribution")):
+                raise ValueError(f"{prefix}: HTTP/load errors")
+            if not cold["samplesMs"] or min(cold["samplesMs"]) <= 0 or build["bytes"] <= 0:
+                raise ValueError(f"{prefix}: missing cold/build measurements")
+            cold_samples.extend(cold["samplesMs"])
+            runs.append({
+                "run": run["directory"], "rps": oha["summary"]["requestsPerSec"],
+                "ttfb_ms": oha["firstBytePercentiles"]["p50"] * 1000,
+                "p99_ms": oha["latencyPercentiles"]["p99"] * 1000,
+                "client_js_gz_kb": browser["clientJsGzB"] / 1024,
+                "initial_client_js_gz_kb": browser["initialClientJsGzB"] / 1024,
+                "js_reqs": browser["jsReqs"], "build_kb": build["bytes"] / 1024,
+                "http_200_responses": oha["statusCodeDistribution"]["200"],
+            })
+        row = {"framework": NAMES[fw], "id": fw, "run_count": len(runs), "runs": runs,
+               "rps_min": round(min(r["rps"] for r in runs)), "rps_max": round(max(r["rps"] for r in runs)),
+               "cold_ms": round(statistics.median(cold_samples), 2), "cold_samples_ms": cold_samples,
+               "ok": "CTS", "theme_persistence": True, "uncached": True,
+               "ssr_cards": 24, "ssr_products": 24, "success": 1.0}
+        for key in ["rps", "ttfb_ms", "p99_ms", "client_js_gz_kb", "initial_client_js_gz_kb", "js_reqs", "build_kb"]:
+            value = statistics.median(r[key] for r in runs)
+            row[key] = round(value) if key in {"rps", "js_reqs"} else round(value, 2)
+        rows.append(row)
+    return {"aggregation": "median of equal repeat sweeps; cold start is median of all process starts",
+            "startedAt": campaign["startedAt"], "finishedAt": campaign["finishedAt"], "frameworks": rows}
+
+
+def table(summary):
+    lines = ["| Framework | Client JS (KiB gz) | TTFB p50 (ms) | RPS median | RPS min–max | p99 (ms) | Process start (ms) | Output (KiB) | C/T/S |",
+             "|---|---:|---:|---:|---:|---:|---:|---:|:---:|"]
+    for row in sorted(summary["frameworks"], key=lambda r: r["rps"], reverse=True):
+        lines.append(f"| {row['framework']} | {row['client_js_gz_kb']:.2f} | {row['ttfb_ms']:.2f} | "
+                     f"{row['rps']:,} | {row['rps_min']:,}–{row['rps_max']:,} | {row['p99_ms']:.2f} | "
+                     f"{row['cold_ms']:.0f} | {row['build_kb']:,.1f} | ✓ |")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("campaign", nargs="?", type=Path)
+    parser.add_argument("--publish", action="store_true", help="also update results/results.json and results/latest.json")
+    args = parser.parse_args()
+    if args.campaign is None:
+        candidates = list((ROOT / "results/runs").glob("*/campaign.json"))
+        if not candidates:
+            parser.error("no campaigns found; run harness/run-all.sh first")
+        # Select the latest attempt, including failures, so an old success cannot
+        # silently stand in for a failed re-run.
+        args.campaign = max(candidates, key=lambda p: read(p)["startedAt"]).parent
+    path = args.campaign.resolve()
     try:
-        with open(p) as f:
-            return f.read().strip()
-    except Exception:
-        return default
+        summary = summarize_campaign(path)
+    except (ValueError, KeyError, OSError) as error:
+        print(f"Cannot publish benchmark: {error}", file=sys.stderr)
+        return 1
+    (path / "summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    (path / "table.md").write_text(table(summary))
+    if args.publish:
+        campaign_name = str(path.relative_to(ROOT / "results"))
+        (ROOT / "results/results.json").write_text(json.dumps(summary["frameworks"], indent=2) + "\n")
+        (ROOT / "results/latest.json").write_text(json.dumps({"campaign": campaign_name,
+                                                            "finishedAt": summary["finishedAt"]}, indent=2) + "\n")
+    print(table(summary))
+    print("C/T/S plus theme persistence, all 24 SSR products, uncached idle/load proof and 100% HTTP 200 verified.")
+    print(f"Raw evidence: {path}")
+    return 0
 
-def rj(p, default=None):
-    try:
-        with open(p) as f:
-            return json.load(f)
-    except Exception:
-        return default
 
-rows = []
-for fw in ORDER:
-    b = rj(f"{OUT}/{fw}.browser.json", {}) or {}
-    oha = rj(f"{OUT}/{fw}.oha.json", {}) or {}
-    summ = oha.get("summary", {})
-    pct = oha.get("latencyPercentiles", {})
-    fb = oha.get("firstBytePercentiles", {})
-    bench = rj(f"{APPS}/{fw}/bench.json", {}) or {}
-    build_bytes = bench.get("buildBytes", 0)
-    cold = rd(f"{OUT}/{fw}.cold")
-    ttfb = rd(f"{OUT}/{fw}.ttfb")
-    row = {
-        "framework": NAMES.get(fw, fw),
-        "build_kb": round(build_bytes / 1024, 1) if build_bytes else None,
-        "client_js_gz_kb": round(b.get("clientJsGzB", 0) / 1024, 2) if b else None,
-        "js_reqs": b.get("jsReqs"),
-        "ssr_cards": b.get("ssrCards"),
-        "ttfb_ms": round(fb.get("p50", 0) * 1000, 2) if fb else (float(ttfb) if ttfb else None),
-        "cold_ms": int(cold) if cold and cold.isdigit() else None,
-        "rps": round(summ.get("requestsPerSec", 0)) if summ else None,
-        "p99_ms": round(pct.get("p99", 0) * 1000, 2) if pct else None,
-        "success": summ.get("successRate"),
-        "tti_ms": b.get("ttiMs"),
-        "ok": f"{'C' if b.get('counterOk') else '-'}{'T' if b.get('themeOk') else '-'}{'S' if b.get('searchOk') else '-'}",
-    }
-    rows.append(row)
-
-with open(f"{OUT}/results.json", "w") as f:
-    json.dump(rows, f, indent=2)
-
-# ---- printed table ----
-cols = [
-    ("framework", "Framework", 13, "{}"),
-    ("client_js_gz_kb", "JS gz KB", 9, "{}"),
-    ("js_reqs", "JSreq", 6, "{}"),
-    ("build_kb", "build KB", 9, "{}"),
-    ("ssr_cards", "SSRcards", 9, "{}"),
-    ("ttfb_ms", "TTFB ms", 8, "{}"),
-    ("cold_ms", "cold ms", 8, "{}"),
-    ("rps", "RPS", 8, "{}"),
-    ("p99_ms", "p99 ms", 8, "{}"),
-    ("tti_ms", "TTI ms", 7, "{}"),
-    ("ok", "C/T/S", 6, "{}"),
-]
-hdr = "  ".join(h.ljust(w) for _, h, w, _ in cols)
-print(hdr)
-print("-" * len(hdr))
-for r in rows:
-    line = "  ".join(str(r.get(k) if r.get(k) is not None else "—").ljust(w) for k, _, w, _ in cols)
-    print(line)
-print()
-print("C/T/S = Counter / Theme / Search interaction verified in a real browser")
-print("client JS = gzipped (uniform level) sum of every JS resource + inline scripts the page loads")
+if __name__ == "__main__":
+    sys.exit(main())

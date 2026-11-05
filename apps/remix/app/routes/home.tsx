@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Route } from "./+types/home";
 import products from "../products.json";
 
@@ -15,6 +15,10 @@ export function loader() {
 
 function ThemeToggle() {
   const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    setDark(document.documentElement.classList.contains("dark"));
+  }, []);
 
   function toggle() {
     const next = !dark;
