@@ -233,6 +233,8 @@ def metadata(args):
         if args.bext_http_workers is not None:
             result["bext"]["overrides"]["BEXT_HTTP_WORKERS"] = str(args.bext_http_workers)
         result["bext"]["overrides"].update(dict(args.bext_flag))
+        if args.bext_log_filter is not None:
+            result["bext"]["overrides"]["RUST_LOG"] = args.bext_log_filter
     return result
 
 
@@ -261,6 +263,8 @@ def server(fw, bench, directory, label, args=None):
                 if args.bext_http_workers is not None:
                     env["BEXT_HTTP_WORKERS"] = str(args.bext_http_workers)
                 env.update(dict(getattr(args, "bext_flag", [])))
+                if getattr(args, "bext_log_filter", None) is not None:
+                    env["RUST_LOG"] = args.bext_log_filter
         proc = subprocess.Popen(command, cwd=ROOT / "apps" / fw, env=env,
                                 stdout=log, stderr=subprocess.STDOUT, start_new_session=True)
         try:
@@ -414,6 +418,8 @@ def main():
     parser.add_argument("--client-cpus", type=cpu_list, help="CPU affinity for runner, oha and Chrome; use CPUs outside the server core")
     parser.add_argument("--bext-v8-workers", type=int, help="explicit BEXT_V8_POOL_SIZE (1–16)")
     parser.add_argument("--bext-http-workers", type=int, help="explicit BEXT_HTTP_WORKERS")
+    parser.add_argument("--bext-log-filter", choices=["info", "warn"],
+                        help="record and set RUST_LOG for bext; use to measure detailed tracing overhead")
     parser.add_argument("--bext-flag", action="append", type=performance_flag, default=[],
                         help="record and apply an allowlisted performance setting (NAME=value); response-cache controls are excluded")
     args = parser.parse_args()

@@ -101,9 +101,10 @@ class EvidenceTests(unittest.TestCase):
 
 
 class ProcessSafetyTests(unittest.TestCase):
-    def test_performance_options_cannot_enable_rendered_response_caching(self):
-        with self.assertRaises(argparse.ArgumentTypeError):
-            runner.performance_flag("BEXT_PRISM_RENDER_CACHE=1")
+    def test_performance_options_preserve_response_caching_and_transport_defaults(self):
+        for option in ["BEXT_PRISM_RENDER_CACHE=1", "BEXT_V8_SUBPROCESS=1"]:
+            with self.assertRaises(argparse.ArgumentTypeError):
+                runner.performance_flag(option)
 
     def test_cpu_audit_detects_a_thread_outside_the_budget(self):
         cpus = sorted(os.sched_getaffinity(0))
