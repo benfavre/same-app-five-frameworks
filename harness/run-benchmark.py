@@ -417,6 +417,11 @@ def measure(fw, bench, directory, args):
     print(f"  {fw}: {oha['summary']['requestsPerSec']:,.0f} RPS, verified", flush=True)
 
 
+def sweep_order(frameworks, repeat):
+    shift = repeat % len(frameworks)
+    return frameworks[shift:] + frameworks[:shift]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "results/runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
@@ -459,8 +464,7 @@ def main():
             port_is_free(bench["port"])
         write_json(args.output / "metadata.json", metadata(args))
         for repeat in range(args.repeats):
-            shift = (repeat * 2) % len(args.frameworks)
-            order = args.frameworks[shift:] + args.frameworks[:shift]
+            order = sweep_order(args.frameworks, repeat)
             directory = args.output / f"run-{repeat + 1}"
             directory.mkdir()
             manifest["runs"].append({"directory": directory.name, "order": order})
