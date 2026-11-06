@@ -20,5 +20,6 @@ apps/remix/.react-router/
 
 # logs / os
 *.log
+*.log.zst
 .DS_Store
 __pycache__/
