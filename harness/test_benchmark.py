@@ -84,6 +84,19 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             summarize_campaign(self.root)
 
+    def test_rechecks_required_warmup_evidence(self):
+        self.write("metadata.json", {"parameters": {"warmupHttp200Required": True}})
+        for i in range(3):
+            self.write(f"run-{i}/next.warmup.json", {"summary": {"successRate": 1},
+                       "statusCodeDistribution": {"200": 100}, "errorDistribution": {}})
+        summarize_campaign(self.root)
+        self.change("run-0/next.warmup.json", statusCodeDistribution={"200": 99, "503": 1})
+        with self.assertRaisesRegex(ValueError, "warmup"):
+            summarize_campaign(self.root)
+        (self.root / "run-0/next.warmup.json").unlink()
+        with self.assertRaises(FileNotFoundError):
+            summarize_campaign(self.root)
+
     def test_cpu_campaign_requires_valid_audits_for_every_entry(self):
         self.write("metadata.json", {"cpuBudget": {"serverCpus": [0]}})
         for i in range(3):
