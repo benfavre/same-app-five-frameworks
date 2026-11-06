@@ -1,0 +1,28 @@
+{
+  "status": "complete",
+  "selected": "compiler Request plans for final qualification",
+  "bootstrapSelected": false,
+  "reason": "Bootstrap does not improve every balanced block; no combined prototype selected.",
+  "pairedRpsIncreasePercent": [
+    {
+      "block": 1,
+      "call-plans": 16.021404397679806,
+      "bootstrap": 10.371385521418542
+    },
+    {
+      "block": 2,
+      "call-plans": 11.279847893947913,
+      "bootstrap": -1.7450793626054617
+    },
+    {
+      "block": 3,
+      "call-plans": 13.906045911102428,
+      "bootstrap": 14.786103601513734
+    }
+  ],
+  "initialCompilerRpsIncreasePercent": 14.852185571985954,
+  "provisionalArtifact": "aa3e016bcce6c6edc1a498897c62ec1c4403bd37c3eeb73376c7b6628cae56f8",
+  "artifactRetainedAt": "/home/infra-sj278/work/bext-compiler-http-20261106/bext-server-initial",
+  "finalArtifactRequiresRebuild": "Add call_plan.rs to the persistent bundle emitter fingerprint; executable rendering logic and SDK are otherwise unchanged.",
+  "productionChanged": false
+}

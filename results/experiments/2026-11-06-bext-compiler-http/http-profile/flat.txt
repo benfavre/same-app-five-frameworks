@@ -1,0 +1,58 @@
+# Whole-HTTP CPU sample report; symbol display limited to 240 characters.
+# Full report and raw perf data retained locally. Percentages are sampled CPU, not throughput.
+     2.19%  actix-rt|system  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     1.74%  bext-server      libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.61%  actix-rt|system  libc.so.6          [.] statx
+     1.48%  bext-server      [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     1.43%  actix-rt|system  libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.34%  bext-v8-eval-wo  libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.07%  actix-rt|system  bext-server        [.] _mi_page_malloc_zero
+     1.07%  bext-v8-eval-wo  bext-server        [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeede …
+     0.85%  bext-v8-eval-wo  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.85%  bext-v8-eval-wo  bext-server        [.] _RNvNtCs5jZkS6BB4A1_11encoding_rs5utf_835convert_utf16_to_utf8_partial_inner
+     0.76%  bext-access-log  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.72%  actix-rt|system  bext-server        [.] _RNCNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism26handle_prism_request_inner0B7_
+     0.63%  bext-v8-eval-wo  bext-server        [.] void v8::internal::CopyChars<unsigned char, unsigned short>(unsigned short*, unsigned char const*, unsigned long)
+     0.58%  actix-rt|system  bext-server        [.] mi_free
+     0.54%  actix-rt|system  [kernel.kallsyms]  [k] link_path_walk.part.0.constprop.0
+     0.54%  actix-rt|system  bext-server        [.] mi_theap_malloc_aligned
+     0.49%  actix-rt|system  bext-server        [.] _RNvNtNtCs1gwkPHDHBr1_4http6header4name9parse_hdr
+     0.49%  bext-v8-eval-wo  bext-server        [.] Builtins_RecordWriteSaveFP
+     0.49%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::Bi …
+     0.45%  actix-rt|system  [kernel.kallsyms]  [k] __d_lookup_rcu
+     0.45%  actix-rt|system  [kernel.kallsyms]  [k] inode_permission
+     0.45%  actix-rt|system  [nf_tables]        [k] nft_do_chain
+     0.45%  bext-v8-eval-wo  bext-server        [.] Builtins_WeakCollectionSet
+     0.45%  bext-v8-pool-wr  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.40%  actix-rt|system  [kernel.kallsyms]  [k] srso_alias_safe_ret
+     0.40%  actix-rt|system  bext-server        [.] _RINvMs0_NtNtCskzFIfObzDlB_10actix_http6header3mapNtB6_9HeaderMap9get_valueReECs6QBwfGVy889_10bext_proxy
+     0.40%  bext-v8-eval-wo  bext-server        [.] Builtins_AsyncFunctionEnter
+     0.40%  bext-v8-eval-wo  bext-server        [.] v8::internal::FastJsonStringifier<unsigned char>::SerializeObject(v8::internal::ContinuationRecord, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8 …
+     0.40%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonParser<unsigned char>::ParseJsonObject(v8::internal::Handle<v8::internal::Map>)
+     0.40%  bext-v8-pool-re  libc.so.6          [.] __libc_recv
+     0.36%  actix-rt|system  bext-server        [.] _RNCNvYINtNtNtCskzFIfObzDlB_10actix_http9responses8response8ResponseuENtNtNtBb_2h17encoder11MessageType14encode_headers0Bb_.llvm.7636872464950948720
+     0.36%  bext-v8-eval-wo  bext-server        [.] Builtins_ArrayPrototypeJoinImpl
+     0.36%  bext-v8-eval-wo  bext-server        [.] Builtins_RegExpMatchFast
+     0.36%  bext-v8-eval-wo  bext-server        [.] Builtins_StringSubstring
+     0.36%  bext-v8-pool-wr  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.31%  actix-rt|system  [kernel.kallsyms]  [k] clear_page_erms
+     0.31%  actix-rt|system  bext-server        [.] _RNvXs2_NtNtCs9ALYTKQbEpY_3std4hash6randomNtB5_13DefaultHasherNtNtCsiYoX4ApF2vj_4core4hash6Hasher5write.llvm.5302450766316506585
+     0.31%  actix-rt|system  bext-server        [.] mi_malloc_aligned
+     0.31%  actix-rt|system  libc.so.6          [.] __memcmp_avx2_movbe
+     0.31%  actix-rt|system  libc.so.6          [.] getenv
+     0.31%  bext-v8-eval-wo  bext-server        [.] Builtins_FindOrderedHashSetEntry
+     0.31%  bext-v8-eval-wo  bext-server        [.] Builtins_LoadIC
+     0.31%  bext-v8-eval-wo  bext-server        [.] _RNvMs1_NtCs2E8lzaXoEOS_7bext_v84evalNtB5_15EvalThreadState30process_request_with_hash_hint.llvm.18286939918237326745
+     0.31%  bext-v8-eval-wo  bext-server        [.] v8::internal::ScavengerEphemeronProcessor::ClearOldEphemerons(v8::internal::Heap*)
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] do_syscall_64
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] path_lookupat
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] vfs_statx
+     0.27%  actix-rt|system  bext-server        [.] _RINvNtCsiYoX4ApF2vj_4core3ptr13drop_in_placeANtNtCs6oZr1Inkksd_12actix_router4path8PathItemj10_ECsl5Wgh76sR8I_9actix_web
+     0.27%  actix-rt|system  bext-server        [.] _RINvYNtNtCs7XqPlFz7kRX_8foldhash4fast11RandomStateNtNtCsiYoX4ApF2vj_4core4hash11BuildHasher8hash_oneRNtNtNtCs1gwkPHDHBr1_4http6header4name10HeaderNameECskzFIfObzDlB_10actix_http
+     0.27%  actix-rt|system  bext-server        [.] _RNCNvXs_NtNtCs1Aah8EqPQSu_11bext_server10middleware11request_logINtB6_23RequestLoggerMiddlewareNtNtCsl5Wgh76sR8I_9actix_web11app_service10AppRoutingEINtCs3qM3leNkEqp_13actix_service7Servi …
+     0.27%  actix-rt|system  bext-server        [.] _RNvMs4_NtNtCs31qw4EiS7VD_5regex5regex6stringNtB5_5Regex11captures_at.llvm.6203076296542837917
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_CreateDataProperty
+     0.27%  bext-v8-eval-wo  bext-server        [.] v8::internal::LookupIterator::State v8::internal::LookupIterator::LookupInSpecialHolder<false>(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSReceiver>)
+     0.27%  bext-v8-eval-wo  libc.so.6          [.] __memset_avx2_unaligned_erms
+     0.27%  bext-v8-pool-re  bext-server        [.] _RNvNtNtCsiYoX4ApF2vj_4core3str8converts9from_utf8
+     0.27%  bext-v8-pool-wr  [kernel.kallsyms]  [k] __memcg_slab_post_alloc_hook

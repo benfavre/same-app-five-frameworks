@@ -4,7 +4,33 @@ The same 24-product SSR app, counter, persisted theme toggle, and live search in
 Next.js, React Router (the Remix entry), Astro, Qwik, and bext. Every measured
 request renders fresh HTML.
 
-## Latest tuned comparison — equal CPU budget, 2026-11-06
+## Compiler Request plans — equal CPU budget, 2026-11-06
+
+The compiler now proves when loaders and layouts cannot use their Request input,
+so PRISM can skip constructing it. Loaders and HTML still run fresh on every
+request. The pass is opt-in with `BEXT_PRISM_CALL_PLANS=1`.
+
+| Framework | RPS median | RPS min–max | CPU ms/request | p99 |
+|---|---:|---:|---:|---:|
+| Astro | 4,648 | 4,450–4,696 | 0.2147 | 31.37 ms |
+| bext (PRISM), compiler plan on | 3,704 | 3,674–3,947 | 0.2695 | 33.25 ms |
+
+A separate same-binary flag-off/on comparison measures **3,735 → 3,837 RPS (+2.75%)**, with CPU/request changing -2.78%. Astro remains ahead in the matched comparison above.
+
+Each complete server tree shares CPU 10; clients exclude that physical core
+and its SMT sibling. Every entry has a 20-second warmup and 15-second load at
+50 connections. Flag comparisons use three balanced pairs (AB/BA/AB), and the
+Astro/Bext comparison alternates across three sweeps. Every warmup/load/browser,
+24-product SSR, fresh-render and CPU-affinity check passes. Profiling and access
+logs remain enabled; render-result caching is disabled. Shared-host ranges are
+observations, not confidence intervals.
+
+[Compiler change](https://github.com/benfavre/bext/pull/432),
+[raw evidence, profiles, controls and identities](results/experiments/2026-11-06-bext-compiler-http/notes.md),
+[final qualification](results/experiments/2026-11-06-bext-compiler-http/qualification.json).
+Bootstrap reuse was inconsistent and remains unselected.
+
+## Earlier five-framework tuned comparison — equal CPU budget, 2026-11-06
 
 Every framework receives **20 seconds of warmup**, followed by an eight-second load at concurrency 50, repeated in three rotating sweeps. This passes the observed delayed profiler initialization in Bext; continuous profiling and HTTP access logging remain enabled. Bext uses the merged native/SDK source, documented opt-in preparation/hash/scanner/text settings and `--bext-log-filter warn`. Every complete server tree shares CPU 10; clients exclude that physical core and its SMT sibling.
 
@@ -24,19 +50,29 @@ The [response-writer experiment](results/experiments/2026-11-05-bext-reply-trans
 
 ## Bext PRISM — full-machine throughput, 2026-11-06
 
-The [admission fix](https://github.com/benfavre/bext/pull/430) queues brief per-site contention instead of immediately returning 503. The default wait is 250 ms with at most 256 waiting requests per site; existing fair-share and pool limits remain in force. A full queue or expired deadline still returns 503 + Retry-After.
+All 24 logical CPUs of the Ryzen 9 5900X (12 physical cores) are available to
+the complete server tree. Clients share the host. Three fresh-server entries
+per row use 20-second warmups and 15-second loads; profiling, access logs and
+fresh rendering stay enabled. The flag-off/on comparison uses the same binary
+and SDK in balanced AB/BA/AB order.
 
-All 24 logical CPUs of the Ryzen 9 5900X (12 physical cores) are available to the entire server tree. Clients share the host. Three fresh-server runs per row, 20-second warmup and 15-second loads; fresh rendering, continuous profiling and HTTP access logging stay enabled.
-
-| Runtime | V8 / HTTP | Connections | Median RPS | RPS min–max | Server CPU equivalents | p99 |
+| Compiler Request plan | V8 / HTTP | Connections | Median RPS | RPS min–max | Server CPU equivalents | p99 |
 |---|---|---:|---:|---:|---:|---:|
-| Original immediate admission | 12 / 12 | 50 | 36,862 | 30,829–38,401 | 14.34 | 2.88 ms |
-| Bounded admission wait | 12 / 12 | 50 | 36,652 | 35,303–36,764 | 14.12 | 3.05 ms |
-| Bounded admission wait | 16 / 24 | 200 | 25,969 | 24,990–27,563 | 11.51 | 11.82 ms |
+| Off | 12 / 12 | 50 | 30,980 | 29,767–31,962 | 12.02 | 4.56 ms |
+| On | 12 / 12 | 50 | 37,131 | 33,758–38,979 | 13.98 | 3.04 ms |
+| On | 16 / 24 | 200 | 26,018 | 22,764–26,278 | 11.11 | 13.05 ms |
 
-With the wait enabled, **all six entries passed: 3,658,428 warmup and 2,809,837 measured HTTP 200 responses, zero warmup/load errors**. All three 200-connection runs passed browser/SSR/freshness checks. At 50 connections, observed median throughput changed −0.57% and p99 changed from 2.88 to 3.05 ms; this is a correctness fix, not a speedup claim. The 50-connection comparison uses balanced AB/BA/AB ordering. These shared-host ranges are not confidence intervals.
+Compiler plans change median 50-connection throughput **+19.86%**. All nine full-machine entries pass: **5,427,612 warmup and 4,166,720 measured HTTP 200 responses**, with zero warmup/load errors. Flag-on entries account for 3,437,953 warmup and 2,775,568 measured HTTP 200 responses. All three 200-connection runs pass the browser/SSR/freshness checks.
 
-Waiting disabled on the same rebuilt binary reproduced 152,122 warmup 503 responses. That failed control and the [earlier full-machine pool sizing and failed overload attempt](results/experiments/2026-11-06-bext-prism-multicore/notes.md) remain archived. New campaigns reject non-200 warmup responses and publication rechecks that evidence. [Method, raw evidence and identities](results/experiments/2026-11-06-bext-site-admission-wait/notes.md). The one-CPU comparison above uses its separately pinned runtime and CPU budget.
+The [bounded admission wait](https://github.com/benfavre/bext/pull/430) remains
+250 ms with at most 256 waiting requests per site. A full queue or expired
+deadline retains 503 + Retry-After. The [earlier disabled-wait control](results/experiments/2026-11-06-bext-site-admission-wait/notes.md)
+reproduced 152,122 warmup 503 responses and remains archived. Configured-instance
+numbers are separate from the equal-CPU comparison; these short shared-host runs
+do not establish a machine ceiling.
+
+[Full raw runs and exact identities](results/experiments/2026-11-06-bext-compiler-http/qualification.json),
+[method and validation](results/experiments/2026-11-06-bext-compiler-http/notes.md).
 
 ## Default-settings baseline — equal CPU budget, 2026-11-05
 
@@ -134,6 +170,9 @@ these settings to the one-CPU command:
 --bext-flag BEXT_V8_LEGACY_HASH_HINT=1 --bext-flag BEXT_PRISM_TOKEN_SCAN=1 \
 --bext-flag BEXT_V8_PREPARED_TEXT=2 --bext-flag BEXT_PRISM_NATIVE_HTML_SCAN=1
 ```
+
+The compiler-plan follow-up requires the SDK shipped with [PR #432](https://github.com/benfavre/bext/pull/432) and `--bext-flag BEXT_PRISM_CALL_PLANS=1`.
+Use `--warmup-seconds 20 --duration 15` for that comparison.
 
 Keep the same frozen SDK while comparing native binaries. To separate a rebuild
 from its opt-in change, use the balanced three-block runner:

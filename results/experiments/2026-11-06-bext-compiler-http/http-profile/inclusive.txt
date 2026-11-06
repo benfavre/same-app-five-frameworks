@@ -1,0 +1,525 @@
+# Whole-HTTP CPU sample report; symbol display limited to 240 characters.
+# Full report and raw perf data retained locally. Percentages are sampled CPU, not throughput.
+    50.83%     0.00%  [.] 0xffffffffffffffff
+    27.79%     0.00%  [k] entry_SYSCALL_64_after_hwframe
+    27.65%     0.63%  [k] do_syscall_64
+    26.76%     0.22%  [k] x64_sys_call
+    20.22%     0.18%  [.] _RNCNvNtCs1Aah8EqPQSu_11bext_server7handler10handle_ssr0B5_
+    19.78%     0.00%  [.] start_thread
+    19.60%     0.00%  [.] clone3
+    18.34%     0.00%  [.] _RNvNvMs0_NtNtNtCs9ALYTKQbEpY_3std3sys6thread4unixNtB7_6Thread3new12thread_start.llvm.8609963975560572235
+    17.67%     0.22%  [.] _RNCNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism20handle_prism_request0B7_
+    17.32%     0.72%  [.] _RNCNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism26handle_prism_request_inner0B7_
+    12.08%     0.09%  [.] _RNvXs2_NtNtCskzFIfObzDlB_10actix_http2h110dispatcherINtB5_10DispatcherNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamINtNtCs3qM3leNkEqp_13actix_service7map_err6MapErrINtNtCsl5Wgh76sR8I_9actix_web11app_servic …
+    12.08%     0.04%  [.] _RNvXs1_NtCs3qM3leNkEqp_13actix_service8and_thenINtB5_22AndThenServiceResponseINtNtB7_10fn_service9FnServiceNCNvMs1_NtCskzFIfObzDlB_10actix_http7serviceINtB1P_11HttpServiceNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6strea …
+    11.81%     0.09%  [.] _RNCNvXs_NtCsagkES8m2SwM_12actix_server7serviceINtB6_13StreamServiceINtNtCs3qM3leNkEqp_13actix_service8and_then14AndThenServiceINtNtB18_10fn_service9FnServiceNCNvMs1_NtCskzFIfObzDlB_10actix_http7serviceINtB2D_11Htt …
+    11.77%     0.00%  [.] _RNvMs4_NtNtNtCsf5Utashzpff_5tokio7runtime4task4coreINtB5_4CoreNCNvXs_NtCsagkES8m2SwM_12actix_server7serviceINtB15_13StreamServiceINtNtCs3qM3leNkEqp_13actix_service8and_then14AndThenServiceINtNtB28_10fn_service9FnS …
+    11.36%     0.27%  [.] __send
+    10.87%     0.04%  [k] __x64_sys_sendto
+    10.83%     0.13%  [k] __sys_sendto
+    10.47%     0.04%  [.] _RNvMs0_NtNtNtCsf5Utashzpff_5tokio7runtime4task7harnessINtB5_7HarnessNCNvXs_NtCsagkES8m2SwM_12actix_server7serviceINtB1b_13StreamServiceINtNtCs3qM3leNkEqp_13actix_service8and_then14AndThenServiceINtNtB2e_10fn_servi …
+     8.99%     0.09%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v810subprocess15run_eval_worker
+     8.99%     0.00%  [.] _RNvCs1Aah8EqPQSu_11bext_server22run_v8_eval_subprocess
+     8.46%     0.00%  [.] _RINvNtNtCs9ALYTKQbEpY_3std3sys9backtrace28___rust_begin_short_backtraceNCNCNvNtCs2E8lzaXoEOS_7bext_v84eval18ensure_eval_thread00uEB1f_
+     8.46%     0.00%  [.] _RNSNvYNCINvNtNtCs9ALYTKQbEpY_3std6thread9lifecycle15spawn_uncheckedNCNCNvNtCs2E8lzaXoEOS_7bext_v84eval18ensure_eval_thread00uEs_0INtNtNtCsiYoX4ApF2vj_4core3ops8function6FnOnceuE9call_once6vtableB1b_
+     8.46%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval28eval_thread_main_with_handle
+     8.14%     0.31%  [.] _RNvMs1_NtCs2E8lzaXoEOS_7bext_v84evalNtB5_15EvalThreadState30process_request_with_hash_hint.llvm.18286939918237326745
+     7.87%     0.13%  [.] _RNvNtNtCs9ALYTKQbEpY_3std3sys2fs8metadata
+     7.56%     0.22%  [.] _RNvNtNtNtCs9ALYTKQbEpY_3std3sys2fs4unix9try_statx.llvm.8609963975560572235
+     7.34%     1.61%  [.] statx
+     7.29%     0.04%  [.] _RNvMs1_NtNtCskzFIfObzDlB_10actix_http2h110dispatcherINtB5_15InnerDispatcherNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamINtNtCs3qM3leNkEqp_13actix_service7map_err6MapErrINtNtCsl5Wgh76sR8I_9actix_web11app_s …
+     7.25%     0.00%  [.] _RNvMs4_NtNtCsf5Utashzpff_5tokio2io12poll_eventedINtB5_11PollEventedNtNtNtNtCs6IMYrB0ydbL_3mio3net3uds6stream10UnixStreamE10poll_writeB9_
+     6.94%     0.00%  [k] inet_sendmsg
+     6.94%     0.00%  [k] tcp_sendmsg
+     6.85%     0.09%  [k] tcp_sendmsg_locked
+     6.76%     0.09%  [.] Builtins_CEntry_Return1_ArgvOnStack_BuiltinExit
+     6.62%     0.13%  [.] _RNCNvXs_NtNtCs1Aah8EqPQSu_11bext_server10middleware6tenantINtB6_24TenantResolverMiddlewareINtNtB8_16security_headers22SecurityHeadersServiceINtNtB8_7alt_svc13AltSvcServiceINtNtCsdbgjhiROCxM_17tracing_actix_web10mi …
+     6.53%     0.13%  [.] _RNCNvXs2_NtNtCs1Aah8EqPQSu_11bext_server10middleware15user_middlewareINtB7_21UserMiddlewareServiceINtNtB9_6tenant24TenantResolverMiddlewareINtNtB9_16security_headers22SecurityHeadersServiceINtNtB9_7alt_svc13AltSvc …
+     5.73%     0.00%  [k] tcp_push
+     5.68%     0.09%  [k] tcp_write_xmit
+     5.64%     0.27%  [.] _RNCNvXs_NtNtCs1Aah8EqPQSu_11bext_server10middleware11request_logINtB6_23RequestLoggerMiddlewareNtNtCsl5Wgh76sR8I_9actix_web11app_service10AppRoutingEINtCs3qM3leNkEqp_13actix_service7ServiceNtNtB1z_7service14Servic …
+     5.64%     0.00%  [k] __tcp_push_pending_frames
+     5.46%     0.09%  [k] __x64_sys_statx
+     5.41%     0.00%  [.] _RINvMNtCs3G1L6H3ma8y_7tracing4spanNtB3_4Span8in_scopeNCNvXs3_NtCsdbgjhiROCxM_17tracing_actix_web10middlewareINtBX_15TracingResponseINtNtCsiYoX4ApF2vj_4core3pin3PinINtNtCseo0TUlPad4f_5alloc5boxed3BoxDNtNtNtB2a_6fut …
+     5.19%     0.22%  [k] __tcp_transmit_skb
+     5.06%     5.06%  [k] _raw_spin_unlock_irqrestore
+     5.01%     0.67%  [.] __libc_recv
+     5.01%     0.04%  [k] ip_queue_xmit
+     4.97%     0.04%  [k] __ip_queue_xmit
+     4.92%     0.00%  [k] ip_local_out
+     4.65%     4.52%  [.] __memmove_avx_unaligned_erms
+     4.56%     0.09%  [.] _RNCNvXs0_NtNtCs1Aah8EqPQSu_11bext_server10middleware7alt_svcINtB7_13AltSvcServiceINtNtCsdbgjhiROCxM_17tracing_actix_web10middleware23TracingLoggerMiddlewareINtNtB9_11request_log23RequestLoggerMiddlewareNtNtCsl5Wgh …
+     4.56%     0.00%  [k] do_statx
+     4.38%     0.09%  [.] Builtins_CEntry_Return1_ArgvOnStack_NoBuiltinExit
+     4.34%     0.27%  [.] syscall
+     4.21%     0.27%  [k] vfs_statx
+     4.21%     0.13%  [.] _RNCNvXs4_NtNtCs1Aah8EqPQSu_11bext_server10middleware4authINtB7_21AuthMiddlewareServiceINtNtB9_15user_middleware21UserMiddlewareServiceINtNtB9_6tenant24TenantResolverMiddlewareINtNtB9_16security_headers22SecurityHe …
+     4.21%     0.04%  [k] __x64_sys_recvfrom
+     4.12%     0.22%  [.] _RNCNvNtCs2E8lzaXoEOS_7bext_v810subprocess17spawn_pool_reader0B5_
+     4.12%     0.00%  [.] _RINvNtNtCs9ALYTKQbEpY_3std3sys9backtrace28___rust_begin_short_backtraceNCNvNtCs2E8lzaXoEOS_7bext_v810subprocess17spawn_pool_reader0uEB1d_
+     4.12%     0.00%  [.] _RNSNvYNCINvNtNtCs9ALYTKQbEpY_3std6thread9lifecycle15spawn_uncheckedNCNvNtCs2E8lzaXoEOS_7bext_v810subprocess17spawn_pool_reader0uEs_0INtNtNtCsiYoX4ApF2vj_4core3ops8function6FnOnceuE9call_once6vtableB19_
+     4.07%     0.04%  [k] __sys_recvfrom
+     4.03%     0.13%  [.] _RNvNtCsiYoX4ApF2vj_4core3fmt5write
+     3.85%     0.00%  [k] __ip_finish_output
+     3.85%     0.00%  [k] ip_finish_output
+     3.85%     0.00%  [k] ip_output
+     3.76%     0.09%  [k] __dev_queue_xmit
+     3.76%     0.00%  [k] ip_finish_output2
+     3.76%     0.00%  [k] neigh_hh_output
+     3.71%     0.04%  [k] sock_recvmsg
+     3.67%     0.18%  [.] _RNCNvXs0_NtNtCs1Aah8EqPQSu_11bext_server10middleware16security_headersINtB7_22SecurityHeadersServiceINtNtB9_7alt_svc13AltSvcServiceINtNtCsdbgjhiROCxM_17tracing_actix_web10middleware23TracingLoggerMiddlewareINtNtB9 …
+     3.58%     0.00%  [k] __do_softirq
+     3.58%     0.00%  [k] __local_bh_enable_ip
+     3.58%     0.00%  [k] do_softirq.part.0
+     3.58%     0.00%  [k] handle_softirqs
+     3.53%     0.09%  [k] net_rx_action
+     3.53%     0.04%  [k] __x64_sys_futex
+     3.49%     0.00%  [k] do_futex
+     3.40%     0.04%  [k] __napi_poll
+     3.36%     0.04%  [k] unix_stream_sendmsg
+     3.31%     0.04%  [k] __netif_receive_skb
+     3.31%     0.00%  [k] process_backlog
+     3.27%     0.04%  [k] __netif_receive_skb_one_core
+     3.18%     0.04%  [k] ip_rcv
+     3.13%     0.13%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v810subprocess15read_pool_frame
+     3.13%     0.13%  [k] filename_lookup
+     3.13%     0.09%  [.] _RINvNtCs9ALYTKQbEpY_3std2io19default_read_to_endINtB2_4TakeQNtNtNtNtNtB4_2os4unix3net6stream10UnixStreamEECs2E8lzaXoEOS_7bext_v8
+     3.09%     0.09%  [k] unix_stream_recvmsg
+     3.09%     0.04%  [.] _RNvNtNtCsWsIHYRVDe7_9bext_core13observability10access_log11writer_loop
+     3.09%     0.00%  [.] _RINvNtNtCs9ALYTKQbEpY_3std3sys9backtrace28___rust_begin_short_backtraceNCNvNtNtCsWsIHYRVDe7_9bext_core13observability10access_log12spawn_writer0uEB1f_
+     3.09%     0.00%  [.] _RNSNvYNCINvNtNtCs9ALYTKQbEpY_3std6thread9lifecycle15spawn_uncheckedNCNvNtNtCsWsIHYRVDe7_9bext_core13observability10access_log12spawn_writer0uEs_0INtNtNtCsiYoX4ApF2vj_4core3ops8function6FnOnceuE9call_once6vtableB1b …
+     3.04%     0.09%  [.] _RNCNCINvNtCsl5Wgh76sR8I_9actix_web7handler15handler_serviceNvNtCs1Aah8EqPQSu_11bext_server7handler10handle_ssrTNtNtB8_7request11HttpRequestNtNtNtB8_5types7payload7PayloadINtNtB8_4data4DataNtBX_8AppStateEEE00BZ_
+     3.00%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval31collect_async_prism_result_fast
+     2.91%     0.27%  [k] path_lookupat
+     2.91%     0.09%  [k] futex_wake
+     2.91%     0.04%  [.] _RNCNCNvXs0_NtCsl5Wgh76sR8I_9actix_web5scopeNtB9_5ScopeNtNtBb_7service18HttpServiceFactory8registers1_00Cs1Aah8EqPQSu_11bext_server
+     2.82%     0.00%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism19prepare_page_inputs
+     2.77%     0.36%  [k] unix_stream_read_generic
+     2.77%     0.18%  [.] Builtins_StringIndexOf
+     2.77%     0.00%  [.] _RNvMs0_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc5wakerNtB5_9SyncWaker6notify.llvm.17562441484008488768
+     2.73%     0.13%  [.] _RNCNvXs1_NtNtCs1Aah8EqPQSu_11bext_server10middleware10rate_limitINtB7_21RateLimiterMiddlewareINtNtB9_4auth21AuthMiddlewareServiceINtNtB9_15user_middleware21UserMiddlewareServiceINtNtB9_6tenant24TenantResolverMiddl …
+     2.68%     0.04%  [.] _RNvXs0_NtNtCs1Aah8EqPQSu_11bext_server10middleware16security_headersINtB5_22SecurityHeadersServiceINtNtB7_7alt_svc13AltSvcServiceINtNtCsdbgjhiROCxM_17tracing_actix_web10middleware23TracingLoggerMiddlewareINtNtB7_1 …
+     2.64%     0.00%  [.] _RNvXs0_NtNtCs1Aah8EqPQSu_11bext_server10middleware7alt_svcINtB5_13AltSvcServiceINtNtCsdbgjhiROCxM_17tracing_actix_web10middleware23TracingLoggerMiddlewareINtNtB7_11request_log23RequestLoggerMiddlewareNtNtCsl5Wgh76 …
+     2.64%     0.00%  [.] _RNvXs2_NtCsdbgjhiROCxM_17tracing_actix_web10middlewareINtB5_23TracingLoggerMiddlewareINtNtNtCs1Aah8EqPQSu_11bext_server10middleware11request_log23RequestLoggerMiddlewareNtNtCsl5Wgh76sR8I_9actix_web11app_service10A …
+     2.64%     0.00%  [k] ip_local_deliver
+     2.64%     0.00%  [k] try_to_wake_up
+     2.64%     0.00%  [k] wake_up_q
+     2.60%     0.18%  [.] Builtins_StringSlowFlatten
+     2.51%     0.04%  [.] _RNvMs_NtNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism12page_prepareNtB4_10PageInputs10is_current
+     2.46%     0.18%  [.] v8::internal::JsonStringify(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::intern …
+     2.46%     0.00%  [.] _RNvMNtNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism12page_prepareNtB2_13InputRevision7capture
+     2.46%     0.00%  [.] v8::internal::Builtin_JsonStringify(int, unsigned long*, v8::internal::Isolate*)
+     2.42%     0.04%  [.] _RINvNtNtCs9ALYTKQbEpY_3std3sys9backtrace28___rust_begin_short_backtraceNCNvNtCs2E8lzaXoEOS_7bext_v810subprocess17spawn_pool_writer0uEB1d_
+     2.42%     0.00%  [.] _RNSNvYNCINvNtNtCs9ALYTKQbEpY_3std6thread9lifecycle15spawn_uncheckedNCNvNtCs2E8lzaXoEOS_7bext_v810subprocess17spawn_pool_writer0uEs_0INtNtNtCsiYoX4ApF2vj_4core3ops8function6FnOnceuE9call_once6vtableB19_
+     2.42%     0.00%  [.] _RNvYNtNtNtNtNtCs9ALYTKQbEpY_3std2os4unix3net6stream10UnixStreamNtNtBc_2io5Write9write_allCscbgmvAZ3h5k_5redis
+     2.37%     0.04%  [.] _RNvMs1_NtNtCskzFIfObzDlB_10actix_http2h110dispatcherINtB5_15InnerDispatcherNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamINtNtCs3qM3leNkEqp_13actix_service7map_err6MapErrINtNtCsl5Wgh76sR8I_9actix_web11app_s …
+     2.37%     0.00%  [.] v8::base::ThreadEntry(void*)
+     2.37%     0.00%  [.] v8::platform::DefaultWorkerThreadsTaskRunner::WorkerThread::Run()
+     2.24%     0.00%  [.] v8::platform::DefaultJobWorker::Run()
+     2.19%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval11kick_render
+     2.19%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval17call_prism_runner
+     2.15%     0.00%  [.] v8::internal::OptimizedCompilationJob::ExecuteJob(v8::internal::RuntimeCallStats*, v8::internal::LocalIsolate*)
+     2.15%     0.00%  [.] v8::internal::OptimizingCompileTaskExecutor::CompileTask::Run(v8::JobDelegate*)
+     2.15%     0.00%  [.] v8::internal::compiler::PipelineCompilationJob::ExecuteJobImpl(v8::internal::RuntimeCallStats*, v8::internal::LocalIsolate*)
+     2.10%     0.04%  [k] ip_protocol_deliver_rcu
+     2.10%     0.00%  [k] __wake_up_sync_key
+     2.10%     0.00%  [k] ip_local_deliver_finish
+     2.06%     0.22%  [.] __GI___libc_write
+     2.06%     0.04%  [.] _RNvXsi_NtNtCs9ALYTKQbEpY_3std2io5stdioNtB5_10StdoutLockNtB7_5Write9write_all
+     2.06%     0.00%  [.] _RNvXNvNtCs9ALYTKQbEpY_3std2io17default_write_fmtINtB2_7AdapterNtNtB4_5stdio10StdoutLockENtNtCsiYoX4ApF2vj_4core3fmt5Write9write_strCsWsIHYRVDe7_9bext_core
+     2.01%     0.22%  [.] _RNvNvNtCseo0TUlPad4f_5alloc3fmt6format12format_inner
+     2.01%     0.13%  [k] tcp_v4_rcv
+     1.97%     0.09%  [.] _RINvNtCs2E8lzaXoEOS_7bext_v84eval30render_prism_with_shell_hashedINtNtCseo0TUlPad4f_5alloc4sync3ArcNtNtB16_6string6StringEEB4_
+     1.97%     0.04%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v811render_text7to_rust
+     1.97%     0.04%  [.] _RNvXs2_NtCs3qM3leNkEqp_13actix_service7map_errINtB5_12MapErrFutureINtNtCsl5Wgh76sR8I_9actix_web11app_service14AppInitServiceINtNtCsduKICAM8YY9_11bext_server8l0_cache14L0CacheServiceINtNtB23_13markdown_repr29Markdo …
+     1.97%     0.00%  [.] v8::internal::DirectHandle<v8::internal::String> v8::internal::String::SlowFlatten<v8::internal::DirectHandle>(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::ConsString>, v8::internal::AllocationT …
+     1.92%     0.04%  [.] _RNCNvXs2_NtCsduKICAM8YY9_11bext_server8l0_cacheINtB7_14L0CacheServiceINtNtB9_13markdown_repr29MarkdownRepresentationServiceINtNtNtCs1Aah8EqPQSu_11bext_server10middleware14group_resolver30MiddlewareGroupResolverSer …
+     1.92%     0.00%  [.] _RNvNtCsduKICAM8YY9_11bext_server8site_env17csp_nonce_enabled
+     1.88%     0.54%  [k] link_path_walk.part.0.constprop.0
+     1.88%     0.00%  [.] _RNvMs1_NtNtCskzFIfObzDlB_10actix_http2h110dispatcherINtB5_15InnerDispatcherNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamINtNtCs3qM3leNkEqp_13actix_service7map_err6MapErrINtNtCsl5Wgh76sR8I_9actix_web11app_s …
+     1.83%     0.04%  [.] _RNCNvXs_NtCsduKICAM8YY9_11bext_server13markdown_reprINtB6_29MarkdownRepresentationServiceINtNtNtCs1Aah8EqPQSu_11bext_server10middleware14group_resolver30MiddlewareGroupResolverServiceINtNtCsccuiYU4UUyY_10actix_cor …
+     1.83%     0.04%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v810subprocess10read_frame
+     1.79%     0.13%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism11build_props
+     1.79%     0.09%  [k] ksys_write
+     1.79%     0.00%  [k] __x64_sys_write
+     1.79%     0.00%  [k] alloc_skb_with_frags
+     1.79%     0.00%  [k] sock_alloc_send_pskb
+     1.74%     0.00%  [k] sock_def_readable
+     1.70%     0.04%  [.] v8::internal::Builtin_JsonParse(int, unsigned long*, v8::internal::Isolate*)
+     1.70%     0.04%  [.] v8::internal::JsonParser<unsigned char>::Parse(v8::internal::Isolate*, v8::internal::Handle<v8::internal::String>, v8::internal::Handle<v8::internal::Object>, std::__Cr::optional<v8::internal::ScriptDetails>)
+     1.70%     0.00%  [k] nf_hook_slow
+     1.66%     0.22%  [k] tcp_rcv_established
+     1.66%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v810subprocess15encode_response
+     1.66%     0.00%  [k] tcp_v4_do_rcv
+     1.66%     0.00%  [k] vfs_write
+     1.61%     1.07%  [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     1.61%     0.09%  [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::Strin …
+     1.61%     0.00%  [.] v8::internal::JsonStringifier::Stringify(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean …
+     1.61%     0.00%  [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int)
+     1.57%     1.12%  [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     1.57%     0.22%  [.] _RNCNvMs9_NtCs2E8lzaXoEOS_7bext_v810subprocessNtB7_14SubprocessPool21submit_buffered_async0Cs1Aah8EqPQSu_11bext_server
+     1.48%     0.09%  [.] _RNvXs_NtNtCs1Aah8EqPQSu_11bext_server10middleware11request_logINtB4_23RequestLoggerMiddlewareNtNtCsl5Wgh76sR8I_9actix_web11app_service10AppRoutingEINtCs3qM3leNkEqp_13actix_service7ServiceNtNtB1x_7service14ServiceR …
+     1.48%     0.09%  [.] v8::Function::Call(v8::Isolate*, v8::Local<v8::Context>, v8::Local<v8::Value>, int, v8::Local<v8::Value>*)
+     1.48%     0.00%  [k] ext4_file_write_iter
+     1.43%     0.40%  [.] v8::internal::JsonParser<unsigned char>::ParseJsonObject(v8::internal::Handle<v8::internal::Map>)
+     1.43%     0.09%  [k] __alloc_skb
+     1.43%     0.00%  [.] v8::internal::JsonParser<unsigned char>::ParseJson(bool)
+     1.39%     0.13%  [k] ext4_buffered_write_iter
+     1.39%     0.04%  [.] _RNvMs_NtCs2E8lzaXoEOS_7bext_v810eval_replyNtB4_5Reply4send
+     1.34%     0.45%  [.] Builtins_WeakCollectionSet
+     1.34%     0.04%  [.] Builtins_WeakMapPrototypeSet
+     1.34%     0.04%  [.] _RNvMs2_NtNtCs9ALYTKQbEpY_3std4sync4mpmcINtB5_6SenderINtNtCsiYoX4ApF2vj_4core6result6ResultNtNtCseo0TUlPad4f_5alloc6string6StringB1q_EE4sendCs2E8lzaXoEOS_7bext_v8
+     1.34%     0.04%  [k] consume_skb
+     1.30%     0.49%  [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String …
+     1.30%     0.04%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v811render_text14encode_compact
+     1.30%     0.04%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval17send_eval_request
+     1.25%     0.09%  [.] void v8::internal::String::WriteToFlat2<unsigned short>(unsigned short*, v8::internal::Tagged<v8::internal::ConsString>, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&, v8::interna …
+     1.25%     0.00%  [.] _RINvMNtCs3G1L6H3ma8y_7tracing4spanNtB3_4Span8in_scopeNCNvXs2_NtCsdbgjhiROCxM_17tracing_actix_web10middlewareINtBX_23TracingLoggerMiddlewareINtNtNtCs1Aah8EqPQSu_11bext_server10middleware11request_log23RequestLogger …
+     1.25%     0.00%  [.] _RNvMs_NtNtCsWsIHYRVDe7_9bext_core13observability10access_logNtB4_12AccessLogger3log
+     1.21%     0.09%  [.] _RNCNvXs1_NtNtCs1Aah8EqPQSu_11bext_server10middleware12cookie_guardINtB7_18CookieGuardServiceINtNtB9_3waf20WafMiddlewareServiceINtNtB9_10rate_limit21RateLimiterMiddlewareINtNtB9_4auth21AuthMiddlewareServiceINtNtB9_ …
+     1.16%     1.16%  [.] _mi_page_malloc_zero
+     1.16%     0.18%  [.] _RNvMs2_NtNtCs9ALYTKQbEpY_3std4sync4mpmcINtB5_6SenderNtNtCs2E8lzaXoEOS_7bext_v84eval11EvalRequestE4sendBS_
+     1.16%     0.09%  [.] Builtins_StringPrototypeReplace
+     1.16%     0.09%  [k] alloc_pages_mpol
+     1.16%     0.00%  [.] v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags, v8::internal::PerformHeapLimitCheck, v8::internal::PerformIneffectiveMarkCompactCheck)
+     1.16%     0.00%  [.] v8::internal::HeapAllocator::AllocateRawSlowPath(v8::internal::HeapAllocator::AllocationRetryMode, int, v8::internal::AllocationType, v8::internal::AllocationOrigin, v8::internal::AllocationAlignment, v8::internal: …
+     1.16%     0.00%  [.] v8::internal::HeapAllocator::CollectGarbageAndRetryAllocation(v8::base::FunctionRef<bool ()>, v8::internal::AllocationType, v8::internal::GarbageCollectionReason)
+     1.16%     0.00%  [.] v8::internal::HeapAllocator::RetryCustomAllocate(v8::base::FunctionRef<bool ()>, v8::internal::AllocationType, v8::internal::GarbageCollectionReason)
+     1.12%     0.22%  [.] v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&)
+     1.12%     0.09%  [.] v8::Object::Get(v8::Local<v8::Context>, v8::Local<v8::Value>)
+     1.12%     0.00%  [.] PushAllRegistersAndIterateStack
+     1.12%     0.00%  [.] _RNCNvMs1_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc4listINtB7_7ChannelINtNtCsiYoX4ApF2vj_4core6result6ResultNtNtCseo0TUlPad4f_5alloc6string6StringB1A_EE4recvs_0Cs2E8lzaXoEOS_7bext_v8
+     1.12%     0.00%  [.] v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags, v8::internal::PerformHeapLimitCheck, v8::internal::PerformIneffectiveMarkCompactCheck):: …
+     1.12%     0.00%  [.] v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::internal::GarbageCollectionReason, char const*)
+     1.12%     0.00%  [.] void heap::base::Stack::SetMarkerAndCallbackImpl<v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags, v8::internal::PerformHeapLimitCheck, v8 …
+     1.07%     0.45%  [k] nft_do_chain
+     1.07%     0.18%  [.] _RNCNvXs0_NtNtCs1Aah8EqPQSu_11bext_server10middleware3wafINtB7_20WafMiddlewareServiceINtNtB9_10rate_limit21RateLimiterMiddlewareINtNtB9_4auth21AuthMiddlewareServiceINtNtB9_15user_middleware21UserMiddlewareServiceIN …
+     1.07%     0.18%  [.] v8::internal::String::LastIndexOf(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::DirectHandle<v8::internal::Object>)
+     1.07%     0.09%  [.] _RNvNtCs9ALYTKQbEpY_3std3env4__var
+     1.07%     0.04%  [.] _RNvXs2_NtNtCskzFIfObzDlB_10actix_http2h15codecNtB5_5CodecINtNtNtCs8e5ABPPtVsB_10tokio_util5codec7encoder7EncoderINtB7_7MessageTINtNtNtB9_9responses8response8ResponseuENtNtNtB9_4body4size8BodySizeEEE6encode
+     1.07%     0.04%  [k] __alloc_pages
+     1.07%     0.04%  [k] __ip_local_out
+     1.07%     0.00%  [.] v8::internal::Builtin_StringPrototypeLastIndexOf(int, unsigned long*, v8::internal::Isolate*)
+     1.03%     0.40%  [.] _RINvMs0_NtNtCskzFIfObzDlB_10actix_http6header3mapNtB6_9HeaderMap9get_valueReECs6QBwfGVy889_10bext_proxy
+     1.03%     0.00%  [.] v8::internal::Runtime::GetObjectProperty(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal: …
+     1.03%     0.00%  [.] v8::internal::ScavengerCollector::CollectGarbage()
+     0.98%     0.22%  [.] _RNvMs_NtNtCs1gwkPHDHBr1_4http6header4nameNtB4_10HeaderName10from_bytes
+     0.98%     0.09%  [k] __check_object_size
+     0.98%     0.09%  [k] generic_perform_write
+     0.98%     0.04%  [.] Builtins_ArrayPrototypeJoin
+     0.98%     0.04%  [.] v8::internal::Builtin_ObjectDefineProperty(int, unsigned long*, v8::internal::Isolate*)
+     0.98%     0.00%  [.] _RNCNvMs_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc5arrayINtB6_7ChannelNtNtNtCsWsIHYRVDe7_9bext_core13observability10access_log9WriterMsgE4recvs_0B14_
+     0.98%     0.00%  [.] _RNvMs0_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc5wakerNtB5_9SyncWaker8register
+     0.98%     0.00%  [.] _RNvMs_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc5arrayINtB4_7ChannelNtNtNtCsWsIHYRVDe7_9bext_core13observability10access_log9WriterMsgE4recvB12_
+     0.94%     0.36%  [.] Builtins_ArrayPrototypeJoinImpl
+     0.94%     0.27%  [.] _RNvXsZ_NtCseo0TUlPad4f_5alloc6stringNtB5_6StringNtNtCsiYoX4ApF2vj_4core3fmt5Write9write_str
+     0.94%     0.18%  [.] _RNCNvNtNtNtCs9ALYTKQbEpY_3std3sys3env4unix6getenv0B9_.llvm.8609963975560572235
+     0.94%     0.09%  [k] alloc_pages
+     0.94%     0.09%  [.] v8::internal::Factory::NewFillerObject(int, v8::internal::AllocationAlignment, v8::internal::AllocationType, v8::internal::AllocationOrigin)
+     0.94%     0.04%  [.] _RNvXs0_NtCs3qM3leNkEqp_13actix_service5applyINtB5_5ApplyNtNtCsl5Wgh76sR8I_9actix_web5scope12ScopeServiceNCNvXs0_BU_NtBU_5ScopeNtNtBW_7service18HttpServiceFactory8registers1_0NtB22_14ServiceRequestB2M_NtB22_15Servi …
+     0.94%     0.00%  [.] _RNvMNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline19route_signals_cacheNtB2_17RouteSignalsCache14get_or_compute
+     0.94%     0.00%  [.] _RNvXs_NtCs3qM3leNkEqp_13actix_service5boxedINtB4_14ServiceWrapperINtNtB6_5apply5ApplyNtNtCsl5Wgh76sR8I_9actix_web5scope12ScopeServiceNCNvXs0_B1n_NtB1n_5ScopeNtNtB1p_7service18HttpServiceFactory8registers1_0NtB2x_1 …
+     0.94%     0.00%  [.] v8::internal::JSReceiver::DefineProperty(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>)
+     0.94%     0.00%  [.] v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*)
+     0.89%     0.36%  [.] Builtins_StringSubstring
+     0.89%     0.04%  [.] _RNvNtCsduKICAM8YY9_11bext_server8site_env13auth_required
+     0.89%     0.04%  [.] _RNvXNtCsdbgjhiROCxM_17tracing_actix_web17root_span_builderNtB2_22DefaultRootSpanBuilderNtB2_15RootSpanBuilder16on_request_start
+     0.89%     0.00%  [.] _RNCNvXs1_NtNtCs1Aah8EqPQSu_11bext_server10middleware14group_resolverINtB7_30MiddlewareGroupResolverServiceINtNtCsccuiYU4UUyY_10actix_cors10middleware14CorsMiddlewareINtNtB9_12cookie_guard18CookieGuardServiceINtNtB …
+     0.89%     0.00%  [.] _RNCNvXs_NtCsccuiYU4UUyY_10actix_cors10middlewareINtB6_14CorsMiddlewareINtNtNtCs1Aah8EqPQSu_11bext_server10middleware12cookie_guard18CookieGuardServiceINtNtB1b_3waf20WafMiddlewareServiceINtNtB1b_10rate_limit21RateL …
+     0.89%     0.00%  [.] _RNvNtCsduKICAM8YY9_11bext_server8site_env17streaming_enabled
+     0.89%     0.00%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism17site_auth_outcome
+     0.85%     0.85%  [.] _RNvNtCs5jZkS6BB4A1_11encoding_rs5utf_835convert_utf16_to_utf8_partial_inner
+     0.85%     0.85%  [k] srso_alias_safe_ret
+     0.85%     0.31%  [.] Builtins_FindOrderedHashSetEntry
+     0.85%     0.22%  [.] _RNvMs0_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc5wakerNtB5_9SyncWaker8register
+     0.85%     0.13%  [.] v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment, v8::internal::AllocationHint)
+     0.85%     0.09%  [k] skb_copy_datagram_iter
+     0.85%     0.04%  [.] _RNvMs0_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc5wakerNtB5_9SyncWaker6notify.llvm.10376304701873041409
+     0.85%     0.04%  [k] get_page_from_freelist
+     0.85%     0.00%  [.] _RNvMs2_NtNtCs9ALYTKQbEpY_3std4sync4mpmcINtB5_6SenderNtNtCs2E8lzaXoEOS_7bext_v810subprocess12WriteCommandE4sendBS_
+     0.85%     0.00%  [.] _RNvMs2_NtNtCs9ALYTKQbEpY_3std4sync4mpmcINtB5_6SenderNtNtNtCsWsIHYRVDe7_9bext_core13observability10access_log9WriterMsgE8try_sendBU_
+     0.85%     0.00%  [.] _RNvNtCs5jZkS6BB4A1_11encoding_rs3mem28convert_utf16_to_str_partial
+     0.85%     0.00%  [.] v8::internal::compiler::PipelineImpl::OptimizeTurbofanGraph(v8::internal::compiler::Linkage*)
+     0.81%     0.13%  [k] __check_object_size.part.0
+     0.81%     0.04%  [k] kmalloc_reserve
+     0.81%     0.04%  [k] skb_release_data
+     0.81%     0.04%  [.] v8::EnterV8InternalScope<v8::InternalEscapableScope, true>::~EnterV8InternalScope()
+     0.76%     0.76%  [.] mi_theap_malloc_aligned
+     0.76%     0.54%  [.] getenv
+     0.76%     0.22%  [.] Builtins_StringToLowerCaseIntl
+     0.76%     0.18%  [k] __skb_datagram_iter
+     0.76%     0.04%  [.] Builtins_StringPrototypeMatch
+     0.76%     0.04%  [.] _RNvNtCsduKICAM8YY9_11bext_server8site_env7resolve
+     0.76%     0.04%  [k] getname_flags
+     0.76%     0.04%  [.] v8::internal::JSReceiver::OrdinaryDefineOwnProperty(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::JSObject>, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::PropertyDescriptor*, v …
+     0.76%     0.04%  [.] v8::internal::MicrotaskQueue::PerformCheckpointInternal(v8::Isolate*)
+     0.76%     0.00%  [.] v8::internal::Isolate::FireCallCompletedCallbackInternal(v8::internal::MicrotaskQueue*)
+     0.72%     0.72%  [.] mi_free
+     0.72%     0.45%  [k] inode_permission
+     0.72%     0.04%  [.] _RINvMNtCs6oZr1Inkksd_12actix_router8resourceNtB3_11ResourceDef21capture_match_info_fnNtNtCsl5Wgh76sR8I_9actix_web7service14ServiceRequestNCINvMNtB5_6routerINtB2h_6RouterINtNtCseo0TUlPad4f_5alloc5boxed3BoxDINtCs3qM …
+     0.72%     0.04%  [.] _RINvXs5_NtCs2Z7LRvcAFy8_10serde_json2deQINtB6_12DeserializerNtNtB8_4read7StrReadENtNtCs4obccN3p1io_10serde_core2de12Deserializer15deserialize_anyNtNvXNtNtB8_5value2deNtB2q_5ValueNtB1j_11Deserialize11deserialize12V …
+     0.72%     0.04%  [k] getname_flags.part.0
+     0.72%     0.04%  [k] unix_stream_read_actor
+     0.72%     0.04%  [.] v8::internal::MicrotaskQueue::RunMicrotasks(v8::internal::Isolate*)
+     0.72%     0.00%  [.] _RINvNtCs2Z7LRvcAFy8_10serde_json2de10from_traitNtNtB4_4read7StrReadNtNtB4_5value5ValueEB4_
+     0.72%     0.00%  [k] tcp_data_queue
+     0.72%     0.00%  [.] v8::internal::compiler::(anonymous namespace)::GenerateCodeFromTurboshaftGraph(v8::internal::compiler::Linkage*, v8::internal::compiler::turboshaft::Pipeline&, v8::internal::compiler::PipelineImpl*, std::__Cr::shar …
+     0.72%     0.00%  [.] 0x00007540740822f9
+     0.72%     0.00%  [.] 0x00007592780822f9
+     0.67%     0.63%  [.] void v8::internal::CopyChars<unsigned char, unsigned short>(unsigned short*, unsigned char const*, unsigned long)
+     0.67%     0.49%  [.] _RNvNtNtCs1gwkPHDHBr1_4http6header4name9parse_hdr
+     0.67%     0.22%  [k] kmem_cache_alloc_node
+     0.67%     0.13%  [k] walk_component
+     0.67%     0.09%  [.] _RNvMNtCsl5Wgh76sR8I_9actix_web4rmapNtB2_11ResourceMap19__find_matching_node.llvm.16803190180651082747
+     0.67%     0.04%  [.] _RINvXNvXNtNtCs2Z7LRvcAFy8_10serde_json5value2deNtB8_5ValueNtNtCs4obccN3p1io_10serde_core2de11Deserialize11deserializeNtB3_12ValueVisitorNtBW_7Visitor9visit_mapINtNtBa_2de9MapAccessNtNtBa_4read7StrReadEEBa_
+     0.67%     0.04%  [.] _RNvMs1_NtNtCskzFIfObzDlB_10actix_http2h110dispatcherINtB5_15InnerDispatcherNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamINtNtCs3qM3leNkEqp_13actix_service7map_err6MapErrINtNtCsl5Wgh76sR8I_9actix_web11app_s …
+     0.67%     0.04%  [.] v8::internal::FactoryBase<v8::internal::Factory>::NewRawTwoByteString(unsigned int, v8::internal::AllocationType, v8::internal::AllocationHint)
+     0.67%     0.00%  [.] _RINvNtNtCs8e5ABPPtVsB_10tokio_util4util8poll_buf13poll_read_bufNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamNtNtCs165W2e9F4Be_5bytes9bytes_mut8BytesMutECsduKICAM8YY9_11bext_server
+     0.67%     0.00%  [.] _RNvMs16_NtCs9ALYTKQbEpY_3std4pathNtB6_4Path7is_file
+     0.67%     0.00%  [.] _RNvMs4_NtNtCsf5Utashzpff_5tokio2io12poll_eventedINtB5_11PollEventedNtNtNtNtCs6IMYrB0ydbL_3mio3net3uds6stream10UnixStreamE9poll_readB9_
+     0.63%     0.18%  [.] _mi_theap_realloc_zero
+     0.63%     0.09%  [.] Builtins_StringPrototypeReplaceAll
+     0.63%     0.09%  [k] expr_call_ops_eval
+     0.63%     0.04%  [k] ext4_da_write_begin
+     0.63%     0.04%  [.] v8::String::ValueView::ValueView(v8::Isolate*, v8::Local<v8::String>)
+     0.63%     0.00%  [.] _RNvMs1_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc4listINtB5_7ChannelNtNtCs2E8lzaXoEOS_7bext_v810subprocess12WriteCommandE4recvB10_
+     0.63%     0.00%  [.] _mi_malloc_generic
+     0.63%     0.00%  [k] nft_do_chain_ipv4
+     0.63%     0.00%  [k] tcp_data_ready
+     0.63%     0.00%  [.] v8::internal::(anonymous namespace)::InvokeWithTryCatch(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&)
+     0.63%     0.00%  [.] v8::internal::Execution::TryRunMicrotasks(v8::internal::Isolate*, v8::internal::MicrotaskQueue*)
+     0.63%     0.00%  [.] v8::internal::compiler::GraphReducer::ReduceNode(v8::internal::compiler::Node*)
+     0.58%     0.58%  [k] clear_page_erms
+     0.58%     0.40%  [.] v8::internal::FastJsonStringifier<unsigned char>::SerializeObject(v8::internal::ContinuationRecord, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAsser …
+     0.58%     0.31%  [k] check_heap_object
+     0.58%     0.22%  [.] Builtins_RegExpReplace
+     0.58%     0.22%  [.] _RNvMNtCs6oZr1Inkksd_12actix_router8resourceNtB2_11ResourceDef10find_match
+     0.58%     0.22%  [.] v8::internal::compiler::GraphReducer::ReduceTop()
+     0.58%     0.18%  [.] _RINvNtCs9ALYTKQbEpY_3std2io18default_read_exactNtNtNtNtNtB4_2os4unix3net6stream10UnixStreamECs2E8lzaXoEOS_7bext_v8
+     0.58%     0.09%  [.] _RNvMs_NtCseyWTxakCfOV_8indexmap5innerINtB4_4CoreNtNtCseo0TUlPad4f_5alloc6string6StringNtNtCs2Z7LRvcAFy8_10serde_json5value5ValueE11insert_fullB1q_
+     0.58%     0.04%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism35fold_request_headers_with_client_ip
+     0.58%     0.04%  [k] nft_do_chain_inet
+     0.58%     0.00%  [.] Builtins_CallApiCallbackOptimizedNoProfiling
+     0.58%     0.00%  [.] _RNvXs0_NtCsl5Wgh76sR8I_9actix_web11app_serviceINtB5_14AppInitServiceINtNtCsduKICAM8YY9_11bext_server8l0_cache14L0CacheServiceINtNtB19_13markdown_repr29MarkdownRepresentationServiceINtNtNtCs1Aah8EqPQSu_11bext_serve …
+     0.58%     0.00%  [.] v8::internal::Execution::Call(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::DirectHandle<v8::internal::Object>, v8::base::Vector<v8::internal::DirectHandle<v8::internal::Ob …
+     0.58%     0.00%  [.] v8::internal::JSReceiver::OrdinaryDefineOwnProperty(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::JSObject>, v8::internal::PropertyKey const&, v8::internal::PropertyDescriptor*, v8::Maybe<v8::int …
+     0.58%     0.00%  [.] v8::internal::compiler::turboshaft::Pipeline::AllocateRegisters(v8::internal::RegisterConfiguration const*, v8::internal::compiler::CallDescriptor*, bool)
+     0.58%     0.00%  [.] v8::internal::compiler::turboshaft::Pipeline::AllocateRegisters(v8::internal::compiler::CallDescriptor*)
+     0.58%     0.00%  [.] 0x000079acb007be90
+     0.54%     0.09%  [k] do_user_addr_fault
+     0.54%     0.09%  [.] v8::internal::JSArray::ArrayJoinConcatToSequentialString(v8::internal::Isolate*, unsigned long, unsigned long, unsigned long, unsigned long)
+     0.54%     0.09%  [.] v8::internal::Object::GetProperty(v8::internal::LookupIterator*, bool)
+     0.54%     0.09%  [.] v8::internal::Runtime_InternalizeString(int, unsigned long*, v8::internal::Isolate*)
+     0.54%     0.04%  [.] _RINvNtCs2Z7LRvcAFy8_10serde_json2de10from_traitNtNtB4_4read9SliceReadINtNtNtNtCs9ALYTKQbEpY_3std11collections4hash3map7HashMapNtNtCseo0TUlPad4f_5alloc6string6StringB20_EECs2E8lzaXoEOS_7bext_v8
+     0.54%     0.04%  [.] _RINvNvMs2_NtCseo0TUlPad4f_5alloc7raw_vecINtB8_11RawVecInnerpE7reserve21do_reserve_and_handleNtNtBa_5alloc6GlobalEBa_.llvm.18122558970861855996
+     0.54%     0.04%  [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys3pal4unix4timeNtB2_8Timespec3now.llvm.8609963975560572235
+     0.54%     0.04%  [.] mi_theap_malloc_zero_aligned_at_overalloc
+     0.54%     0.04%  [k] skb_page_frag_refill
+     0.54%     0.04%  [.] v8::internal::(anonymous namespace)::LocaleConvertCase(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::String>, bool, char const*)
+     0.54%     0.00%  [.] Builtins_JSRunMicrotasksEntry
+     0.54%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v810subprocess10decode_env
+     0.54%     0.00%  [k] asm_exc_page_fault
+     0.54%     0.00%  [k] exc_page_fault
+     0.54%     0.00%  [k] inet_recvmsg
+     0.54%     0.00%  [k] sk_page_frag_refill
+     0.54%     0.00%  [.] v8::internal::Factory::NewProperSubString(v8::internal::DirectHandle<v8::internal::String>, unsigned int, unsigned int)
+     0.54%     0.00%  [.] v8::internal::Runtime_StringSubstring(int, unsigned long*, v8::internal::Isolate*)
+     0.54%     0.00%  [.] v8::internal::Runtime_StringToLowerCaseIntl(int, unsigned long*, v8::internal::Isolate*)
+     0.54%     0.00%  [.] v8::internal::StringTable::LookupString(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::String>)
+     0.49%     0.49%  [.] Builtins_RecordWriteSaveFP
+     0.49%     0.18%  [.] v8::internal::PropertyKey::PropertyKey<v8::internal::Object, v8::internal::DirectHandle>(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Object>, bool*) requires std::is_convertible_v<v8::internal: …
+     0.49%     0.09%  [.] _RINvYNtNtNtCs9ALYTKQbEpY_3std4hash6random11RandomStateNtNtCsiYoX4ApF2vj_4core4hash11BuildHasher8hash_oneRNtNtB9_4path4PathECsctdEF1atdwx_8bext_css
+     0.49%     0.04%  [.] clock_gettime@@GLIBC_2.17
+     0.49%     0.04%  [k] destroy_large_folio
+     0.49%     0.04%  [k] futex_wait
+     0.49%     0.04%  [.] u_strToLower_77
+     0.49%     0.00%  [.] _RINvMNtNtCsf5Utashzpff_5tokio7runtime7runtimeNtB3_7Runtime14block_on_innerNCINvMs2_NtNtB7_4task5localNtB1j_8LocalSet9run_untilNtNtCsioe7z4mKQR6_8actix_rt7arbiter13ArbiterRunnerE0EB24_
+     0.49%     0.00%  [.] _RINvMNtNtNtCsf5Utashzpff_5tokio7runtime7context6scopedINtB3_6ScopedNtNtB7_9scheduler7ContextE3setNCINvMs7_NtB15_14current_threadNtB1G_9CoreGuard5enterNCINvB1C_8block_onINtNtCsiYoX4ApF2vj_4core3pin3PinQNCINvMs2_NtN …
+     0.49%     0.00%  [.] _RINvMs7_NtNtNtCsf5Utashzpff_5tokio7runtime9scheduler14current_threadNtB6_9CoreGuard5enterNCINvB2_8block_onINtNtCsiYoX4ApF2vj_4core3pin3PinQNCINvMs2_NtNtBc_4task5localNtB2m_8LocalSet9run_untilNtNtCsioe7z4mKQR6_8act …
+     0.49%     0.00%  [.] _RINvMs_NtNtCs1Aah8EqPQSu_11bext_server11site_worker8responseNtB5_19SiteResponseBuilder13insert_headerTReB1C_EEB9_
+     0.49%     0.00%  [.] _RINvNtNtCs9ALYTKQbEpY_3std3sys9backtrace28___rust_begin_short_backtraceNCINvMs0_NtCsioe7z4mKQR6_8actix_rt7arbiterNtB1g_7Arbiter13with_tokio_rtNCNvMs9_NtCsagkES8m2SwM_12actix_server6workerNtB2o_12ServerWorker5spawn …
+     0.49%     0.00%  [.] _RINvNtNtNtCsf5Utashzpff_5tokio7runtime7context7runtime13enter_runtimeNCINvMNtNtB6_9scheduler14current_threadNtB1b_13CurrentThread8block_onNCINvMs2_NtNtB8_4task5localNtB2l_8LocalSet9run_untilNtNtCsioe7z4mKQR6_8acti …
+     0.49%     0.00%  [.] _RINvXs5_NtCs2Z7LRvcAFy8_10serde_json2deQINtB6_12DeserializerNtNtB8_4read9SliceReadENtNtCs4obccN3p1io_10serde_core2de12Deserializer15deserialize_mapINtNvXs3g_NtB1l_5implsINtNtNtNtCs9ALYTKQbEpY_3std11collections4has …
+     0.49%     0.00%  [.] _RNSNvYNCINvNtNtCs9ALYTKQbEpY_3std6thread9lifecycle15spawn_uncheckedNCINvMs0_NtCsioe7z4mKQR6_8actix_rt7arbiterNtB1c_7Arbiter13with_tokio_rtNCNvMs9_NtCsagkES8m2SwM_12actix_server6workerNtB2k_12ServerWorker5spawns_0E …
+     0.49%     0.00%  [.] _RNvMs4_NtCseo0TUlPad4f_5alloc7raw_vecNtB5_11RawVecInner11finish_growB7_.llvm.18122558970861855996
+     0.49%     0.00%  [k] __folio_put
+     0.49%     0.00%  [k] simple_copy_to_iter
+     0.45%     0.45%  [k] __d_lookup_rcu
+     0.45%     0.36%  [.] Builtins_RegExpMatchFast
+     0.45%     0.22%  [.] Builtins_StringConstructor
+     0.45%     0.18%  [.] Builtins_RunMicrotasks
+     0.45%     0.13%  [k] __kmalloc_node_track_caller
+     0.45%     0.09%  [.] Builtins_EphemeronKeyBarrierSaveFP
+     0.45%     0.09%  [.] Builtins_ObjectEntries
+     0.45%     0.09%  [k] tcp_ack
+     0.45%     0.04%  [.] _RINvNtNtCsiYoX4ApF2vj_4core3fmt5float29float_to_decimal_common_exactdEB6_.llvm.13710908900403314757
+     0.45%     0.04%  [k] tcp_recvmsg_locked
+     0.45%     0.04%  [k] unix_destruct_scm
+     0.45%     0.04%  [.] ustrcase_mapWithOverlap_77
+     0.45%     0.04%  [.] v8::internal::Handle<v8::internal::String> v8::internal::Factory::InternalizeSubString<v8::internal::SeqOneByteString, v8::internal::Handle>(v8::internal::Handle<v8::internal::SeqOneByteString>, unsigned int, unsig …
+     0.45%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval26pump_timers_and_microtasks
+     0.45%     0.00%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server11site_worker6worker22site_response_to_actix
+     0.45%     0.00%  [.] _RNvXs2_NtCsduKICAM8YY9_11bext_server8l0_cacheINtB5_14L0CacheServiceINtNtB7_13markdown_repr29MarkdownRepresentationServiceINtNtNtCs1Aah8EqPQSu_11bext_server10middleware14group_resolver30MiddlewareGroupResolverServi …
+     0.45%     0.00%  [k] __futex_wait
+     0.45%     0.00%  [k] __handle_mm_fault
+     0.45%     0.00%  [k] handle_mm_fault
+     0.45%     0.00%  [k] lookup_fast
+     0.45%     0.00%  [k] tcp_recvmsg
+     0.45%     0.00%  [.] v8::internal::JsonStringifier::SerializeJSReceiverSlow(v8::internal::DirectHandle<v8::internal::JSReceiver>)
+     0.45%     0.00%  [.] v8::internal::compiler::turboshaft::Pipeline::OptimizeTurboshaftGraph(v8::internal::compiler::Linkage*)
+     0.45%     0.00%  [.] 0x000075407407ce10
+     0.45%     0.00%  [.] 0x000075407408d6eb
+     0.45%     0.00%  [.] 0x00007739f0074230
+     0.45%     0.00%  [.] 0x000079acb008d2ab
+     0.40%     0.40%  [.] Builtins_AsyncFunctionEnter
+     0.40%     0.36%  [.] _RNCNvYINtNtNtCskzFIfObzDlB_10actix_http9responses8response8ResponseuENtNtNtBb_2h17encoder11MessageType14encode_headers0Bb_.llvm.7636872464950948720
+     0.40%     0.31%  [k] __memcg_slab_post_alloc_hook
+     0.40%     0.13%  [.] Builtins_JSBuiltinsConstructStub
+     0.40%     0.13%  [.] _RNvMs_NtCseyWTxakCfOV_8indexmap5innerINtB4_4CoreNtNtCseo0TUlPad4f_5alloc6string6StringNtNtCs2Z7LRvcAFy8_10serde_json5value5ValueE10push_entryB1q_
+     0.40%     0.13%  [.] v8::internal::Builtin_GlobalDecodeURIComponent(int, unsigned long*, v8::internal::Isolate*)
+     0.40%     0.09%  [.] _RINvXs1h_NtCs9ALYTKQbEpY_3std4pathNtB7_4PathNtNtCsiYoX4ApF2vj_4core4hash4Hash4hashNtNtNtB9_4hash6random13DefaultHasherECsctdEF1atdwx_8bext_css
+     0.40%     0.09%  [k] nf_conntrack_in
+     0.40%     0.09%  [k] skb_copy_datagram_from_iter
+     0.40%     0.09%  [k] strncpy_from_user
+     0.40%     0.04%  [.] _RNvCsctdEF1atdwx_8bext_css17route_css_enabled
+     0.40%     0.04%  [.] _RNvMs2_NtNtCsf5Utashzpff_5tokio4task5localNtB5_8LocalSet4tick
+     0.40%     0.04%  [.] _RNvNtCsduKICAM8YY9_11bext_server13markdown_repr19advertised_twin_url
+     0.40%     0.04%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server11site_worker6worker23site_request_from_actix
+     0.40%     0.04%  [.] _RNvXNtNtCs1kOjJb6cQCK_4uuid3rng3impNtB2_6RngImpNtB4_3Rng4u128
+     0.40%     0.04%  [k] complete_walk
+     0.40%     0.04%  [k] handle_pte_fault
+     0.40%     0.04%  [k] sock_wfree
+     0.40%     0.04%  [.] v8::internal::DirectHandle<v8::internal::InternalizedString> v8::internal::StringTable::LookupKey<v8::internal::SeqSubStringKey<v8::internal::SeqOneByteString>, v8::internal::Isolate>(v8::internal::Isolate*, v8::in …
+     0.40%     0.04%  [.] v8::internal::JSObject::DefineOwnPropertyIgnoreAttributes(v8::internal::LookupIterator*, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::PropertyAttributes, v8::Maybe<v8::internal::ShouldThrow>, v8: …
+     0.40%     0.00%  [.] _RINvMs1_NtNtNtCsf5Utashzpff_5tokio7runtime9scheduler14current_threadNtB6_7Context5enterINtNtNtCsiYoX4ApF2vj_4core4task4poll4PolluENCNCINvMs7_B6_NtB6_9CoreGuard8block_onINtNtB1u_3pin3PinQNCINvMs2_NtNtBc_4task5local …
+     0.40%     0.00%  [.] _RINvMs2_NtNtCs9ALYTKQbEpY_3std6thread5localINtB6_8LocalKeyNtNtNtCsf5Utashzpff_5tokio4task5local9LocalDataE4withNCINvMs2_BW_NtBW_8LocalSet4withINtNtNtCsiYoX4ApF2vj_4core4task4poll4PolluENCNvXs8_BW_INtBW_8RunUntilNt …
+     0.40%     0.00%  [.] _RNCINvMs2_NtNtCsf5Utashzpff_5tokio4task5localNtB8_8LocalSet9run_untilNtNtCsioe7z4mKQR6_8actix_rt7arbiter13ArbiterRunnerE0B19_.llvm.10017372415426323522
+     0.40%     0.00%  [.] _RNvMs4_NtCseo0TUlPad4f_5alloc7raw_vecNtB5_11RawVecInner11finish_growCsc9l14CRSzkQ_5gimli
+     0.40%     0.00%  [.] _RNvXs_NtCsduKICAM8YY9_11bext_server13markdown_reprINtB4_29MarkdownRepresentationServiceINtNtNtCs1Aah8EqPQSu_11bext_server10middleware14group_resolver30MiddlewareGroupResolverServiceINtNtCsccuiYU4UUyY_10actix_cors1 …
+     0.40%     0.00%  [.] _RNvYINtNtNtCskzFIfObzDlB_10actix_http9responses8response8ResponseuENtNtNtB9_2h17encoder11MessageType14encode_headersB9_
+     0.40%     0.00%  [k] ipv4_conntrack_local
+     0.40%     0.00%  [k] skb_release_head_state
+     0.40%     0.00%  [.] v8::internal::JSReceiver::ValidateAndApplyPropertyDescriptor(v8::internal::Isolate*, v8::internal::LookupIterator*, bool, v8::internal::PropertyDescriptor*, v8::internal::PropertyDescriptor*, v8::Maybe<v8::internal …
+     0.40%     0.00%  [.] v8::internal::Runtime::SetObjectProperty(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal: …
+     0.40%     0.00%  [.] v8::internal::Runtime_SetKeyedProperty(int, unsigned long*, v8::internal::Isolate*)
+     0.40%     0.00%  [.] 0x000075927808deeb
+     0.40%     0.00%  [.] 0x00007739f0063d63
+     0.40%     0.00%  [.] 0x000079acb003e923
+     0.36%     0.36%  [k] _copy_to_iter
+     0.36%     0.31%  [.] v8::internal::ScavengerEphemeronProcessor::ClearOldEphemerons(v8::internal::Heap*)
+     0.36%     0.27%  [.] _RNvMs4_NtNtCs31qw4EiS7VD_5regex5regex6stringNtB5_5Regex11captures_at.llvm.6203076296542837917
+     0.36%     0.27%  [.] __memset_avx2_unaligned_erms
+     0.36%     0.22%  [.] icu_77::(anonymous namespace)::toLower(int, unsigned int, char16_t*, int, char16_t const*, UCaseContext*, int, int, icu_77::Edits*, UErrorCode&)
+     0.36%     0.18%  [.] _RNvMs4_NtNtCs31qw4EiS7VD_5regex5regex6stringNtB5_5Regex11captures_at
+     0.36%     0.13%  [.] Builtins_CopyDataPropertiesWithExcludedPropertiesOnStack
+     0.36%     0.13%  [.] _RNvMs_NtNtCsf5Utashzpff_5tokio4sync7oneshotINtB4_6SenderINtNtCsiYoX4ApF2vj_4core6result6ResultNtNtCseo0TUlPad4f_5alloc6string6StringB1u_EE4sendCs2E8lzaXoEOS_7bext_v8
+     0.36%     0.09%  [.] _RNvMs1_NtCsiKq9rgzCU0L_9hashbrown3mapINtB5_7HashMapNtNtNtCs1gwkPHDHBr1_4http6header4name10HeaderNameNtNtNtCskzFIfObzDlB_10actix_http6header3map5ValueNtNtCs7XqPlFz7kRX_8foldhash4fast11RandomStateE6insertB1G_
+     0.36%     0.09%  [.] __GI___getrandom
+     0.36%     0.04%  [.] _RNvMs_NtNtCsWsIHYRVDe7_9bext_core13observability10access_logNtB4_12AccessLogger24format_json_with_headers
+     0.36%     0.04%  [.] _RNvXs1_NtNtCskzFIfObzDlB_10actix_http2h17decoderINtNtNtB9_8requests7request7RequestINtNtCsiYoX4ApF2vj_4core3pin3PinINtNtCseo0TUlPad4f_5alloc5boxed3BoxDNtNtCsbXzw8Qkh1mQ_12futures_core6stream6Streamp4ItemINtNtB1o_6 …
+     0.36%     0.04%  [.] ustrcase_internalToLower_77
+     0.36%     0.04%  [.] v8::internal::KeyAccumulator::GetKeys(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::JSReceiver>, v8::internal::KeyCollectionMode, v8::internal::PropertyFilter, v8::internal::GetKeysConversion, bo …
+     0.36%     0.04%  [.] v8::internal::Runtime_ObjectEntries(int, unsigned long*, v8::internal::Isolate*)
+     0.36%     0.04%  [.] v8::internal::compiler::GraphReducer::Reduce(v8::internal::compiler::Node*)
+     0.36%     0.04%  [.] void v8::internal::String::WriteToFlat<unsigned char>(v8::internal::Tagged<v8::internal::String>, unsigned char*, unsigned int, unsigned int)
+     0.36%     0.00%  [.] _RINvNvXs16_NtCskvQxFKbegzD_2v87supportFUKCpEpINtB9_7CFnFrompE7mapping4c_fnNCNvXs8_NtBb_8functionFUKCPNtB1i_20FunctionCallbackInfoEuINtB9_9MapFnFromNvNtCs2E8lzaXoEOS_7bext_v86bridge6fn_envE7mapping0uB1A_EB2p_
+     0.36%     0.00%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v86bridge6fn_env
+     0.36%     0.00%  [.] _RNvXs0_NtNtCs1Aah8EqPQSu_11bext_server11site_worker8responseTReBX_ENtB5_14IntoHeaderPair9into_pairB9_.llvm.3819063558956151018
+     0.36%     0.00%  [.] _RNvXs1_NtNtCskzFIfObzDlB_10actix_http2h15codecNtB5_5CodecNtNtNtCs8e5ABPPtVsB_10tokio_util5codec7decoder7Decoder6decode
+     0.36%     0.00%  [.] _RNvXs6_NtNtCsiYoX4ApF2vj_4core3net7ip_addrNtB5_8Ipv4AddrNtNtB9_3fmt7Display3fmt
+     0.36%     0.00%  [k] do_anonymous_page
+     0.36%     0.00%  [.] mi_theap_malloc_zero_aligned_at_generic
+     0.36%     0.00%  [k] unix_write_space
+     0.36%     0.00%  [.] v8::internal::Object::TransitionAndWriteDataProperty(v8::internal::LookupIterator*, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::PropertyAttributes, v8::Maybe<v8::internal::ShouldThrow>, v8::inte …
+     0.36%     0.00%  [.] v8::internal::ScavengerJobTask::ProcessItems(v8::JobDelegate*, v8::internal::Scavenger*)
+     0.36%     0.00%  [.] v8::internal::ScavengerJobTask::Run(v8::JobDelegate*)
+     0.36%     0.00%  [.] 0x0000759278063ce3
+     0.31%     0.31%  [.] Builtins_LoadIC
+     0.31%     0.31%  [.] _RNvXs2_NtNtCs9ALYTKQbEpY_3std4hash6randomNtB5_13DefaultHasherNtNtCsiYoX4ApF2vj_4core4hash6Hasher5write.llvm.5302450766316506585
+     0.31%     0.31%  [.] __memcmp_avx2_movbe
+     0.31%     0.31%  [.] mi_malloc_aligned
+     0.31%     0.31%  [.] mi_theap_umalloc
+     0.31%     0.27%  [k] __fdget
+     0.31%     0.27%  [.] heap::base::SlotCallbackResult v8::internal::Scavenger::ScavengeObject<v8::internal::FullHeapObjectSlot>(v8::internal::FullHeapObjectSlot, v8::internal::Tagged<v8::internal::HeapObject>)
+     0.31%     0.22%  [.] malloc
+     0.31%     0.22%  [.] std::__Cr::optional<v8::internal::DirectHandle<v8::internal::InternalizedString> > v8::internal::StringTable::TryLookupKey<v8::internal::InternalizedStringKey, v8::internal::Isolate>(v8::internal::Isolate*, v8::int …
+     0.31%     0.18%  [.] Builtins_ToString
+     0.31%     0.18%  [k] apparmor_inode_getattr
+     0.31%     0.18%  [k] obj_cgroup_charge
+     0.31%     0.13%  [k] __filemap_get_folio
+     0.31%     0.13%  [.] mi_page_queue_find_free_ex
+     0.31%     0.13%  [k] try_to_unlazy
+     0.31%     0.13%  [k] uncharge_batch
+     0.31%     0.13%  [.] v8::internal::RegExp::AtomExecRaw(v8::internal::Isolate*, unsigned long, unsigned long, int, int*, int)
+     0.31%     0.13%  [k] vfs_getattr_nosec
+     0.31%     0.09%  [.] v8::internal::SemiSpaceNewSpaceAllocatorPolicy::EnsureAllocation(int, v8::internal::AllocationAlignment, v8::internal::AllocationOrigin)
+     0.31%     0.04%  [.] _RNvMs0_NtNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline5prism12page_prepareNtB5_14PageInputCache6lookup
+     0.31%     0.04%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v89multiplex10is_enabled
+     0.31%     0.04%  [k] __mod_timer
+     0.31%     0.04%  [k] file_modified
+     0.31%     0.00%  [.] _RINvXNvNtNtCsWsIHYRVDe7_9bext_core13observability10access_log1__NtB5_14AccessLogEntryNtNtCs4obccN3p1io_10serde_core3ser9Serialize9serializeQINtNtCs2Z7LRvcAFy8_10serde_json3ser10SerializerQINtNtCseo0TUlPad4f_5alloc …
+     0.31%     0.00%  [.] _RINvYINtNtCs2Z7LRvcAFy8_10serde_json2de9MapAccessNtNtB8_4read9SliceReadENtNtCs4obccN3p1io_10serde_core2de9MapAccess10next_entryNtNtCseo0TUlPad4f_5alloc6string6StringB21_ECsWsIHYRVDe7_9bext_core
+     0.31%     0.00%  [.] _RNvMs1_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc4listINtB5_7ChannelNtNtCs2E8lzaXoEOS_7bext_v84eval11EvalRequestE4recvB10_
+     0.31%     0.00%  [.] _RNvMs_NtNtCsWsIHYRVDe7_9bext_core13observability10access_logNtB4_12AccessLogger11format_json
+     0.31%     0.00%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline15route_css_union28inject_route_css_union_bytes
+     0.31%     0.00%  [k] __mem_cgroup_uncharge
+     0.31%     0.00%  [k] alloc_anon_folio
+     0.31%     0.00%  [k] mod_timer
+     0.31%     0.00%  [k] sk_reset_timer
+     0.31%     0.00%  [k] sockfd_lookup_light
+     0.31%     0.00%  [.] v8::internal::DirectHandle<v8::internal::InternalizedString> v8::internal::StringTable::LookupKey<v8::internal::InternalizedStringKey, v8::internal::Isolate>(v8::internal::Isolate*, v8::internal::InternalizedString …
+     0.31%     0.00%  [.] v8::internal::MainAllocator::AllocateRawSlow(v8::base::StrongAlias<v8::internal::HeapObjectSizeTag, unsigned int>, v8::internal::AllocationAlignment, v8::internal::AllocationOrigin)
+     0.31%     0.00%  [.] v8::internal::compiler::LinearScanAllocator::AllocateRegisters()
+     0.31%     0.00%  [k] vma_alloc_folio
+     0.31%     0.00%  [.] 0x0000754074071fe5
+     0.31%     0.00%  [.] 0x0000759278064fd1
+     0.31%     0.00%  [.] 0x000075927806a0c5
+     0.31%     0.00%  [.] 0x00007592780741b0
+     0.31%     0.00%  [.] 0x00007739f0072225
+     0.31%     0.00%  [.] 0x00007739f00822f9
+     0.31%     0.00%  [.] 0x000079acb00822f9
+     0.27%     0.27%  [.] Builtins_CreateDataProperty
+     0.27%     0.27%  [.] _RINvNtCsiYoX4ApF2vj_4core3ptr13drop_in_placeANtNtCs6oZr1Inkksd_12actix_router4path8PathItemj10_ECsl5Wgh76sR8I_9actix_web
+     0.27%     0.27%  [.] _RINvYNtNtCs7XqPlFz7kRX_8foldhash4fast11RandomStateNtNtCsiYoX4ApF2vj_4core4hash11BuildHasher8hash_oneRNtNtNtCs1gwkPHDHBr1_4http6header4name10HeaderNameECskzFIfObzDlB_10actix_http
+     0.27%     0.27%  [.] _RNvNtNtCsiYoX4ApF2vj_4core3str8converts9from_utf8
+     0.27%     0.27%  [.] v8::internal::LookupIterator::State v8::internal::LookupIterator::LookupInSpecialHolder<false>(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSReceiver>)
+     0.27%     0.22%  [.] std::__Cr::optional<v8::internal::DirectHandle<v8::internal::InternalizedString> > v8::internal::StringTable::TryLookupKey<v8::internal::SeqSubStringKey<v8::internal::SeqOneByteString>, v8::internal::Isolate>(v8::i …
+     0.27%     0.18%  [.] Builtins_JSConstructStubGeneric
+     0.27%     0.18%  [.] Builtins_StringAdd_CheckNone
+     0.27%     0.18%  [.] void v8::internal::String::WriteToFlat<unsigned char>(v8::internal::Tagged<v8::internal::String>, unsigned char*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     0.27%     0.13%  [k] futex_wait_setup
+     0.27%     0.13%  [k] tcp_clean_rtx_queue.constprop.0
+     0.27%     0.13%  [.] v8::internal::EphemeronRememberedSet::RecordEphemeronKeyWrite(v8::internal::Tagged<v8::internal::EphemeronHashTable>, unsigned long)
+     0.27%     0.13%  [.] v8::internal::Uri::Decode(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::String>, bool)
+     0.27%     0.09%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v815render_deadline20deadline_ms_from_env
+     0.27%     0.09%  [k] nft_meta_get_eval
+     0.27%     0.04%  [.] Builtins_JSEntry
+     0.27%     0.04%  [.] _RINvXs1h_NtCs9ALYTKQbEpY_3std4pathNtB7_4PathNtNtCsiYoX4ApF2vj_4core4hash4Hash4hashNtNtNtB9_4hash6random13DefaultHasherECs6Ju7DH7Vv7_6notify
+     0.27%     0.04%  [.] _RNvMs_NtNtCsWsIHYRVDe7_9bext_core13observability13route_metricsNtB4_12RouteMetrics15record_for_host
+     0.27%     0.04%  [.] _RNvMsg_NtNtCs9ALYTKQbEpY_3std4sync4mpmcINtB5_8ReceiverINtNtCsiYoX4ApF2vj_4core6result6ResultNtNtCseo0TUlPad4f_5alloc6string6StringB1s_EE12recv_timeoutCs2E8lzaXoEOS_7bext_v8
+     0.27%     0.04%  [.] _RNvNtCs2E8lzaXoEOS_7bext_v84eval16read_prism_field
+     0.27%     0.04%  [.] _RNvXs_NtCs3qM3leNkEqp_13actix_service5boxedINtB4_14ServiceWrapperINtNtB6_10fn_service9FnServiceNCINvNtCsl5Wgh76sR8I_9actix_web7handler15handler_serviceNvNtCs1Aah8EqPQSu_11bext_server7handler10handle_ssrTNtNtB1C_7r …
+     0.27%     0.04%  [.] v8::internal::Factory::NewStringFromUtf8(v8::base::Vector<unsigned char const>, unibrow::Utf8Variant, v8::internal::AllocationType)
+     0.27%     0.04%  [.] v8::internal::FastGetOwnValuesOrEntries(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::JSReceiver>, bool, v8::internal::Handle<v8::internal::FixedArray>*)
+     0.27%     0.04%  [.] v8::internal::JsonStringifier::StackPush(v8::internal::Handle<v8::internal::Object>, v8::internal::Handle<v8::internal::Object>)
+     0.27%     0.04%  [.] void v8::internal::LookupIterator::NextInternal<false>(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSReceiver>)
+     0.27%     0.00%  [.] _RINvNtCsduKICAM8YY9_11bext_server17response_outcomes7observeINtNtNtCskzFIfObzDlB_10actix_http4body6either10EitherBodyIBX_IBX_IBX_IBX_IBX_IBX_IBX_INtNtCsdbgjhiROCxM_17tracing_actix_web10middleware10StreamSpanNtNtB1 …
+     0.27%     0.00%  [.] _RNCNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline13site_fairness7acquire0B7_
+     0.27%     0.00%  [.] _RNvMs9_NtCs2E8lzaXoEOS_7bext_v810subprocessNtB5_14SubprocessPool21pick_and_claim_worker
+     0.27%     0.00%  [.] _RNvNtNtCs1Aah8EqPQSu_11bext_server12ssr_pipeline13site_fairness11counter_for
+     0.27%     0.00%  [.] _RNvNtNtNtCs9ALYTKQbEpY_3std3sys2fs4unix12canonicalize.llvm.8609963975560572235
+     0.27%     0.00%  [.] _RNvXs_NtCs3qM3leNkEqp_13actix_service5boxedINtB4_14ServiceWrapperNtNtCsl5Wgh76sR8I_9actix_web5route12RouteServiceEINtB6_7ServiceNtNtB15_7service14ServiceRequestE4callCs1Aah8EqPQSu_11bext_server
+     0.27%     0.00%  [.] _ZN2v88internal8compiler10turboshaft8Pipeline3RunITkNS2_15TurboshaftPhaseENS2_29AllocateGeneralRegistersPhaseINS1_19LinearScanAllocatorEEEJEEEDaDpOT0_
+     0.27%     0.00%  [.] operator new(unsigned long)
+     0.27%     0.00%  [.] realpath@@GLIBC_2.3
+     0.27%     0.00%  [.] v8::String::NewFromUtf8(v8::Isolate*, char const*, v8::NewStringType, int)
+     0.27%     0.00%  [.] v8::internal::FastKeyAccumulator::GetKeys(v8::internal::GetKeysConversion)
+     0.27%     0.00%  [.] v8::internal::GetOwnValuesOrEntries(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::JSReceiver>, v8::internal::PropertyFilter, bool, bool)
+     0.27%     0.00%  [.] v8::internal::MaybeHandle<v8::internal::FixedArray> v8::internal::(anonymous namespace)::GetOwnKeysWithElements<true>(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::JSObject>, v8::internal::GetKey …
+     0.27%     0.00%  [.] v8::platform::DefaultJobHandle::Join()
+     0.27%     0.00%  [.] v8::platform::DefaultJobState::Join()
+     0.27%     0.00%  [.] 0x0000754074069f05
+     0.27%     0.00%  [.] 0x000075927807ced0
+     0.27%     0.00%  [.] 0x0000759278082a22
+     0.27%     0.00%  [.] 0x00007739f007cf50
+     0.27%     0.00%  [.] 0x000079acb0085979

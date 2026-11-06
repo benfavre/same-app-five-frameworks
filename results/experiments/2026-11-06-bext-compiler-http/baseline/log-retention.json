@@ -1,0 +1,44 @@
+[
+  {
+    "originalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/baseline/run-1/bext.server.log",
+    "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/baseline/run-1/bext.server.log.zst",
+    "compression": "zstd",
+    "originalSha256": "a00a22197080fcbc31d31cb8505d079e49a71cba79548b501e6339b84a05b58a",
+    "bytes": 31507272,
+    "compressedSha256": "cf32790720b15d7bd5861592a3d08e8c2fc60cde7f5b0700d466463a46860b6f",
+    "compressedBytes": 814628,
+    "statusDistribution": {
+      "200": 128202,
+      "404": 1
+    },
+    "retainedLocally": true
+  },
+  {
+    "originalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/baseline/run-2/bext.server.log",
+    "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/baseline/run-2/bext.server.log.zst",
+    "compression": "zstd",
+    "originalSha256": "e0ca84eb3dc7a2551d4673093406ab84fdabe850c1f5d62332767d90be8f45b2",
+    "bytes": 29398497,
+    "compressedSha256": "81d02d159a155d3e7efcb63865e8228569040a31d90fee6c5c0855ee999f845c",
+    "compressedBytes": 768127,
+    "statusDistribution": {
+      "200": 119600,
+      "404": 1
+    },
+    "retainedLocally": true
+  },
+  {
+    "originalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/baseline/run-3/bext.server.log",
+    "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/baseline/run-3/bext.server.log.zst",
+    "compression": "zstd",
+    "originalSha256": "9f348c47716bf1b83cd313aed6da301fb2c4d4f0a59ccdbd88f75ab6cad1d1b7",
+    "bytes": 30449010,
+    "compressedSha256": "f969b32bffdc4e215c861a1440cbd72f2725003db347486d6dc0e72de52a1b57",
+    "compressedBytes": 791207,
+    "statusDistribution": {
+      "200": 123900,
+      "404": 1
+    },
+    "retainedLocally": true
+  }
+]

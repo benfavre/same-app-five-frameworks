@@ -1,0 +1,24 @@
+{
+  "status": "complete",
+  "kind": "whole HTTP server-tree diagnostic; profiled RPS is not a headline measurement",
+  "flags": {
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "BEXT_V8_SITE_WAIT_MS": "250"
+  },
+  "serverCpu": [
+    10
+  ],
+  "productionChanged": false,
+  "binarySha256": "33fdc09dc6fd8090c99efeffbd2b9e08443c50d8e6429f1e118e04320b423af7",
+  "cpuRoles": {
+    "controller": 6.15,
+    "workers": 5.88
+  },
+  "perfDataPath": "/home/infra-sj278/work/bext-compiler-http-20261106/http-perf.data",
+  "perfDataSha256": "41d19549b2713e22b9cda5d72baea0b3e3e800e2eb81db9a4ae25b37078f4580"
+}

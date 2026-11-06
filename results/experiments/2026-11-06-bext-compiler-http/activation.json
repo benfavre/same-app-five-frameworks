@@ -1,0 +1,137 @@
+{
+  "status": "complete",
+  "cases": [
+    {
+      "enabled": 0,
+      "samples": [
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        },
+        {
+          "requestConstructors": 2,
+          "loaderPlan": false,
+          "layoutPlan": false
+        }
+      ]
+    },
+    {
+      "enabled": 1,
+      "samples": [
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        },
+        {
+          "requestConstructors": 0,
+          "loaderPlan": true,
+          "layoutPlan": true
+        }
+      ]
+    }
+  ],
+  "fixtureCopiesOnly": true,
+  "binarySha256": "72f972a6e9262c22af7e1a5bdd2b19f73d09b09825723505de51e8a347a6e489"
+}
