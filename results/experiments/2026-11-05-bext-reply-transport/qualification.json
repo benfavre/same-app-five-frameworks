@@ -1,0 +1,431 @@
+{
+  "status": "complete",
+  "sourceCommit": "d7841975516c8d96cd7f261b4c470a4909bca9ea",
+  "baseCommit": "e64d643d7a8ae43fac1fa3af4f4366bddfdb244d",
+  "originalBinarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+  "build": {
+    "at": 1793923229.6633883,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 488.12208669632673,
+    "peak_rss_kib": 7272744,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+    "binary_bytes": 1095703304,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "tests": {
+    "at": 1793922741.5408318,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--lib",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 51.373003827407956,
+    "peak_rss_kib": 3086068,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 231,
+        "failed": 0,
+        "ignored": 4,
+        "measured": 0,
+        "filtered": 0
+      }
+    ]
+  },
+  "sharedFramework": "/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/source/sites/shared/framework",
+  "productionChanged": false,
+  "comparison": {
+    "status": "complete",
+    "screen": [
+      {
+        "arm": "original",
+        "mode": 0,
+        "original": true,
+        "block": null,
+        "directory": "screen-01-original",
+        "binarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+        "run": "run-1",
+        "rps": 3434.8889497444557,
+        "ttfb_ms": 14.237385,
+        "p99_ms": 30.666756,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 27521,
+        "average_cpu_cores": 0.9221208363918039,
+        "cpu_ms_per_request": 0.29395734166636384
+      },
+      {
+        "arm": "copied",
+        "mode": 0,
+        "original": false,
+        "block": null,
+        "directory": "screen-02-copied",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3436.2670479536328,
+        "ttfb_ms": 14.055026999999999,
+        "p99_ms": 31.324545,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 27508,
+        "average_cpu_cores": 0.9114615885775132,
+        "cpu_ms_per_request": 0.2951868547331686
+      },
+      {
+        "arm": "vectored",
+        "mode": 1,
+        "original": false,
+        "block": null,
+        "directory": "screen-03-vectored",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3376.4721572555245,
+        "ttfb_ms": 13.977613999999999,
+        "p99_ms": 32.999405,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 27059,
+        "average_cpu_cores": 0.9251823460364619,
+        "cpu_ms_per_request": 0.2982371854096604
+      },
+      {
+        "arm": "shared-memory",
+        "mode": 2,
+        "original": false,
+        "block": null,
+        "directory": "screen-04-shared-memory",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3564.006176261996,
+        "ttfb_ms": 13.376661,
+        "p99_ms": 30.156643,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28564,
+        "average_cpu_cores": 0.9250436862672129,
+        "cpu_ms_per_request": 0.28392382019325024
+      },
+      {
+        "arm": "original-repeat",
+        "mode": 0,
+        "original": true,
+        "block": null,
+        "directory": "screen-05-original-repeat",
+        "binarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+        "run": "run-1",
+        "rps": 3298.293493539129,
+        "ttfb_ms": 14.680495,
+        "p99_ms": 32.682899,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 26425,
+        "average_cpu_cores": 0.9133910670353973,
+        "cpu_ms_per_request": 0.3057710501419111
+      }
+    ],
+    "confirmation": [
+      {
+        "arm": "control",
+        "mode": 0,
+        "original": false,
+        "block": 1,
+        "directory": "confirmation-01-control",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3413.22390820931,
+        "ttfb_ms": 14.058603,
+        "p99_ms": 31.880564,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 27351,
+        "average_cpu_cores": 0.9214374921370042,
+        "cpu_ms_per_request": 0.29615004935834155
+      },
+      {
+        "arm": "candidate",
+        "mode": 2,
+        "original": false,
+        "block": 1,
+        "directory": "confirmation-02-candidate",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3558.272394198276,
+        "ttfb_ms": 13.540414,
+        "p99_ms": 30.460524999999997,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28526,
+        "average_cpu_cores": 0.9258807046510904,
+        "cpu_ms_per_request": 0.28465259763023215
+      },
+      {
+        "arm": "candidate",
+        "mode": 2,
+        "original": false,
+        "block": 2,
+        "directory": "confirmation-03-candidate",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3422.2281528638337,
+        "ttfb_ms": 13.718795,
+        "p99_ms": 33.830213,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 27416,
+        "average_cpu_cores": 0.9055444740816744,
+        "cpu_ms_per_request": 0.29544791362707906
+      },
+      {
+        "arm": "control",
+        "mode": 0,
+        "original": false,
+        "block": 2,
+        "directory": "confirmation-04-control",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3497.910872107764,
+        "ttfb_ms": 13.911101,
+        "p99_ms": 29.883878,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28034,
+        "average_cpu_cores": 0.9228314072467964,
+        "cpu_ms_per_request": 0.28857815509738177
+      },
+      {
+        "arm": "control",
+        "mode": 0,
+        "original": false,
+        "block": 3,
+        "directory": "confirmation-05-control",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3518.0256243439976,
+        "ttfb_ms": 13.628668,
+        "p99_ms": 30.029758,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28184,
+        "average_cpu_cores": 0.9221826952044481,
+        "cpu_ms_per_request": 0.2877519159806982
+      },
+      {
+        "arm": "candidate",
+        "mode": 2,
+        "original": false,
+        "block": 3,
+        "directory": "confirmation-06-candidate",
+        "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58",
+        "run": "run-1",
+        "rps": 3317.7636030432895,
+        "ttfb_ms": 14.231624,
+        "p99_ms": 35.054749,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 26579,
+        "average_cpu_cores": 0.9207921663461711,
+        "cpu_ms_per_request": 0.303999398020994
+      }
+    ],
+    "method": "five-cell exploratory screen; independent AB/BA/AB confirmation",
+    "productionChanged": false,
+    "responseCache": false,
+    "flags": {
+      "BEXT_V8_MULTIPLEX": "0",
+      "BEXT_PRISM_PREPARED_PAGES": "1",
+      "BEXT_V8_LEGACY_HASH_HINT": "1",
+      "BEXT_PRISM_TOKEN_SCAN": "1",
+      "BEXT_V8_PREPARED_TEXT": "2",
+      "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+    },
+    "detailedLogFilter": "warn",
+    "selectedMode": 2,
+    "screenSelection": "highest RPS among modes 1 and 2; screening cells excluded from confirmation",
+    "medians": {
+      "control": {
+        "rps": 3497.910872107764,
+        "p99_ms": 30.029758,
+        "cpu_ms_per_request": 0.28857815509738177
+      },
+      "candidate": {
+        "rps": 3422.2281528638337,
+        "p99_ms": 33.830213,
+        "cpu_ms_per_request": 0.29544791362707906
+      }
+    },
+    "rpsIncreasePercent": -2.1636548788999233,
+    "cpuCostReductionPercent": -2.380553901378657,
+    "pairedResults": [
+      {
+        "block": 1,
+        "rpsIncreasePercent": 4.2496035973527135,
+        "cpuCostReductionPercent": 3.8823062001916098
+      },
+      {
+        "block": 2,
+        "rpsIncreasePercent": -2.1636548788999233,
+        "cpuCostReductionPercent": -2.380553901378657
+      },
+      {
+        "block": 3,
+        "rpsIncreasePercent": -5.69245487909289,
+        "cpuCostReductionPercent": -5.646350602018457
+      }
+    ]
+  },
+  "completedAt": 1793923485.5579815,
+  "performanceAccepted": false,
+  "performanceDecision": "Retain the current copied writer; independent confirmation regressed throughput and CPU cost",
+  "sourceFreshnessInheritedFlags": {
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+  },
+  "sourceFreshnessModes": [
+    1,
+    2
+  ],
+  "accessLogging": [
+    {
+      "directory": "screen-01-original",
+      "httpAccessLogEntries": 34008,
+      "measuredHttpResponses": 27521,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/screen-01-original/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-02-copied",
+      "httpAccessLogEntries": 32613,
+      "measuredHttpResponses": 27508,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/screen-02-copied/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-03-vectored",
+      "httpAccessLogEntries": 33918,
+      "measuredHttpResponses": 27059,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/screen-03-vectored/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-04-shared-memory",
+      "httpAccessLogEntries": 35062,
+      "measuredHttpResponses": 28564,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/screen-04-shared-memory/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-05-original-repeat",
+      "httpAccessLogEntries": 32130,
+      "measuredHttpResponses": 26425,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/screen-05-original-repeat/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-01-control",
+      "httpAccessLogEntries": 33973,
+      "measuredHttpResponses": 27351,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/confirmation-01-control/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-02-candidate",
+      "httpAccessLogEntries": 35366,
+      "measuredHttpResponses": 28526,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/confirmation-02-candidate/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-03-candidate",
+      "httpAccessLogEntries": 34431,
+      "measuredHttpResponses": 27416,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/confirmation-03-candidate/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-04-control",
+      "httpAccessLogEntries": 34847,
+      "measuredHttpResponses": 28034,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/confirmation-04-control/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-05-control",
+      "httpAccessLogEntries": 34699,
+      "measuredHttpResponses": 28184,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/confirmation-05-control/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-06-candidate",
+      "httpAccessLogEntries": 32712,
+      "measuredHttpResponses": 26579,
+      "coversWarmupAndBrowser": true,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-05-bext-reply-transport/comparison/confirmation-06-candidate/run-1/bext.server.log"
+    }
+  ],
+  "buildProvenance": {
+    "privateInputManifestSha256": "e9ed9de76e41551fdaf1aa3881061a186dd22314a126dc2754981b8890ad1c2b",
+    "sourceFileCount": 2660,
+    "externalPinsSha256": "ce5a974c0ef69e11b8ae2be47087c862789fa4fe1b2c2d904d9cd8705806ef5b",
+    "externalFileCount": 23258,
+    "note": "Private snapshots link pinned external vendor dependencies; their contents matched master for all 42 tracked actix files. Source and external fingerprints remained unchanged during the build."
+  }
+}

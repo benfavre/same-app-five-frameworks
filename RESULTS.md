@@ -401,3 +401,22 @@ candidate. The lower observed Bext p99 is a separate short-run measurement, not
 a throughput lead or a general tail-latency guarantee. The next profiling target
 is controller/worker allocation, string ownership and handoff overhead after the
 now-measured hash and scanner/text costs; tuning the nursery did not close it.
+
+## Merged-source refresh and rejected follow-ups, 2026-11-06
+
+Bext uses the merged native/SDK source, the documented opt-in preparation/hash/scanner/text settings, and `--bext-log-filter warn`. HTTP access logging stays enabled. Each complete server tree shares CPU 10; clients exclude that physical core and its SMT sibling. Three rotating eight-second sweeps at concurrency 50:
+
+| Framework | RPS median | RPS min–max | CPU ms/request | p99 |
+|---|---:|---:|---:|---:|
+| Astro | 3,993 | 3,853–4,275 | 0.2501 | 41.02 ms |
+| bext (PRISM) | 3,530 | 3,407–3,541 | 0.2866 | 30.31 ms |
+| Qwik | 442 | 437–442 | 2.2644 | 171.34 ms |
+| Next.js | 428 | 418–451 | 2.3363 | 182.06 ms |
+| React Router (Remix) | 367 | 361–391 | 2.7205 | 197.46 ms |
+
+**Astro remains ahead in throughput.** All 15 load/browser entries passed: 211,132 measured HTTP 200 responses, zero load errors and zero CPU-affinity violations. Counter, persisted theme, search/reset, 24-product SSR and fresh render stamps pass for every entry. These short shared-host runs show observed variation, not confidence intervals.
+
+[Raw campaign and identities](results/experiments/2026-11-06-five-frameworks-merged/), [summary](results/experiments/2026-11-06-five-frameworks-merged/summary.json), [qualification](results/experiments/2026-11-06-five-frameworks-merged/qualification.json). The [rejected response-writer experiment](results/experiments/2026-11-05-bext-reply-transport/table.md) and [text-conversion screen](results/experiments/2026-11-06-bext-text-modes/table.md) are retained. The default-settings baseline remains archived in `results/latest.json`.
+
+
+The new shared-memory response writer regressed independent AB/BA/AB confirmation by 2.16% RPS and raised CPU/request 2.38%; Bext PR #421 is closed without merging. Existing sized/native-copy text modes also lost their exploratory screen, so compact mode 2 remains selected. Source/correctness checks passing are kept separate from these failed performance results.

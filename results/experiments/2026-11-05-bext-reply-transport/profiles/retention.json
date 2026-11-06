@@ -1,0 +1,7 @@
+{
+  "rawPerfDataLocalPath": "/home/infra-sj278/work/bext-byhash-transport-20261105/profile-optimized-0/perf.data",
+  "sha256": "031ab9e771aedfe251652b89de33d66588ef15225ea8c1af97139a54f316d663",
+  "kind": "diagnostic profile; no paired throughput claim",
+  "sourceCommit": "d7841975516c8d96cd7f261b4c470a4909bca9ea",
+  "binarySha256": "f2cffc71a9fb95f7591e7073503b41cc431964ec93c1b176fa1623de12b03b58"
+}

@@ -1,0 +1,14 @@
+{
+  "kind": "diagnostic profile only; not a throughput comparison",
+  "flags": {
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "BEXT_V8_BY_HASH_REPLY_TRANSPORT": "0"
+  },
+  "logFilter": "warn",
+  "productionChanged": false
+}
