@@ -1,0 +1,86 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cpu-clock'
+# Event count (approx.): 7507536750
+#
+# Overhead  Command          Shared Object      Symbol
+# ........  ...............  .................  ............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+     1.54%  bext-server      libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.34%  actix-rt|system  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     1.27%  bext-v8-eval-wo  libc.so.6          [.] __memmove_avx_unaligned_erms
+     1.20%  actix-rt|system  bext-server        [.] _mi_page_malloc_zero
+     1.07%  bext-server      [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.94%  actix-rt|system  bext-server        [.] mi_free
+     0.94%  actix-rt|system  libc.so.6          [.] __memmove_avx_unaligned_erms
+     0.94%  actix-rt|system  libc.so.6          [.] statx
+     0.94%  bext-v8-eval-wo  bext-server        [.] _RNvNtCs5jZkS6BB4A1_11encoding_rs5utf_835convert_utf16_to_utf8_partial_inner
+     0.87%  bext-v8-eval-wo  bext-server        [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     0.80%  bext-profiler-r  [kernel.kallsyms]  [k] do_user_addr_fault
+     0.80%  bext-profiler-r  bext-server        [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation16parse_attributesINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace
+     0.74%  actix-rt|system  [kernel.kallsyms]  [k] link_path_walk.part.0.constprop.0
+     0.74%  bext-access-log  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.67%  actix-rt|system  bext-server        [.] _RNvNtNtCs1gwkPHDHBr1_4http6header4name9parse_hdr
+     0.67%  bext-v8-eval-wo  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     0.67%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, bool, v8::internal::Handle<v8::internal::Object>)
+     0.60%  actix-rt|system  bext-server        [.] mi_malloc_aligned
+     0.60%  bext-v8-eval-wo  bext-server        [.] Builtins_StringAdd_CheckNone
+     0.60%  bext-v8-eval-wo  libc.so.6          [.] __memchr_avx2
+     0.60%  bext-v8-pool-wr  bext-server        [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.54%  actix-rt|system  [kernel.kallsyms]  [k] __d_lookup_rcu
+     0.54%  actix-rt|system  bext-server        [.] _RNCNvNtNtCs48UkyFIjBFK_11bext_server12ssr_pipeline5prism26handle_prism_request_inner0B7_
+     0.54%  bext-v8-eval-wo  bext-server        [.] void v8::internal::CopyChars<unsigned char, unsigned short>(unsigned short*, unsigned char const*, unsigned long)
+     0.47%  actix-rt|system  [kernel.kallsyms]  [k] inode_permission
+     0.47%  actix-rt|system  [nf_tables]        [k] nft_do_chain
+     0.47%  bext-v8-eval-wo  bext-server        [.] v8::internal::FastJsonStringifier<unsigned char>::SerializeObject(v8::internal::ContinuationRecord, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.47%  bext-v8-pool-re  libc.so.6          [.] __libc_recv
+     0.40%  bext-v8-eval-wo  bext-server        [.] Builtins_SetConstructor
+     0.40%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonParser<unsigned char>::ParseJsonObject(v8::internal::Handle<v8::internal::Map>)
+     0.40%  bext-v8-eval-wo  bext-server        [.] v8::internal::LookupIterator::State v8::internal::LookupIterator::LookupInSpecialHolder<false>(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSReceiver>)
+     0.33%  V8 DefaultWorke  bext-server        [.] v8::internal::compiler::GraphReducer::ReduceTop()
+     0.33%  actix-rt|system  [kernel.kallsyms]  [k] clear_page_erms
+     0.33%  actix-rt|system  [kernel.kallsyms]  [k] do_syscall_64
+     0.33%  actix-rt|system  [kernel.kallsyms]  [k] generic_permission
+     0.33%  actix-rt|system  bext-server        [.] _RINvMNtCs6oZr1Inkksd_12actix_router8resourceNtB3_11ResourceDef21capture_match_info_fnNtNtCsl5Wgh76sR8I_9actix_web7service14ServiceRequestNCINvMNtB5_6routerINtB2h_6RouterINtNtCseo0TUlPad4f_5alloc5boxed3BoxDINtCs3qM3leNkEqp_13actix_service7ServiceB1l_Ep6FutureINtNtCsiYoX4ApF2vj_4core3pin3PinIB2I_DNtNtNtB4d_6future6future6Futurep6OutputINtNtB4d_6result6ResultNtB1n_15ServiceResponseNtNtNtB1p_5error5error5ErrorEEL_EEp5ErrorB67_p8ResponseB5K_EL_EINtNtB2M_3vec3VecIB2I_DNtNtB1p_5guard5GuardEL_EEE12recognize_fnB1l_NCNvXs3_NtB1p_11app_serviceNtB8l_10AppRoutingIB3i_B1l_E4call0E0EB1p_
+     0.33%  actix-rt|system  bext-server        [.] mi_theap_umalloc
+     0.33%  bext-profiler-r  bext-server        [.] mi_page_free_list_extend
+     0.33%  bext-profiler-r  libc.so.6          [.] __memmove_avx_unaligned_erms
+     0.33%  bext-v8-eval-wo  bext-server        [.] Builtins_AsyncFunctionEnter
+     0.33%  bext-v8-eval-wo  bext-server        [.] Builtins_RecordWriteSaveFP
+     0.33%  bext-v8-eval-wo  bext-server        [.] bool v8::internal::JsonStringifier::SerializeString<false>(v8::internal::Handle<v8::internal::String>)
+     0.33%  bext-v8-eval-wo  bext-server        [.] std::__Cr::optional<v8::internal::DirectHandle<v8::internal::InternalizedString> > v8::internal::StringTable::TryLookupKey<v8::internal::InternalizedStringKey, v8::internal::Isolate>(v8::internal::Isolate*, v8::internal::InternalizedStringKey*)
+     0.33%  bext-v8-eval-wo  bext-server        [.] unsigned int v8::internal::StringHasher::HashSequentialString<unsigned char>(unsigned char const*, unsigned int, v8::internal::HashSeed, bool*)
+     0.33%  bext-v8-eval-wo  bext-server        [.] v8::internal::(anonymous namespace)::Invoke(v8::internal::Isolate*, v8::internal::(anonymous namespace)::InvokeParams const&)
+     0.33%  bext-v8-eval-wo  bext-server        [.] v8::internal::Handle<v8::internal::JSObject> v8::internal::JsonParser<unsigned char>::BuildJsonObject<false>(v8::internal::JsonParser<unsigned char>::JsonContinuation const&, v8::internal::DirectHandle<v8::internal::Map>)
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] __memset
+     0.27%  actix-rt|system  [kernel.kallsyms]  [k] srso_alias_safe_ret
+     0.27%  actix-rt|system  [nf_tables]        [k] expr_call_ops_eval
+     0.27%  actix-rt|system  bext-server        [.] _RNCNCINvNtCsl5Wgh76sR8I_9actix_web7handler15handler_serviceNvNtCs48UkyFIjBFK_11bext_server7handler10handle_ssrTNtNtB8_7request11HttpRequestNtNtNtB8_5types7payload7PayloadINtNtB8_4data4DataNtBX_8AppStateEEE00BZ_
+     0.27%  actix-rt|system  bext-server        [.] _RNvMs4_NtNtCs31qw4EiS7VD_5regex5regex6stringNtB5_5Regex11captures_at.llvm.6203076296542837917
+     0.27%  actix-rt|system  bext-server        [.] _RNvMs_NtCseyWTxakCfOV_8indexmap5innerINtB4_4CoreNtNtCseo0TUlPad4f_5alloc6string6StringNtNtCs2Z7LRvcAFy8_10serde_json5value5ValueE10push_entryB1q_
+     0.27%  actix-rt|system  bext-server        [.] _RNvNtNtNtCs9ALYTKQbEpY_3std3sys2fs4unix9try_statx.llvm.8609963975560572235
+     0.27%  actix-rt|system  bext-server        [.] _RNvXs2_NtNtCskzFIfObzDlB_10actix_http2h110dispatcherINtB5_10DispatcherNtNtNtNtCsf5Utashzpff_5tokio3net3tcp6stream9TcpStreamINtNtCs3qM3leNkEqp_13actix_service7map_err6MapErrINtNtCsl5Wgh76sR8I_9actix_web11app_service14AppInitServiceINtNtCsc5GCFbexipV_11bext_server8l0_cache14L0CacheServiceINtNtB3L_13markdown_repr29MarkdownRepresentationServiceINtNtNtCs48UkyFIjBFK_11bext_server10middleware14group_resolver30MiddlewareGroupResolverServiceINtNtCsccuiYU4UUyY_10actix_cors10middleware14CorsMiddlewareINtNtB5z_12cookie_guard18CookieGuardServiceINtNtB5z_3waf20WafMiddlewareServiceINtNtB5z_10rate_limit21RateLimiterMiddlewareINtNtB5z_4auth21AuthMiddlewareServiceINtNtB5z_15user_middleware21UserMiddlewareServiceINtNtB5z_6tenant24TenantResolverMiddlewareINtNtB5z_16security_headers22SecurityHeadersServiceINtNtB5z_7alt_svc13AltSvcServiceINtNtCsdbgjhiROCxM_17tracing_actix_web10middleware23TracingLoggerMiddlewareINtNtB5z_11request_log23RequestLoggerMiddlewareNtB2N_10AppRoutingENtNtBdp_17root_span_builder22DefaultRootSpanBuilderEEEEEEEEEEEEEINtNtNtB9_4body6either10EitherBodyIBgE_IBgE_IBgE_IBgE_IBgE_IBgE_IBgE_IBgE_INtBdn_10StreamSpanNtNtBgI_5boxed7BoxBodyEEEEEEEEEEEINtNtNtB9_8requests7request7RequestINtNtCsiYoX4ApF2vj_4core3pin3PinINtNtCseo0TUlPad4f_5alloc5boxed3BoxDNtNtCsbXzw8Qkh1mQ_12futures_core6stream6Streamp4ItemINtNtBjj_6result6ResultNtNtCs165W2e9F4Be_5bytes5bytes5BytesNtNtB9_5error12PayloadErrorEEL_EEENCNCNvMNtB2P_6serverINtBmM_10HttpServerNCNCNvB5B_16run_server_inner0sm_0INtNtB2P_3app3AppINtNtB22_9transform14ApplyTransformNtB3J_17L0CacheMiddlewareIBo7_NtB4E_22MarkdownRepresentationIBo7_NtB5x_33MiddlewareGroupResolverMiddlewareIBo7_NtNtB75_7builder4CorsIBo7_NtB80_21CookieGuardMiddlewareIBo7_NtB8H_13WafMiddlewareIBo7_NtB9g_11RateLimiterIBo7_NtB9Y_14AuthMiddlewareIBo7_NtBaz_14UserMiddlewareIBo7_NtBbm_14TenantResolverIBo7_NtBc2_25SecurityHeadersMiddlewareIBo7_NtBcR_16AltSvcMiddlewareIBo7_INtBdn_13TracingLoggerBfB_EIBo7_NtBeA_13RequestLoggerNtB2N_8AppEntryNtNtB2P_7service14ServiceRequestEBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EBvI_EEINtB2N_7AppInitBo6_BgD_EBgD_E6listen0s0_0NtNtNtB2P_8response8response12HttpResponseEBgD_NtNtB7_6expect13ExpectHandlerNtNtB7_7upgrade14UpgradeHandlerENtNtNtBjj_6future6future6Future4pollB5B_
+     0.27%  actix-rt|system  bext-server        [.] mi_theap_malloc_aligned
+     0.27%  bext-profiler-r  bext-server        [.] _RINvMs5_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB6_12Abbreviation5parseINtNtB8_12endian_slice11EndianSliceNtNtBa_9endianity12LittleEndianEECsfGUVTLFp9L5_9backtrace
+     0.27%  bext-profiler-r  bext-server        [.] _RINvNtNtNtNtCsiYoX4ApF2vj_4core5slice4sort8unstable9quicksort9quicksortNtNtNtNtCsfGUVTLFp9L5_9backtrace9symbolize5gimli3elf9ParsedSymNCINvMB8_SB17_20sort_unstable_by_keyyNCNvMs_B19_NtB19_6Object5parses1_0E0EB1f_
+     0.27%  bext-profiler-r  bext-server        [.] _RNvMs6_NtNtCs2vHICpn4Vxg_5gimli4read6abbrevNtB5_10Attributes4push
+     0.27%  bext-server      [kernel.kallsyms]  [k] clear_page_erms
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_AsyncFunctionAwait
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_CreateDataProperty
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_FulfillPromise
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_GetProperty
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_LoadIC
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_RegExpReplace
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_StringIndexOf
+     0.27%  bext-v8-eval-wo  bext-server        [.] Builtins_StringToLowerCaseIntl
+     0.27%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonParser<unsigned char>::ScanJsonString(bool)
+     0.27%  bext-v8-eval-wo  bext-server        [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, bool, v8::internal::Handle<v8::internal::Object>)
+     0.27%  bext-v8-eval-wo  bext-server        [.] void v8::internal::String::WriteToFlat<unsigned char>(v8::internal::Tagged<v8::internal::String>, unsigned char*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

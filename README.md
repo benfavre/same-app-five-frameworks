@@ -4,7 +4,23 @@ The same 24-product SSR app, counter, persisted theme toggle, and live search in
 Next.js, React Router (the Remix entry), Astro, Qwik, and bext. Every measured
 request renders fresh HTML.
 
-## Current results — equal CPU budget, 2026-11-05
+## Latest tuned comparison — equal CPU budget, 2026-11-06
+
+Bext uses the merged native/SDK source, the documented opt-in preparation/hash/scanner/text settings, and `--bext-log-filter warn`. HTTP access logging stays enabled. Each complete server tree shares CPU 10; clients exclude that physical core and its SMT sibling. Three rotating eight-second sweeps at concurrency 50:
+
+| Framework | RPS median | RPS min–max | CPU ms/request | p99 |
+|---|---:|---:|---:|---:|
+| Astro | 3,993 | 3,853–4,275 | 0.2501 | 41.02 ms |
+| bext (PRISM) | 3,530 | 3,407–3,541 | 0.2866 | 30.31 ms |
+| Qwik | 442 | 437–442 | 2.2644 | 171.34 ms |
+| Next.js | 428 | 418–451 | 2.3363 | 182.06 ms |
+| React Router (Remix) | 367 | 361–391 | 2.7205 | 197.46 ms |
+
+**Astro remains ahead in throughput.** All 15 load/browser entries passed: 211,132 measured HTTP 200 responses, zero load errors and zero CPU-affinity violations. Counter, persisted theme, search/reset, 24-product SSR and fresh render stamps pass for every entry. These short shared-host runs show observed variation, not confidence intervals.
+
+[Raw campaign and identities](results/experiments/2026-11-06-five-frameworks-merged/), [summary](results/experiments/2026-11-06-five-frameworks-merged/summary.json), [qualification](results/experiments/2026-11-06-five-frameworks-merged/qualification.json). The [rejected response-writer experiment](results/experiments/2026-11-05-bext-reply-transport/table.md) and [text-conversion screen](results/experiments/2026-11-06-bext-text-modes/table.md) are retained. The earlier default-settings baseline follows; `results/latest.json` continues to identify that baseline.
+
+## Default-settings baseline — equal CPU budget, 2026-11-05
 
 **Every server, child process and helper thread is pinned to one hardware thread
 (CPU 10).** The load generator is kept off that physical core and its SMT sibling.
@@ -89,8 +105,10 @@ sweeps, three process starts per entry per sweep, a two-second warmup, then
 `oha -z 8s -c 50 -w` with HTTP/1.1 keep-alive. The order rotates across sweeps.
 `--publish` updates local results JSON; it does not push to GitHub.
 
-For the measured native improvement, build [bext PR #420](https://github.com/benfavre/bext/pull/420)
-and add these settings to the one-CPU command:
+The recovered native/SDK source and measured hash improvement are merged in
+[bext PR #419](https://github.com/benfavre/bext/pull/419) and
+[PR #420](https://github.com/benfavre/bext/pull/420). Build merged master and add
+these settings to the one-CPU command:
 
 ```bash
 --bext-flag BEXT_PRISM_PREPARED_PAGES=1 --bext-flag BEXT_V8_MULTIPLEX=0 \
@@ -109,13 +127,15 @@ python3 harness/compare-bext-binaries.py --original /path/to/frozen-bext-server 
 
 `harness/check-prepared-source.py --legacy-hash-hint 1 --output /path/to/proof.json`
 checks page/layout/import/API invalidation and fresh request data in disposable
-fixtures. Performance settings are allowlisted; response-cache and transport
-overrides are excluded. The native transport defaults must be preserved: setting
+fixtures. Performance settings are allowlisted; response-cache and process-isolation
+overrides are excluded. Reply-writer modes are separately allowlisted only to
+reproduce the [rejected transport experiment](results/experiments/2026-11-05-bext-reply-transport/table.md);
+they require the unmerged prototype. Preserve the standalone defaults: setting
 `BEXT_V8_SUBPROCESS=1` explicitly skips other standalone defaults in this version.
 `--bext-log-filter warn` records a separate detailed-tracing tradeoff; HTTP access
-logging is still checked. The [fresh five-framework candidate sweep](results/experiments/2026-11-05-five-frameworks-bext-candidate/table.md)
-measures Bext at 3,469 versus Astro at 4,252 RPS on one CPU. Default headline
-results remain separate from these opt-in measurements.
+logging is still checked. The [latest merged-source comparison](results/experiments/2026-11-06-five-frameworks-merged/table.md)
+measures Bext at 3,530 versus Astro at 3,993 RPS on one CPU. The archived default
+baseline remains separate from these opt-in measurements.
 
 ## Measurements and limits
 

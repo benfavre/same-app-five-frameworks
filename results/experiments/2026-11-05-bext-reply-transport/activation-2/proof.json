@@ -1,0 +1,248 @@
+{
+  "status": "complete",
+  "mode": 2,
+  "flags": {
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "BEXT_V8_BY_HASH_REPLY_TRANSPORT": "2"
+  },
+  "productionChanged": false,
+  "observations": [
+    {
+      "pid": 3346034,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3346034",
+          "ownerPid": 3346034,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3346035,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3346035",
+          "ownerPid": 3346035,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3346036,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3346036",
+          "ownerPid": 3346036,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3346037,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3346037",
+          "ownerPid": 3346037,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3346010,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3346037",
+          "ownerPid": 3346037,
+          "permissions": "rw-s"
+        },
+        {
+          "path": "/dev/shm/bext-v8-shm-3346036",
+          "ownerPid": 3346036,
+          "permissions": "rw-s"
+        },
+        {
+          "path": "/dev/shm/bext-v8-shm-3346035",
+          "ownerPid": 3346035,
+          "permissions": "rw-s"
+        },
+        {
+          "path": "/dev/shm/bext-v8-shm-3346034",
+          "ownerPid": 3346034,
+          "permissions": "rw-s"
+        }
+      ]
+    }
+  ],
+  "workerPids": [
+    3346034,
+    3346035,
+    3346036,
+    3346037
+  ],
+  "controllerMappings": [
+    {
+      "pid": 3346010,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3346037",
+          "ownerPid": 3346037,
+          "permissions": "rw-s"
+        },
+        {
+          "path": "/dev/shm/bext-v8-shm-3346036",
+          "ownerPid": 3346036,
+          "permissions": "rw-s"
+        },
+        {
+          "path": "/dev/shm/bext-v8-shm-3346035",
+          "ownerPid": 3346035,
+          "permissions": "rw-s"
+        },
+        {
+          "path": "/dev/shm/bext-v8-shm-3346034",
+          "ownerPid": 3346034,
+          "permissions": "rw-s"
+        }
+      ]
+    }
+  ],
+  "timestampSamples": [
+    "1793923236110",
+    "1793923236119",
+    "1793923236128",
+    "1793923236132",
+    "1793923236134",
+    "1793923236135",
+    "1793923236137",
+    "1793923236139",
+    "1793923236140",
+    "1793923236142",
+    "1793923236143",
+    "1793923236145",
+    "1793923236146",
+    "1793923236147",
+    "1793923236147",
+    "1793923236149",
+    "1793923236150",
+    "1793923236151",
+    "1793923236152",
+    "1793923236153",
+    "1793923236154",
+    "1793923236156",
+    "1793923236157",
+    "1793923236158",
+    "1793923236160",
+    "1793923236161",
+    "1793923236162",
+    "1793923236163",
+    "1793923236164",
+    "1793923236165",
+    "1793923236166",
+    "1793923236167",
+    "1793923236168",
+    "1793923236169",
+    "1793923236170",
+    "1793923236171",
+    "1793923236172",
+    "1793923236173",
+    "1793923236174",
+    "1793923236175"
+  ],
+  "cpuAudit": {
+    "method": "sampled /proc server process tree; all thread affinity masks",
+    "sampleIntervalSeconds": 0.25,
+    "clockTicksPerSecond": 100,
+    "wallSeconds": 0.23626774176955223,
+    "cpuSeconds": 0.06,
+    "averageCpuCores": 0.2539491830354142,
+    "requestedCpuAffinity": [
+      10
+    ],
+    "affinityViolations": [],
+    "errors": [],
+    "samples": [
+      {
+        "elapsedSeconds": 0.03226372227072716,
+        "processCount": 5,
+        "threadCount": 127
+      },
+      {
+        "elapsedSeconds": 0.23626360669732094,
+        "processCount": 5,
+        "threadCount": 127
+      }
+    ],
+    "processes": [
+      {
+        "pid": 3346034,
+        "parent": 3346010,
+        "startTicks": 1270653244,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.0
+      },
+      {
+        "pid": 3346035,
+        "parent": 3346010,
+        "startTicks": 1270653244,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 3346036,
+        "parent": 3346010,
+        "startTicks": 1270653244,
+        "cpuTicks": 1,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 3346037,
+        "parent": 3346010,
+        "startTicks": 1270653244,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 3346010,
+        "parent": 3346008,
+        "startTicks": 1270653242,
+        "cpuTicks": 4,
+        "threadCount": 43,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      }
+    ]
+  }
+}

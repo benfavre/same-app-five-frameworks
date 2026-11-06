@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-11-06T00:09:39.254656+00:00",
+  "loadBefore": [
+    4.2373046875,
+    5.0078125,
+    5.22900390625
+  ],
+  "startCommand": "HOST=127.0.0.1 PORT=8102 node node_modules/@react-router/serve/dist/cli.js ./build/server/index.js",
+  "finishedAt": "2026-11-06T00:09:57.303968+00:00",
+  "loadAfter": [
+    3.9873046875,
+    4.90771484375,
+    5.19140625
+  ]
+}

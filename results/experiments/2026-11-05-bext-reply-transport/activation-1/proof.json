@@ -1,0 +1,201 @@
+{
+  "status": "complete",
+  "mode": 1,
+  "flags": {
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "BEXT_V8_BY_HASH_REPLY_TRANSPORT": "1"
+  },
+  "productionChanged": false,
+  "observations": [
+    {
+      "pid": 3345008,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3345008",
+          "ownerPid": 3345008,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3345015,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3345015",
+          "ownerPid": 3345015,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3344968,
+      "mappings": []
+    },
+    {
+      "pid": 3345006,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3345006",
+          "ownerPid": 3345006,
+          "permissions": "rw-s"
+        }
+      ]
+    },
+    {
+      "pid": 3345023,
+      "mappings": [
+        {
+          "path": "/dev/shm/bext-v8-shm-3345023",
+          "ownerPid": 3345023,
+          "permissions": "rw-s"
+        }
+      ]
+    }
+  ],
+  "workerPids": [
+    3345006,
+    3345008,
+    3345015,
+    3345023
+  ],
+  "controllerMappings": [],
+  "timestampSamples": [
+    "1793923234898",
+    "1793923234908",
+    "1793923234917",
+    "1793923234920",
+    "1793923234922",
+    "1793923234923",
+    "1793923234925",
+    "1793923234926",
+    "1793923234927",
+    "1793923234929",
+    "1793923234930",
+    "1793923234932",
+    "1793923234933",
+    "1793923234934",
+    "1793923234937",
+    "1793923234938",
+    "1793923234939",
+    "1793923234940",
+    "1793923234941",
+    "1793923234942",
+    "1793923234944",
+    "1793923234945",
+    "1793923234947",
+    "1793923234948",
+    "1793923234949",
+    "1793923234950",
+    "1793923234952",
+    "1793923234952",
+    "1793923234953",
+    "1793923234954",
+    "1793923234955",
+    "1793923234956",
+    "1793923234957",
+    "1793923234958",
+    "1793923234959",
+    "1793923234960",
+    "1793923234960",
+    "1793923234961",
+    "1793923234962",
+    "1793923234963"
+  ],
+  "cpuAudit": {
+    "method": "sampled /proc server process tree; all thread affinity masks",
+    "sampleIntervalSeconds": 0.25,
+    "clockTicksPerSecond": 100,
+    "wallSeconds": 0.23279973305761814,
+    "cpuSeconds": 0.07,
+    "averageCpuCores": 0.3006876300097601,
+    "requestedCpuAffinity": [
+      10
+    ],
+    "affinityViolations": [],
+    "errors": [],
+    "samples": [
+      {
+        "elapsedSeconds": 0.03318297304213047,
+        "processCount": 5,
+        "threadCount": 127
+      },
+      {
+        "elapsedSeconds": 0.23279541358351707,
+        "processCount": 5,
+        "threadCount": 127
+      }
+    ],
+    "processes": [
+      {
+        "pid": 3345008,
+        "parent": 3344968,
+        "startTicks": 1270653120,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 3345015,
+        "parent": 3344968,
+        "startTicks": 1270653121,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 3344968,
+        "parent": 3344890,
+        "startTicks": 1270653119,
+        "cpuTicks": 5,
+        "threadCount": 43,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 3345006,
+        "parent": 3344968,
+        "startTicks": 1270653120,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.0
+      },
+      {
+        "pid": 3345023,
+        "parent": 3344968,
+        "startTicks": 1270653121,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      }
+    ]
+  }
+}
