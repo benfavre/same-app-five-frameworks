@@ -1,0 +1,206 @@
+{
+  "aggregation": "median of equal repeat sweeps; cold start is median of all process starts",
+  "startedAt": "2026-11-06T22:10:52.409112+00:00",
+  "finishedAt": "2026-11-06T22:15:13.148130+00:00",
+  "cpuBudget": {
+    "serverCpus": [
+      10
+    ],
+    "clientCpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23
+    ],
+    "runnerCpuAffinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23
+    ],
+    "bextV8Workers": 4,
+    "bextHttpWorkers": 1
+  },
+  "frameworks": [
+    {
+      "framework": "Astro",
+      "id": "astro",
+      "run_count": 3,
+      "runs": [
+        {
+          "run": "run-1",
+          "rps": 4449.725430730184,
+          "ttfb_ms": 9.508523,
+          "p99_ms": 33.421144,
+          "client_js_gz_kb": 0.3291015625,
+          "initial_client_js_gz_kb": 0.3291015625,
+          "js_reqs": 0,
+          "build_kb": 478.8505859375,
+          "http_200_responses": 66796,
+          "average_cpu_cores": 0.948136996623512,
+          "cpu_ms_per_request": 0.22441463560692257
+        },
+        {
+          "run": "run-2",
+          "rps": 4647.950646701136,
+          "ttfb_ms": 9.089227,
+          "p99_ms": 29.153142,
+          "client_js_gz_kb": 0.3291015625,
+          "initial_client_js_gz_kb": 0.3291015625,
+          "js_reqs": 0,
+          "build_kb": 478.8505859375,
+          "http_200_responses": 69769,
+          "average_cpu_cores": 0.9460164141314231,
+          "cpu_ms_per_request": 0.21470853817598076
+        },
+        {
+          "run": "run-3",
+          "rps": 4696.24006613823,
+          "ttfb_ms": 9.053752,
+          "p99_ms": 31.37293,
+          "client_js_gz_kb": 0.3291015625,
+          "initial_client_js_gz_kb": 0.3291015625,
+          "js_reqs": 0,
+          "build_kb": 478.8505859375,
+          "http_200_responses": 70509,
+          "average_cpu_cores": 0.9486605542500265,
+          "cpu_ms_per_request": 0.2128806251684182
+        }
+      ],
+      "rps_min": 4450,
+      "rps_max": 4696,
+      "cold_ms": 176.46,
+      "cold_samples_ms": [
+        218.226,
+        176.46,
+        174.831
+      ],
+      "ok": "CTS",
+      "theme_persistence": true,
+      "uncached": true,
+      "ssr_cards": 24,
+      "ssr_products": 24,
+      "success": 1.0,
+      "rps": 4648,
+      "ttfb_ms": 9.09,
+      "p99_ms": 31.37,
+      "client_js_gz_kb": 0.33,
+      "initial_client_js_gz_kb": 0.33,
+      "js_reqs": 0,
+      "build_kb": 478.85,
+      "server_cpu_affinity": [
+        10
+      ],
+      "average_cpu_cores": 0.9481,
+      "cpu_ms_per_request": 0.2147
+    },
+    {
+      "framework": "bext (PRISM)",
+      "id": "bext",
+      "run_count": 3,
+      "runs": [
+        {
+          "run": "run-1",
+          "rps": 3704.0771738370895,
+          "ttfb_ms": 12.106003000000001,
+          "p99_ms": 33.254415,
+          "client_js_gz_kb": 5.7119140625,
+          "initial_client_js_gz_kb": 5.7119140625,
+          "js_reqs": 4,
+          "build_kb": 405.8046875,
+          "http_200_responses": 55589,
+          "average_cpu_cores": 0.9481121923789168,
+          "cpu_ms_per_request": 0.26947777437982334
+        },
+        {
+          "run": "run-2",
+          "rps": 3946.871304837824,
+          "ttfb_ms": 11.408150000000001,
+          "p99_ms": 29.350016999999998,
+          "client_js_gz_kb": 5.7119140625,
+          "initial_client_js_gz_kb": 5.7119140625,
+          "js_reqs": 4,
+          "build_kb": 405.8046875,
+          "http_200_responses": 59229,
+          "average_cpu_cores": 0.94916181855041,
+          "cpu_ms_per_request": 0.2534231541981124
+        },
+        {
+          "run": "run-3",
+          "rps": 3674.1915465615584,
+          "ttfb_ms": 12.161554,
+          "p99_ms": 35.741127,
+          "client_js_gz_kb": 5.7119140625,
+          "initial_client_js_gz_kb": 5.7119140625,
+          "js_reqs": 4,
+          "build_kb": 405.8046875,
+          "http_200_responses": 55164,
+          "average_cpu_cores": 0.9490639981128322,
+          "cpu_ms_per_request": 0.27191646726125734
+        }
+      ],
+      "rps_min": 3674,
+      "rps_max": 3947,
+      "cold_ms": 94.47,
+      "cold_samples_ms": [
+        89.381,
+        103.231,
+        94.473
+      ],
+      "ok": "CTS",
+      "theme_persistence": true,
+      "uncached": true,
+      "ssr_cards": 24,
+      "ssr_products": 24,
+      "success": 1.0,
+      "rps": 3704,
+      "ttfb_ms": 12.11,
+      "p99_ms": 33.25,
+      "client_js_gz_kb": 5.71,
+      "initial_client_js_gz_kb": 5.71,
+      "js_reqs": 4,
+      "build_kb": 405.8,
+      "server_cpu_affinity": [
+        10
+      ],
+      "average_cpu_cores": 0.9491,
+      "cpu_ms_per_request": 0.2695
+    }
+  ]
+}

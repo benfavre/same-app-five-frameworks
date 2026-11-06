@@ -114,6 +114,12 @@ class EvidenceTests(unittest.TestCase):
 
 
 class ProcessSafetyTests(unittest.TestCase):
+    def test_two_framework_sweeps_alternate_the_first_framework(self):
+        frameworks = ["astro", "bext"]
+        orders = [runner.sweep_order(frameworks, n) for n in range(3)]
+        self.assertEqual(orders, [["astro", "bext"], ["bext", "astro"], ["astro", "bext"]])
+        self.assertEqual(frameworks, ["astro", "bext"])
+
     def test_warmup_and_load_reject_http_errors_even_with_transport_success(self):
         result = {"summary": {"successRate": 1}, "statusCodeDistribution": {"200": 100}, "errorDistribution": {}}
         runner.require_http_200(result, "warmup")

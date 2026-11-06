@@ -1,0 +1,66 @@
+{
+  "status": "complete",
+  "cells": [
+    {
+      "name": "05-rebuilt-frozen-sdk",
+      "run": "run-1",
+      "rps": 3472.840554969215,
+      "ttfb_ms": 12.955511,
+      "p99_ms": 36.25613,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 52145,
+      "average_cpu_cores": 0.9427005968066617,
+      "cpu_ms_per_request": 0.28554990890785314,
+      "logs": [
+        {
+          "originalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/screen/05-rebuilt-frozen-sdk/run-1/bext.server.log",
+          "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/screen/05-rebuilt-frozen-sdk/run-1/bext.server.log.zst",
+          "compression": "zstd",
+          "originalSha256": "e7330ea01f5722568bcf87f2252bf8f1585856280fd16eb30b23b9886f0e794c",
+          "bytes": 29900545,
+          "compressedSha256": "01d193f9b6e265eb3987ff1dccc321de324560e659063cb3b56b9f2514175a24",
+          "compressedBytes": 778676,
+          "statusDistribution": {
+            "200": 121651,
+            "404": 1
+          },
+          "retainedLocally": true
+        }
+      ]
+    },
+    {
+      "name": "06-original-new-sdk",
+      "run": "run-1",
+      "rps": 3723.523749161826,
+      "ttfb_ms": 12.043572000000001,
+      "p99_ms": 33.018116,
+      "client_js_gz_kb": 5.7119140625,
+      "initial_client_js_gz_kb": 5.7119140625,
+      "js_reqs": 4,
+      "build_kb": 405.8046875,
+      "http_200_responses": 55886,
+      "average_cpu_cores": 0.9462131490317138,
+      "cpu_ms_per_request": 0.26786672869770606,
+      "logs": [
+        {
+          "originalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/screen/06-original-new-sdk/run-1/bext.server.log",
+          "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-compiler-http/screen/06-original-new-sdk/run-1/bext.server.log.zst",
+          "compression": "zstd",
+          "originalSha256": "3199c19479f09cd60b6f719537a56bff74002b72d997843a50d780631484d58b",
+          "bytes": 30788150,
+          "compressedSha256": "5d2867e7dbd29189bbceed84a8b5cba53f49f463fe813b5ca2c04ed1c087491b",
+          "compressedBytes": 799407,
+          "statusDistribution": {
+            "200": 125279,
+            "404": 1
+          },
+          "retainedLocally": true
+        }
+      ]
+    }
+  ],
+  "productionChanged": false
+}

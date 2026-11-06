@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "trackedCompilerFile": "../bext-core/src/transform/prism_compile/call_plan.rs",
+  "emitFiles": [
+    "src/direct.rs",
+    "src/prism.rs",
+    "src/wrappers.rs",
+    "../bext-core/src/transform/prism_compile.rs",
+    "../bext-core/src/transform/prism_compile/analysis.rs",
+    "../bext-core/src/transform/prism_compile/url_fold.rs",
+    "../bext-core/src/transform/prism_compile/observations.rs",
+    "../bext-core/src/transform/prism_compile/imported.rs",
+    "../bext-core/src/transform/prism_compile/call_plan.rs",
+    "../bext-core/src/transform/module_exports.rs",
+    "../bext-core/src/transform/framework_imports.rs",
+    "../bext-core/src/transform/macros.rs"
+  ],
+  "actualBuildId": "15235386739864083741",
+  "syntheticCompilerEditBuildId": "12844899516938574254",
+  "buildOutputsWithMatchingId": [
+    "/home/infra-sj278/bext/target/release/build/bext-turbopack-5dfafdfac403a1e5/output"
+  ],
+  "sourceModifiedForProbe": false
+}

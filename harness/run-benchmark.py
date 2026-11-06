@@ -25,7 +25,7 @@ FRAMEWORKS = ["next", "remix", "astro", "qwik", "bext"]
 LOAD_URL_COUNT = 1_000_000
 PERFORMANCE_FLAGS = {name: {"0", "1"} for name in [
     "BEXT_V8_MULTIPLEX", "BEXT_PRISM_PREPARED_PAGES", "BEXT_V8_LEGACY_HASH_HINT",
-    "BEXT_PRISM_TOKEN_SCAN", "BEXT_PRISM_NATIVE_HTML_SCAN",
+    "BEXT_PRISM_TOKEN_SCAN", "BEXT_PRISM_NATIVE_HTML_SCAN", "BEXT_PRISM_CALL_PLANS",
 ]}
 PERFORMANCE_FLAGS["BEXT_V8_PREPARED_TEXT"] = {"0", "2", "3", "4"}
 PERFORMANCE_FLAGS["BEXT_V8_MAX_SEMI_SPACE_MB"] = {"4", "8", "16"}
@@ -417,6 +417,11 @@ def measure(fw, bench, directory, args):
     print(f"  {fw}: {oha['summary']['requestsPerSec']:,.0f} RPS, verified", flush=True)
 
 
+def sweep_order(frameworks, repeat):
+    shift = repeat % len(frameworks)
+    return frameworks[shift:] + frameworks[:shift]
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, default=ROOT / "results/runs" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ"))
@@ -459,8 +464,7 @@ def main():
             port_is_free(bench["port"])
         write_json(args.output / "metadata.json", metadata(args))
         for repeat in range(args.repeats):
-            shift = (repeat * 2) % len(args.frameworks)
-            order = args.frameworks[shift:] + args.frameworks[:shift]
+            order = sweep_order(args.frameworks, repeat)
             directory = args.output / f"run-{repeat + 1}"
             directory.mkdir()
             manifest["runs"].append({"directory": directory.name, "order": order})

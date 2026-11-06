@@ -1,0 +1,376 @@
+{
+  "compiler-tests.json": {
+    "at": 1794000244.924234,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-core",
+      "--lib",
+      "transform::prism_compile",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 68.84428372979164,
+    "peak_rss_kib": 2809356,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 70,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered": 2570
+      }
+    ]
+  },
+  "compiler-tests-initial.json": {
+    "at": 1793999875.3949893,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-core",
+      "--lib",
+      "transform::prism_compile",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 89.89487653970718,
+    "peak_rss_kib": 2985652,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 70,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered": 2570
+      }
+    ]
+  },
+  "compiler-review-interruption.json": {
+    "reason": "Tighten compiler proof to existing modules and match facts to the call adapter before building a candidate",
+    "at": 1793999975.5349345,
+    "onlyOwnedProcessesInterrupted": [
+      2783635
+    ]
+  },
+  "initial-native-input-setup.json": {
+    "status": "failed-before-cargo",
+    "reason": "Candidate SDK source changes were not yet included in the updated private input manifest",
+    "productionChanged": false
+  },
+  "guard-baseline.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/baseline-profile.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 3045536,
+    "minimumObservedAvailableKiB": 28165116,
+    "guard": null,
+    "exitCode": 0,
+    "elapsedSeconds": 299.8491446617991,
+    "passed": true
+  },
+  "guard-screen.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/screen.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 3062792,
+    "minimumObservedAvailableKiB": 25059064,
+    "guard": null,
+    "exitCode": 0,
+    "elapsedSeconds": 186.32320320047438,
+    "passed": true
+  },
+  "guard-isolate.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/isolate.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 3051636,
+    "minimumObservedAvailableKiB": 24606392,
+    "guard": null,
+    "exitCode": 0,
+    "elapsedSeconds": 91.29991549812257,
+    "passed": true
+  },
+  "guard-activation-initial.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/screen.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 249808,
+    "minimumObservedAvailableKiB": 29669632,
+    "guard": null,
+    "exitCode": 1,
+    "elapsedSeconds": 3.111986629664898,
+    "passed": false
+  },
+  "guard-activation-inspected.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/screen.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 248640,
+    "minimumObservedAvailableKiB": 27665108,
+    "guard": null,
+    "exitCode": 1,
+    "elapsedSeconds": 3.1094187647104263,
+    "passed": false
+  },
+  "guard-activation-bundle-trace.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/screen.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 143920,
+    "minimumObservedAvailableKiB": 28351092,
+    "guard": null,
+    "exitCode": 1,
+    "elapsedSeconds": 3.1009276434779167,
+    "passed": false
+  },
+  "earlier-binary-archives.json": [
+    {
+      "originalPath": "/home/infra-sj278/work/bext-direct-page-props-20261106/bext-server",
+      "path": "/home/infra-sj278/work/bext-direct-page-props-20261106/bext-server.zst",
+      "originalSha256": "9367a6e9ae42ab2667ff2c3959e4a8de7a33d80bfc28f391bae3e1c766ee5a0a",
+      "originalBytes": 1095695760,
+      "compression": "zstd",
+      "compressedBytes": 258871531,
+      "compressedSha256": "53c32ab7bb6a3efa1d575830a0482e921bfbd3fb3074d25a4a87a766d3e103b2",
+      "verifiedLossless": true
+    },
+    {
+      "originalPath": "/home/infra-sj278/work/bext-direct-page-props-20261106/bext-server-before-map-order",
+      "path": "/home/infra-sj278/work/bext-direct-page-props-20261106/bext-server-before-map-order.zst",
+      "originalSha256": "414719ceb32ac47cab1fc9765f437eb9e5d165c8aa390ee9e32b9a4d7c8af11d",
+      "originalBytes": 1095747720,
+      "compression": "zstd",
+      "compressedBytes": 259019730,
+      "compressedSha256": "d996bb739fde0d13342a3ee7ffd43a3ccfcaec591d7ec24fa8c23909041d7762",
+      "verifiedLossless": true
+    },
+    {
+      "originalPath": "/home/infra-sj278/work/bext-reply-read-buffer-20261106/bext-server",
+      "path": "/home/infra-sj278/work/bext-reply-read-buffer-20261106/bext-server.zst",
+      "originalSha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+      "originalBytes": 1095686320,
+      "compression": "zstd",
+      "compressedBytes": 258877612,
+      "compressedSha256": "a341f5b2ca9ed28a0f3c9ffcefd4333ab6af03986d6e224bc0b2caafe935e436",
+      "verifiedLossless": true
+    }
+  ],
+  "localManifests": {
+    "build-inputs.json": {
+      "path": "/home/infra-sj278/work/bext-compiler-http-20261106/build-inputs.json",
+      "sha256": "cc84dd6acac479229295c33ec10f8d7143d890b136657feb9a9f0a2b96dfc121"
+    },
+    "external-dependency-pins.json": {
+      "path": "/home/infra-sj278/work/bext-compiler-http-20261106/external-dependency-pins.json",
+      "sha256": "ce5a974c0ef69e11b8ae2be47087c862789fa4fe1b2c2d904d9cd8705806ef5b"
+    }
+  },
+  "sourceCommit": "6724dee3790848b6bfb5166d1aa81e01094210d4",
+  "sdkTests": {
+    "status": "passed",
+    "passed": 109,
+    "failed": 0,
+    "expectations": 12833,
+    "files": 11,
+    "logPath": "/home/infra-sj278/work/bext-compiler-http-20261106/sdk-tests-final.log",
+    "logSha256": "8bfd1bbaf1ded1371473d1e2cc09ea419b38f8cca75fedca71e8310063ea79be"
+  },
+  "bootstrapTests": {
+    "status": "passed",
+    "passed": 101,
+    "failed": 0,
+    "expectations": 12829,
+    "files": 11,
+    "logPath": "/home/infra-sj278/work/bext-compiler-http-20261106/bootstrap-sdk-tests.log",
+    "logSha256": "2493ac675f4951d57d46ae6b07b5a9504feb767ab67d4094a35f4cf5b2c4fe4a"
+  },
+  "setupCorrections": [
+    "An initial Request URL credential test incorrectly expected Bun to throw; it now preserves the observed baseline behavior.",
+    "Three activation attempts checked a transitive Layout import rather than the route adapter function identity. The final fixture checks its own loader and layout functions, and all 24 flag-off/on samples pass.",
+    "The first standalone bootstrap SDK test copy lacked a repository-relative bext-lite source fixture. The copy was moved under sites/shared/framework with a read-only crates link; the full 101-test selection then passed.",
+    "Copied manifest labels were corrected to name the server target and final code commit; source hashes and the actual canonical server build command were unchanged."
+  ],
+  "productionChanged": false,
+  "initialBuild": {
+    "at": 1794000886.8039896,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 518.3103480897844,
+    "peak_rss_kib": 7311264,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "aa3e016bcce6c6edc1a498897c62ec1c4403bd37c3eeb73376c7b6628cae56f8",
+    "binary_bytes": 1095968384,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "guard-confirmation.json": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/confirm.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 3036700,
+    "minimumObservedAvailableKiB": 24131068,
+    "guard": null,
+    "exitCode": 0,
+    "elapsedSeconds": 423.4412233289331,
+    "passed": true
+  },
+  "emitterFingerprintProof": "emitter-fingerprint-proof.json",
+  "initialNativeArtifactRetention": {
+    "sha256": "aa3e016bcce6c6edc1a498897c62ec1c4403bd37c3eeb73376c7b6628cae56f8",
+    "retainedPath": "/home/infra-sj278/work/bext-compiler-http-20261106/bext-server-initial",
+    "reason": "A second build adds the compiler source to persistent emitter cache identity. The initial candidate and all its measurements remain retained."
+  },
+  "build.json": {
+    "at": 1794002701.278843,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 485.3113014549017,
+    "peak_rss_kib": 7026544,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "72f972a6e9262c22af7e1a5bdd2b19f73d09b09825723505de51e8a347a6e489",
+    "binary_bytes": 1095968384,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "finalArtifactGuard": {
+    "command": [
+      "/usr/bin/python3",
+      "/home/infra-sj278/work/bext-compiler-http-20261106/qualify.py"
+    ],
+    "rssCapKiB": 10485760,
+    "minimumAvailableKiB": 8388608,
+    "minimumDiskBytes": 4294967296,
+    "timeoutSeconds": 1200,
+    "productionChanged": false,
+    "peakRssKiB": 4368508,
+    "minimumObservedAvailableKiB": 25673300,
+    "guard": null,
+    "exitCode": 0,
+    "elapsedSeconds": 969.1839304883033,
+    "passed": true
+  },
+  "finalActivation": "activation.json",
+  "finalSourceInvalidation": "call-plan-source-invalidation-final.json",
+  "harnessTests": {
+    "status": "passed",
+    "passed": 14,
+    "failed": 0,
+    "logPath": "/home/infra-sj278/work/bext-compiler-http-20261106/harness-tests.log"
+  },
+  "githubStatusAtCodeHead": {
+    "commit": "6724dee3790848b6bfb5166d1aa81e01094210d4",
+    "statuses": [],
+    "greenCiClaimed": false
+  },
+  "pullRequestHead": "fc40ffa17e4e2618f07cb1f51c55cd25834419b7",
+  "codeChangesAfterBuild": [],
+  "mergedCommit": "22b2524df8f065285bbd4f76b96efc4635ecdcb7",
+  "mergedNativeCargoSdkDifferencesFromBuiltSource": [],
+  "githubStatusAtPullRequestHead": {
+    "commit": "fc40ffa17e4e2618f07cb1f51c55cd25834419b7",
+    "statuses": [],
+    "greenCiClaimed": false
+  }
+}

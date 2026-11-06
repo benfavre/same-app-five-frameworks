@@ -1,0 +1,96 @@
+--- a/sites/shared/framework/src/prism-runtime.ts
++++ b/sites/shared/framework/src/prism-runtime.ts
+@@ -1545,6 +1545,30 @@
+   return false;
+ }
+
++// Cache one immutable compiler bootstrap, never a rendered response. The
++// generated wrapper passes the same script on each request. A one-entry cache
++// is bounded and switches immediately when a different wrapper is evaluated.
++let previousIslandLoader: string | undefined;
++let normalizedIslandLoader: string | undefined;
++function normalizeIslandLoader(rawIslandLoaderHtml: string | undefined): string | undefined {
++  if (rawIslandLoaderHtml === previousIslandLoader) return normalizedIslandLoader;
++  // Client navigation must replay the bootstrap outside <main>, while
++  // persistent layout scripts run only once.
++  normalizedIslandLoader = rawIslandLoaderHtml?.includes("<script>") ? rawIslandLoaderHtml.replace("<script>", "<script data-bext-island-loader>")
++    // The native bootstrap's lazy listeners close over a per-run script cache.
++    // Dispose them before replay so they cannot intercept a later island with
++    // the same component name and mistake its old bundle for a fresh mount.
++    .replaceAll("document.addEventListener(", "__bextListen(")
++    .replace("<script data-bext-island-loader>", `<script data-bext-island-loader>(function(){
++      if(window.__bextDisposeIslandLoader)window.__bextDisposeIslandLoader();
++      var listeners=[];
++      function __bextListen(type,handler,options){document.addEventListener(type,handler,options);listeners.push([type,handler,options]);}
++      window.__bextDisposeIslandLoader=function(){listeners.forEach(function(l){document.removeEventListener(l[0],l[1],l[2]);});listeners=[];};
++    `).replace("</script>", "})();</script>") : rawIslandLoaderHtml;
++  previousIslandLoader = rawIslandLoaderHtml;
++  return normalizedIslandLoader;
++}
++
+ /** Run a PRISM route end-to-end. */
+ export async function runRoute(args: RunRouteArgs): Promise<RouteResult> {
+   const {
+@@ -1569,19 +1593,7 @@
+     dynamic,
+     revalidate,
+   } = args;
+-  // Client navigation must replay the bootstrap outside <main>, while
+-  // persistent layout scripts run only once.
+-  const islandLoaderHtml = rawIslandLoaderHtml?.includes("<script>") ? rawIslandLoaderHtml.replace("<script>", "<script data-bext-island-loader>")
+-    // The native bootstrap's lazy listeners close over a per-run script cache.
+-    // Dispose them before replay so they cannot intercept a later island with
+-    // the same component name and mistake its old bundle for a fresh mount.
+-    .replaceAll("document.addEventListener(", "__bextListen(")
+-    .replace("<script data-bext-island-loader>", `<script data-bext-island-loader>(function(){
+-      if(window.__bextDisposeIslandLoader)window.__bextDisposeIslandLoader();
+-      var listeners=[];
+-      function __bextListen(type,handler,options){document.addEventListener(type,handler,options);listeners.push([type,handler,options]);}
+-      window.__bextDisposeIslandLoader=function(){listeners.forEach(function(l){document.removeEventListener(l[0],l[1],l[2]);});listeners=[];};
+-    `).replace("</script>", "})();</script>") : rawIslandLoaderHtml;
++  const islandLoaderHtml = normalizeIslandLoader(rawIslandLoaderHtml);
+   // Scrub the reserved \x01 sentinel from all untrusted input before anything
+   // reads it — closes the sentinel-forgery XSS path (see sanitizeEnvelope).
+   sanitizeEnvelope(envelope);
+--- a/sites/shared/framework/src/prism-bootstrap.test.ts
++++ b/sites/shared/framework/src/prism-bootstrap.test.ts
+@@ -0,0 +1,39 @@
++import { expect, test } from "bun:test";
++import { runRoute } from "./prism-runtime";
++import { safe } from "./jsx";
++
++test("reused compiler bootstrap preserves fresh HTML and disposes listeners on every browser replay", async () => {
++  let renders = 0;
++  const envelope = () => ({ params: {}, searchParams: {}, request: {
++    url: "https://fixture.invalid/", method: "GET", headers: {}, body: null,
++  } });
++  const render = async (islandLoaderHtml?: string) => {
++    const result = await runRoute({
++      Page: () => safe(`<html><head></head><body><p>${++renders}</p><bext-island data-component="Probe"></bext-island></body></html>`),
++      layouts: [], envelope: envelope(), dynamic: "force-dynamic", islandLoaderHtml,
++    });
++    if (result.kind !== "html") throw new Error("expected HTML");
++    return result.body;
++  };
++  const a = '<script>document.addEventListener("click",function(){window.probe="A";});</script>';
++  const b = '<script>document.addEventListener("focus",function(){window.probe="B";});</script>';
++  const script = (html: string) => html.match(/<script data-bext-island-loader>([\s\S]*?)<\/script>/)![1];
++  const first = await render(a), second = await render(a), changed = await render(b), again = await render(a);
++  expect(first).toContain("<p>1</p>"); expect(second).toContain("<p>2</p>");
++  expect(script(second)).toBe(script(first)); expect(script(again)).toBe(script(first));
++  expect(script(changed)).not.toBe(script(first));
++  const listeners = new Map<string, Function>();
++  const window: any = {};
++  const document = {
++    addEventListener(type: string, handler: Function) { listeners.set(type, handler); },
++    removeEventListener(type: string, handler: Function) { if (listeners.get(type) === handler) listeners.delete(type); },
++  };
++  for (const [html, type, marker] of [[first, "click", "A"], [second, "click", "A"], [changed, "focus", "B"], [again, "click", "A"]]) {
++    new Function("window", "document", script(html))(window, document);
++    expect(listeners.size).toBe(1); expect(listeners.has(type)).toBe(true);
++    listeners.get(type)!(); expect(window.probe).toBe(marker);
++  }
++  expect(await render()).not.toContain("data-bext-island-loader");
++  expect(await render('<script data-custom>window.custom=1;</script>')).toContain('<script data-custom>window.custom=1;</script>');
++  expect(script(await render(a))).toBe(script(first));
++});

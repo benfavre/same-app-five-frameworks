@@ -1,0 +1,14 @@
+[
+  {
+    "report": "flat.txt",
+    "displaySha256": "4924e4c05cbd17ff2123f0777864923491d78b6152e836a8b79f3ec86f197a09",
+    "fullReportPath": "/home/infra-sj278/work/bext-compiler-http-20261106/http-profile-full-flat.txt",
+    "fullReportSha256": "3df2f26bcbac5d0c0b9a729e29347293768b6915f2a881f612cb814179fa587a"
+  },
+  {
+    "report": "inclusive.txt",
+    "displaySha256": "a4624b3009ff0c4c66567b71bd910c218878baae1e675a2618e70f73932065da",
+    "fullReportPath": "/home/infra-sj278/work/bext-compiler-http-20261106/http-profile-full-inclusive.txt",
+    "fullReportSha256": "e763dbf510a8371ac99defebec696e3ab192f6c3f32fa5ccefeac24d619d01d6"
+  }
+]
