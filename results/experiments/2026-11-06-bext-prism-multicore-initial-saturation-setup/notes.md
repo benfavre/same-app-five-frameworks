@@ -1,0 +1,1 @@
+Initial higher-concurrency setup failed before any server or load was started because the private wrapper omitted the pinned BEXT_BIN and BEXT_SHARED_FRAMEWORK_DIR environment variables. No performance result was produced. The corrected attempt is retained separately under ../2026-11-06-bext-prism-multicore/saturation-200/ and failed its load contract with HTTP 503 responses.

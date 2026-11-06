@@ -1,0 +1,286 @@
+{
+  "status": "complete",
+  "productionChanged": false,
+  "clientColocated": true,
+  "serverCpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "clientCpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "warmupSeconds": 20,
+  "durationSeconds": 15,
+  "entries": 9,
+  "measuredHttp200": 3736457,
+  "loadErrors": 0,
+  "cpuAffinityViolations": 0,
+  "nativeSourceCommit": "a89da13e6917d3cf4c426a980295e4af7e03fd0b",
+  "mergedNativeRuntimeInputs": "e64d643d7a8ae43fac1fa3af4f4366bddfdb244d",
+  "nativeBinarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+  "frameworkSha256": "ae92033bc02dc15d6586a2f88b81092b3829ccc8e3478ea2e03ad4a0e130762e",
+  "logging": "HTTP access logging and continuous profiling enabled; Rust tracing warn",
+  "responseCache": false,
+  "guards": {
+    "guard.json": {
+      "command": [
+        "/usr/bin/python3",
+        "/home/infra-sj278/same-app-five-frameworks/harness/compare-bext-multicore.py",
+        "--binary",
+        "/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/bext-server",
+        "--framework",
+        "/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/source/sites/shared/framework",
+        "--output",
+        "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore",
+        "--lock-file",
+        "/home/infra-sj278/.local/state/bext-prism-scaling-20261031/measurement.lock"
+      ],
+      "rssCapKiB": 10485760,
+      "minimumAvailableKiB": 8388608,
+      "minimumDiskBytes": 4294967296,
+      "timeoutSeconds": 1200,
+      "productionChanged": false,
+      "peakRssKiB": 4348828,
+      "minimumObservedAvailableKiB": 24687388,
+      "guard": null,
+      "exitCode": 0,
+      "elapsedSeconds": 407.0612085238099,
+      "passed": true
+    },
+    "guard-saturation.json": {
+      "command": [
+        "/usr/bin/python3",
+        "/home/infra-sj278/same-app-five-frameworks/harness/run-benchmark.py",
+        "--frameworks",
+        "bext",
+        "--repeats",
+        "3",
+        "--cold-samples",
+        "1",
+        "--duration",
+        "15",
+        "--warmup-seconds",
+        "20",
+        "--concurrency",
+        "200",
+        "--server-cpus",
+        "0-23",
+        "--client-cpus",
+        "0-23",
+        "--bext-v8-workers",
+        "16",
+        "--bext-http-workers",
+        "24",
+        "--bext-log-filter",
+        "warn",
+        "--output",
+        "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/saturation-200",
+        "--bext-flag",
+        "BEXT_PRISM_PREPARED_PAGES=1",
+        "--bext-flag",
+        "BEXT_V8_LEGACY_HASH_HINT=1",
+        "--bext-flag",
+        "BEXT_V8_MULTIPLEX=0",
+        "--bext-flag",
+        "BEXT_PRISM_TOKEN_SCAN=1",
+        "--bext-flag",
+        "BEXT_V8_PREPARED_TEXT=2",
+        "--bext-flag",
+        "BEXT_PRISM_NATIVE_HTML_SCAN=1"
+      ],
+      "rssCapKiB": 10485760,
+      "minimumAvailableKiB": 8388608,
+      "minimumDiskBytes": 4294967296,
+      "timeoutSeconds": 1200,
+      "productionChanged": false,
+      "peakRssKiB": 3441612,
+      "minimumObservedAvailableKiB": 24240724,
+      "guard": null,
+      "exitCode": 1,
+      "elapsedSeconds": 26.714638525620103,
+      "passed": false
+    }
+  },
+  "accessLogs": [
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/01-4v8-1http/run-1/bext.server.log",
+      "sha256": "85fa2c21179bfaaa08d04cf5fdab2391d5341e9b998437e9ded013affd4fd4dd",
+      "bytes": 95683096,
+      "allPhasesStatusDistribution": {
+        "200": 389847,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/02-12v8-12http/run-1/bext.server.log",
+      "sha256": "aa1a608d2bf0eb49483ca1626191ad85a28ab8ceec43f3328c956193b9a471af",
+      "bytes": 315627755,
+      "allPhasesStatusDistribution": {
+        "200": 1285837,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/03-16v8-24http/run-1/bext.server.log",
+      "sha256": "d3155303e8c5d87cb2234f1b6908326f32e390953356c673a792d48057ba656c",
+      "bytes": 319494024,
+      "allPhasesStatusDistribution": {
+        "200": 1301571,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/04-12v8-12http/run-1/bext.server.log",
+      "sha256": "9aae6dc13e39295200c866f68df28648a2069f5182c7cc2ae7b79193856b1813",
+      "bytes": 305988537,
+      "allPhasesStatusDistribution": {
+        "200": 1246585,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/05-16v8-24http/run-1/bext.server.log",
+      "sha256": "fbcdf2cbf12aba6ca1bc06c3be5f47a58d55082c5d5d9c081a22ea060ce08e5c",
+      "bytes": 303968773,
+      "allPhasesStatusDistribution": {
+        "200": 1238320,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/06-4v8-1http/run-1/bext.server.log",
+      "sha256": "2f62ea75c5b40d0e4a71b6765c10a8efe3766c9fd578cca0c35ba5dbbed673fe",
+      "bytes": 93756862,
+      "allPhasesStatusDistribution": {
+        "200": 381993,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/07-16v8-24http/run-1/bext.server.log",
+      "sha256": "9c66693f117124f254e6cf7130bf1a31d1d50cbcc157d21c0460ab83b39e2e66",
+      "bytes": 302440944,
+      "allPhasesStatusDistribution": {
+        "200": 1232107,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/08-4v8-1http/run-1/bext.server.log",
+      "sha256": "4369882f8e2982c5d11a9a1bd6447ff8d81ae9f88883df7424aa5d50128c0b43",
+      "bytes": 94881414,
+      "allPhasesStatusDistribution": {
+        "200": 386572,
+        "404": 1
+      },
+      "retainedLocally": true
+    },
+    {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/09-12v8-12http/run-1/bext.server.log",
+      "sha256": "3aae0e9293cf0c38520b3538c9bcd544b957fc1f5eb6e11d9021f0ca1ed8fce7",
+      "bytes": 313772618,
+      "allPhasesStatusDistribution": {
+        "200": 1278273,
+        "404": 1
+      },
+      "retainedLocally": true
+    }
+  ],
+  "finishedAt": "2026-11-06T07:13:23.465028+00:00",
+  "benchmarkSourceCommit": "fc7e5433e41a5f47904025db2474fd57f90d00f5",
+  "overload200": {
+    "status": "failed",
+    "directory": "saturation-200",
+    "v8Workers": 16,
+    "httpWorkers": 24,
+    "concurrency": 200,
+    "campaign": {
+      "schemaVersion": 1,
+      "status": "failed",
+      "frameworks": [
+        "bext"
+      ],
+      "repeats": 3,
+      "runs": [
+        {
+          "directory": "run-1",
+          "order": [
+            "bext"
+          ]
+        }
+      ],
+      "startedAt": "2026-11-06T07:14:31.429205+00:00",
+      "error": "HTTP Error 503: Service Unavailable",
+      "finishedAt": "2026-11-06T07:14:57.436395+00:00"
+    },
+    "warmupStatusDistribution": {
+      "200": 737208,
+      "503": 150977
+    },
+    "warmupRejectedPercent": 16.99837308668802,
+    "qualifyingThroughputResult": false,
+    "note": "Freshness proof encountered HTTP 503; measured load was aborted, no complete oha load output or browser/freshness pass. Warmup statuses are not measured throughput.",
+    "accessLog": {
+      "path": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-prism-multicore/saturation-200/run-1/bext.server.log",
+      "sha256": "de9e8e1e9586aa83185c2dc10c3a8eef442a7f6a38d389bb5f4649bef810a29a",
+      "bytes": 254543264,
+      "allPhasesStatusDistribution": {
+        "200": 747522,
+        "503": 154682
+      },
+      "retainedLocally": true
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "frameworks": [
+    "bext"
+  ],
+  "repeats": 3,
+  "runs": [
+    {
+      "directory": "run-1",
+      "order": [
+        "bext"
+      ]
+    }
+  ],
+  "startedAt": "2026-11-06T07:14:31.429205+00:00",
+  "error": "HTTP Error 503: Service Unavailable",
+  "finishedAt": "2026-11-06T07:14:57.436395+00:00"
+}

@@ -22,6 +22,18 @@ Every framework receives **20 seconds of warmup**, followed by an eight-second l
 
 The [response-writer experiment](results/experiments/2026-11-05-bext-reply-transport/table.md), [reply-read-buffer trial](results/experiments/2026-11-06-bext-read-buffer/table.md), [direct-props serializer trial](results/experiments/2026-11-06-bext-direct-props/table.md) and [text-conversion screen](results/experiments/2026-11-06-bext-text-modes/table.md) did not improve performance and remain unselected. The [profiler-startup probe](results/experiments/2026-11-06-bext-profiler-startup/notes.md) explains the longer warmup; a [JavaScript profiling helper](https://github.com/benfavre/bext/pull/423) is merged with [sample output](results/experiments/2026-11-06-bext-jit-profile/notes.md). The earlier default-settings baseline follows; `results/latest.json` continues to identify that baseline.
 
+## Bext PRISM — full-machine throughput, 2026-11-06
+
+All 24 logical CPUs of the Ryzen 9 5900X (12 physical cores) are available to the server tree. Three runs per row, 20-second warmup and 15-second loads; fresh rendering, continuous profiling and HTTP access logging stay enabled. Clients share the machine.
+
+| V8 / HTTP workers | Connections | RPS median | RPS min–max | Server CPU equivalents | CPU ms/request | p99 |
+|---|---:|---:|---:|---:|---:|---:|
+| 4 / 1 | 50 | 10,969 | 10,928–11,122 | 2.77 | 0.2684 | 7.15 ms |
+| 12 / 12 | 50 | 36,118 | 35,538–37,254 | 14.02 | 0.4128 | 3.23 ms |
+| 16 / 24 | 50 | 34,734 | 34,217–38,144 | 14.59 | 0.4436 | 3.56 ms |
+
+All 9 completed load/browser entries passed: 3,736,457 measured HTTP 200 responses, no load errors or CPU-affinity violations. These configured-instance figures have a different CPU budget from the equal-CPU comparison above. **The separate 200-connection check failed with HTTP 503 responses** (about 17% during warmup); no throughput result from that attempt qualifies. Observed ranges are not confidence intervals. [Method, reproduction and raw evidence](results/experiments/2026-11-06-bext-prism-multicore/notes.md).
+
 ## Default-settings baseline — equal CPU budget, 2026-11-05
 
 **Every server, child process and helper thread is pinned to one hardware thread
