@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "frameworks": [
+    "bext"
+  ],
+  "repeats": 1,
+  "runs": [
+    {
+      "directory": "run-1",
+      "order": [
+        "bext"
+      ]
+    }
+  ],
+  "startedAt": "2026-11-06T17:34:20.844779+00:00",
+  "error": "bext: warmup: errors or non-200s: {'200': 728439, '503': 152122}, {}",
+  "finishedAt": "2026-11-06T17:34:45.783127+00:00"
+}

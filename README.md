@@ -24,15 +24,19 @@ The [response-writer experiment](results/experiments/2026-11-05-bext-reply-trans
 
 ## Bext PRISM — full-machine throughput, 2026-11-06
 
-All 24 logical CPUs of the Ryzen 9 5900X (12 physical cores) are available to the server tree. Three runs per row, 20-second warmup and 15-second loads; fresh rendering, continuous profiling and HTTP access logging stay enabled. Clients share the machine.
+The [admission fix](https://github.com/benfavre/bext/pull/430) queues brief per-site contention instead of immediately returning 503. The default wait is 250 ms with at most 256 waiting requests per site; existing fair-share and pool limits remain in force. A full queue or expired deadline still returns 503 + Retry-After.
 
-| V8 / HTTP workers | Connections | RPS median | RPS min–max | Server CPU equivalents | CPU ms/request | p99 |
-|---|---:|---:|---:|---:|---:|---:|
-| 4 / 1 | 50 | 10,969 | 10,928–11,122 | 2.77 | 0.2684 | 7.15 ms |
-| 12 / 12 | 50 | 36,118 | 35,538–37,254 | 14.02 | 0.4128 | 3.23 ms |
-| 16 / 24 | 50 | 34,734 | 34,217–38,144 | 14.59 | 0.4436 | 3.56 ms |
+All 24 logical CPUs of the Ryzen 9 5900X (12 physical cores) are available to the entire server tree. Clients share the host. Three fresh-server runs per row, 20-second warmup and 15-second loads; fresh rendering, continuous profiling and HTTP access logging stay enabled.
 
-All 9 completed load/browser entries passed: 3,736,457 measured HTTP 200 responses, no load errors or CPU-affinity violations. These configured-instance figures have a different CPU budget from the equal-CPU comparison above. **The separate 200-connection check failed with HTTP 503 responses** (about 17% during warmup); no throughput result from that attempt qualifies. Observed ranges are not confidence intervals. [Method, reproduction and raw evidence](results/experiments/2026-11-06-bext-prism-multicore/notes.md).
+| Runtime | V8 / HTTP | Connections | Median RPS | RPS min–max | Server CPU equivalents | p99 |
+|---|---|---:|---:|---:|---:|---:|
+| Original immediate admission | 12 / 12 | 50 | 36,862 | 30,829–38,401 | 14.34 | 2.88 ms |
+| Bounded admission wait | 12 / 12 | 50 | 36,652 | 35,303–36,764 | 14.12 | 3.05 ms |
+| Bounded admission wait | 16 / 24 | 200 | 25,969 | 24,990–27,563 | 11.51 | 11.82 ms |
+
+With the wait enabled, **all six entries passed: 3,658,428 warmup and 2,809,837 measured HTTP 200 responses, zero warmup/load errors**. All three 200-connection runs passed browser/SSR/freshness checks. At 50 connections, observed median throughput changed −0.57% and p99 changed from 2.88 to 3.05 ms; this is a correctness fix, not a speedup claim. The 50-connection comparison uses balanced AB/BA/AB ordering. These shared-host ranges are not confidence intervals.
+
+Waiting disabled on the same rebuilt binary reproduced 152,122 warmup 503 responses. That failed control and the [earlier full-machine pool sizing and failed overload attempt](results/experiments/2026-11-06-bext-prism-multicore/notes.md) remain archived. New campaigns reject non-200 warmup responses and publication rechecks that evidence. [Method, raw evidence and identities](results/experiments/2026-11-06-bext-site-admission-wait/notes.md). The one-CPU comparison above uses its separately pinned runtime and CPU budget.
 
 ## Default-settings baseline — equal CPU budget, 2026-11-05
 
