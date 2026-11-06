@@ -1,6 +1,7 @@
 {
-  "campaign": "experiments/2026-11-06-bext-prism-multicore",
-  "finishedAt": "2026-11-06T07:13:23.465028+00:00",
-  "profile": "Bext-only; all 24 logical CPUs allowed; fresh rendering; co-located clients",
-  "nativeSourceCommit": "a89da13e6917d3cf4c426a980295e4af7e03fd0b"
+  "campaign": "experiments/2026-11-06-bext-site-admission-wait",
+  "profile": "Bext-only; bounded admission wait; all 24 logical CPUs allowed; co-located clients",
+  "nativeSourceCommit": "df92672c8b09ad747e763dda7179adfbbf81e579",
+  "nativePullRequest": "https://github.com/benfavre/bext/pull/430",
+  "completedAt": 1793986920.3672352
 }

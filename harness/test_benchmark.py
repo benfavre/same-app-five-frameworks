@@ -84,6 +84,19 @@ class EvidenceTests(unittest.TestCase):
         with self.assertRaises(FileNotFoundError):
             summarize_campaign(self.root)
 
+    def test_rechecks_required_warmup_evidence(self):
+        self.write("metadata.json", {"parameters": {"warmupHttp200Required": True}})
+        for i in range(3):
+            self.write(f"run-{i}/next.warmup.json", {"summary": {"successRate": 1},
+                       "statusCodeDistribution": {"200": 100}, "errorDistribution": {}})
+        summarize_campaign(self.root)
+        self.change("run-0/next.warmup.json", statusCodeDistribution={"200": 99, "503": 1})
+        with self.assertRaisesRegex(ValueError, "warmup"):
+            summarize_campaign(self.root)
+        (self.root / "run-0/next.warmup.json").unlink()
+        with self.assertRaises(FileNotFoundError):
+            summarize_campaign(self.root)
+
     def test_cpu_campaign_requires_valid_audits_for_every_entry(self):
         self.write("metadata.json", {"cpuBudget": {"serverCpus": [0]}})
         for i in range(3):
@@ -101,6 +114,16 @@ class EvidenceTests(unittest.TestCase):
 
 
 class ProcessSafetyTests(unittest.TestCase):
+    def test_warmup_and_load_reject_http_errors_even_with_transport_success(self):
+        result = {"summary": {"successRate": 1}, "statusCodeDistribution": {"200": 100}, "errorDistribution": {}}
+        runner.require_http_200(result, "warmup")
+        for label in ["warmup", "load"]:
+            for statuses in [{"200": 100, "503": 1}, {"503": 100}, {"200": 0}]:
+                with self.assertRaisesRegex(RuntimeError, label):
+                    runner.require_http_200({**result, "statusCodeDistribution": statuses}, label)
+        with self.assertRaises(RuntimeError):
+            runner.require_http_200({**result, "errorDistribution": {"timeout": 1}}, "warmup")
+
     def test_performance_options_preserve_response_caching_and_transport_defaults(self):
         for option in ["BEXT_PRISM_RENDER_CACHE=1", "BEXT_V8_SUBPROCESS=1"]:
             with self.assertRaises(argparse.ArgumentTypeError):

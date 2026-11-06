@@ -35,6 +35,13 @@ def summarize_campaign(path):
             oha = read(prefix.with_suffix(".oha.json"))
             build = read(prefix.with_suffix(".build.json"))
             cold = read(prefix.with_suffix(".cold.json"))
+            if metadata.get("parameters", {}).get("warmupHttp200Required"):
+                warmup = read(prefix.with_suffix(".warmup.json"))
+                if not (set(warmup["statusCodeDistribution"]) == {"200"}
+                        and warmup["statusCodeDistribution"]["200"] > 0
+                        and warmup["summary"]["successRate"] == 1
+                        and not warmup.get("errorDistribution")):
+                    raise ValueError(f"{prefix}: HTTP/warmup errors")
             if not (browser["status"] == 200 and browser["ssrCards"] == 24 and browser["ssrProducts"] == 24
                     and all(browser.get(key) for key in ["counterOk", "themeOk", "themePersistOk", "searchOk"])
                     and not browser.get("resourceErrors")):
