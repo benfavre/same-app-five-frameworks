@@ -365,5 +365,12 @@
     "greenCiClaimed": false
   },
   "pullRequestHead": "fc40ffa17e4e2618f07cb1f51c55cd25834419b7",
-  "codeChangesAfterBuild": []
+  "codeChangesAfterBuild": [],
+  "mergedCommit": "22b2524df8f065285bbd4f76b96efc4635ecdcb7",
+  "mergedNativeCargoSdkDifferencesFromBuiltSource": [],
+  "githubStatusAtPullRequestHead": {
+    "commit": "fc40ffa17e4e2618f07cb1f51c55cd25834419b7",
+    "statuses": [],
+    "greenCiClaimed": false
+  }
 }

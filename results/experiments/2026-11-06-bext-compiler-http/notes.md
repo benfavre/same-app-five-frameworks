@@ -133,3 +133,5 @@ row use 16 V8 / 24 HTTP workers and three repeats. Exact task drivers and option
 are retained under [reproduction](reproduction/); their private artifact paths
 must exist before use. Lossless raw server logs and perf data are retained at
 the recorded local paths; JSON evidence and their hashes are versioned here.
+
+The native implementation is merged in [Bext PR #432](https://github.com/benfavre/bext/pull/432) as `22b2524df8f065285bbd4f76b96efc4635ecdcb7`. Native/Cargo/SDK inputs match the qualified code commit exactly; the PR head adds documentation only. The production binary and service flags remain unchanged.
