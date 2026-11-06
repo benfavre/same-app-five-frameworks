@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "status": "failed",
+  "frameworks": [
+    "bext"
+  ],
+  "repeats": 3,
+  "runs": [],
+  "startedAt": "2026-11-06T07:13:23.564206+00:00",
+  "error": "bext requires BEXT_BIN and BEXT_SHARED_FRAMEWORK_DIR; explicitly omit it with --frameworks to run fewer apps",
+  "finishedAt": "2026-11-06T07:13:23.652082+00:00"
+}

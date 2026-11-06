@@ -1,0 +1,912 @@
+{
+  "method": "sampled /proc server process tree; all thread affinity masks",
+  "sampleIntervalSeconds": 0.25,
+  "clockTicksPerSecond": 100,
+  "wallSeconds": 15.896371614187956,
+  "cpuSeconds": 231.9,
+  "averageCpuCores": 14.588234700868641,
+  "requestedCpuAffinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "affinityViolations": [],
+  "errors": [],
+  "samples": [
+    {
+      "elapsedSeconds": 0.03669370710849762,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 0.32016944512724876,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 0.607894154265523,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 0.9331268481910229,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 1.2491481974720955,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 1.552092108875513,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 1.8710426483303308,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 2.195159124210477,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 2.504994036629796,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 2.836632365360856,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 3.1552273854613304,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 3.454121593385935,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 3.7498728465288877,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 4.047060517594218,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 4.346038833260536,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 4.658461380749941,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 4.970516704022884,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 5.2826639246195555,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 5.610896319150925,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 5.954165376722813,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 6.267885459586978,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 6.584178410470486,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 6.891814334318042,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 7.203031864017248,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 7.518387615680695,
+      "processCount": 17,
+      "threadCount": 437
+    },
+    {
+      "elapsedSeconds": 7.834604285657406,
+      "processCount": 17,
+      "threadCount": 443
+    },
+    {
+      "elapsedSeconds": 8.1474535074085,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 8.449836680665612,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 8.76477836444974,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 9.0828319452703,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 9.399917352944613,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 9.731613928452134,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 10.061354724690318,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 10.369253506883979,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 10.674033237621188,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 10.99948038905859,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 11.317249312996864,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 11.634017374366522,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 11.942429987713695,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 12.251076141372323,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 12.570978060364723,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 12.896006688475609,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 13.231648776680231,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 13.561434295028448,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 13.888745184987783,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 14.204094745218754,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 14.518362941220403,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 14.843619730323553,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 15.15609428845346,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 15.470083581283689,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 15.752224300056696,
+      "processCount": 17,
+      "threadCount": 459
+    },
+    {
+      "elapsedSeconds": 15.896368408575654,
+      "processCount": 17,
+      "threadCount": 459
+    }
+  ],
+  "processes": [
+    {
+      "pid": 555200,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1528,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.29
+    },
+    {
+      "pid": 555328,
+      "parent": 555174,
+      "startTicks": 1273236668,
+      "cpuTicks": 1519,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.27
+    },
+    {
+      "pid": 555202,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1544,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.37
+    },
+    {
+      "pid": 555204,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1539,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.43
+    },
+    {
+      "pid": 555268,
+      "parent": 555174,
+      "startTicks": 1273236668,
+      "cpuTicks": 1538,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.47
+    },
+    {
+      "pid": 555344,
+      "parent": 555174,
+      "startTicks": 1273236668,
+      "cpuTicks": 1519,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.3
+    },
+    {
+      "pid": 555408,
+      "parent": 555174,
+      "startTicks": 1273236668,
+      "cpuTicks": 1518,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.3
+    },
+    {
+      "pid": 555220,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1523,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.29
+    },
+    {
+      "pid": 555233,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1539,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.41
+    },
+    {
+      "pid": 555237,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1518,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.33
+    },
+    {
+      "pid": 555174,
+      "parent": 553715,
+      "startTicks": 1273236665,
+      "cpuTicks": 30811,
+      "threadCount": 123,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 130.53
+    },
+    {
+      "pid": 555239,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1524,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.36
+    },
+    {
+      "pid": 555241,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1539,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.35
+    },
+    {
+      "pid": 555244,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1514,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.26
+    },
+    {
+      "pid": 555245,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1518,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.24
+    },
+    {
+      "pid": 555248,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1529,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.38
+    },
+    {
+      "pid": 555251,
+      "parent": 555174,
+      "startTicks": 1273236667,
+      "cpuTicks": 1531,
+      "threadCount": 21,
+      "threadCpuAffinities": [
+        [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      ],
+      "cpuSeconds": 6.32
+    }
+  ]
+}
