@@ -32,6 +32,7 @@ PERFORMANCE_FLAGS["BEXT_V8_MAX_SEMI_SPACE_MB"] = {"4", "8", "16"}
 PERFORMANCE_FLAGS["BEXT_V8_BY_HASH_REPLY_TRANSPORT"] = {"0", "1", "2"}
 PERFORMANCE_FLAGS["BEXT_V8_REPLY_READ_BUFFER_BYTES"] = {"0", "512", "4096"}
 PERFORMANCE_FLAGS["BEXT_PRISM_DIRECT_PROPS_JSON"] = {"0", "1"}
+PERFORMANCE_FLAGS["BEXT_V8_SITE_WAIT_MS"] = {"0", "250"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
@@ -94,6 +95,13 @@ def performance_flag(value):
         allowed = ", ".join(f"{name}={'|'.join(sorted(values))}" for name, values in sorted(PERFORMANCE_FLAGS.items()))
         raise argparse.ArgumentTypeError("expected an allowed performance setting: " + allowed)
     return key, setting
+
+
+def require_http_200(result, label):
+    statuses = result["statusCodeDistribution"]
+    if (set(statuses) != {"200"} or not statuses["200"] or result.get("errorDistribution")
+            or result["summary"]["successRate"] != 1):
+        raise RuntimeError(f"{label}: errors or non-200s: {statuses}, {result.get('errorDistribution')}")
 
 
 def process_tree(pid):
@@ -361,6 +369,7 @@ def measure(fw, bench, directory, args):
             with prefix.with_suffix(".warmup.json").open("w") as output, prefix.with_suffix(".warmup.log").open("w") as errors:
                 subprocess.run(base + ["-z", f"{args.warmup_seconds}s"], stdout=output, stderr=errors,
                                env=oha_env, check=True, timeout=args.warmup_seconds + 30)
+            require_http_200(json.loads(prefix.with_suffix(".warmup.json").read_text()), f"{fw}: warmup")
             samples = []
             print(f"  {fw}: {args.duration}s load, concurrency {args.concurrency}", flush=True)
             with prefix.with_suffix(".oha.json").open("w") as output, prefix.with_suffix(".oha.log").open("w") as errors:
@@ -386,9 +395,7 @@ def measure(fw, bench, directory, args):
                 if cpu["affinityViolations"] or cpu["errors"]:
                     raise RuntimeError(f"{fw}: CPU affinity audit failed; see {prefix}.cpu.json")
             oha = json.loads(prefix.with_suffix(".oha.json").read_text())
-            statuses = oha["statusCodeDistribution"]
-            if set(statuses) != {"200"} or not statuses["200"] or oha.get("errorDistribution") or oha["summary"]["successRate"] != 1:
-                raise RuntimeError(f"{fw}: load errors or non-200s: {statuses}, {oha.get('errorDistribution')}")
+            require_http_200(oha, f"{fw}: load")
         proof = {"r1": r1, "r2": r2, "loadSamples": samples, "loadDistinct": len(set(samples)),
                  "uncached": r1 != r2 and len(set(samples)) == 20}
         write_json(prefix.with_suffix(".proof"), proof)

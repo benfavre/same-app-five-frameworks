@@ -101,6 +101,16 @@ class EvidenceTests(unittest.TestCase):
 
 
 class ProcessSafetyTests(unittest.TestCase):
+    def test_warmup_and_load_reject_http_errors_even_with_transport_success(self):
+        result = {"summary": {"successRate": 1}, "statusCodeDistribution": {"200": 100}, "errorDistribution": {}}
+        runner.require_http_200(result, "warmup")
+        for label in ["warmup", "load"]:
+            for statuses in [{"200": 100, "503": 1}, {"503": 100}, {"200": 0}]:
+                with self.assertRaisesRegex(RuntimeError, label):
+                    runner.require_http_200({**result, "statusCodeDistribution": statuses}, label)
+        with self.assertRaises(RuntimeError):
+            runner.require_http_200({**result, "errorDistribution": {"timeout": 1}}, "warmup")
+
     def test_performance_options_preserve_response_caching_and_transport_defaults(self):
         for option in ["BEXT_PRISM_RENDER_CACHE=1", "BEXT_V8_SUBPROCESS=1"]:
             with self.assertRaises(argparse.ArgumentTypeError):
