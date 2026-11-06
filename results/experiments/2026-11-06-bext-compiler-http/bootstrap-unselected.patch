@@ -3,7 +3,7 @@
 @@ -1545,6 +1545,30 @@
    return false;
  }
- 
+
 +// Cache one immutable compiler bootstrap, never a rendered response. The
 +// generated wrapper passes the same script on each request. A one-entry cache
 +// is bounded and switches immediately when a different wrapper is evaluated.
