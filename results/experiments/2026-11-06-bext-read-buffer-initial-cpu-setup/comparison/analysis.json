@@ -1,0 +1,20 @@
+{
+  "status": "failed",
+  "screen": [],
+  "confirmation": [],
+  "screenDurationSeconds": 8,
+  "confirmationDurationSeconds": 15,
+  "method": "five-cell exploratory screen; independent AB/BA/AB confirmation",
+  "productionChanged": false,
+  "responseCache": false,
+  "flags": {
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+  },
+  "detailedLogFilter": "warn",
+  "error": "Command '['/usr/bin/python3', '/home/infra-sj278/same-app-five-frameworks/harness/run-benchmark.py', '--frameworks', 'bext', '--repeats', '1', '--cold-samples', '1', '--duration', '8', '--concurrency', '50', '--server-cpus', '10', '--client-cpus', '0-9,11-21,23', '--bext-v8-workers', '4', '--bext-http-workers', '1', '--bext-log-filter', 'warn', '--output', '/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/screen-01-original', '--bext-flag', 'BEXT_V8_MULTIPLEX=0', '--bext-flag', 'BEXT_PRISM_PREPARED_PAGES=1', '--bext-flag', 'BEXT_V8_LEGACY_HASH_HINT=1', '--bext-flag', 'BEXT_PRISM_TOKEN_SCAN=1', '--bext-flag', 'BEXT_V8_PREPARED_TEXT=2', '--bext-flag', 'BEXT_PRISM_NATIVE_HTML_SCAN=1', '--bext-flag', 'BEXT_V8_REPLY_READ_BUFFER_BYTES=0']' returned non-zero exit status 2."
+}

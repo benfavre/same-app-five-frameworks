@@ -1,0 +1,14 @@
+{
+  "perf.data": {
+    "localPath": "/home/infra-sj278/work/bext-prism-jit-profile-20261106/profile/perf.data",
+    "sha256": "062c6c8859e97d19b3527a4cfdab081472500747eac7c548003dd816da945acb"
+  },
+  "bundle.js": {
+    "localPath": "/home/infra-sj278/work/bext-prism-jit-profile-20261106/profile/bundle.js",
+    "sha256": "28d22d0235831ec2d366b82095c45b442831e8d27f1af5c881ed7134ae52c8af"
+  },
+  "captured.html": {
+    "localPath": "/home/infra-sj278/work/bext-prism-jit-profile-20261106/profile/captured.html",
+    "sha256": "21d407c8d28a64ff4478686d656d5e21d7f201cf7c0a71c6c933266d23cd5b47"
+  }
+}

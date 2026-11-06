@@ -1,0 +1,106 @@
+{
+  "status": "complete",
+  "capacity": 0,
+  "activationLines": [],
+  "cpuAudit": {
+    "method": "sampled /proc server process tree; all thread affinity masks",
+    "sampleIntervalSeconds": 0.25,
+    "clockTicksPerSecond": 100,
+    "wallSeconds": 0.14235437288880348,
+    "cpuSeconds": 0.07,
+    "averageCpuCores": 0.49173059161785454,
+    "requestedCpuAffinity": [
+      10
+    ],
+    "affinityViolations": [],
+    "errors": [],
+    "samples": [
+      {
+        "elapsedSeconds": 0.036194462329149246,
+        "processCount": 5,
+        "threadCount": 128
+      },
+      {
+        "elapsedSeconds": 0.1423514373600483,
+        "processCount": 5,
+        "threadCount": 127
+      }
+    ],
+    "processes": [
+      {
+        "pid": 253542,
+        "parent": 36722,
+        "startTicks": 1270852078,
+        "cpuTicks": 4,
+        "threadCount": 43,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 253575,
+        "parent": 253542,
+        "startTicks": 1270852079,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 253576,
+        "parent": 253542,
+        "startTicks": 1270852079,
+        "cpuTicks": 1,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 253577,
+        "parent": 253542,
+        "startTicks": 1270852079,
+        "cpuTicks": 1,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 253578,
+        "parent": 253542,
+        "startTicks": 1270852079,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      }
+    ]
+  },
+  "flags": {
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "BEXT_V8_REPLY_READ_BUFFER_BYTES": "0"
+  }
+}

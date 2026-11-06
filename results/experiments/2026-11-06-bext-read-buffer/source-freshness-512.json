@@ -1,0 +1,177 @@
+{
+  "status": "complete",
+  "cases": [
+    {
+      "preparedPages": 0,
+      "case": "initial",
+      "status": 200,
+      "renderedAt": "1793925743161",
+      "elapsedMs": 8.63
+    },
+    {
+      "preparedPages": 0,
+      "case": "api-fresh-request-data",
+      "requests": 24,
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "code": "original",
+      "elapsedMs": 32.57
+    },
+    {
+      "preparedPages": 0,
+      "case": "api-source-edit",
+      "requests": 24,
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "code": "changed",
+      "elapsedMs": 843.31
+    },
+    {
+      "preparedPages": 0,
+      "case": "page-edit",
+      "status": 200,
+      "renderedAt": "1793925744056",
+      "elapsedMs": 20.61
+    },
+    {
+      "preparedPages": 0,
+      "case": "layout-edit",
+      "status": 200,
+      "renderedAt": "1793925745130",
+      "elapsedMs": 1074.66
+    },
+    {
+      "preparedPages": 0,
+      "case": "imported-data-edit",
+      "status": 200,
+      "renderedAt": "1793925746194",
+      "elapsedMs": 1060.96
+    },
+    {
+      "preparedPages": 0,
+      "case": "layout-delete",
+      "status": 200,
+      "renderedAt": "1793925747344",
+      "elapsedMs": 1152.39
+    },
+    {
+      "preparedPages": 0,
+      "case": "layout-add",
+      "status": 200,
+      "renderedAt": "1793925748435",
+      "elapsedMs": 1090.83
+    },
+    {
+      "preparedPages": 0,
+      "case": "render-stays-fresh",
+      "status": 200,
+      "renderedAt": "1793925748463",
+      "elapsedMs": 5.37
+    },
+    {
+      "preparedPages": 1,
+      "case": "initial",
+      "status": 200,
+      "renderedAt": "1793925750740",
+      "elapsedMs": 9.75
+    },
+    {
+      "preparedPages": 1,
+      "case": "api-fresh-request-data",
+      "requests": 24,
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "code": "original",
+      "elapsedMs": 38.3
+    },
+    {
+      "preparedPages": 1,
+      "case": "api-source-edit",
+      "requests": 24,
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "code": "changed",
+      "elapsedMs": 853.22
+    },
+    {
+      "preparedPages": 1,
+      "case": "page-edit",
+      "status": 200,
+      "renderedAt": "1793925751654",
+      "elapsedMs": 22.87
+    },
+    {
+      "preparedPages": 1,
+      "case": "layout-edit",
+      "status": 200,
+      "renderedAt": "1793925752719",
+      "elapsedMs": 1066.72
+    },
+    {
+      "preparedPages": 1,
+      "case": "imported-data-edit",
+      "status": 200,
+      "renderedAt": "1793925753775",
+      "elapsedMs": 1053.35
+    },
+    {
+      "preparedPages": 1,
+      "case": "layout-delete",
+      "status": 200,
+      "renderedAt": "1793925754922",
+      "elapsedMs": 1148.91
+    },
+    {
+      "preparedPages": 1,
+      "case": "layout-add",
+      "status": 200,
+      "renderedAt": "1793925756006",
+      "elapsedMs": 1083.68
+    },
+    {
+      "preparedPages": 1,
+      "case": "render-stays-fresh",
+      "status": 200,
+      "renderedAt": "1793925756033",
+      "elapsedMs": 4.87
+    }
+  ],
+  "serverCpu": 10,
+  "clientCpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    23
+  ],
+  "fixtureCopiesOnly": true,
+  "liveReload": true,
+  "watcherWarmupSeconds": 1.25,
+  "legacyHashHint": 1,
+  "note": "Source edits use the documented one-second watcher in disposable fixtures; timed benchmarks retain live_reload=false."
+}

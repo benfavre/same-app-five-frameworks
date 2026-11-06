@@ -1,0 +1,10 @@
+{
+  "params": {},
+  "searchParams": {},
+  "request": {
+    "url": "http://127.0.0.1:18106/codex-profile-4b67ad074be6",
+    "method": "GET",
+    "headers": {},
+    "body": null
+  }
+}

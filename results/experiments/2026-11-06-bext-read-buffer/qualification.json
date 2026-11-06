@@ -1,0 +1,796 @@
+{
+  "status": "complete",
+  "sourceCommit": "7b81d84bd10429b78d7b4d5b424d79e229121b24",
+  "baseCommit": "e64d643d7a8ae43fac1fa3af4f4366bddfdb244d",
+  "nativeBuild": {
+    "at": 1793925222.4200184,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 478.33397061377764,
+    "peak_rss_kib": 7171816,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+    "binary_bytes": 1095686320,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "nativeTests": {
+    "at": 1793924744.085602,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--lib",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 26.295917078852654,
+    "peak_rss_kib": 1404096,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 231,
+        "failed": 0,
+        "ignored": 4,
+        "measured": 0,
+        "filtered": 0
+      }
+    ]
+  },
+  "initialCompileFailure": {
+    "at": 1793924642.2991302,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--lib",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 101,
+    "elapsed_s": 29.102432150393724,
+    "peak_rss_kib": 3065844,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": false,
+    "test_counts": []
+  },
+  "inputManifestSha256": "43226a37760f19feeaef67fecaeb6cda46ecf5f1c28f735bbfcc4a64510c6bd0",
+  "externalManifestSha256": "ce5a974c0ef69e11b8ae2be47087c862789fa4fe1b2c2d904d9cd8705806ef5b",
+  "productionChanged": false,
+  "activation": [
+    {
+      "status": "complete",
+      "capacity": 0,
+      "activationLines": [],
+      "cpuAudit": {
+        "method": "sampled /proc server process tree; all thread affinity masks",
+        "sampleIntervalSeconds": 0.25,
+        "clockTicksPerSecond": 100,
+        "wallSeconds": 0.12521536275744438,
+        "cpuSeconds": 0.06,
+        "averageCpuCores": 0.47917442938872,
+        "requestedCpuAffinity": [
+          10
+        ],
+        "affinityViolations": [],
+        "errors": [],
+        "samples": [
+          {
+            "elapsedSeconds": 0.03254469484090805,
+            "processCount": 5,
+            "threadCount": 127
+          },
+          {
+            "elapsedSeconds": 0.12521142698824406,
+            "processCount": 5,
+            "threadCount": 127
+          }
+        ],
+        "processes": [
+          {
+            "pid": 393424,
+            "parent": 393384,
+            "startTicks": 1270877440,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 393425,
+            "parent": 393384,
+            "startTicks": 1270877440,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 393427,
+            "parent": 393384,
+            "startTicks": 1270877440,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 393384,
+            "parent": 393223,
+            "startTicks": 1270877439,
+            "cpuTicks": 4,
+            "threadCount": 43,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 393423,
+            "parent": 393384,
+            "startTicks": 1270877440,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.0
+          }
+        ]
+      },
+      "flags": {
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_REPLY_READ_BUFFER_BYTES": "0"
+      }
+    },
+    {
+      "status": "complete",
+      "capacity": 512,
+      "activationLines": [
+        "{\"timestamp\":\"2026-11-06T00:37:59.008430Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":0,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:37:59.008508Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":1,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:37:59.008609Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":2,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:37:59.008721Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":3,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}"
+      ],
+      "cpuAudit": {
+        "method": "sampled /proc server process tree; all thread affinity masks",
+        "sampleIntervalSeconds": 0.25,
+        "clockTicksPerSecond": 100,
+        "wallSeconds": 0.14472342655062675,
+        "cpuSeconds": 0.06,
+        "averageCpuCores": 0.4145838820297069,
+        "requestedCpuAffinity": [
+          10
+        ],
+        "affinityViolations": [],
+        "errors": [],
+        "samples": [
+          {
+            "elapsedSeconds": 0.0421317033469677,
+            "processCount": 5,
+            "threadCount": 127
+          },
+          {
+            "elapsedSeconds": 0.14472031220793724,
+            "processCount": 5,
+            "threadCount": 127
+          }
+        ],
+        "processes": [
+          {
+            "pid": 394321,
+            "parent": 393223,
+            "startTicks": 1270877543,
+            "cpuTicks": 3,
+            "threadCount": 43,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.0
+          },
+          {
+            "pid": 394346,
+            "parent": 394321,
+            "startTicks": 1270877544,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.0
+          },
+          {
+            "pid": 394348,
+            "parent": 394321,
+            "startTicks": 1270877544,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 394349,
+            "parent": 394321,
+            "startTicks": 1270877545,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 394350,
+            "parent": 394321,
+            "startTicks": 1270877545,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          }
+        ]
+      },
+      "flags": {
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_REPLY_READ_BUFFER_BYTES": "512"
+      }
+    },
+    {
+      "status": "complete",
+      "capacity": 4096,
+      "activationLines": [
+        "{\"timestamp\":\"2026-11-06T00:38:00.066060Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":0,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:38:00.066130Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":1,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:38:00.066226Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":2,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:38:00.066332Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":3,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}"
+      ],
+      "cpuAudit": {
+        "method": "sampled /proc server process tree; all thread affinity masks",
+        "sampleIntervalSeconds": 0.25,
+        "clockTicksPerSecond": 100,
+        "wallSeconds": 0.14115703478455544,
+        "cpuSeconds": 0.07,
+        "averageCpuCores": 0.4959016042440911,
+        "requestedCpuAffinity": [
+          10
+        ],
+        "affinityViolations": [],
+        "errors": [],
+        "samples": [
+          {
+            "elapsedSeconds": 0.043915675953030586,
+            "processCount": 5,
+            "threadCount": 127
+          },
+          {
+            "elapsedSeconds": 0.14115466177463531,
+            "processCount": 5,
+            "threadCount": 127
+          }
+        ],
+        "processes": [
+          {
+            "pid": 394499,
+            "parent": 393223,
+            "startTicks": 1270877648,
+            "cpuTicks": 4,
+            "threadCount": 43,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 394523,
+            "parent": 394499,
+            "startTicks": 1270877649,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 394524,
+            "parent": 394499,
+            "startTicks": 1270877650,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 394525,
+            "parent": 394499,
+            "startTicks": 1270877650,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 394526,
+            "parent": 394499,
+            "startTicks": 1270877650,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          }
+        ]
+      },
+      "flags": {
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_REPLY_READ_BUFFER_BYTES": "4096"
+      }
+    }
+  ],
+  "comparison": {
+    "status": "complete",
+    "screen": [
+      {
+        "arm": "original",
+        "mode": 0,
+        "original": true,
+        "block": null,
+        "directory": "screen-01-original",
+        "binarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+        "run": "run-1",
+        "rps": 3509.6321704426487,
+        "ttfb_ms": 13.658805,
+        "p99_ms": 30.538472000000002,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28102,
+        "average_cpu_cores": 0.9191725705260668,
+        "cpu_ms_per_request": 0.28752401964273006
+      },
+      {
+        "arm": "unbuffered",
+        "mode": 0,
+        "original": false,
+        "block": null,
+        "directory": "screen-02-unbuffered",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3542.030523073725,
+        "ttfb_ms": 13.798113,
+        "p99_ms": 29.604882999999997,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28365,
+        "average_cpu_cores": 0.9201217781035178,
+        "cpu_ms_per_request": 0.28380045831129913
+      },
+      {
+        "arm": "buffer-512",
+        "mode": 512,
+        "original": false,
+        "block": null,
+        "directory": "screen-03-buffer-512",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3588.8728336087524,
+        "ttfb_ms": 13.382013,
+        "p99_ms": 29.61379,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 28761,
+        "average_cpu_cores": 0.9206884560899351,
+        "cpu_ms_per_request": 0.28093598970828554
+      },
+      {
+        "arm": "buffer-4096",
+        "mode": 4096,
+        "original": false,
+        "block": null,
+        "directory": "screen-04-buffer-4096",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3476.0760477359354,
+        "ttfb_ms": 13.895192000000002,
+        "p99_ms": 30.418128999999997,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 27856,
+        "average_cpu_cores": 0.9236452065360601,
+        "cpu_ms_per_request": 0.2900631820792648
+      },
+      {
+        "arm": "original-repeat",
+        "mode": 0,
+        "original": true,
+        "block": null,
+        "directory": "screen-05-original-repeat",
+        "binarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+        "run": "run-1",
+        "rps": 3336.5515143033476,
+        "ttfb_ms": 14.32072,
+        "p99_ms": 33.245723999999996,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 26731,
+        "average_cpu_cores": 0.9188069556844011,
+        "cpu_ms_per_request": 0.3018966742733156
+      }
+    ],
+    "confirmation": [
+      {
+        "arm": "control",
+        "mode": 0,
+        "original": false,
+        "block": 1,
+        "directory": "confirmation-01-control",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3611.4596060129497,
+        "ttfb_ms": 13.281036,
+        "p99_ms": 31.833970000000004,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 54217,
+        "average_cpu_cores": 0.9469602085869026,
+        "cpu_ms_per_request": 0.27721932235276764
+      },
+      {
+        "arm": "candidate",
+        "mode": 512,
+        "original": false,
+        "block": 1,
+        "directory": "confirmation-02-candidate",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3549.14255158895,
+        "ttfb_ms": 13.354592,
+        "p99_ms": 32.433971,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 53282,
+        "average_cpu_cores": 0.9540837761275373,
+        "cpu_ms_per_request": 0.2818963252130175
+      },
+      {
+        "arm": "candidate",
+        "mode": 512,
+        "original": false,
+        "block": 2,
+        "directory": "confirmation-03-candidate",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3590.2809734368725,
+        "ttfb_ms": 13.351335,
+        "p99_ms": 30.650829,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 53888,
+        "average_cpu_cores": 0.9526379200791636,
+        "cpu_ms_per_request": 0.27872624703087884
+      },
+      {
+        "arm": "control",
+        "mode": 0,
+        "original": false,
+        "block": 2,
+        "directory": "confirmation-04-control",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3608.1546166983817,
+        "ttfb_ms": 13.154591,
+        "p99_ms": 30.127932,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 54173,
+        "average_cpu_cores": 0.9502945584611853,
+        "cpu_ms_per_request": 0.27670610820888636
+      },
+      {
+        "arm": "control",
+        "mode": 0,
+        "original": false,
+        "block": 3,
+        "directory": "confirmation-05-control",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3490.9485527494744,
+        "ttfb_ms": 13.659035,
+        "p99_ms": 31.726561,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 52387,
+        "average_cpu_cores": 0.9507473406107674,
+        "cpu_ms_per_request": 0.2867123523011434
+      },
+      {
+        "arm": "candidate",
+        "mode": 512,
+        "original": false,
+        "block": 3,
+        "directory": "confirmation-06-candidate",
+        "binarySha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+        "run": "run-1",
+        "rps": 3548.777101446757,
+        "ttfb_ms": 13.449047,
+        "p99_ms": 32.92008,
+        "client_js_gz_kb": 5.7119140625,
+        "initial_client_js_gz_kb": 5.7119140625,
+        "js_reqs": 4,
+        "build_kb": 405.8046875,
+        "http_200_responses": 53271,
+        "average_cpu_cores": 0.9549407461801396,
+        "cpu_ms_per_request": 0.282142253759081
+      }
+    ],
+    "screenDurationSeconds": 8,
+    "confirmationDurationSeconds": 15,
+    "method": "five-cell exploratory screen; independent AB/BA/AB confirmation",
+    "productionChanged": false,
+    "responseCache": false,
+    "flags": {
+      "BEXT_V8_MULTIPLEX": "0",
+      "BEXT_PRISM_PREPARED_PAGES": "1",
+      "BEXT_V8_LEGACY_HASH_HINT": "1",
+      "BEXT_PRISM_TOKEN_SCAN": "1",
+      "BEXT_V8_PREPARED_TEXT": "2",
+      "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+    },
+    "detailedLogFilter": "warn",
+    "selectedMode": 512,
+    "screenSelection": "highest RPS among 512- and 4096-byte buffers; screening cells excluded from confirmation",
+    "medians": {
+      "control": {
+        "rps": 3608.1546166983817,
+        "p99_ms": 31.726561,
+        "cpu_ms_per_request": 0.27721932235276764
+      },
+      "candidate": {
+        "rps": 3549.14255158895,
+        "p99_ms": 32.433971,
+        "cpu_ms_per_request": 0.2818963252130175
+      }
+    },
+    "rpsIncreasePercent": -1.6355192994315315,
+    "cpuCostReductionPercent": -1.6871128680916003,
+    "pairedResults": [
+      {
+        "block": 1,
+        "rpsIncreasePercent": -1.7255365204762119,
+        "cpuCostReductionPercent": -1.6871128680916003
+      },
+      {
+        "block": 2,
+        "rpsIncreasePercent": -0.4953679972246938,
+        "cpuCostReductionPercent": -0.7300665804122586
+      },
+      {
+        "block": 3,
+        "rpsIncreasePercent": 1.6565282422090322,
+        "cpuCostReductionPercent": 1.593966393628654
+      }
+    ]
+  },
+  "completedAt": 1793925771.9914577,
+  "performanceAccepted": false,
+  "performanceDecision": "Retain direct reads; independent 15-second confirmation regressed throughput and CPU cost",
+  "allocatorFeatureCheck": {
+    "at": 1793925251.6758504,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "check",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--features",
+      "allocator-park"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 24.322589786723256,
+    "peak_rss_kib": 1471272,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true
+  },
+  "sourceFreshnessInheritedFlags": {
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+  },
+  "sourceFreshnessCapacities": [
+    512,
+    4096
+  ],
+  "accessLogging": [
+    {
+      "directory": "screen-01-original",
+      "httpAccessLogEntries": 34742,
+      "measuredHttpResponses": 28102,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/screen-01-original/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-02-unbuffered",
+      "httpAccessLogEntries": 34932,
+      "measuredHttpResponses": 28365,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/screen-02-unbuffered/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-03-buffer-512",
+      "httpAccessLogEntries": 35572,
+      "measuredHttpResponses": 28761,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/screen-03-buffer-512/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-04-buffer-4096",
+      "httpAccessLogEntries": 34133,
+      "measuredHttpResponses": 27856,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/screen-04-buffer-4096/run-1/bext.server.log"
+    },
+    {
+      "directory": "screen-05-original-repeat",
+      "httpAccessLogEntries": 33329,
+      "measuredHttpResponses": 26731,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/screen-05-original-repeat/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-01-control",
+      "httpAccessLogEntries": 61128,
+      "measuredHttpResponses": 54217,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/confirmation-01-control/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-02-candidate",
+      "httpAccessLogEntries": 59907,
+      "measuredHttpResponses": 53282,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/confirmation-02-candidate/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-03-candidate",
+      "httpAccessLogEntries": 60305,
+      "measuredHttpResponses": 53888,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/confirmation-03-candidate/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-04-control",
+      "httpAccessLogEntries": 60458,
+      "measuredHttpResponses": 54173,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/confirmation-04-control/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-05-control",
+      "httpAccessLogEntries": 58532,
+      "measuredHttpResponses": 52387,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/confirmation-05-control/run-1/bext.server.log"
+    },
+    {
+      "directory": "confirmation-06-candidate",
+      "httpAccessLogEntries": 60018,
+      "measuredHttpResponses": 53271,
+      "rawLogLocalPath": "/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison/confirmation-06-candidate/run-1/bext.server.log"
+    }
+  ],
+  "measuredHttp200": 461033
+}

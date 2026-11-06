@@ -1,0 +1,106 @@
+{
+  "aggregation": "median of equal repeat sweeps; cold start is median of all process starts",
+  "startedAt": "2026-11-06T00:39:40.612982+00:00",
+  "finishedAt": "2026-11-06T00:40:07.635634+00:00",
+  "cpuBudget": {
+    "serverCpus": [
+      10
+    ],
+    "clientCpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23
+    ],
+    "runnerCpuAffinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      23
+    ],
+    "bextV8Workers": 4,
+    "bextHttpWorkers": 1
+  },
+  "frameworks": [
+    {
+      "framework": "bext (PRISM)",
+      "id": "bext",
+      "run_count": 1,
+      "runs": [
+        {
+          "run": "run-1",
+          "rps": 3611.4596060129497,
+          "ttfb_ms": 13.281036,
+          "p99_ms": 31.833970000000004,
+          "client_js_gz_kb": 5.7119140625,
+          "initial_client_js_gz_kb": 5.7119140625,
+          "js_reqs": 4,
+          "build_kb": 405.8046875,
+          "http_200_responses": 54217,
+          "average_cpu_cores": 0.9469602085869026,
+          "cpu_ms_per_request": 0.27721932235276764
+        }
+      ],
+      "rps_min": 3611,
+      "rps_max": 3611,
+      "cold_ms": 96.99,
+      "cold_samples_ms": [
+        96.994
+      ],
+      "ok": "CTS",
+      "theme_persistence": true,
+      "uncached": true,
+      "ssr_cards": 24,
+      "ssr_products": 24,
+      "success": 1.0,
+      "rps": 3611,
+      "ttfb_ms": 13.28,
+      "p99_ms": 31.83,
+      "client_js_gz_kb": 5.71,
+      "initial_client_js_gz_kb": 5.71,
+      "js_reqs": 4,
+      "build_kb": 405.8,
+      "server_cpu_affinity": [
+        10
+      ],
+      "average_cpu_cores": 0.947,
+      "cpu_ms_per_request": 0.2772
+    }
+  ]
+}

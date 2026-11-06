@@ -30,6 +30,8 @@ PERFORMANCE_FLAGS = {name: {"0", "1"} for name in [
 PERFORMANCE_FLAGS["BEXT_V8_PREPARED_TEXT"] = {"0", "2", "3", "4"}
 PERFORMANCE_FLAGS["BEXT_V8_MAX_SEMI_SPACE_MB"] = {"4", "8", "16"}
 PERFORMANCE_FLAGS["BEXT_V8_BY_HASH_REPLY_TRANSPORT"] = {"0", "1", "2"}
+PERFORMANCE_FLAGS["BEXT_V8_REPLY_READ_BUFFER_BYTES"] = {"0", "512", "4096"}
+PERFORMANCE_FLAGS["BEXT_PRISM_DIRECT_PROPS_JSON"] = {"0", "1"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
@@ -206,7 +208,7 @@ def metadata(args):
         "versions": versions(args.frameworks),
         "parameters": {"repeats": args.repeats, "durationSeconds": args.duration,
                        "concurrency": args.concurrency, "coldSamples": args.cold_samples,
-                       "warmupSeconds": 2, "httpVersion": "1.1", "uniqueLoadUrls": False,
+                       "warmupSeconds": args.warmup_seconds, "httpVersion": "1.1", "uniqueLoadUrls": False,
                        "loadUrlPoolSize": LOAD_URL_COUNT, "loadUrlSelection": "random with replacement",
                        "waitForOngoingRequests": True, "underLoadSamples": 20},
         "cpuBudget": {"serverCpus": args.server_cpus, "clientCpus": args.client_cpus,
@@ -357,8 +359,8 @@ def measure(fw, bench, directory, args):
                     "--output-format", "json", "--urls-from-file", urls.name]
             oha_env = {**os.environ, "NO_COLOR": "true"}
             with prefix.with_suffix(".warmup.json").open("w") as output, prefix.with_suffix(".warmup.log").open("w") as errors:
-                subprocess.run(base + ["-z", "2s"], stdout=output, stderr=errors,
-                               env=oha_env, check=True, timeout=30)
+                subprocess.run(base + ["-z", f"{args.warmup_seconds}s"], stdout=output, stderr=errors,
+                               env=oha_env, check=True, timeout=args.warmup_seconds + 30)
             samples = []
             print(f"  {fw}: {args.duration}s load, concurrency {args.concurrency}", flush=True)
             with prefix.with_suffix(".oha.json").open("w") as output, prefix.with_suffix(".oha.log").open("w") as errors:
@@ -413,6 +415,8 @@ def main():
     parser.add_argument("--frameworks", nargs="+", choices=FRAMEWORKS, default=FRAMEWORKS)
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--duration", type=int, default=8)
+    parser.add_argument("--warmup-seconds", type=int, default=2,
+                        help="warmup for every framework; use 20s to pass delayed profiler initialization")
     parser.add_argument("--concurrency", type=int, default=50)
     parser.add_argument("--cold-samples", type=int, default=3)
     parser.add_argument("--server-cpus", type=cpu_list, help="CPU affinity for every server and its descendants")
@@ -424,8 +428,8 @@ def main():
     parser.add_argument("--bext-flag", action="append", type=performance_flag, default=[],
                         help="record and apply an allowlisted performance setting (NAME=value); response-cache controls are excluded")
     args = parser.parse_args()
-    if min(args.repeats, args.concurrency, args.cold_samples) < 1 or args.duration < 4:
-        parser.error("positive repeats/concurrency/cold samples and duration >= 4s required")
+    if min(args.repeats, args.concurrency, args.cold_samples, args.warmup_seconds) < 1 or args.duration < 4:
+        parser.error("positive repeats/concurrency/cold samples/warmup and duration >= 4s required")
     available = os.sched_getaffinity(0)
     for cpus in [args.server_cpus, args.client_cpus]:
         if cpus and not set(cpus) <= available:
