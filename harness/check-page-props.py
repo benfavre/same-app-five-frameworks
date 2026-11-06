@@ -91,8 +91,8 @@ def main():
                         assert props['data']['request']['body']==expected_body,(arm,name,props)
                         if name in ['params','post-params']:assert len(props['params'])==2
                         if name in ['cookies','post-params']:assert props['data']['request']['headers']['cookie']=='a=1; b=2'
-                        if arm=='original':reference[name]=encoded
-                        else:assert encoded==reference[name],(arm,name,'JSON bytes differ',reference[name],encoded)
+                        if arm=='original':reference[name]=props
+                        else:assert props==reference[name],(arm,name,'page props differ',reference[name],props)
                         report['cases'].append(dict(arm=arm,case=name,status=response.status,propsJson=encoded))
                 runner.ROOT=original_root
         report['status']='complete'
