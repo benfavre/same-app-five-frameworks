@@ -30,6 +30,7 @@ PERFORMANCE_FLAGS = {name: {"0", "1"} for name in [
 PERFORMANCE_FLAGS["BEXT_V8_PREPARED_TEXT"] = {"0", "2", "3", "4"}
 PERFORMANCE_FLAGS["BEXT_V8_MAX_SEMI_SPACE_MB"] = {"4", "8", "16"}
 PERFORMANCE_FLAGS["BEXT_V8_BY_HASH_REPLY_TRANSPORT"] = {"0", "1", "2"}
+PERFORMANCE_FLAGS["BEXT_V8_REPLY_READ_BUFFER_BYTES"] = {"0", "512", "4096"}
 PACKAGES = {
     "next": ["next", "react", "react-dom"],
     "remix": ["react-router", "@react-router/node", "@react-router/serve", "react", "react-dom", "vite"],
