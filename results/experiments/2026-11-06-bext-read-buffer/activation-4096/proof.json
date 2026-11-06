@@ -1,0 +1,111 @@
+{
+  "status": "complete",
+  "capacity": 4096,
+  "activationLines": [
+    "{\"timestamp\":\"2026-11-06T00:38:00.066060Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":0,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+    "{\"timestamp\":\"2026-11-06T00:38:00.066130Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":1,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+    "{\"timestamp\":\"2026-11-06T00:38:00.066226Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":2,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+    "{\"timestamp\":\"2026-11-06T00:38:00.066332Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":3,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}"
+  ],
+  "cpuAudit": {
+    "method": "sampled /proc server process tree; all thread affinity masks",
+    "sampleIntervalSeconds": 0.25,
+    "clockTicksPerSecond": 100,
+    "wallSeconds": 0.14115703478455544,
+    "cpuSeconds": 0.07,
+    "averageCpuCores": 0.4959016042440911,
+    "requestedCpuAffinity": [
+      10
+    ],
+    "affinityViolations": [],
+    "errors": [],
+    "samples": [
+      {
+        "elapsedSeconds": 0.043915675953030586,
+        "processCount": 5,
+        "threadCount": 127
+      },
+      {
+        "elapsedSeconds": 0.14115466177463531,
+        "processCount": 5,
+        "threadCount": 127
+      }
+    ],
+    "processes": [
+      {
+        "pid": 394499,
+        "parent": 393223,
+        "startTicks": 1270877648,
+        "cpuTicks": 4,
+        "threadCount": 43,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 394523,
+        "parent": 394499,
+        "startTicks": 1270877649,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      },
+      {
+        "pid": 394524,
+        "parent": 394499,
+        "startTicks": 1270877650,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 394525,
+        "parent": 394499,
+        "startTicks": 1270877650,
+        "cpuTicks": 2,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.02
+      },
+      {
+        "pid": 394526,
+        "parent": 394499,
+        "startTicks": 1270877650,
+        "cpuTicks": 1,
+        "threadCount": 21,
+        "threadCpuAffinities": [
+          [
+            10
+          ]
+        ],
+        "cpuSeconds": 0.01
+      }
+    ]
+  },
+  "flags": {
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "BEXT_V8_REPLY_READ_BUFFER_BYTES": "4096"
+  }
+}

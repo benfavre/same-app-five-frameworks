@@ -1,0 +1,29 @@
+{
+  "status": "complete",
+  "profile": "20-second warmup; accepted opt-in Bext settings, warn-level Rust tracing, continuous profiling and HTTP access logs retained",
+  "sourceCommit": "a89da13e6917d3cf4c426a980295e4af7e03fd0b",
+  "mergedNativeRuntimeInputs": "e64d643d7a8ae43fac1fa3af4f4366bddfdb244d",
+  "nativeBinarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+  "frameworkSha256": "ae92033bc02dc15d6586a2f88b81092b3829ccc8e3478ea2e03ad4a0e130762e",
+  "overrides": {
+    "BEXT_PRISM_RENDER_CACHE": "0",
+    "BEXT_V8_POOL_PER_WORKER_CAP": "64",
+    "BEXT_V8_POOL_QUEUE_DEPTH": "256",
+    "BEXT_V8_POOL_SIZE": "4",
+    "BEXT_HTTP_WORKERS": "1",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+    "RUST_LOG": "warn"
+  },
+  "warmupSeconds": 20,
+  "durationSeconds": 8,
+  "entries": 15,
+  "measuredHttp200": 238454,
+  "loadErrors": 0,
+  "cpuAffinityViolations": 0,
+  "productionChanged": false
+}

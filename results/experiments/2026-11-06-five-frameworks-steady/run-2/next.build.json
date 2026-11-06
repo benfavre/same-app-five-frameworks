@@ -1,0 +1,10 @@
+{
+  "bytes": 5170627,
+  "directories": {
+    ".next": 5170627
+  },
+  "excludes": [
+    "cache",
+    "diagnostics"
+  ]
+}

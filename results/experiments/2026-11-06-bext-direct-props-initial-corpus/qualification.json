@@ -1,0 +1,76 @@
+{
+  "status": "failed",
+  "sourceCommit": "3fc042c3eef8fca8dee96fb10ff7f3ff2be69a7b",
+  "baseCommit": "139d7491c35b5b518f13a952e5ddd8e89c5a8716",
+  "nativeBuild": {
+    "at": 1793927930.8730128,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 474.0556784309447,
+    "peak_rss_kib": 7249396,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "414719ceb32ac47cab1fc9765f437eb9e5d165c8aa390ee9e32b9a4d7c8af11d",
+    "binary_bytes": 1095747720,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "wireTests": {
+    "at": 1793927456.8168793,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-core",
+      "--lib",
+      "prism_props",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 89.40608059614897,
+    "peak_rss_kib": 2770112,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 2638
+      }
+    ]
+  },
+  "inputManifestSha256": "1e98a951672ba58508398b1b72ce79bade07a0ff54176bb65ee16f7d72162bba",
+  "externalManifestSha256": "ce5a974c0ef69e11b8ae2be47087c862789fa4fe1b2c2d904d9cd8705806ef5b",
+  "productionChanged": false,
+  "warmupSeconds": 20,
+  "durationSeconds": 15,
+  "error": "Command '['/usr/bin/python3', '/home/infra-sj278/same-app-five-frameworks/harness/check-page-props.py', '--original', '/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/bext-server', '--candidate', '/home/infra-sj278/work/bext-direct-page-props-20261106/bext-server', '--framework', '/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/source/sites/shared/framework', '--output', '/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-direct-props/page-props']' returned non-zero exit status 1."
+}

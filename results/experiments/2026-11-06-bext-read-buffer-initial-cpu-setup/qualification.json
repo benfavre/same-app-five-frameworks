@@ -1,0 +1,429 @@
+{
+  "status": "failed",
+  "sourceCommit": "7b81d84bd10429b78d7b4d5b424d79e229121b24",
+  "baseCommit": "e64d643d7a8ae43fac1fa3af4f4366bddfdb244d",
+  "nativeBuild": {
+    "at": 1793925222.4200184,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-server",
+      "--bin",
+      "bext-server",
+      "--no-default-features",
+      "--features",
+      "nginx-compat,tls,redis,realtime,waf,v8,react-compiler-oxc,turbopack,php,route-css,h3-quic,native-caps,caldav,mqtt,grpc,automonique-term-ws,websocket-proxy,bun-mimalloc",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 478.33397061377764,
+    "peak_rss_kib": 7171816,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "83f9c3cc65eb7d7d8f6465ae5c91c73c4e843ff8ef7c3c092659f8c15341e094",
+    "binary_bytes": 1095686320,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "nativeTests": {
+    "at": 1793924744.085602,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--lib",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 26.295917078852654,
+    "peak_rss_kib": 1404096,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "test_counts": [
+      {
+        "passed": 231,
+        "failed": 0,
+        "ignored": 4,
+        "measured": 0,
+        "filtered": 0
+      }
+    ]
+  },
+  "initialCompileFailure": {
+    "at": 1793924642.2991302,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "test",
+      "--locked",
+      "--offline",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--lib",
+      "--",
+      "--test-threads=1"
+    ],
+    "exit_code": 101,
+    "elapsed_s": 29.102432150393724,
+    "peak_rss_kib": 3065844,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": false,
+    "test_counts": []
+  },
+  "inputManifestSha256": "43226a37760f19feeaef67fecaeb6cda46ecf5f1c28f735bbfcc4a64510c6bd0",
+  "externalManifestSha256": "ce5a974c0ef69e11b8ae2be47087c862789fa4fe1b2c2d904d9cd8705806ef5b",
+  "productionChanged": false,
+  "activation": [
+    {
+      "status": "complete",
+      "capacity": 0,
+      "activationLines": [],
+      "cpuAudit": {
+        "method": "sampled /proc server process tree; all thread affinity masks",
+        "sampleIntervalSeconds": 0.25,
+        "clockTicksPerSecond": 100,
+        "wallSeconds": 0.14856924675405025,
+        "cpuSeconds": 0.08,
+        "averageCpuCores": 0.5384694460518901,
+        "requestedCpuAffinity": [
+          10
+        ],
+        "affinityViolations": [],
+        "errors": [],
+        "samples": [
+          {
+            "elapsedSeconds": 0.029446909204125404,
+            "processCount": 5,
+            "threadCount": 127
+          },
+          {
+            "elapsedSeconds": 0.14856620132923126,
+            "processCount": 5,
+            "threadCount": 127
+          }
+        ],
+        "processes": [
+          {
+            "pid": 340848,
+            "parent": 331330,
+            "startTicks": 1270867754,
+            "cpuTicks": 4,
+            "threadCount": 43,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 340870,
+            "parent": 340848,
+            "startTicks": 1270867755,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 340871,
+            "parent": 340848,
+            "startTicks": 1270867755,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 340876,
+            "parent": 340848,
+            "startTicks": 1270867756,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 340877,
+            "parent": 340848,
+            "startTicks": 1270867756,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          }
+        ]
+      },
+      "flags": {
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_REPLY_READ_BUFFER_BYTES": "0"
+      }
+    },
+    {
+      "status": "complete",
+      "capacity": 512,
+      "activationLines": [
+        "{\"timestamp\":\"2026-11-06T00:36:22.191546Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":0,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:36:22.191639Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":1,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:36:22.191754Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":2,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:36:22.191875Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":3,\"buffer_bytes\":512},\"target\":\"bext_v8::subprocess\"}"
+      ],
+      "cpuAudit": {
+        "method": "sampled /proc server process tree; all thread affinity masks",
+        "sampleIntervalSeconds": 0.25,
+        "clockTicksPerSecond": 100,
+        "wallSeconds": 0.1298267599195242,
+        "cpuSeconds": 0.04,
+        "averageCpuCores": 0.30810289053500856,
+        "requestedCpuAffinity": [
+          10
+        ],
+        "affinityViolations": [],
+        "errors": [],
+        "samples": [
+          {
+            "elapsedSeconds": 0.031788356602191925,
+            "processCount": 5,
+            "threadCount": 127
+          },
+          {
+            "elapsedSeconds": 0.129823736846447,
+            "processCount": 5,
+            "threadCount": 127
+          }
+        ],
+        "processes": [
+          {
+            "pid": 341380,
+            "parent": 341341,
+            "startTicks": 1270867863,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 341370,
+            "parent": 341341,
+            "startTicks": 1270867862,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.0
+          },
+          {
+            "pid": 341371,
+            "parent": 341341,
+            "startTicks": 1270867862,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 341341,
+            "parent": 331330,
+            "startTicks": 1270867861,
+            "cpuTicks": 4,
+            "threadCount": 43,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 341374,
+            "parent": 341341,
+            "startTicks": 1270867863,
+            "cpuTicks": 1,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          }
+        ]
+      },
+      "flags": {
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_REPLY_READ_BUFFER_BYTES": "512"
+      }
+    },
+    {
+      "status": "complete",
+      "capacity": 4096,
+      "activationLines": [
+        "{\"timestamp\":\"2026-11-06T00:36:23.242740Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":0,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:36:23.242830Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":1,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:36:23.242947Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":2,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}",
+        "{\"timestamp\":\"2026-11-06T00:36:23.243073Z\",\"level\":\"INFO\",\"fields\":{\"message\":\"V8 pool reply read-ahead enabled\",\"worker_id\":3,\"buffer_bytes\":4096},\"target\":\"bext_v8::subprocess\"}"
+      ],
+      "cpuAudit": {
+        "method": "sampled /proc server process tree; all thread affinity masks",
+        "sampleIntervalSeconds": 0.25,
+        "clockTicksPerSecond": 100,
+        "wallSeconds": 0.1610705517232418,
+        "cpuSeconds": 0.08,
+        "averageCpuCores": 0.49667676148188383,
+        "requestedCpuAffinity": [
+          10
+        ],
+        "affinityViolations": [],
+        "errors": [],
+        "samples": [
+          {
+            "elapsedSeconds": 0.04229440353810787,
+            "processCount": 5,
+            "threadCount": 127
+          },
+          {
+            "elapsedSeconds": 0.16106836684048176,
+            "processCount": 5,
+            "threadCount": 127
+          }
+        ],
+        "processes": [
+          {
+            "pid": 342449,
+            "parent": 331330,
+            "startTicks": 1270867966,
+            "cpuTicks": 5,
+            "threadCount": 43,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 342475,
+            "parent": 342449,
+            "startTicks": 1270867967,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          },
+          {
+            "pid": 342476,
+            "parent": 342449,
+            "startTicks": 1270867967,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 342477,
+            "parent": 342449,
+            "startTicks": 1270867967,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.02
+          },
+          {
+            "pid": 342478,
+            "parent": 342449,
+            "startTicks": 1270867967,
+            "cpuTicks": 2,
+            "threadCount": 21,
+            "threadCpuAffinities": [
+              [
+                10
+              ]
+            ],
+            "cpuSeconds": 0.01
+          }
+        ]
+      },
+      "flags": {
+        "BEXT_V8_MULTIPLEX": "0",
+        "BEXT_PRISM_PREPARED_PAGES": "1",
+        "BEXT_V8_LEGACY_HASH_HINT": "1",
+        "BEXT_PRISM_TOKEN_SCAN": "1",
+        "BEXT_V8_PREPARED_TEXT": "2",
+        "BEXT_PRISM_NATIVE_HTML_SCAN": "1",
+        "BEXT_V8_REPLY_READ_BUFFER_BYTES": "4096"
+      }
+    }
+  ],
+  "error": "Command '['/usr/bin/python3', '/home/infra-sj278/same-app-five-frameworks/harness/compare-bext-read-buffers.py', '--original', '/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/bext-server', '--candidate', '/home/infra-sj278/work/bext-reply-read-buffer-20261106/bext-server', '--framework', '/home/infra-sj278/work/bext-legacy-hash-hint-20261105/reconciled/source/sites/shared/framework', '--output', '/home/infra-sj278/same-app-five-frameworks/results/experiments/2026-11-06-bext-read-buffer/comparison']' returned non-zero exit status 1."
+}

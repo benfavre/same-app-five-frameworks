@@ -1,0 +1,26 @@
+{
+  "status": "failed",
+  "cases": [
+    {
+      "arm": "original",
+      "case": "empty",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "repeats",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"a\":[\"1\",\"2\"],\"bare\":\"\",\"empty\":\"\",\"z\":\"last\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?z=last&a=1&a=2&bare&empty=\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "unicode",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"quote\":\"\\\"<&\",\"x\":\"\u00e9\ud83d\ude00\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?x=%C3%A9%F0%9F%98%80&quote=%22%3C%26\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    }
+  ],
+  "productionChanged": false,
+  "scope": "page props wire compatibility; not a load benchmark",
+  "error": "('original', 'invalid-percent', 500, '<!doctype html><title>Internal Server Error</title><h1>Internal Server Error</h1>')"
+}

@@ -6,19 +6,21 @@ request renders fresh HTML.
 
 ## Latest tuned comparison — equal CPU budget, 2026-11-06
 
-Bext uses the merged native/SDK source, the documented opt-in preparation/hash/scanner/text settings, and `--bext-log-filter warn`. HTTP access logging stays enabled. Each complete server tree shares CPU 10; clients exclude that physical core and its SMT sibling. Three rotating eight-second sweeps at concurrency 50:
+Every framework receives **20 seconds of warmup**, followed by an eight-second load at concurrency 50, repeated in three rotating sweeps. This passes the observed delayed profiler initialization in Bext; continuous profiling and HTTP access logging remain enabled. Bext uses the merged native/SDK source, documented opt-in preparation/hash/scanner/text settings and `--bext-log-filter warn`. Every complete server tree shares CPU 10; clients exclude that physical core and its SMT sibling.
 
 | Framework | RPS median | RPS min–max | CPU ms/request | p99 |
 |---|---:|---:|---:|---:|
-| Astro | 3,993 | 3,853–4,275 | 0.2501 | 41.02 ms |
-| bext (PRISM) | 3,530 | 3,407–3,541 | 0.2866 | 30.31 ms |
-| Qwik | 442 | 437–442 | 2.2644 | 171.34 ms |
-| Next.js | 428 | 418–451 | 2.3363 | 182.06 ms |
-| React Router (Remix) | 367 | 361–391 | 2.7205 | 197.46 ms |
+| Astro | 4,975 | 4,665–5,165 | 0.2007 | 29.13 ms |
+| bext (PRISM) | 3,732 | 3,370–3,844 | 0.2680 | 31.45 ms |
+| Next.js | 482 | 478–507 | 2.0719 | 165.01 ms |
+| Qwik | 471 | 468–486 | 2.1184 | 164.32 ms |
+| React Router (Remix) | 368 | 360–379 | 2.7073 | 203.17 ms |
 
-**Astro remains ahead in throughput.** All 15 load/browser entries passed: 211,132 measured HTTP 200 responses, zero load errors and zero CPU-affinity violations. Counter, persisted theme, search/reset, 24-product SSR and fresh render stamps pass for every entry. These short shared-host runs show observed variation, not confidence intervals.
+**Astro remains ahead in throughput.** All 15 load/browser entries passed: 238,454 measured HTTP 200 responses, zero load errors and zero CPU-affinity violations. Counter, persisted theme, search/reset, 24-product SSR and fresh render stamps pass for every entry. These short shared-host runs show observed variation, not confidence intervals.
 
-[Raw campaign and identities](results/experiments/2026-11-06-five-frameworks-merged/), [summary](results/experiments/2026-11-06-five-frameworks-merged/summary.json), [qualification](results/experiments/2026-11-06-five-frameworks-merged/qualification.json). The [rejected response-writer experiment](results/experiments/2026-11-05-bext-reply-transport/table.md) and [text-conversion screen](results/experiments/2026-11-06-bext-text-modes/table.md) are retained. The earlier default-settings baseline follows; `results/latest.json` continues to identify that baseline.
+[Raw campaign and identities](results/experiments/2026-11-06-five-frameworks-steady/), [summary](results/experiments/2026-11-06-five-frameworks-steady/summary.json), [qualification](results/experiments/2026-11-06-five-frameworks-steady/qualification.json). The [earlier two-second-warmup comparison](results/experiments/2026-11-06-five-frameworks-merged/notes.md) remains archived. All frameworks benefited from the longer warmup; this is a measurement-method change, not a Bext code speedup.
+
+The [response-writer experiment](results/experiments/2026-11-05-bext-reply-transport/table.md), [reply-read-buffer trial](results/experiments/2026-11-06-bext-read-buffer/table.md), [direct-props serializer trial](results/experiments/2026-11-06-bext-direct-props/table.md) and [text-conversion screen](results/experiments/2026-11-06-bext-text-modes/table.md) did not improve performance and remain unselected. The [profiler-startup probe](results/experiments/2026-11-06-bext-profiler-startup/notes.md) explains the longer warmup; a [JavaScript profiling helper](https://github.com/benfavre/bext/pull/423) is merged with [sample output](results/experiments/2026-11-06-bext-jit-profile/notes.md). The earlier default-settings baseline follows; `results/latest.json` continues to identify that baseline.
 
 ## Default-settings baseline — equal CPU budget, 2026-11-05
 
@@ -89,7 +91,7 @@ export BEXT_SHARED_FRAMEWORK_DIR=/absolute/path/to/bext/sites/shared/framework
 # CPU IDs below are for activ-2. Choose available IDs on another host;
 # keep the server CPU and its SMT sibling out of the client mask.
 npm run benchmark -- --server-cpus 10 --client-cpus 0-9,11-21,23 \
-  --bext-v8-workers 4 --bext-http-workers 1 \
+  --bext-v8-workers 4 --bext-http-workers 1 --warmup-seconds 20 \
   --output results/runs/local-one-cpu
 npm run summarize -- results/runs/local-one-cpu --publish
 ```
@@ -100,10 +102,11 @@ stops process groups it starts. `bash harness/run-all.sh` is equivalent to
 configured servers; label that separately from equal-CPU results.
 
 To omit bext, add `--frameworks next remix astro qwik`. Override `--repeats`,
-`--duration`, `--concurrency`, or `--cold-samples` as needed. Defaults are three
-sweeps, three process starts per entry per sweep, a two-second warmup, then
+`--duration`, `--warmup-seconds`, `--concurrency`, or `--cold-samples` as needed. Defaults are three
+sweeps, three process starts per entry per sweep, a legacy two-second warmup, then
 `oha -z 8s -c 50 -w` with HTTP/1.1 keep-alive. The order rotates across sweeps.
-`--publish` updates local results JSON; it does not push to GitHub.
+`--warmup-seconds 20` is used for the latest steady comparison. `--publish`
+updates local results JSON; it does not push to GitHub.
 
 The recovered native/SDK source and measured hash improvement are merged in
 [bext PR #419](https://github.com/benfavre/bext/pull/419) and
@@ -130,11 +133,14 @@ checks page/layout/import/API invalidation and fresh request data in disposable
 fixtures. Performance settings are allowlisted; response-cache and process-isolation
 overrides are excluded. Reply-writer modes are separately allowlisted only to
 reproduce the [rejected transport experiment](results/experiments/2026-11-05-bext-reply-transport/table.md);
-they require the unmerged prototype. Preserve the standalone defaults: setting
+they require the unmerged prototype. The reply-read-buffer and direct-props flags
+also require their unmerged prototypes ([PR #422](https://github.com/benfavre/bext/pull/422)
+and [PR #424](https://github.com/benfavre/bext/pull/424)); both trials were rejected.
+Preserve the standalone defaults: setting
 `BEXT_V8_SUBPROCESS=1` explicitly skips other standalone defaults in this version.
 `--bext-log-filter warn` records a separate detailed-tracing tradeoff; HTTP access
-logging is still checked. The [latest merged-source comparison](results/experiments/2026-11-06-five-frameworks-merged/table.md)
-measures Bext at 3,530 versus Astro at 3,993 RPS on one CPU. The archived default
+logging is still checked. The [latest merged-source comparison](results/experiments/2026-11-06-five-frameworks-steady/table.md)
+measures Bext at 3,732 versus Astro at 4,975 RPS on one CPU. The archived default
 baseline remains separate from these opt-in measurements.
 
 ## Measurements and limits

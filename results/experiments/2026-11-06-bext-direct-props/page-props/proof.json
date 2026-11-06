@@ -1,0 +1,223 @@
+{
+  "status": "complete",
+  "cases": [
+    {
+      "arm": "original",
+      "case": "empty",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "repeats",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"a\":[\"1\",\"2\"],\"bare\":\"\",\"empty\":\"\",\"z\":\"last\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?z=last&a=1&a=2&bare&empty=\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "unicode",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"quote\":\"\\\"<&\",\"x\":\"\u00e9\ud83d\ude00\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?x=%C3%A9%F0%9F%98%80&quote=%22%3C%26\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "invalid-percent",
+      "status": 500,
+      "preservedExistingError": true
+    },
+    {
+      "arm": "original",
+      "case": "params",
+      "status": 200,
+      "propsJson": "{\"params\":{\"part\":\"beta\",\"id\":\"alpha\"},\"searchParams\":{\"q\":\"value\"},\"data\":{\"params\":{\"part\":\"beta\",\"id\":\"alpha\"},\"request\":{\"url\":\"http://127.0.0.1:18107/probe/alpha/beta?q=value\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "cookies",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"cookie\":\"a=1; b=2\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "repeated-header",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\",\"x-list\":\"one, two\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "proxy",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"value\":\"proxy\"},\"data\":{\"params\":{},\"request\":{\"url\":\"https://example.test:8443/?value=proxy\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\",\"x-forwarded-host\":\"example.test:8443\",\"x-forwarded-proto\":\"https\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "original",
+      "case": "utf8-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"value\":\"posted\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?value=posted\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"11\",\"content-type\":\"text/plain\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\u00e9\ud83d\ude00\\u0000<&>\\\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "original",
+      "case": "empty-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"0\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "original",
+      "case": "binary-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"7\",\"content-type\":\"application/octet-stream\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "original",
+      "case": "post-params",
+      "status": 200,
+      "propsJson": "{\"params\":{\"part\":\"two\",\"id\":\"one\"},\"searchParams\":{\"r\":[\"1\",\"2\"]},\"data\":{\"params\":{\"part\":\"two\",\"id\":\"one\"},\"request\":{\"url\":\"http://127.0.0.1:18107/probe/one/two?r=1&r=2\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"6\",\"cookie\":\"a=1; b=2\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"posted\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "empty",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "repeats",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"a\":[\"1\",\"2\"],\"bare\":\"\",\"empty\":\"\",\"z\":\"last\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?z=last&a=1&a=2&bare&empty=\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "unicode",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"quote\":\"\\\"<&\",\"x\":\"\u00e9\ud83d\ude00\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?x=%C3%A9%F0%9F%98%80&quote=%22%3C%26\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "invalid-percent",
+      "status": 500,
+      "preservedExistingError": true
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "params",
+      "status": 200,
+      "propsJson": "{\"params\":{\"id\":\"alpha\",\"part\":\"beta\"},\"searchParams\":{\"q\":\"value\"},\"data\":{\"params\":{\"id\":\"alpha\",\"part\":\"beta\"},\"request\":{\"url\":\"http://127.0.0.1:18107/probe/alpha/beta?q=value\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "cookies",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"cookie\":\"a=1; b=2\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "repeated-header",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\",\"x-list\":\"one, two\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "proxy",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"value\":\"proxy\"},\"data\":{\"params\":{},\"request\":{\"url\":\"https://example.test:8443/?value=proxy\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\",\"x-forwarded-host\":\"example.test:8443\",\"x-forwarded-proto\":\"https\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "utf8-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"value\":\"posted\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?value=posted\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"11\",\"content-type\":\"text/plain\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\u00e9\ud83d\ude00\\u0000<&>\\\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "empty-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"0\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "binary-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"7\",\"content-type\":\"application/octet-stream\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "rebuilt-control",
+      "case": "post-params",
+      "status": 200,
+      "propsJson": "{\"params\":{\"id\":\"one\",\"part\":\"two\"},\"searchParams\":{\"r\":[\"1\",\"2\"]},\"data\":{\"params\":{\"id\":\"one\",\"part\":\"two\"},\"request\":{\"url\":\"http://127.0.0.1:18107/probe/one/two?r=1&r=2\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"6\",\"cookie\":\"a=1; b=2\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"posted\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "direct",
+      "case": "empty",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "repeats",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"a\":[\"1\",\"2\"],\"bare\":\"\",\"empty\":\"\",\"z\":\"last\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?z=last&a=1&a=2&bare&empty=\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "unicode",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"quote\":\"\\\"<&\",\"x\":\"\u00e9\ud83d\ude00\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?x=%C3%A9%F0%9F%98%80&quote=%22%3C%26\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "invalid-percent",
+      "status": 500,
+      "preservedExistingError": true
+    },
+    {
+      "arm": "direct",
+      "case": "params",
+      "status": 200,
+      "propsJson": "{\"params\":{\"id\":\"alpha\",\"part\":\"beta\"},\"searchParams\":{\"q\":\"value\"},\"data\":{\"params\":{\"id\":\"alpha\",\"part\":\"beta\"},\"request\":{\"url\":\"http://127.0.0.1:18107/probe/alpha/beta?q=value\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "cookies",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"cookie\":\"a=1; b=2\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "repeated-header",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\",\"x-list\":\"one, two\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "proxy",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"value\":\"proxy\"},\"data\":{\"params\":{},\"request\":{\"url\":\"https://example.test:8443/?value=proxy\",\"method\":\"GET\",\"headers\":{\"accept-encoding\":\"identity\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\",\"x-forwarded-host\":\"example.test:8443\",\"x-forwarded-proto\":\"https\"},\"body\":\"\"}}}"
+    },
+    {
+      "arm": "direct",
+      "case": "utf8-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{\"value\":\"posted\"},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/?value=posted\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"11\",\"content-type\":\"text/plain\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\u00e9\ud83d\ude00\\u0000<&>\\\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "direct",
+      "case": "empty-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"0\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "direct",
+      "case": "binary-body",
+      "status": 200,
+      "propsJson": "{\"params\":{},\"searchParams\":{},\"data\":{\"params\":{},\"request\":{\"url\":\"http://127.0.0.1:18107/\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"7\",\"content-type\":\"application/octet-stream\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"\"}},\"actionData\":{\"ok\":true}}"
+    },
+    {
+      "arm": "direct",
+      "case": "post-params",
+      "status": 200,
+      "propsJson": "{\"params\":{\"part\":\"two\",\"id\":\"one\"},\"searchParams\":{\"r\":[\"1\",\"2\"]},\"data\":{\"params\":{\"part\":\"two\",\"id\":\"one\"},\"request\":{\"url\":\"http://127.0.0.1:18107/probe/one/two?r=1&r=2\",\"method\":\"POST\",\"headers\":{\"accept-encoding\":\"identity\",\"content-length\":\"6\",\"cookie\":\"a=1; b=2\",\"host\":\"127.0.0.1:18107\",\"user-agent\":\"bext-props-wire-check\",\"x-bext-client-ip\":\"127.0.0.1\"},\"body\":\"posted\"}},\"actionData\":{\"ok\":true}}"
+    }
+  ],
+  "productionChanged": false,
+  "scope": "page props wire compatibility; not a load benchmark"
+}

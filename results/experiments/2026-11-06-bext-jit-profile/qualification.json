@@ -1,0 +1,50 @@
+{
+  "status": "complete",
+  "kind": "renderer-only JIT diagnostic; not HTTP throughput",
+  "productionChanged": false,
+  "build": {
+    "at": 1793925380.7906067,
+    "command": [
+      "/home/infra-sj278/.cargo/bin/cargo",
+      "+nightly",
+      "build",
+      "--release",
+      "-p",
+      "bext-v8",
+      "--example",
+      "profile_prism",
+      "--locked",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "elapsed_s": 41.798653503879905,
+    "peak_rss_kib": 3794748,
+    "guard": null,
+    "source_pins_unchanged": true,
+    "external_inputs_unchanged": true,
+    "external_changes": [],
+    "production_changed": false,
+    "passed": true,
+    "binary_sha256": "3c737e46783e9633cdbac22cfa79fbf1f9908c86dd57fee2300b1581af47d435",
+    "binary_bytes": 121773496,
+    "BEXT_PHP_CONFIG": "/opt/php-zts/bin/php-config"
+  },
+  "flags": {
+    "BEXT_V8_MULTIPLEX": "0",
+    "BEXT_PRISM_PREPARED_PAGES": "1",
+    "BEXT_V8_LEGACY_HASH_HINT": "1",
+    "BEXT_PRISM_TOKEN_SCAN": "1",
+    "BEXT_V8_PREPARED_TEXT": "2",
+    "BEXT_PRISM_NATIVE_HTML_SCAN": "1"
+  },
+  "sourceCommit": "653cfc6680a181e5a09f14b24d509271bc36c3a2",
+  "bundleSha256": "28d22d0235831ec2d366b82095c45b442831e8d27f1af5c881ed7134ae52c8af",
+  "propsSha256": "4967851899141aa25de4f1c4680a39bb4e3a92cd2137cb0e8986fe7054dc581a",
+  "capturedSsrProducts": 24,
+  "pid": 613667,
+  "jitMapSha256": "bc8b27ccadf8d31864f1b93b0bdb9194c0e3775f4d35d9b353a517e5032bf65a",
+  "perfDataSha256": "062c6c8859e97d19b3527a4cfdab081472500747eac7c548003dd816da945acb",
+  "rendererCpu": [
+    10
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "campaign": "experiments/2026-11-06-five-frameworks-merged",
-  "finishedAt": "2026-11-06T00:14:01.517750+00:00",
-  "profile": "accepted opt-in code paths and warn-level Rust tracing; HTTP access logging retained",
+  "campaign": "experiments/2026-11-06-five-frameworks-steady",
+  "finishedAt": "2026-11-06T01:09:26.614626+00:00",
+  "profile": "20-second warmup; accepted opt-in Bext settings, warn-level Rust tracing, continuous profiling and HTTP access logs retained",
   "nativeSourceCommit": "a89da13e6917d3cf4c426a980295e4af7e03fd0b"
 }

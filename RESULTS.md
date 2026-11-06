@@ -420,3 +420,23 @@ Bext uses the merged native/SDK source, the documented opt-in preparation/hash/s
 
 
 The new shared-memory response writer regressed independent AB/BA/AB confirmation by 2.16% RPS and raised CPU/request 2.38%; Bext PR #421 is closed without merging. Existing sized/native-copy text modes also lost their exploratory screen, so compact mode 2 remains selected. Source/correctness checks passing are kept separate from these failed performance results.
+
+## Steady comparison with longer warmup, 2026-11-06
+
+Every framework receives **20 seconds of warmup**, followed by an eight-second load at concurrency 50, repeated in three rotating sweeps. This passes the observed delayed profiler initialization in Bext; continuous profiling and HTTP access logging remain enabled. Bext uses the merged native/SDK source, documented opt-in preparation/hash/scanner/text settings and `--bext-log-filter warn`. Every complete server tree shares CPU 10; clients exclude that physical core and its SMT sibling.
+
+| Framework | RPS median | RPS min–max | CPU ms/request | p99 |
+|---|---:|---:|---:|---:|
+| Astro | 4,975 | 4,665–5,165 | 0.2007 | 29.13 ms |
+| bext (PRISM) | 3,732 | 3,370–3,844 | 0.2680 | 31.45 ms |
+| Next.js | 482 | 478–507 | 2.0719 | 165.01 ms |
+| Qwik | 471 | 468–486 | 2.1184 | 164.32 ms |
+| React Router (Remix) | 368 | 360–379 | 2.7073 | 203.17 ms |
+
+**Astro remains ahead in throughput.** All 15 load/browser entries passed: 238,454 measured HTTP 200 responses, zero load errors and zero CPU-affinity violations. Counter, persisted theme, search/reset, 24-product SSR and fresh render stamps pass for every entry. These short shared-host runs show observed variation, not confidence intervals.
+
+[Raw campaign and identities](results/experiments/2026-11-06-five-frameworks-steady/), [summary](results/experiments/2026-11-06-five-frameworks-steady/summary.json), [qualification](results/experiments/2026-11-06-five-frameworks-steady/qualification.json). The [earlier two-second-warmup comparison](results/experiments/2026-11-06-five-frameworks-merged/notes.md) remains archived. All frameworks benefited from the longer warmup; this is a measurement-method change, not a Bext code speedup.
+
+The [response-writer experiment](results/experiments/2026-11-05-bext-reply-transport/table.md), [reply-read-buffer trial](results/experiments/2026-11-06-bext-read-buffer/table.md), [direct-props serializer trial](results/experiments/2026-11-06-bext-direct-props/table.md) and [text-conversion screen](results/experiments/2026-11-06-bext-text-modes/table.md) did not improve performance and remain unselected. The earlier default-settings baseline remains archived; `results/latest.json` continues to identify that baseline.
+
+The two-second-warmup figures above remain historical. The profiler-startup probe and updated input metadata accompany this campaign; the change in warmup applies equally to every framework.

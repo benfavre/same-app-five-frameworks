@@ -1,0 +1,11 @@
+{
+  "status": "complete",
+  "profilerInitializationThreadCpuSeconds": 0.93,
+  "firstCpuSampleSeconds": 10.119328754022717,
+  "lastCpuSampleSeconds": 13.540193669497967,
+  "nativeBinarySha256": "2f1ce8b160f416b5cbba862503e5939be285d391195ce5091aa11d94e6d1f1ac",
+  "frameworkSha256": "ae92033bc02dc15d6586a2f88b81092b3829ccc8e3478ea2e03ad4a0e130762e",
+  "sourceCommit": "a89da13e6917d3cf4c426a980295e4af7e03fd0b",
+  "productionChanged": false,
+  "kind": "startup diagnostic; not a full browser benchmark"
+}

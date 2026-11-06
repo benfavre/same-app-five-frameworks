@@ -1,0 +1,108 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 1K of event 'cpu-clock'
+# Event count (approx.): 7633164875
+#
+# Overhead  Command          Shared Object      Symbol
+# ........  ...............  .................  .............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+     9.61%  profile_prism    libc.so.6          [.] __memmove_avx_unaligned_erms
+     4.41%  bext-v8-eval-wo  libc.so.6          [.] __memmove_avx_unaligned_erms
+     2.70%  bext-v8-eval-wo  profile_prism      [.] void v8::internal::String::WriteToFlat<unsigned short>(v8::internal::Tagged<v8::internal::String>, unsigned short*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     2.37%  bext-v8-eval-wo  profile_prism      [.] void v8::internal::CopyChars<unsigned char, unsigned short>(unsigned short*, unsigned char const*, unsigned long)
+     2.24%  bext-v8-eval-wo  [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     2.17%  bext-v8-eval-wo  profile_prism      [.] _RNvNtCs4FEHf8ayHBs_11encoding_rs5utf_835convert_utf16_to_utf8_partial_inner
+     2.11%  profile_prism    [kernel.kallsyms]  [k] _raw_spin_unlock_irqrestore
+     1.65%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'walkMarkup :4025:20
+     1.51%  bext-v8-eval-wo  libc.so.6          [.] _int_malloc
+     1.38%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringAdd_CheckNone
+     1.32%  bext-v8-eval-wo  [JIT] tid 613667   [.] RegExp.< src: '[&<>"]' flags: ''
+     0.99%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'h :1150:11
+     0.99%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'runRoute :4910:24
+     0.99%  bext-v8-eval-wo  profile_prism      [.] v8::internal::FastJsonStringifier<unsigned char>::SerializeObject(v8::internal::ContinuationRecord, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.86%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:* :3470:961
+     0.86%  bext-v8-eval-wo  libc.so.6          [.] __memchr_avx2
+     0.86%  bext-v8-eval-wo  profile_prism      [.] Builtins_RegExpReplace
+     0.86%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringPrototypeReplace
+     0.79%  bext-v8-eval-wo  profile_prism      [.] Builtins_RegExpPrototypeTestFast
+     0.79%  bext-v8-eval-wo  profile_prism      [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<false>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, bool, v8::internal::Handle<v8::internal::Object>)
+     0.72%  bext-v8-eval-wo  profile_prism      [.] Builtins_RegExpMatchFast
+     0.72%  bext-v8-eval-wo  profile_prism      [.] v8::internal::JsonStringifier::Result v8::internal::JsonStringifier::Serialize_<true>(v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, bool, v8::internal::Handle<v8::internal::Object>)
+     0.72%  bext-v8-eval-wo  profile_prism      [.] v8::internal::StringSearch<unsigned char, unsigned char>::InitialSearch(v8::internal::StringSearch<unsigned char, unsigned char>*, v8::base::Vector<unsigned char const>, int)
+     0.66%  bext-v8-eval-wo  profile_prism      [.] Builtins_RecordWriteSaveFP
+     0.66%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringSubstring
+     0.66%  bext-v8-eval-wo  profile_prism      [.] std::__Cr::optional<v8::internal::DirectHandle<v8::internal::InternalizedString> > v8::internal::StringTable::TryLookupKey<v8::internal::InternalizedStringKey, v8::internal::Isolate>(v8::internal::Isolate*, v8::internal::InternalizedStringKey*)
+     0.59%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'closingTagAt :4000:22
+     0.59%  bext-v8-eval-wo  [JIT] tid 613667   [.] RegExp.< src: '[?#]' flags: ''
+     0.59%  bext-v8-eval-wo  [JIT] tid 613667   [.] RegExp.< src: '^([a-z][a-z0-9+.-]*:)\/\/(?:([^:@/?#]+)(?::([^@/?#]*))?@)?(\[[^\]]+\]|[^/:?#]+)(?::(\d+))?(\/[^?#]*)?(\?[^#]*)?(#.*)?$' flags: 'i'
+     0.59%  bext-v8-eval-wo  profile_prism      [.] Builtins_JSBuiltinsConstructStub
+     0.53%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'formatAttrs :249:21
+     0.53%  bext-v8-eval-wo  profile_prism      [.] Builtins_ArrayPrototypeJoinImpl
+     0.53%  bext-v8-eval-wo  profile_prism      [.] Builtins_CopyDataPropertiesWithExcludedPropertiesOnStack
+     0.53%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringToLowerCaseIntl
+     0.53%  bext-v8-eval-wo  profile_prism      [.] v8::internal::Factory::AllocateRaw(int, v8::internal::AllocationType, v8::internal::AllocationAlignment, v8::internal::AllocationHint)
+     0.53%  bext-v8-eval-wo  profile_prism      [.] v8::internal::ScavengerEphemeronProcessor::ClearOldEphemerons(v8::internal::Heap*)
+     0.46%  bext-v8-eval-wo  profile_prism      [.] Builtins_AsyncFunctionEnter
+     0.46%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringPrototypeReplaceAll
+     0.46%  bext-v8-eval-wo  profile_prism      [.] Builtins_SubString
+     0.46%  bext-v8-eval-wo  profile_prism      [.] icu_77::(anonymous namespace)::toLower(int, unsigned int, char16_t*, int, char16_t const*, UCaseContext*, int, int, icu_77::Edits*, UErrorCode&)
+     0.46%  bext-v8-eval-wo  profile_prism      [.] void v8::internal::String::WriteToFlat2<unsigned short>(unsigned short*, v8::internal::Tagged<v8::internal::ConsString>, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.39%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'_jsx :648:14
+     0.39%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'h :393:11
+     0.39%  bext-v8-eval-wo  libc.so.6          [.] malloc
+     0.39%  bext-v8-eval-wo  profile_prism      [.] Builtins_ArrayPrototypeFlat
+     0.39%  bext-v8-eval-wo  profile_prism      [.] Builtins_CreateDataProperty
+     0.39%  bext-v8-eval-wo  profile_prism      [.] Builtins_FindOrderedHashSetEntry
+     0.39%  bext-v8-eval-wo  profile_prism      [.] Builtins_RegExpSearchFast
+     0.39%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringIndexOf
+     0.39%  bext-v8-eval-wo  profile_prism      [.] Builtins_ToString
+     0.39%  bext-v8-eval-wo  profile_prism      [.] unsigned int v8::internal::FastAsciiConvert<unibrow::ToLowercase>(char*, char const*, unsigned int)
+     0.39%  bext-v8-eval-wo  profile_prism      [.] v8::internal::EphemeronRememberedSet::RecordEphemeronKeyWrite(v8::internal::Tagged<v8::internal::EphemeronHashTable>, unsigned long)
+     0.39%  bext-v8-eval-wo  profile_prism      [.] v8::internal::String::SlowGetFlatContent(v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&, v8::internal::SharedStringAccessGuardIfNeeded const&)
+     0.39%  profile_prism    [kernel.kallsyms]  [k] do_syscall_64
+     0.39%  profile_prism    libc.so.6          [.] _int_malloc
+     0.33%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'renderResumableToString :2512:33
+     0.33%  bext-v8-eval-wo  [JIT] tid 613667   [.] RegExp.< src: '[\t\n\r]' flags: 'g'
+     0.33%  bext-v8-eval-wo  [JIT] tid 613667   [.] RegExp.< src: '^[\u0000- ]+|[\u0000- ]+$' flags: 'g'
+     0.33%  bext-v8-eval-wo  profile_prism      [.] Builtins_CallFunction_ReceiverIsNullOrUndefined
+     0.33%  bext-v8-eval-wo  profile_prism      [.] Builtins_GetProperty
+     0.33%  bext-v8-eval-wo  profile_prism      [.] Builtins_KeyedStoreIC_Megamorphic
+     0.33%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringConstructor
+     0.33%  bext-v8-eval-wo  profile_prism      [.] Builtins_WeakCollectionSet
+     0.33%  bext-v8-eval-wo  profile_prism      [.] _RINvYNtNtNtCs9ALYTKQbEpY_3std4hash6random11RandomStateNtNtCsiYoX4ApF2vj_4core4hash11BuildHasher8hash_oneReECs2dfMsZc1J3g_14tsc_rs_emitter
+     0.33%  bext-v8-eval-wo  profile_prism      [.] _RNvMs1_NtNtNtCs9ALYTKQbEpY_3std4sync4mpmc4listINtB5_7ChannelNtNtCs48wBYHpln83_7bext_v84eval11EvalRequestE4recvB10_
+     0.33%  bext-v8-eval-wo  profile_prism      [.] absl::container_internal::raw_hash_set<absl::container_internal::FlatHashSetPolicy<int>>::raw_hash_set(absl::container_internal::raw_hash_set<absl::container_internal::FlatHashSetPolicy<int>>&&)
+     0.33%  bext-v8-eval-wo  profile_prism      [.] unsigned int v8::internal::StringHasher::HashSequentialString<unsigned char>(unsigned char const*, unsigned int, v8::internal::HashSeed, bool*)
+     0.33%  bext-v8-eval-wo  profile_prism      [.] unsigned long v8::internal::StringTable::Data::TryStringToIndexOrLookupExisting<unsigned char>(v8::internal::Isolate*, v8::internal::Tagged<v8::internal::String>, v8::internal::Tagged<v8::internal::String>, unsigned long)
+     0.33%  bext-v8-eval-wo  profile_prism      [.] v8::internal::Factory::NewJSArray(v8::internal::ElementsKind, unsigned int, unsigned int, v8::internal::ArrayStorageAllocationMode, v8::internal::AllocationType)
+     0.33%  bext-v8-eval-wo  profile_prism      [.] v8::internal::Runtime_StringSplit(int, unsigned long*, v8::internal::Isolate*)
+     0.33%  bext-v8-eval-wo  profile_prism      [.] v8::internal::String::LastIndexOf(v8::internal::Isolate*, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::DirectHandle<v8::internal::Object>, v8::internal::DirectHandle<v8::internal::Object>)
+     0.26%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'Page :3468:14
+     0.26%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'buildRequest :4723:22
+     0.26%  bext-v8-eval-wo  [JIT] tid 613667   [.] JS:*'renderChild :578:21
+     0.26%  bext-v8-eval-wo  [kernel.kallsyms]  [k] do_syscall_64
+     0.26%  bext-v8-eval-wo  libc.so.6          [.] unlink_chunk.isra.0
+     0.26%  bext-v8-eval-wo  profile_prism      [.] Builtins_MapPrototypeSet
+     0.26%  bext-v8-eval-wo  profile_prism      [.] Builtins_ObjectEntries
+     0.26%  bext-v8-eval-wo  profile_prism      [.] Builtins_StringPrototypeSplit
+     0.26%  bext-v8-eval-wo  profile_prism      [.] _RNvMNtNtNtNtCs9ALYTKQbEpY_3std3sys4sync5mutex5futexNtB2_5Mutex14lock_contended
+     0.26%  bext-v8-eval-wo  profile_prism      [.] _RNvMs1_NtCs48wBYHpln83_7bext_v84evalNtB5_15EvalThreadState30process_request_with_hash_hint.llvm.7539298340814595478
+     0.26%  bext-v8-eval-wo  profile_prism      [.] unsigned char* v8::internal::(anonymous namespace)::WriteNonConsToFlat2<unsigned char>(v8::internal::Tagged<v8::internal::String>, v8::internal::StringShape, unsigned char*, unsigned int, unsigned int, v8::internal::SharedStringAccessGuardIfNeeded const&, v8::internal::PerThreadAssertScopeEmpty<false, (v8::internal::PerThreadAssertType)1, (v8::internal::PerThreadAssertType)2> const&)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::Factory::InitializeJSObjectFromMap(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSObject>, std::__Cr::optional<v8::internal::Tagged<v8::internal::Union<v8::internal::Smi, v8::internal::SwissNameDictionary, v8::internal::FixedArrayBase, v8::internal::PropertyArray, v8::internal::GlobalDictionary> > >, v8::internal::NewJSObjectType)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::Factory::NewProperSubString(v8::internal::DirectHandle<v8::internal::String>, unsigned int, unsigned int)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::HashTable<v8::internal::EphemeronHashTable, v8::internal::EphemeronHashTableShape>::Rehash()
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::LookupIterator::State v8::internal::LookupIterator::LookupInSpecialHolder<false>(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSReceiver>)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::PropertyDescriptor::ToPropertyDescriptor(v8::internal::Isolate*, v8::internal::Handle<v8::internal::Union<v8::internal::Smi, v8::internal::HeapNumber, v8::internal::BigInt, v8::internal::String, v8::internal::Symbol, v8::internal::Boolean, v8::internal::Null, v8::internal::Undefined, v8::internal::JSReceiver> >, v8::internal::PropertyDescriptor*)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::String::ComputeAndSetRawHash(v8::internal::SharedStringAccessGuardIfNeeded const&, bool*)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] v8::internal::Utf8DecoderBase<v8::internal::Utf8Decoder>::Utf8DecoderBase(v8::base::Vector<unsigned char const>)
+     0.26%  bext-v8-eval-wo  profile_prism      [.] void v8::internal::LookupIterator::NextInternal<false>(v8::internal::Tagged<v8::internal::Map>, v8::internal::Tagged<v8::internal::JSReceiver>)
+     0.26%  profile_prism    libc.so.6          [.] getenv
+     0.26%  profile_prism    libc.so.6          [.] syscall
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#
