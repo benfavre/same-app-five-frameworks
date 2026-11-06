@@ -48,7 +48,7 @@ def main():
         ('post-params','POST','/probe/one/two?r=1&r=2',[('Cookie','a=1'),('Cookie','b=2')],b'posted'),
     ]
     report=dict(status='running',cases=[],productionChanged=False,scope='page props wire compatibility; not a load benchmark')
-    reference={};original_root=runner.ROOT
+    reference={};reference_errors={};original_root=runner.ROOT
     try:
         for arm,binary,flag in [('original',args.original,0),('rebuilt-control',args.candidate,0),('direct',args.candidate,1)]:
             os.environ['BEXT_SHARED_FRAMEWORK_DIR']=str(args.framework.resolve())
@@ -75,8 +75,14 @@ def main():
                             if body is not None:connection.putheader('Content-Length',str(len(body)))
                             connection.endheaders(body)
                             response=connection.getresponse();source=response.read().decode()
-                            assert response.status==200,(arm,name,response.status,source[:200])
+                            expected_status=500 if name=='invalid-percent' else 200
+                            assert response.status==expected_status,(arm,name,response.status,source[:200])
                         finally:connection.close()
+                        if expected_status!=200:
+                            if arm=='original':reference_errors[name]=(response.status,source)
+                            else:assert (response.status,source)==reference_errors[name],(arm,name,'legacy error changed')
+                            report['cases'].append(dict(arm=arm,case=name,status=response.status,preservedExistingError=True))
+                            continue
                         match=re.search(r'<pre id="props-probe">([\s\S]*?)</pre>',source)
                         assert match,(arm,name,'missing props probe')
                         encoded=html.unescape(match[1]);props=json.loads(encoded)
