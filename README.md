@@ -81,7 +81,7 @@ checks but still trails Astro; it is an opt-in result, separate from the headlin
   reload, filters the expected products with mixed-case input, and restores the
   complete list when the input is cleared. Every framework uses the same typing
   rate and waits for the asserted search DOM state.
-- Every load response is HTTP 200, with no transport errors. The server process
+- Every warmup and load response is HTTP 200, with no transport errors. The server process
   tree and every thread's affinity are sampled during the load interval. Missing
   or failed evidence, including an escaped CPU mask, prevents publication.
 

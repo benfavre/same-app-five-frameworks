@@ -64,9 +64,12 @@ Server-rendered page containing, in order:
   warm; report the median of all process starts. Poll at 5 ms intervals. Start
   commands invoke local Node entrypoints directly, without `npx` startup overhead.
 - **ttfb_ms** — first-byte p50 during load, from `oha` (not an idle curl latency).
-- **rps / p99** — `oha -z 8s -c 50 -w`, HTTP/1.1 keep-alive, varied query URLs, after a
-  2-second warmup. Wait for in-flight requests at the deadline. Require only HTTP
-  200 responses, successRate=1 and an empty error distribution.
+- **rps / p99** — default `oha -z 8s -c 50 -w`, HTTP/1.1 keep-alive, varied query URLs,
+  after a legacy 2-second warmup. The latest steady comparisons use 20 seconds of
+  warmup; experiments record any duration/concurrency overrides. Wait for in-flight
+  requests at the deadline. Require only HTTP 200 responses, successRate=1 and an
+  empty error distribution during both warmup and measured load. New campaigns
+  record this warmup requirement, and publication rechecks the raw warmup evidence.
 - **interaction checks** — counter increments, theme toggles and persists after a
   reload (then toggles back), mixed-case search matches exactly the expected cards,
   and clearing the input restores all 24 cards. Verify all 24 names and card
